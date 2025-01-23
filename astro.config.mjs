@@ -4,7 +4,7 @@ import { loadEnv } from "vite";
 import tailwind from "@astrojs/tailwind";
 import basicSsl from "@vitejs/plugin-basic-ssl";
 import { isPreview, isLocal } from "./src/utils/utils";
-import netlify from "@astrojs/netlify";
+import vercel from "@astrojs/vercel/serverless";
 
 const { STORYBLOK_TOKEN } = loadEnv(process.env.NODE_ENV, process.cwd(), "");
 
@@ -12,15 +12,8 @@ export default defineConfig({
   integrations: [
     storyblok({
       accessToken: STORYBLOK_TOKEN,
-      bridge: isPreview,
       livePreview: isPreview,
       enableFallbackComponent: isPreview,
-      apiOptions: {
-        region: "",
-      },
-      bridge: {
-        customParent: "https://app.storyblok.com",
-      },
       components: {
         page: "storyblok/Page",
         header: "storyblok/Header",
@@ -42,6 +35,7 @@ export default defineConfig({
     }),
     tailwind(),
   ],
+
   ...(isLocal && {
     vite: {
       plugins: [basicSsl()],
@@ -51,7 +45,7 @@ export default defineConfig({
     },
   }),
   ...(isPreview && {
-    adapter: netlify(),
+    adapter: vercel(),
     output: "server",
   }),
 });
