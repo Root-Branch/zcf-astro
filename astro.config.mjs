@@ -4,7 +4,7 @@ import { loadEnv } from "vite";
 import tailwind from "@astrojs/tailwind";
 import basicSsl from "@vitejs/plugin-basic-ssl";
 import { isPreview, isLocal } from "./src/utils/utils";
-import vercel from "@astrojs/vercel/serverless";
+import netlify from "@astrojs/netlify";
 
 const { STORYBLOK_TOKEN } = loadEnv(process.env.NODE_ENV, process.cwd(), "");
 
@@ -45,7 +45,7 @@ export default defineConfig({
     },
   }),
   ...(isPreview && {
-    adapter: vercel(),
+    adapter: netlify(),
     output: "server",
   }),
 });
