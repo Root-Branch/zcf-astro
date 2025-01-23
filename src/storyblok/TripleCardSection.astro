@@ -1,0 +1,8 @@
+---
+import { storyblokEditable } from '@storyblok/astro'
+import TripleCardSection from '../components/home-page/triple-card/TripleCardSection.astro'
+
+const { blok } = Astro.props
+---
+
+<TripleCardSection {...blok} {...storyblokEditable(blok)} /> 

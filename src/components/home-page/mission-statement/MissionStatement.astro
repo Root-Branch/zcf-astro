@@ -1,0 +1,28 @@
+---
+import { renderRichText } from "@storyblok/astro";
+import { convertToWebP } from "../../../utils/imageConvert";
+
+const { heading, description, image } = Astro.props;
+
+const renderedHeading = renderRichText(heading);
+const renderedDescription = renderRichText(description);
+---
+
+<section class="bg-white pt-[105px]">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-col md:flex-row items-center gap-12">
+      <div class="max-w-[627px]">
+        <img
+          src={convertToWebP(image.filename)}
+          alt={image.alt || "Zero is Everything"}
+          class="w-full h-auto"
+        />
+      </div>
+
+      <div class="w-1/2 mt-20">
+        <h2 class="ds-h2 mb-8" set:html={renderedHeading} />
+        <div class="ds-p-2" set:html={renderedDescription} />
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,30 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  logo: {
+    filename: string;
+    alt: string;
+  };
+  link: {
+    url: string;
+    email?: string;
+  };
+}
+
+const { logo, link } = Astro.props;
+const href = link.email ? `mailto:${link.email}` : link.url;
+---
+
+<a 
+  href={href}
+  class="hover:opacity-80 transition-opacity"
+  target={link.email ? undefined : "_blank"}
+  rel={link.email ? undefined : "noopener noreferrer"}
+>
+  <img 
+    src={logo.filename} 
+    alt={logo.alt || "Social media icon"}
+    class="object-contain h-[39px] w-full"
+  />
+</a> 

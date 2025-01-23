@@ -1,0 +1,8 @@
+---
+import { storyblokEditable } from "@storyblok/astro";
+import Header from "../components/header/Header.astro";
+
+const { blok } = Astro.props;
+---
+
+<Header {...blok} {...storyblokEditable(blok)} />

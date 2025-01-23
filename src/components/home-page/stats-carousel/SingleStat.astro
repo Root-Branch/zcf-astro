@@ -1,0 +1,17 @@
+---
+import { convertToWebP } from "../../../utils/imageConvert";
+
+const { icon, number, description } = Astro.props;
+---
+
+<div class="flex flex-row text-ds-white h-[157px]">
+  <img 
+    src={convertToWebP(icon.filename)}
+    alt={icon.alt || "Stat Icon"}
+    class="h-full mr-4"
+  />
+  <div class="flex flex-col max-w-[249px] w-fit">
+    <p class="ds-h2 !leading-1">{number}</p>
+    <p class="ds-p-1 !leading-1">{description}</p>
+  </div>
+</div> 

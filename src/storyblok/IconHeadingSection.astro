@@ -1,0 +1,8 @@
+---
+import { storyblokEditable } from '@storyblok/astro'
+import IconHeadingSection from '../components/home-page/icon-heading-section/IconHeadingSection.astro'
+
+const { blok } = Astro.props
+---
+
+<IconHeadingSection {...blok} {...storyblokEditable(blok)} /> 

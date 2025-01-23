@@ -1,0 +1,32 @@
+---
+import StatsCard from "./StatsCard.astro";
+import OverlayImageCard from "./OverlayImageCard.astro";
+import { renderRichText } from "@storyblok/astro";
+
+const { heading, subheading, description, content_blocks } = Astro.props;
+
+const renderedDescription = renderRichText(description);
+---
+
+<section class="pt-32 pb-20">
+  <div class="mx-auto text-center">
+    <div class="max-w-[1168px] mx-auto">
+      <h2 class="ds-h3 mb-8">{heading}</h2>
+      <p class="ds-p-large mb-4">{subheading}</p>
+      <div class="ds-p-1 mb-12" set:html={renderedDescription} />
+    </div>
+
+    <div class="grid grid-cols-3 gap-16 max-w-[1720px] mx-auto px-10">
+      {
+        content_blocks?.map((block) => {
+          if (block.component === "stats_card") {
+            return <StatsCard {...block} />;
+          } else if (block.component === "overlay_image_card") {
+            return <OverlayImageCard {...block} />;
+          }
+        })
+      }
+    </div>
+  </div>
+</section>
+

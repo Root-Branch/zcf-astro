@@ -1,0 +1,36 @@
+---
+import { convertToWebP } from "../../../utils/imageConvert";
+
+const { image, category, overlay_text } = Astro.props;
+---
+
+<div class="relative max-w-[503px] min-h-[429px]">
+  <img
+    src={convertToWebP(image.filename)}
+    alt={image.alt || "Overlay Image"}
+    class="w-full h-[429px] object-cover"
+  />
+  <div
+    class="absolute inset-0 bg-ds-blue-900/45 flex items-center justify-center"
+  >
+    <div class="text-center text-ds-white">
+      <h4 class="ds-p-2 !font-bold mb-10">{category}</h4>
+      <p class="ds-highlight-3">{overlay_text}</p>
+    </div>
+  </div>
+  {/* White background square */}
+  <div class="absolute bottom-0 right-0 w-24 h-24 bg-ds-white">
+    <div class="triangle"></div>
+  </div>
+</div>
+
+<style>
+  .triangle {
+    width: 0px;
+    height: 0px;
+    border-style: solid;
+    border-width: 96px 96px 0 0;
+    border-color: #00b0ae transparent transparent transparent;
+    transform: rotate(0deg);
+  }
+</style>

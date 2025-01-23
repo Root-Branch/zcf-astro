@@ -1,0 +1,1660 @@
+{
+  "components": [
+    {
+      "name": "benefit_item",
+      "display_name": "Benefit Item",
+      "description": "Individual benefit with icon and description",
+      "created_at": "2025-01-20T18:07:30.354Z",
+      "updated_at": "2025-01-20T18:07:30.354Z",
+      "id": 6822346,
+      "schema": {
+        "icon": {
+          "type": "asset",
+          "pos": 0,
+          "required": true,
+          "description": "Benefit icon (e.g., lightbulb, shield, star)",
+          "filetypes": [
+            "images"
+          ],
+          "id": "5RXfV9WnTtWbzW79WZFFeA"
+        },
+        "title": {
+          "type": "text",
+          "pos": 1,
+          "required": true,
+          "description": "Benefit title (e.g., 'EFFICIENCY', 'RESILIENCE', 'BRAND')",
+          "id": "RVi8XR1gRyGSjikLtMKeyw"
+        },
+        "description": {
+          "type": "textarea",
+          "pos": 2,
+          "required": true,
+          "description": "Benefit description text",
+          "id": "mig18NDiTCOw1JzRojLj9g"
+        }
+      },
+      "image": null,
+      "preview_field": "title",
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "Benefit Item",
+      "component_group_uuid": "905dcdf8-ee68-4637-b387-62504651b2cb",
+      "color": null,
+      "icon": null,
+      "internal_tags_list": [],
+      "internal_tag_ids": [],
+      "content_type_asset_preview": null,
+      "component_group_name": "Home Page"
+    },
+    {
+      "name": "benefits_section",
+      "display_name": "Benefits Section",
+      "description": "Section highlighting business benefits with icons",
+      "created_at": "2025-01-20T18:07:29.397Z",
+      "updated_at": "2025-01-20T18:57:07.180Z",
+      "id": 6822345,
+      "schema": {
+        "heading": {
+          "type": "text",
+          "pos": 0,
+          "required": true,
+          "description": "Section heading (e.g., 'BENEFITS TO BUSINESS')",
+          "id": "phrgfw-cS5yc6QWM5rItKg"
+        },
+        "benefits": {
+          "type": "bloks",
+          "pos": 1,
+          "required": true,
+          "minimum": 3,
+          "maximum": 3,
+          "restrict_components": true,
+          "component_whitelist": [
+            "benefit_item"
+          ],
+          "description": "Business benefits (exactly 3)",
+          "id": "5Xpay1xRRgKWe24gtRzIcQ"
+        },
+        "cta_button": {
+          "type": "bloks",
+          "pos": 2,
+          "required": true,
+          "maximum": 1,
+          "restrict_components": true,
+          "component_whitelist": [
+            "cta_button"
+          ],
+          "description": "Call-to-action button",
+          "id": "5H_auRHbRP-pY2Qrg3NCyQ"
+        }
+      },
+      "image": null,
+      "preview_field": "heading",
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "Benefits Section",
+      "component_group_uuid": "905dcdf8-ee68-4637-b387-62504651b2cb",
+      "color": null,
+      "icon": null,
+      "internal_tags_list": [],
+      "internal_tag_ids": [],
+      "content_type_asset_preview": null,
+      "component_group_name": "Home Page"
+    },
+    {
+      "name": "carbon_calculator_card",
+      "display_name": "Carbon Calculator Card",
+      "description": "Card promoting a carbon calculator tool",
+      "created_at": "2025-01-20T18:34:51.559Z",
+      "updated_at": "2025-01-23T12:21:11.763Z",
+      "id": 6822392,
+      "schema": {
+        "title": {
+          "type": "text",
+          "pos": 0,
+          "required": true,
+          "description": "Card title (e.g., 'CARBON CALCULATOR')",
+          "id": "yL9pqWHWTeSvM3HJqFUyqQ"
+        },
+        "description": {
+          "type": "richtext",
+          "pos": 1,
+          "required": true,
+          "description": "Description text (e.g., 'Find out your - it's a great place to start!')",
+          "id": "ggnTBYovRim6dwux6mnWMA"
+        },
+        "cta_button": {
+          "type": "bloks",
+          "pos": 3,
+          "required": true,
+          "maximum": 1,
+          "restrict_components": true,
+          "component_whitelist": [
+            "cta_button"
+          ],
+          "description": "Call-to-action button",
+          "id": "cIYblbl0Q_y0_fuaH36foA"
+        }
+      },
+      "image": null,
+      "preview_field": "title",
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "Carbon Calculator Card",
+      "component_group_uuid": null,
+      "color": null,
+      "icon": null,
+      "internal_tags_list": [],
+      "internal_tag_ids": [],
+      "content_type_asset_preview": null
+    },
+    {
+      "name": "card_carousel_section",
+      "display_name": "Card Carousel Section",
+      "description": "Section showing carbon calculator cards in a carousel",
+      "created_at": "2025-01-20T18:34:50.734Z",
+      "updated_at": "2025-01-23T12:18:13.567Z",
+      "id": 6822391,
+      "schema": {
+        "heading": {
+          "type": "text",
+          "pos": 0,
+          "required": true,
+          "description": "Section heading (e.g., 'YOU MAY BE INTERESTED IN:')",
+          "id": "nSkVnIvuSFq5GetyWxAtEw"
+        },
+        "calculator_cards": {
+          "type": "bloks",
+          "pos": 1,
+          "required": true,
+          "minimum": 1,
+          "restrict_components": true,
+          "component_whitelist": [
+            "carbon_calculator_card"
+          ],
+          "description": "Carbon calculator cards for carousel",
+          "id": "-ssOCzkEQ_C9qhY2DoJ3aA"
+        }
+      },
+      "image": null,
+      "preview_field": "heading",
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "Card Carousel Section",
+      "component_group_uuid": null,
+      "color": null,
+      "icon": null,
+      "internal_tags_list": [],
+      "internal_tag_ids": [],
+      "content_type_asset_preview": null
+    },
+    {
+      "name": "cta_button",
+      "display_name": "CTA Button",
+      "description": "Reusable CTA button component with styling options",
+      "created_at": "2025-01-20T18:55:14.064Z",
+      "updated_at": "2025-01-22T10:46:54.493Z",
+      "id": 6822493,
+      "schema": {
+        "text": {
+          "type": "text",
+          "pos": 0,
+          "required": true,
+          "description": "Button text",
+          "id": "UrtizLerQgCrjANOQ06iZw"
+        },
+        "link": {
+          "type": "multilink",
+          "pos": 1,
+          "required": true,
+          "description": "Button link",
+          "id": "mw9qO5TnSAucmGIrFYPuJw"
+        },
+        "style": {
+          "type": "option",
+          "pos": 2,
+          "required": true,
+          "description": "Button style",
+          "options": [
+            {
+              "name": "Primary",
+              "value": "primary"
+            },
+            {
+              "name": "Secondary",
+              "value": "secondary"
+            }
+          ],
+          "id": "ez0lzSg_QEyIFVJVmw8qLw"
+        },
+        "text_color": {
+          "type": "option",
+          "pos": 3,
+          "use_uuid": true,
+          "source": "internal",
+          "datasource_slug": "color",
+          "id": "VyGdufVdTpCYug4vLEXVCg"
+        },
+        "background_color": {
+          "type": "option",
+          "pos": 4,
+          "use_uuid": true,
+          "id": "KFaMa5tRSDO__FKsj7PX8w",
+          "source": "internal",
+          "datasource_slug": "color"
+        }
+      },
+      "image": null,
+      "preview_field": "text",
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "CTA Button",
+      "component_group_uuid": "3affc4a3-4a4a-4fe5-be9f-7d30049879f2",
+      "color": null,
+      "icon": null,
+      "internal_tags_list": [],
+      "internal_tag_ids": [],
+      "content_type_asset_preview": null,
+      "component_group_name": "Common"
+    },
+    {
+      "name": "double_stat",
+      "display_name": "Double Statistic",
+      "description": "Statistic with two numbers and descriptions",
+      "created_at": "2025-01-20T18:25:57.959Z",
+      "updated_at": "2025-01-20T18:25:57.959Z",
+      "id": 6822385,
+      "schema": {
+        "icon": {
+          "type": "asset",
+          "pos": 0,
+          "required": true,
+          "description": "Statistic icon",
+          "filetypes": [
+            "images"
+          ],
+          "id": "wwFfG3o4SYSRh9SMIr_09g"
+        },
+        "primary_number": {
+          "type": "text",
+          "pos": 1,
+          "required": true,
+          "description": "Primary number (e.g., '71')",
+          "id": "PKS27lYASWOTV7v7FR-CiA"
+        },
+        "primary_description": {
+          "type": "text",
+          "pos": 2,
+          "required": true,
+          "description": "Primary number description",
+          "id": "F6qJ5jXzQ2Otl8NjrMMl_Q"
+        },
+        "secondary_number": {
+          "type": "text",
+          "pos": 3,
+          "required": true,
+          "description": "Secondary number (e.g., '35,000')",
+          "id": "gMVYf0TPQR-ICjPc67XyYg"
+        },
+        "secondary_description": {
+          "type": "text",
+          "pos": 4,
+          "required": true,
+          "description": "Secondary number description",
+          "id": "G9GzE4exQWShebOGPJGtpw"
+        }
+      },
+      "image": null,
+      "preview_field": "primary_number",
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "Double Statistic",
+      "component_group_uuid": "905dcdf8-ee68-4637-b387-62504651b2cb",
+      "color": null,
+      "icon": null,
+      "internal_tags_list": [],
+      "internal_tag_ids": [],
+      "content_type_asset_preview": null,
+      "component_group_name": "Home Page"
+    },
+    {
+      "name": "dual_card_section",
+      "display_name": "Dual Card Section",
+      "description": "Side-by-side cards section",
+      "created_at": "2025-01-20T17:24:54.660Z",
+      "updated_at": "2025-01-22T11:01:14.031Z",
+      "id": 6822150,
+      "schema": {
+        "cards": {
+          "type": "bloks",
+          "pos": 0,
+          "component_whitelist": [
+            "info_card"
+          ],
+          "restrict_components": true,
+          "description": "Add cards",
+          "minimum": 2,
+          "maximum": 2,
+          "id": "u5AsHS2lS0Wf2_pe4udlgg"
+        }
+      },
+      "image": null,
+      "preview_field": "cards",
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "Dual Card Section",
+      "component_group_uuid": "905dcdf8-ee68-4637-b387-62504651b2cb",
+      "color": null,
+      "icon": null,
+      "internal_tags_list": [],
+      "internal_tag_ids": [],
+      "content_type_asset_preview": null,
+      "component_group_name": "Home Page"
+    },
+    {
+      "name": "footer",
+      "display_name": "Footer",
+      "description": "Main site footer",
+      "created_at": "2025-01-20T15:58:43.539Z",
+      "updated_at": "2025-01-23T16:04:42.003Z",
+      "id": 6821648,
+      "schema": {
+        "logo": {
+          "type": "asset",
+          "pos": 0,
+          "description": "Footer logo image",
+          "filetypes": [
+            "images"
+          ],
+          "id": "qeO9GApzQwaPaPXixDzr9g"
+        },
+        "footer_social_links": {
+          "type": "bloks",
+          "pos": 1,
+          "description": "Social media links (email, LinkedIn)",
+          "component_whitelist": [
+            "social_link"
+          ],
+          "restrict_components": true,
+          "id": "KVmvHzebQgiQNredJX9bBg"
+        },
+        "company_description": {
+          "type": "textarea",
+          "pos": 2,
+          "description": "Zero Carbon Forum is a private limited company...",
+          "id": "wTamjgwVTFijfw0Jej8jGA"
+        },
+        "credit": {
+          "type": "richtext",
+          "pos": 3,
+          "description": "Website created by",
+          "id": "p9KlYj26Txuu5Ikq5q7IBA"
+        },
+        "awards_logo": {
+          "type": "multiasset",
+          "pos": 14,
+          "description": "Footer award badges",
+          "filetypes": [
+            "images"
+          ],
+          "id": "VXyA8is0Tw6qSZ7_oMGRZA"
+        },
+        "footer_links": {
+          "type": "bloks",
+          "pos": 7,
+          "component_whitelist": [
+            "footer_link"
+          ],
+          "restrict_components": true,
+          "id": "ybw6L8fISOe_d6-Au8r-Ew"
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "Footer",
+      "component_group_uuid": "aef04009-6e67-4741-ab10-b20c3878d8cf",
+      "color": null,
+      "icon": null,
+      "internal_tags_list": [],
+      "internal_tag_ids": [],
+      "content_type_asset_preview": null,
+      "component_group_name": "Footer"
+    },
+    {
+      "name": "footer_link",
+      "display_name": "Footer Link",
+      "description": "Footer navigation link item",
+      "created_at": "2025-01-20T15:58:45.531Z",
+      "updated_at": "2025-01-23T16:06:18.377Z",
+      "id": 6821650,
+      "schema": {
+        "title": {
+          "type": "text",
+          "pos": 0,
+          "required": true,
+          "description": "Text to display for the link",
+          "id": "wYR5MeGbTneShj-50wU8FQ"
+        },
+        "link": {
+          "type": "richtext",
+          "pos": 1,
+          "required": true,
+          "description": "URL for the link",
+          "id": "CV3z7kdmQRmFgfFmDCstgQ",
+          "display_name": "link"
+        }
+      },
+      "image": null,
+      "preview_field": "footer_link_label",
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "Footer Link",
+      "component_group_uuid": "aef04009-6e67-4741-ab10-b20c3878d8cf",
+      "color": null,
+      "icon": null,
+      "internal_tags_list": [],
+      "internal_tag_ids": [],
+      "content_type_asset_preview": null,
+      "component_group_name": "Footer"
+    },
+    {
+      "name": "free_resource_link",
+      "display_name": "Free Resource Link",
+      "description": "Button/link for individual resource",
+      "created_at": "2025-01-20T17:24:56.389Z",
+      "updated_at": "2025-01-20T17:24:56.389Z",
+      "id": 6822152,
+      "schema": {
+        "text": {
+          "type": "text",
+          "pos": 0,
+          "required": true,
+          "id": "5DW6wZKTRs-lrNz1BIyIow"
+        },
+        "link": {
+          "type": "multilink",
+          "pos": 1,
+          "required": true,
+          "id": "wz9Cs3D5QTKNyAdbEooNyg"
+        }
+      },
+      "image": null,
+      "preview_field": "text",
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "Free Resource Link",
+      "component_group_uuid": "905dcdf8-ee68-4637-b387-62504651b2cb",
+      "color": null,
+      "icon": null,
+      "internal_tags_list": [],
+      "internal_tag_ids": [],
+      "content_type_asset_preview": null,
+      "component_group_name": "Home Page"
+    },
+    {
+      "name": "header",
+      "display_name": null,
+      "description": "Header",
+      "created_at": "2025-01-20T14:45:11.968Z",
+      "updated_at": "2025-01-20T23:24:41.107Z",
+      "id": 6821202,
+      "schema": {
+        "site_logo": {
+          "type": "asset",
+          "pos": 0,
+          "id": "Mkbo028NT-eYI_-Mfn1fmA"
+        },
+        "nav_items": {
+          "type": "bloks",
+          "pos": 1,
+          "display_name": "nav_items",
+          "description": "Main navigation menu items",
+          "id": "PMicGB8jQkG2Pjg_klw4nQ",
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": [
+            "nav_item"
+          ]
+        },
+        "contact_button": {
+          "type": "bloks",
+          "pos": 2,
+          "required": true,
+          "maximum": 1,
+          "restrict_components": true,
+          "component_whitelist": [
+            "button",
+            "cta_button"
+          ],
+          "description": "Call-to-action button",
+          "id": "f6hffiGjROOcayRf0Knm8w"
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "header",
+      "component_group_uuid": "e07356c0-60bf-47ad-8392-2c0a256bee02",
+      "color": null,
+      "icon": null,
+      "internal_tags_list": [],
+      "internal_tag_ids": [],
+      "content_type_asset_preview": null,
+      "component_group_name": "Header"
+    },
+    {
+      "name": "hero_banner_section",
+      "display_name": "Hero Banner Section",
+      "description": "Full-width hero section with heading and call-to-action",
+      "created_at": "2025-01-20T17:13:10.571Z",
+      "updated_at": "2025-01-20T21:58:12.595Z",
+      "id": 6822140,
+      "schema": {
+        "background_image": {
+          "type": "asset",
+          "pos": 0,
+          "required": true,
+          "description": "Background image for the hero section",
+          "filetypes": [
+            "images"
+          ],
+          "id": "DOjE3AxZQZ6hbuU7RM02RQ"
+        },
+        "decorative_overlay": {
+          "type": "asset",
+          "pos": 1,
+          "description": "Decorative pattern overlay image (e.g., dots pattern)",
+          "filetypes": [
+            "images"
+          ],
+          "id": "Wgu3zQU-Rnm2la7rUgJwOg"
+        },
+        "heading": {
+          "type": "text",
+          "pos": 2,
+          "required": true,
+          "description": "Main heading text",
+          "id": "_p-iG_zlSiGUzRk7Xhj_1A"
+        },
+        "cta_button": {
+          "type": "bloks",
+          "pos": 3,
+          "required": true,
+          "maximum": 1,
+          "restrict_components": true,
+          "component_whitelist": [
+            "cta_button"
+          ],
+          "description": "Call-to-action button",
+          "id": "YpaRvrRYTo-0iYpEwl2KXA"
+        }
+      },
+      "image": null,
+      "preview_field": "heading",
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "Hero Banner Section",
+      "component_group_uuid": "905dcdf8-ee68-4637-b387-62504651b2cb",
+      "color": null,
+      "icon": null,
+      "internal_tags_list": [],
+      "internal_tag_ids": [],
+      "content_type_asset_preview": null,
+      "component_group_name": "Home Page"
+    },
+    {
+      "name": "icon_heading_section",
+      "display_name": "Icon Heading Section",
+      "description": "Free resources section with icon and buttons",
+      "created_at": "2025-01-20T17:24:55.544Z",
+      "updated_at": "2025-01-22T11:35:46.584Z",
+      "id": 6822151,
+      "schema": {
+        "icon": {
+          "type": "asset",
+          "pos": 0,
+          "description": "Section icon",
+          "filetypes": [
+            "images"
+          ],
+          "id": "jjBu_pegSqqIZaI7wdxVuw"
+        },
+        "heading": {
+          "type": "text",
+          "pos": 1,
+          "required": true,
+          "id": "ws-gvV5zRwaVvyUVehpB4Q"
+        },
+        "description": {
+          "type": "text",
+          "pos": 2,
+          "id": "nxBl8S-oSQ6gWRUv0Vr25Q"
+        },
+        "cta_button": {
+          "type": "bloks",
+          "pos": 3,
+          "required": true,
+          "maximum": 2,
+          "restrict_components": true,
+          "component_whitelist": [
+            "cta_button"
+          ],
+          "description": "Call-to-action button",
+          "id": "dBvdTwsSTFKf8o1lc6Pe3A"
+        }
+      },
+      "image": null,
+      "preview_field": "heading",
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "Icon Heading Section",
+      "component_group_uuid": "905dcdf8-ee68-4637-b387-62504651b2cb",
+      "color": null,
+      "icon": null,
+      "internal_tags_list": [],
+      "internal_tag_ids": [],
+      "content_type_asset_preview": null,
+      "component_group_name": "Home Page"
+    },
+    {
+      "name": "image_banner_section",
+      "display_name": "Image Banner Section",
+      "description": "Full-width banner with background image and text",
+      "created_at": "2025-01-20T17:37:29.938Z",
+      "updated_at": "2025-01-20T22:04:26.613Z",
+      "id": 6822213,
+      "schema": {
+        "background_image": {
+          "type": "asset",
+          "pos": 0,
+          "required": true,
+          "description": "Full-width background image",
+          "filetypes": [
+            "images"
+          ],
+          "id": "ApoSAzuzRyKxITydqGy2hg"
+        },
+        "decorative_text_image": {
+          "type": "asset",
+          "pos": 1,
+          "required": true,
+          "description": "Decorative text image (e.g., 'STEP UP TO THE TABLE')",
+          "filetypes": [
+            "images"
+          ],
+          "id": "lNU63ziqT2-6VSPhFIV8LQ"
+        },
+        "heading": {
+          "type": "text",
+          "pos": 2,
+          "required": true,
+          "description": "Main heading text (e.g., 'WE WORK WITH A THIRD OF THE SECTOR')",
+          "id": "bA2SiHG4SLqPkmdj2BePhA"
+        }
+      },
+      "image": null,
+      "preview_field": "heading",
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "Image Banner Section",
+      "component_group_uuid": "905dcdf8-ee68-4637-b387-62504651b2cb",
+      "color": null,
+      "icon": null,
+      "internal_tags_list": [],
+      "internal_tag_ids": [],
+      "content_type_asset_preview": null,
+      "component_group_name": "Home Page"
+    },
+    {
+      "name": "info_card",
+      "display_name": "Information Card",
+      "description": "Reusable card with title, description, and CTA",
+      "created_at": "2025-01-20T17:24:54.242Z",
+      "updated_at": "2025-01-20T23:08:37.461Z",
+      "id": 6822149,
+      "schema": {
+        "title": {
+          "type": "text",
+          "pos": 0,
+          "required": true,
+          "id": "fiqgbt_KTpeg4L_tXvYBDQ"
+        },
+        "subtitle": {
+          "type": "text",
+          "pos": 1,
+          "id": "KT--I4nUQTS48xDo0w_tbg"
+        },
+        "description": {
+          "type": "textarea",
+          "pos": 2,
+          "id": "1F3Y5BcZRsKKtgEtzqZ38w"
+        },
+        "cta_button": {
+          "type": "bloks",
+          "pos": 3,
+          "required": true,
+          "maximum": 1,
+          "restrict_components": true,
+          "component_whitelist": [
+            "cta_button"
+          ],
+          "description": "Call-to-action button",
+          "id": "b2dGqRevQsOoOqRUhXb-Ag"
+        },
+        "background_color": {
+          "type": "option",
+          "pos": 6,
+          "description": "Card background color",
+          "options": [],
+          "id": "9go7Es7TRHStYfI9uzUfRg",
+          "source": "internal",
+          "datasource_slug": "color"
+        }
+      },
+      "image": null,
+      "preview_field": "title",
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "Information Card",
+      "component_group_uuid": "905dcdf8-ee68-4637-b387-62504651b2cb",
+      "color": null,
+      "icon": null,
+      "internal_tags_list": [],
+      "internal_tag_ids": [],
+      "content_type_asset_preview": null,
+      "component_group_name": "Home Page"
+    },
+    {
+      "name": "logo_showcase_section",
+      "display_name": "Logo Showcase Section",
+      "description": "Display multiple partner/client logos",
+      "created_at": "2025-01-20T17:39:07.938Z",
+      "updated_at": "2025-01-20T22:04:36.879Z",
+      "id": 6822215,
+      "schema": {
+        "logos": {
+          "type": "multiasset",
+          "pos": 0,
+          "required": true,
+          "description": "Partner/client logos to display",
+          "filetypes": [
+            "images"
+          ],
+          "alt_text": true,
+          "id": "56zNpOlISU-0qm0ujIdbDQ"
+        },
+        "section_title": {
+          "type": "text",
+          "pos": 1,
+          "description": "Optional section title (hidden by default)",
+          "id": "Fz5SP_qpSKW97l69ftiTyA"
+        }
+      },
+      "image": null,
+      "preview_field": "logos",
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "Logo Showcase Section",
+      "component_group_uuid": "905dcdf8-ee68-4637-b387-62504651b2cb",
+      "color": null,
+      "icon": null,
+      "internal_tags_list": [],
+      "internal_tag_ids": [],
+      "content_type_asset_preview": null,
+      "component_group_name": "Home Page"
+    },
+    {
+      "name": "mission_statement_section",
+      "display_name": "Mission Statement Section",
+      "description": "Large text statement with icon",
+      "created_at": "2025-01-20T17:24:53.400Z",
+      "updated_at": "2025-01-22T10:06:56.325Z",
+      "id": 6822148,
+      "schema": {
+        "image": {
+          "type": "asset",
+          "pos": 0,
+          "description": "Icon image (e.g., globe)",
+          "filetypes": [
+            "images"
+          ],
+          "id": "0mfN-0qQSMyEb1EhGb4I_Q"
+        },
+        "heading": {
+          "type": "richtext",
+          "pos": 1,
+          "required": true,
+          "description": "Large statement text",
+          "id": "e3pNtRFeTfeQeTcwZ56gWw"
+        },
+        "description": {
+          "type": "richtext",
+          "pos": 2,
+          "description": "Subheading text with optional styling handled in frontend",
+          "id": "y2SYJhYxQOmS6XyIS1EVDw",
+          "default_value": "The Zero Carbon Group empowers members of the hospitality and brewing sector to reach sustainability targets with more speed, efficiency, and profit individually and as a united effort. We make the journey to net zero easier and quicker with tailored sustainability services and a non-profit industry forum backed by peers, government and sustainability experts. \n\nTogether, we’ll take you to net zero. "
+        }
+      },
+      "image": null,
+      "preview_field": "heading",
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "Mission Statement Section",
+      "component_group_uuid": "905dcdf8-ee68-4637-b387-62504651b2cb",
+      "color": null,
+      "icon": null,
+      "internal_tags_list": [],
+      "internal_tag_ids": [],
+      "content_type_asset_preview": null,
+      "component_group_name": "Home Page"
+    },
+    {
+      "name": "nav_item",
+      "display_name": null,
+      "description": "Navigation Item",
+      "created_at": "2025-01-20T14:55:00.729Z",
+      "updated_at": "2025-01-20T14:55:21.791Z",
+      "id": 6821249,
+      "schema": {
+        "nav_item_label": {
+          "type": "text",
+          "pos": 0,
+          "id": "G5MNtHO6T0a0qkdR8iWyHg"
+        },
+        "nav_item_link": {
+          "type": "multilink",
+          "pos": 1,
+          "id": "TDwwJ62HRk-KUFaaroLePA"
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "nav_item",
+      "component_group_uuid": "e07356c0-60bf-47ad-8392-2c0a256bee02",
+      "color": null,
+      "icon": null,
+      "internal_tags_list": [],
+      "internal_tag_ids": [],
+      "content_type_asset_preview": null,
+      "component_group_name": "Header"
+    },
+    {
+      "name": "overlay_image_card",
+      "display_name": "Overlay Image Card",
+      "description": "Image card with text overlay and category label",
+      "created_at": "2025-01-20T18:13:55.301Z",
+      "updated_at": "2025-01-20T18:13:55.301Z",
+      "id": 6822349,
+      "schema": {
+        "image": {
+          "type": "asset",
+          "pos": 0,
+          "required": true,
+          "description": "Background image",
+          "filetypes": [
+            "images"
+          ],
+          "id": "XcQaSxA0TI6WGy4-J2DjFQ"
+        },
+        "category": {
+          "type": "text",
+          "pos": 1,
+          "required": true,
+          "description": "Category label (e.g., 'Employees', 'Sales')",
+          "id": "BazaSq7VSlWydLxG3XOayA"
+        },
+        "overlay_text": {
+          "type": "text",
+          "pos": 2,
+          "required": true,
+          "description": "Text overlay on image (e.g., 'TALENT LOVES COMMITMENT')",
+          "id": "C7WrKaCoQGuMz5PL4Ip3og"
+        }
+      },
+      "image": null,
+      "preview_field": "overlay_text",
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "Overlay Image Card",
+      "component_group_uuid": "905dcdf8-ee68-4637-b387-62504651b2cb",
+      "color": null,
+      "icon": null,
+      "internal_tags_list": [],
+      "internal_tag_ids": [],
+      "content_type_asset_preview": null,
+      "component_group_name": "Home Page"
+    },
+    {
+      "name": "page",
+      "display_name": null,
+      "description": null,
+      "created_at": "2025-01-20T14:32:32.923Z",
+      "updated_at": "2025-01-21T10:42:10.927Z",
+      "id": 6821124,
+      "schema": {
+        "body": {
+          "type": "bloks",
+          "pos": 0,
+          "id": "F0zKj7_dTBKjTolEmHyS6Q",
+          "display_name": "body"
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": true,
+      "preview_tmpl": null,
+      "is_nestable": false,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "page",
+      "component_group_uuid": "3affc4a3-4a4a-4fe5-be9f-7d30049879f2",
+      "color": null,
+      "icon": null,
+      "internal_tags_list": [],
+      "internal_tag_ids": [],
+      "content_type_asset_preview": null,
+      "component_group_name": "Common"
+    },
+    {
+      "name": "page-layout",
+      "display_name": null,
+      "description": null,
+      "created_at": "2025-01-22T18:02:36.908Z",
+      "updated_at": "2025-01-22T18:02:36.908Z",
+      "id": 6839434,
+      "schema": {},
+      "image": null,
+      "preview_field": null,
+      "is_root": true,
+      "preview_tmpl": null,
+      "is_nestable": false,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "page-layout",
+      "component_group_uuid": "all",
+      "color": null,
+      "icon": null,
+      "internal_tags_list": [],
+      "internal_tag_ids": [],
+      "content_type_asset_preview": null,
+      "component_group_name": ""
+    },
+    {
+      "name": "partner_section",
+      "display_name": "Partner Section",
+      "description": "Section displaying partner/supporter logos",
+      "created_at": "2025-01-20T18:38:16.490Z",
+      "updated_at": "2025-01-23T15:39:07.793Z",
+      "id": 6822428,
+      "schema": {
+        "heading": {
+          "type": "text",
+          "pos": 0,
+          "required": true,
+          "description": "Section heading (e.g., 'SUPPORTED BY')",
+          "id": "4wGkKeHuRYSTDmNg09k9xw"
+        },
+        "logos": {
+          "type": "multiasset",
+          "pos": 1,
+          "required": true,
+          "description": "Partner logo images",
+          "filetypes": [
+            "images"
+          ],
+          "allow_multiple": true,
+          "id": "1V-Khc-fQ6qRqFAU_Ttlug"
+        }
+      },
+      "image": null,
+      "preview_field": "heading",
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "Partner Section",
+      "component_group_uuid": null,
+      "color": null,
+      "icon": null,
+      "internal_tags_list": [],
+      "internal_tag_ids": [],
+      "content_type_asset_preview": null
+    },
+    {
+      "name": "single_stat",
+      "display_name": "Single Statistic",
+      "description": "Statistic with one number and description",
+      "created_at": "2025-01-20T18:25:57.298Z",
+      "updated_at": "2025-01-20T18:25:57.298Z",
+      "id": 6822384,
+      "schema": {
+        "icon": {
+          "type": "asset",
+          "pos": 0,
+          "required": true,
+          "description": "Statistic icon",
+          "filetypes": [
+            "images"
+          ],
+          "id": "q51S0RE8RA-k5rzFJgqzgQ"
+        },
+        "number": {
+          "type": "text",
+          "pos": 1,
+          "required": true,
+          "description": "Statistic number (e.g., '10M')",
+          "id": "-NInJFJ4RPueVDgJlbrGuw"
+        },
+        "description": {
+          "type": "text",
+          "pos": 2,
+          "required": true,
+          "description": "Statistic description",
+          "id": "3Va8SCEhTm6yVaG1W0jOPA"
+        }
+      },
+      "image": null,
+      "preview_field": "number",
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "Single Statistic",
+      "component_group_uuid": "905dcdf8-ee68-4637-b387-62504651b2cb",
+      "color": null,
+      "icon": null,
+      "internal_tags_list": [],
+      "internal_tag_ids": [],
+      "content_type_asset_preview": null,
+      "component_group_name": "Home Page"
+    },
+    {
+      "name": "site-config",
+      "display_name": null,
+      "description": null,
+      "created_at": "2025-01-21T10:58:35.517Z",
+      "updated_at": "2025-01-21T11:01:09.756Z",
+      "id": 6826094,
+      "schema": {
+        "header": {
+          "type": "bloks",
+          "pos": 0,
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": [
+            "header"
+          ],
+          "id": "_T8ITkdkS3e1MuAgWx_NtA"
+        },
+        "footer": {
+          "type": "bloks",
+          "pos": 1,
+          "id": "LAUXWBl6Su2Z__JJJHtNYw",
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": [
+            "footer"
+          ]
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": true,
+      "preview_tmpl": null,
+      "is_nestable": false,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "site-config",
+      "component_group_uuid": "3affc4a3-4a4a-4fe5-be9f-7d30049879f2",
+      "color": null,
+      "icon": null,
+      "internal_tags_list": [],
+      "internal_tag_ids": [],
+      "content_type_asset_preview": null,
+      "component_group_name": "Common"
+    },
+    {
+      "name": "social_link",
+      "display_name": "Social Link",
+      "description": "Social media link item",
+      "created_at": "2025-01-20T15:58:44.546Z",
+      "updated_at": "2025-01-23T16:07:08.924Z",
+      "id": 6821649,
+      "schema": {
+        "logo": {
+          "type": "asset",
+          "pos": 0,
+          "required": true,
+          "description": "Image for the social link",
+          "id": "KyzUL7HUT-G5CmwF0iZSBg",
+          "display_name": ""
+        },
+        "link": {
+          "type": "multilink",
+          "pos": 1,
+          "email_link_type": true,
+          "required": true,
+          "id": "aeDZp-PUTj2a12UUKsB7Yw"
+        }
+      },
+      "image": null,
+      "preview_field": "social_link_image",
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "Social Link",
+      "component_group_uuid": "aef04009-6e67-4741-ab10-b20c3878d8cf",
+      "color": null,
+      "icon": null,
+      "internal_tags_list": [],
+      "internal_tag_ids": [],
+      "content_type_asset_preview": null,
+      "component_group_name": "Footer"
+    },
+    {
+      "name": "stats_card",
+      "display_name": "Statistics Card",
+      "description": "Card displaying two statistics with descriptions",
+      "created_at": "2025-01-20T18:13:54.786Z",
+      "updated_at": "2025-01-20T18:13:54.786Z",
+      "id": 6822348,
+      "schema": {
+        "stat_1_percentage": {
+          "type": "text",
+          "pos": 0,
+          "required": true,
+          "description": "First statistic percentage (e.g., '64%')",
+          "id": "em2d6PizSFCnmDj9oIB_XQ"
+        },
+        "stat_1_text": {
+          "type": "textarea",
+          "pos": 1,
+          "required": true,
+          "description": "First statistic description",
+          "id": "pNZV0EG0S1SYat0lpKxbnA"
+        },
+        "stat_2_percentage": {
+          "type": "text",
+          "pos": 2,
+          "required": true,
+          "description": "Second statistic percentage (e.g., '37%')",
+          "id": "-WCcnpzSS2qswC_oSg_30w"
+        },
+        "stat_2_text": {
+          "type": "textarea",
+          "pos": 3,
+          "required": true,
+          "description": "Second statistic description",
+          "id": "79EZOATCTeet6h4xCXJ6Cw"
+        }
+      },
+      "image": null,
+      "preview_field": "stat_1_percentage",
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "Statistics Card",
+      "component_group_uuid": "905dcdf8-ee68-4637-b387-62504651b2cb",
+      "color": null,
+      "icon": null,
+      "internal_tags_list": [],
+      "internal_tag_ids": [],
+      "content_type_asset_preview": null,
+      "component_group_name": "Home Page"
+    },
+    {
+      "name": "stats_carousel_section",
+      "display_name": "Stats Carousel Section",
+      "description": "Section showcasing membership benefits and testimonials",
+      "created_at": "2025-01-20T18:25:56.388Z",
+      "updated_at": "2025-01-22T17:49:52.572Z",
+      "id": 6822383,
+      "schema": {
+        "heading_image": {
+          "type": "asset",
+          "pos": 0,
+          "required": true,
+          "description": "Heading image (e.g., 'IT'S TIME TO MOVE TO ZERO')",
+          "filetypes": [
+            "images"
+          ],
+          "id": "vNfVXhe3Rg6o1PJN0VXyVg"
+        },
+        "section_title": {
+          "type": "text",
+          "pos": 1,
+          "required": true,
+          "description": "Section title (e.g., 'GET INVOLVED')",
+          "id": "0sT2koiETkeIkacQeIpACg"
+        },
+        "description": {
+          "type": "textarea",
+          "pos": 2,
+          "required": true,
+          "description": "Section description text",
+          "id": "3PASs4pfQXqpywjIVS1JSw"
+        },
+        "feature_image": {
+          "type": "asset",
+          "pos": 3,
+          "required": true,
+          "description": "Feature image",
+          "filetypes": [
+            "images"
+          ],
+          "id": "gW3iGkZ0REea3Jlc9O_ovw"
+        },
+        "stats": {
+          "type": "bloks",
+          "pos": 4,
+          "required": true,
+          "restrict_components": true,
+          "component_whitelist": [
+            "single_stat",
+            "double_stat"
+          ],
+          "description": "Statistics (mix of single and double number stats)",
+          "id": "xKmHP7DQQ4S0b5d5d0Ui7w"
+        },
+        "cta_button": {
+          "type": "bloks",
+          "pos": 5,
+          "required": true,
+          "maximum": 1,
+          "restrict_components": true,
+          "component_whitelist": [
+            "cta_button"
+          ],
+          "description": "Call-to-action button",
+          "id": "KFj9xiafQ6q6dKvBQarDTA"
+        },
+        "testimonials": {
+          "type": "bloks",
+          "pos": 7,
+          "required": true,
+          "restrict_components": true,
+          "component_whitelist": [
+            "testimonial_item"
+          ],
+          "description": "Testimonial slides",
+          "id": "PUgUA5a5S1WUszrVL8M5Lw"
+        }
+      },
+      "image": null,
+      "preview_field": "section_title",
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "Stats Carousel Section",
+      "component_group_uuid": "905dcdf8-ee68-4637-b387-62504651b2cb",
+      "color": null,
+      "icon": null,
+      "internal_tags_list": [],
+      "internal_tag_ids": [],
+      "content_type_asset_preview": null,
+      "component_group_name": "Home Page"
+    },
+    {
+      "name": "step_item",
+      "display_name": "Step Item",
+      "description": "Individual step in the process",
+      "created_at": "2025-01-20T18:03:16.943Z",
+      "updated_at": "2025-01-22T15:05:50.304Z",
+      "id": 6822344,
+      "schema": {
+        "number": {
+          "type": "number",
+          "pos": 0,
+          "required": true,
+          "description": "Step number (1-4)",
+          "id": "QfT6LleBQNCjJ883q6o2rQ"
+        },
+        "background_color": {
+          "type": "option",
+          "pos": 1,
+          "required": true,
+          "description": "Background color for the step",
+          "options": [
+            {
+              "name": "White",
+              "value": "white"
+            },
+            {
+              "name": "Dark",
+              "value": "dark"
+            }
+          ],
+          "id": "u9ECGkIfT9qel0P_JQJB1g",
+          "source": "internal",
+          "datasource_slug": "color"
+        },
+        "step_label": {
+          "type": "text",
+          "pos": 2,
+          "required": true,
+          "description": "Step label (e.g., 'Measure', 'Plan', 'Reduce', 'Comply')",
+          "id": "4Z1R-xVtRhWZIf0zetEVYQ"
+        },
+        "step_heading": {
+          "type": "richtext",
+          "pos": 3,
+          "required": true,
+          "description": "Step heading text",
+          "id": "rt23uo5DTnO7jp6naHk-4g"
+        },
+        "step_description": {
+          "type": "textarea",
+          "pos": 4,
+          "required": true,
+          "description": "Step description text",
+          "id": "toTcmIwWRYaURgxcSFEEVg"
+        }
+      },
+      "image": null,
+      "preview_field": "step_label",
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "Step Item",
+      "component_group_uuid": "905dcdf8-ee68-4637-b387-62504651b2cb",
+      "color": null,
+      "icon": null,
+      "internal_tags_list": [],
+      "internal_tag_ids": [],
+      "content_type_asset_preview": null,
+      "component_group_name": "Home Page"
+    },
+    {
+      "name": "steps_section",
+      "display_name": "Steps Section",
+      "description": "Section displaying numbered steps or process",
+      "created_at": "2025-01-20T18:03:16.002Z",
+      "updated_at": "2025-01-22T13:09:33.432Z",
+      "id": 6822343,
+      "schema": {
+        "heading_image": {
+          "type": "asset",
+          "pos": 0,
+          "required": true,
+          "description": "Heading image (e.g., '4 STEPS TO NET ZERO')",
+          "filetypes": [
+            "images"
+          ],
+          "id": "KEfXxfOHSCmKWKCamQ70gA"
+        },
+        "subheading": {
+          "type": "text",
+          "pos": 1,
+          "description": "Supporting text below heading",
+          "id": "UeWGV6PpTMmVdUc_yAEABA"
+        },
+        "steps": {
+          "type": "bloks",
+          "pos": 2,
+          "required": true,
+          "minimum": 4,
+          "maximum": 4,
+          "restrict_components": true,
+          "component_whitelist": [
+            "step_item"
+          ],
+          "description": "The 4 steps in the process",
+          "id": "q-11itftTFClsIOPsxVMdQ"
+        },
+        "decorative_arrow": {
+          "type": "multiasset",
+          "pos": 3,
+          "id": "XmI4l7ZcTZqy2bPEDHo-oQ"
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "Steps Section",
+      "component_group_uuid": "905dcdf8-ee68-4637-b387-62504651b2cb",
+      "color": null,
+      "icon": null,
+      "internal_tags_list": [],
+      "internal_tag_ids": [],
+      "content_type_asset_preview": null,
+      "component_group_name": "Home Page"
+    },
+    {
+      "name": "testimonial_item",
+      "display_name": "Testimonial Item",
+      "description": "Individual testimonial with quote and image",
+      "created_at": "2025-01-20T18:27:59.526Z",
+      "updated_at": "2025-01-20T18:27:59.526Z",
+      "id": 6822388,
+      "schema": {
+        "quote": {
+          "type": "textarea",
+          "pos": 0,
+          "required": true,
+          "description": "Testimonial quote text",
+          "id": "bRboUwLXSiSp-IYwBqDDGw"
+        },
+        "author_name": {
+          "type": "text",
+          "pos": 1,
+          "required": true,
+          "description": "Author name",
+          "id": "DQKqoRPXTs2JbX5b6zezoA"
+        },
+        "author_title": {
+          "type": "text",
+          "pos": 2,
+          "required": true,
+          "description": "Author title/position",
+          "id": "wm3FTn2lS6uX7rfoRCN1Vg"
+        },
+        "author_company": {
+          "type": "text",
+          "pos": 3,
+          "required": true,
+          "description": "Author company",
+          "id": "uttlPU5vSxWJXtAvL7G6kg"
+        },
+        "company_logo": {
+          "type": "asset",
+          "pos": 4,
+          "required": true,
+          "description": "Company logo",
+          "filetypes": [
+            "images"
+          ],
+          "id": "Fbdy9Ip2QUynJf7nuHYbQA"
+        },
+        "image": {
+          "type": "asset",
+          "pos": 5,
+          "required": true,
+          "description": "Testimonial image",
+          "filetypes": [
+            "images"
+          ],
+          "id": "-ROgGop1Qa2Fbzwu5b6_aQ"
+        }
+      },
+      "image": null,
+      "preview_field": "author_name",
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "Testimonial Item",
+      "component_group_uuid": "905dcdf8-ee68-4637-b387-62504651b2cb",
+      "color": null,
+      "icon": null,
+      "internal_tags_list": [],
+      "internal_tag_ids": [],
+      "content_type_asset_preview": null,
+      "component_group_name": "Home Page"
+    },
+    {
+      "name": "triple_card_section",
+      "display_name": "Triple Card Section",
+      "description": "Section with statistics and image cards explaining urgency",
+      "created_at": "2025-01-20T18:13:53.871Z",
+      "updated_at": "2025-01-22T15:52:18.813Z",
+      "id": 6822347,
+      "schema": {
+        "heading": {
+          "type": "text",
+          "pos": 0,
+          "required": true,
+          "description": "Section heading (e.g., 'WHY NOW?')",
+          "id": "OzUzqEgdSxuGrkjvLYZZiA"
+        },
+        "subheading": {
+          "type": "text",
+          "pos": 1,
+          "required": true,
+          "description": "Main statistic text (e.g., '35% of the UK's emissions are from food and drink.')",
+          "id": "bxJIJYwRRGWt1-xA2kWZOg",
+          "display_name": "Subheading"
+        },
+        "description": {
+          "type": "richtext",
+          "pos": 2,
+          "required": true,
+          "description": "Explanatory text with optional link formatting",
+          "id": "QzZ3-ST6Rt-OK0fBLxMxXA"
+        },
+        "content_blocks": {
+          "type": "bloks",
+          "pos": 3,
+          "required": true,
+          "restrict_components": true,
+          "component_whitelist": [
+            "stats_card",
+            "overlay_image_card"
+          ],
+          "description": "Add statistics card and image cards",
+          "id": "sEaPtTxYSjiQo_rmd-M2Lw"
+        }
+      },
+      "image": null,
+      "preview_field": "heading",
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "Triple Card Section",
+      "component_group_uuid": "905dcdf8-ee68-4637-b387-62504651b2cb",
+      "color": null,
+      "icon": null,
+      "internal_tags_list": [],
+      "internal_tag_ids": [],
+      "content_type_asset_preview": null,
+      "component_group_name": "Home Page"
+    }
+  ],
+  "component_groups": [
+    {
+      "name": "Common",
+      "id": 480998,
+      "uuid": "3affc4a3-4a4a-4fe5-be9f-7d30049879f2",
+      "parent_id": null,
+      "parent_uuid": null
+    },
+    {
+      "name": "Footer",
+      "id": 480928,
+      "uuid": "aef04009-6e67-4741-ab10-b20c3878d8cf",
+      "parent_id": null,
+      "parent_uuid": null
+    },
+    {
+      "name": "Header",
+      "id": 480929,
+      "uuid": "e07356c0-60bf-47ad-8392-2c0a256bee02",
+      "parent_id": null,
+      "parent_uuid": null
+    },
+    {
+      "name": "Home Page",
+      "id": 480937,
+      "uuid": "905dcdf8-ee68-4637-b387-62504651b2cb",
+      "parent_id": null,
+      "parent_uuid": null
+    }
+  ]
+}

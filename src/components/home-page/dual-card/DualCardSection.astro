@@ -1,0 +1,13 @@
+---
+import InfoCard from "./InfoCard.astro";
+
+const { cards } = Astro.props;
+---
+
+<section class="relative z-20">
+  <div class="mx-auto px-20 pt-[105px]">
+    <div class="flex flex-row justify-center gap-24">
+      {cards?.map((card) => <InfoCard {...card} />)}
+    </div>
+  </div>
+</section>

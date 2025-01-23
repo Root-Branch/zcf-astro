@@ -1,0 +1,28 @@
+---
+import Button from "../../common/Button.astro";
+import { renderRichText } from "@storyblok/astro";
+
+const { title, description, cta_button } = Astro.props;
+
+const renderedDescription = renderRichText(description);
+---
+
+<div class="calculator-card bg-ds-blue-500 p-8 max-w-[445px] min-h-[306px] text-center h-full flex flex-col">
+  <h3 class="ds-h4 text-ds-white mb-6">{title}</h3>
+  <div
+    class="ds-p-1 text-ds-white mb-8 flex-grow"
+    set:html={renderedDescription}
+  />
+  {
+    cta_button?.[0] && (
+      <Button
+        text={cta_button[0].text}
+        link={cta_button[0].link}
+        style={cta_button[0].style}
+        text_color={cta_button[0].text_color}
+        background_color={cta_button[0].background_color}
+      />
+    )
+  }
+</div>
+

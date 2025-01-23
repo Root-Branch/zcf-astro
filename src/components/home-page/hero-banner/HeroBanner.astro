@@ -1,0 +1,48 @@
+---
+import Button from "../../common/Button.astro";
+import { convertToWebP } from "../../../utils/imageConvert";
+
+const { heading, background_image, cta_button, decorative_overlay } = Astro.props;
+---
+
+<section class="relative min-h-[905px] flex">
+  {/* Background Image */}
+  <div class="absolute inset-0 z-0">
+    <img
+      src={convertToWebP(background_image.filename)}
+      alt={background_image.alt}
+      class="w-full h-full object-cover"
+    />
+    <div class="absolute inset-0 bg-ds-blue-900/45"></div>
+  </div>
+
+  {/* Decorative Overlay */}
+  <div class="absolute -right-[456px] top-[100px] z-10">
+    <img
+      src={convertToWebP(decorative_overlay.filename)}
+      alt="Decorative pattern"
+      class="w-auto h-[912px]"
+    />
+  </div>
+
+  {/* Content */}
+  <div class="container mx-auto relative z-20 px-4 mt-[313px]">
+    <h1
+      class="text-ds-white ds-h1 font-bold max-w-[952px] mb-20"
+    >
+      {heading}
+    </h1>
+    {
+      cta_button?.[0] && (
+        <Button
+          text={cta_button[0].text}
+          link={cta_button[0].link}
+          style={cta_button[0].style}
+          background_color={cta_button[0].background_color}
+          text_color={cta_button[0].text_color}
+        />
+      )
+    }
+  </div>
+</section>
+

@@ -1,0 +1,29 @@
+---
+import { convertToWebP } from "../../../utils/imageConvert";
+import BenefitItem from "./BenefitItem.astro";
+import Button from "../../common/Button.astro";
+
+const { heading, benefits, cta_button } = Astro.props;
+---
+
+<section class="bg-ds-blue-900 pt-16 pb-32">
+  <div class="max-w-[1170px] mx-auto px-4 text-center">
+    <h2 class="ds-h3 text-ds-white mb-20">{heading}</h2>
+
+    <div class="grid grid-cols-3 gap-8 mb-16">
+      {benefits?.map((benefit) => (
+        <BenefitItem {...benefit} />
+      ))}
+    </div>
+
+    {cta_button?.[0] && (
+      <Button
+        text={cta_button[0].text}
+        link={cta_button[0].link}
+        style={cta_button[0].style}
+        background_color={cta_button[0].background_color}
+        text_color={cta_button[0].text_color}
+      />
+    )}
+  </div>
+</section> 

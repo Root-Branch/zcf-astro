@@ -1,0 +1,66 @@
+---
+import CarbonCalculatorCard from "./CarbonCalculatorCard.astro";
+
+const { heading, calculator_cards } = Astro.props;
+---
+
+<section class="pt-32 pb-10">
+  <div class="mx-auto">
+    <h2 class="ds-h3 text-center mb-20">{heading}</h2>
+
+    <div class="swiper calculatorSwiper">
+      <div class="swiper-wrapper gap-10">
+        {
+          calculator_cards?.map((card) => (
+            <div class="swiper-slide max-w-[445px]">
+              <CarbonCalculatorCard {...card} />
+            </div>
+          ))
+        }
+      </div>
+
+      <div
+        class="ml-10 swiper-button-prev after:text-black after:font-bold after:text-5xl"
+        style="opacity: 1;"
+      >
+      </div>
+      <div
+        class="mr-10 swiper-button-next after:text-black after:font-bold after:text-5xl"
+        style="opacity: 0;"
+      >
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { Swiper } from "swiper";
+  import { Navigation } from "swiper/modules";
+  import "swiper/css";
+  import "swiper/css/navigation";
+
+  new Swiper(".calculatorSwiper", {
+    modules: [Navigation],
+    slidesPerView: 3,
+    spaceBetween: 32,
+    navigation: {
+      nextEl: ".swiper-button-prev",
+      prevEl: ".swiper-button-next",
+    },
+    slidesOffsetBefore: 150,
+    on: {
+      navigationNext: function (swiper) {
+        swiper.navigation.nextEl.style.opacity =
+          swiper.navigation.nextEl.style.opacity === "0" ? "1" : "0";
+        swiper.navigation.prevEl.style.opacity =
+          swiper.navigation.prevEl.style.opacity === "0" ? "1" : "0";
+      },
+      navigationPrev: function (swiper) {
+        swiper.navigation.prevEl.style.opacity =
+          swiper.navigation.prevEl.style.opacity === "0" ? "1" : "0";
+        swiper.navigation.nextEl.style.opacity =
+          swiper.navigation.nextEl.style.opacity === "0" ? "1" : "0";
+      },
+    },
+  });
+</script>

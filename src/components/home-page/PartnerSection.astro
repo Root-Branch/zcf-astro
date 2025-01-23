@@ -1,0 +1,36 @@
+---
+import { Image } from "astro:assets";
+import { convertToWebP } from "../../utils/imageConvert";
+
+interface Props {
+  heading: string;
+  logos: {
+    filename: string;
+    alt: string;
+    id: number;
+  }[];
+}
+
+const { heading, logos } = Astro.props;
+---
+
+<section class="py-20">
+  <div class="max-w-[1432px] mx-auto px-4">
+    <h2 class="ds-h4 text-center mb-12">{heading}</h2>
+
+    <div class="flex flex-wrap items-center justify-center gap-12">
+      {
+        logos?.map((logo) => (
+          <div class="flex items-center justify-center">
+            <Image
+              src={convertToWebP(logo.filename)}
+              alt={logo.alt || "Partner logo"}
+              width={180}
+              height={50}
+            />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

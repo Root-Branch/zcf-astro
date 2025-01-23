@@ -1,0 +1,27 @@
+---
+import Button from "../../common/Button.astro";
+
+const { title, subtitle, description, cta_button, background_color } =
+  Astro.props;
+---
+
+<div
+  class={`bg-${background_color} px-[88px] py-[75px] text-ds-white min-h-[572px] flex flex-col items-center max-w-[810px]`}
+>
+  <h3 class="ds-h3 mb-11">{title}</h3>
+  <p class="ds-p-1 !font-semibold mb-10">{subtitle}</p>
+  <p class="ds-p-1 mb-11 text-center">{description}</p>
+  {
+    cta_button?.[0] && (
+      <div class="mt-auto">
+        <Button
+          text={cta_button[0].text}
+          link={cta_button[0].link}
+          style={cta_button[0].style}
+          background_color={cta_button[0].background_color}
+          text_color={cta_button[0].text_color}
+        />
+      </div>
+    )
+  }
+</div>

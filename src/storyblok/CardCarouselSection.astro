@@ -1,0 +1,8 @@
+---
+import { storyblokEditable } from '@storyblok/astro'
+import CardCarouselSection from '../components/home-page/card-carousel/CardCarouselSection.astro'
+
+const { blok } = Astro.props
+---
+
+<CardCarouselSection {...blok} {...storyblokEditable(blok)} /> 

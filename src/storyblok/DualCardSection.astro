@@ -1,0 +1,8 @@
+---
+import { storyblokEditable } from '@storyblok/astro'
+import DualCardSection from '../components/home-page/dual-card/DualCardSection.astro'
+
+const { blok } = Astro.props
+---
+
+<DualCardSection {...blok} {...storyblokEditable(blok)} /> 

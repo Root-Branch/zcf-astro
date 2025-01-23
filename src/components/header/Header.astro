@@ -1,0 +1,37 @@
+---
+const { nav_items = [], site_logo, contact_button } = Astro.props;
+import { convertToWebP } from "../../utils/imageConvert";
+import Button from "../common/Button.astro";
+---
+
+<header class="py-14">
+  <nav class="container mx-auto flex justify-between items-center">
+    <img
+      src={convertToWebP(site_logo.filename)}
+      alt={site_logo.alt}
+      class="h-[85px]"
+    />
+    <div class="flex items-center gap-8">
+      <ul class="flex gap-8">
+        {
+          nav_items?.map((item) => (
+            <li class="text-xl font-medium">
+              <a href={item.nav_item_link.url}>{item.nav_item_label}</a>
+            </li>
+          ))
+        }
+      </ul>
+      {
+        contact_button?.[0] && (
+          <Button
+            text={contact_button[0].text}
+            link={contact_button[0].link}
+            style={contact_button[0].style}
+            text_color={contact_button[0].text_color}
+            background_color={contact_button[0].background_color}
+          />
+        )
+      }
+    </div>
+  </nav>
+</header>

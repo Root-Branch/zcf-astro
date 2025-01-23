@@ -1,0 +1,34 @@
+---
+import TestimonialItem from "./TestimonialItem.astro";
+
+const { testimonials } = Astro.props;
+---
+
+<div>
+  <div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+      {testimonials?.map((testimonial) => (
+        <div class="swiper-slide">
+          <TestimonialItem {...testimonial} />
+        </div>
+      ))}
+    </div>
+    <div class="swiper-button-prev ml-10 after:text-black after:font-bold after:text-5xl"></div>
+    <div class="swiper-button-next mr-10 after:text-black after:font-bold after:text-5xl"></div>
+  </div>
+</div>
+
+<script>
+  import { Swiper } from 'swiper';
+  import { Navigation } from 'swiper/modules';
+  import 'swiper/css';
+  import 'swiper/css/navigation';
+
+  new Swiper(".mySwiper", {
+    modules: [Navigation],
+    navigation: {
+      nextEl: ".swiper-button-prev",
+      prevEl: ".swiper-button-next",
+    },
+  });
+</script>

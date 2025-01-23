@@ -1,0 +1,50 @@
+---
+import { convertToWebP } from "../../../utils/imageConvert";
+import Button from "../../common/Button.astro";
+
+const { icon, heading, description, cta_button } = Astro.props;
+---
+
+<section class="relative -mt-32 bg-ds-black pt-[270px] pb-36 z-10">
+  <div class="max-w-[1440px] mx-auto px-4">
+    <div class="flex flex-col items-center text-center">
+      <div class="flex flex-row items-center">
+        {/* Icon */}
+        <img
+          src={convertToWebP(icon.filename)}
+          alt={icon.alt || "Section icon"}
+          class="w-16 h-16 mb-6 mr-6"
+        />
+
+        {/* Heading */}
+        <h2 class="ds-h3 text-ds-white mb-6">
+          {heading}
+        </h2>
+      </div>
+
+      {/* Description */}
+      {
+        description && (
+          <p class="ds-p-1 text-ds-white mb-10 max-w-3xl">{description}</p>
+        )
+      }
+
+      {/* Buttons */}
+      {
+        cta_button && (
+          <div class="flex flex-wrap justify-center gap-6">
+            {cta_button.map((button) => (
+              <Button
+                text={button.text}
+                link={button.link}
+                style={button.style}
+                background_color={button.background_color}
+                text_color={button.text_color}
+              />
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </div>
+</section>

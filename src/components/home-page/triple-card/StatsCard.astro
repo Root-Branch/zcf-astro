@@ -1,0 +1,42 @@
+---
+const { stat_1_percentage, stat_1_text, stat_2_percentage, stat_2_text } =
+  Astro.props;
+
+// Remove % symbol and convert to numbers
+const percent1 = parseInt(stat_1_percentage.replace("%", ""));
+const percent2 = parseInt(stat_2_percentage.replace("%", ""));
+---
+
+<div class="bg-ds-teal-500 max-w-[503px] min-h-[429px] p-8">
+  <div class="mb-8 flex flex-row">
+    <div class="flex items-center gap-8 mb-4 mr-8">
+      <div class="w-[22px] h-[144px] bg-ds-blue-900 relative">
+        <div
+          class="absolute inset-0 bg-ds-white"
+          style={`height: ${percent1}%`}
+        >
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col items-start">
+      <span class="ds-number text-ds-white mb-4">{stat_1_percentage}</span>
+      <p class="ds-p-1 text-ds-white text-left">{stat_1_text}</p>
+    </div>
+  </div>
+
+  <div class="flex flex-row">
+    <div class="flex items-center gap-8 mb-4 mr-8">
+      <div class="w-[22px] h-[144px] bg-ds-blue-900 relative">
+        <div
+          class="absolute inset-0 bg-ds-white"
+          style={`height: ${percent2}%`}
+        >
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col items-start">
+      <span class="ds-number text-ds-white mb-4">{stat_2_percentage}</span>
+      <p class="ds-p-1 text-ds-white text-left">{stat_2_text}</p>
+    </div>
+  </div>
+</div>

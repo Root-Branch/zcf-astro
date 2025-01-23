@@ -1,0 +1,24 @@
+---
+import { convertToWebP } from "../../../utils/imageConvert";
+
+const { logos, section_title } = Astro.props;
+
+// Double the logos array to create a repeating pattern
+const repeatedLogos = [...logos, ...logos, ...logos, ...logos];
+---
+
+<section class="py-8">
+  <div class="overflow-hidden">
+    <div class="flex justify-center gap-16 -ml-[480px]">
+      {repeatedLogos.map((logo) => (
+        <div class="flex-shrink-0">
+          <img
+            src={convertToWebP(logo.filename)}
+            alt={logo.alt || "Partner logo"}
+            class="h-32 w-auto"
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

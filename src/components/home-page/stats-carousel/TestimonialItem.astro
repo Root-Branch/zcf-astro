@@ -1,0 +1,44 @@
+---
+import { convertToWebP } from "../../../utils/imageConvert";
+import quoteIcon from "../../../assets/quote-icon.png";
+import { Image } from "astro:assets";
+
+const {
+  quote,
+  author_name,
+  author_title,
+  author_company,
+  company_logo,
+  image,
+} = Astro.props;
+---
+
+<div class="flex flex-row mx-32 h-[750px]">
+  <div class="bg-black py-[188px] px-[100px] w-[55%]">
+    <blockquote class="ds-p-large !leading-[1.25] text-ds-white mb-8 relative">
+      {quote}
+      <Image src={quoteIcon} alt="Quote Icon" class="w-10 h-10 mb-4 absolute top-0 left-0 translate-x-[-40px] translate-y-[-30px]" />
+    </blockquote>
+
+    <div class="flex flex-row items-center">
+      <div>
+        <p class="ds-p-1 text-ds-white font-bold">{author_name}</p>
+        <p class="ds-p-1 text-ds-white">{author_title}, {author_company}</p>
+      </div>
+
+      <img
+        src={convertToWebP(company_logo.filename)}
+        alt={company_logo.alt || `${author_company} logo`}
+        class="h-[90px] w-auto ml-4"
+      />
+    </div>
+  </div>
+
+  <div class="w-[45%]">
+    <img
+      src={convertToWebP(image.filename)}
+      alt={image.alt || `${author_name} testimonial`}
+      class="w-full h-full object-cover"
+    />
+  </div>
+</div>

@@ -1,0 +1,72 @@
+---
+import { convertToWebP } from "../../../utils/imageConvert";
+import StepItem from "./StepItem.astro";
+
+const { heading_image, subheading, steps, decorative_arrow } = Astro.props;
+
+const orderedSteps = [steps[0], steps[1], steps[3], steps[2]];
+
+const shortArrow = decorative_arrow?.[1];
+const longArrow = decorative_arrow?.[0];
+---
+
+<section class="bg-ds-blue-900 py-20">
+  <div class="max-w-[1630px] mx-auto px-4">
+    {/* Header */}
+    <div class="flex flex-col items-center mb-20">
+      <div class="relative w-fit -ml-20">
+        <img
+          src={convertToWebP(heading_image.filename)}
+          alt={heading_image.alt || "Steps heading"}
+          class="w-[800px]"
+        />
+        <p class="ds-p-1 text-ds-white absolute bottom-1 right-[-160px]">
+          {subheading}
+        </p>
+      </div>
+    </div>
+
+    {/* Steps Grid with Arrows */}
+    <div class="grid grid-cols-2 gap-x-20 gap-y-12">
+      {
+        orderedSteps.map((step, index) => (
+          <div class="relative">
+            <StepItem {...step} />
+            {/* Right arrow between 1 and 2 */}
+            {index === 0 && shortArrow && (
+              <img
+                src={convertToWebP(shortArrow.filename)}
+                alt="Arrow"
+                class="max-w-28 absolute left-full top-1 rotate-180 -translate-x-1/2"
+              />
+            )}
+            {/* Down arrow between 2 and 3 */}
+            {index === 1 && shortArrow && (
+              <img
+                src={convertToWebP(shortArrow.filename)}
+                alt="Arrow"
+                class="max-w-28 absolute -rotate-90 left-full -translate-x-1/2"
+              />
+            )}
+            {/* Left arrow between 3 and 4 */}
+            {index === 3 && shortArrow && (
+              <img
+                src={convertToWebP(shortArrow.filename)}
+                alt="Arrow"
+                class="max-w-28 absolute -translate-x-1/2 -translate-y-1/2"
+              />
+            )}
+            {/* Up arrow between 4 and 1 */}
+            {index === 2 && shortArrow && (
+              <img
+                src={convertToWebP(shortArrow.filename)}
+                alt="Arrow"
+                class="max-w-28 absolute rotate-90 bottom-full -translate-y-full"
+              />
+            )}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

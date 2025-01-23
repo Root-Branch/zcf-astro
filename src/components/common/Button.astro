@@ -1,0 +1,24 @@
+---
+const {
+  text,
+  link,
+  style = "primary",
+  text_color,
+  background_color,
+} = Astro.props;
+
+const buttonClasses = {
+  primary: `bg-${background_color} text-${text_color}`,
+  secondary: `border-2 border-${background_color} text-${text_color} hover:bg-${background_color}/5`,
+};
+
+const buttonStyle = buttonClasses[style] || buttonClasses.primary;
+---
+
+<a
+  href={link.url}
+  class={`px-9 py-4 ds-button inline-block rounded-full hover:opacity-90 ${buttonStyle}`}
+>
+  {text}
+</a>
+

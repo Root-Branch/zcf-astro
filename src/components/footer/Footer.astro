@@ -1,0 +1,67 @@
+---
+import { Image } from "astro:assets";
+import SocialLink from "./SocialLink.astro";
+import { renderRichText } from "@storyblok/astro";
+
+const {
+  logo,
+  footer_social_links,
+  company_description,
+  credit,
+  awards_logo,
+  footer_links,
+} = Astro.props;
+---
+
+<footer class="bg-black text-ds-white pt-36 pb-20">
+  <div class="max-w-[1505px] mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.5fr_2fr_1fr] gap-16">
+      <div class="flex flex-col gap-8 max-w-[390px]">
+        <div class="flex gap-8 justify-between items-start">
+          <img
+            src={logo.filename}
+            alt={logo.alt || "Footer logo"}
+            class="object-contain h-[85px]"
+          />
+          <div class="flex gap-8">
+            {footer_social_links?.map((social) => <SocialLink {...social} />)}
+          </div>
+        </div>
+
+        <p class="ds-p-3 !font-[300]">{company_description}</p>
+
+        <div set:html={renderRichText(credit)} class="ds-p-3 !font-[600]" />
+      </div>
+
+      {/* Column 2: Quick Links in 3 columns */}
+      <div class="grid grid-cols-3 gap-8">
+        {
+          footer_links?.map((section) => (
+            <div class="flex flex-col gap-4">
+              <h3 class="font-bold text-ds-p-3">{section.title}</h3>
+              <div class="flex flex-col gap-2">
+                <div
+                  set:html={renderRichText(section.link)}
+                  class="underline text-ds-p-3 !font-[300]"
+                />
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      {/* Column 3: Awards */}
+      <div class="flex flex-col gap-6 items-start">
+        {
+          awards_logo?.map((award) => (
+            <img
+              src={award.filename}
+              alt={award.alt || "Award logo"}
+              class="object-contain h-[64px] w-full"
+            />
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</footer>

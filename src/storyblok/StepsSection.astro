@@ -1,0 +1,8 @@
+---
+import { storyblokEditable } from '@storyblok/astro'
+import StepsSection from '../components/home-page/steps-section/StepsSection.astro'
+
+const { blok } = Astro.props
+---
+
+<StepsSection {...blok} {...storyblokEditable(blok)} /> 
