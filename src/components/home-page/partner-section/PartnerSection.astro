@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import { convertToWebP } from "../../utils/imageConvert";
+import { convertToWebP } from "../../../utils/imageConvert";
 
 interface Props {
   heading: string;
@@ -22,11 +22,10 @@ const { heading, logos } = Astro.props;
       {
         logos?.map((logo) => (
           <div class="flex items-center justify-center">
-            <Image
+            <img
               src={convertToWebP(logo.filename)}
               alt={logo.alt || "Partner logo"}
-              width={180}
-              height={50}
+              class="w-full h-[50px] object-contain"
             />
           </div>
         ))
