@@ -5,4 +5,6 @@ import ImageBannerSection from '../components/home-page/image-banner-section/Ima
 const { blok } = Astro.props
 ---
 
-<ImageBannerSection {...blok} {...storyblokEditable(blok)} /> 
+<div {...storyblokEditable(blok)}>
+  <ImageBannerSection {...blok} />
+</div>

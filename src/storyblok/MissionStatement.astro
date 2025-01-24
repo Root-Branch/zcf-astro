@@ -5,4 +5,6 @@ import MissionStatement from '../components/home-page/mission-statement/MissionS
 const { blok } = Astro.props
 ---
 
-<MissionStatement {...blok} {...storyblokEditable(blok)} /> 
+<div {...storyblokEditable(blok)}>
+  <MissionStatement {...blok} />
+</div>

@@ -5,4 +5,6 @@ import LogoShowcaseSection from '../components/home-page/logo-showcase-section/L
 const { blok } = Astro.props
 ---
 
-<LogoShowcaseSection {...blok} {...storyblokEditable(blok)} /> 
+<div {...storyblokEditable(blok)}>
+  <LogoShowcaseSection {...blok} />
+</div>

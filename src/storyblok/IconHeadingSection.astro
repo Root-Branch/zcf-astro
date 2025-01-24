@@ -5,4 +5,6 @@ import IconHeadingSection from '../components/home-page/icon-heading-section/Ico
 const { blok } = Astro.props
 ---
 
-<IconHeadingSection {...blok} {...storyblokEditable(blok)} /> 
+<div {...storyblokEditable(blok)}>
+  <IconHeadingSection {...blok} />
+</div>

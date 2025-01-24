@@ -5,4 +5,6 @@ import StatsCarouselSection from '../components/home-page/stats-carousel/StatsCa
 const { blok } = Astro.props
 ---
 
-<StatsCarouselSection {...blok} {...storyblokEditable(blok)} /> 
+<div {...storyblokEditable(blok)}>
+  <StatsCarouselSection {...blok} />
+</div>

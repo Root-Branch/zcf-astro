@@ -5,4 +5,6 @@ import StepsSection from '../components/home-page/steps-section/StepsSection.ast
 const { blok } = Astro.props
 ---
 
-<StepsSection {...blok} {...storyblokEditable(blok)} /> 
+<div {...storyblokEditable(blok)}>
+  <StepsSection {...blok} />
+</div>

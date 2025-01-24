@@ -5,4 +5,6 @@ import HeroBanner from '../components/home-page/hero-banner/HeroBanner.astro'
 const { blok } = Astro.props
 ---
 
-<HeroBanner {...blok} {...storyblokEditable(blok)} /> 
+<div {...storyblokEditable(blok)}>
+  <HeroBanner {...blok} />
+</div>

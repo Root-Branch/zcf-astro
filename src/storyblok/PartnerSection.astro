@@ -1,8 +1,10 @@
 ---
-import { storyblokEditable } from '@storyblok/astro'
-import PartnerSection from '../components/home-page/partner-section/PartnerSection.astro'
+import { storyblokEditable } from "@storyblok/astro";
+import PartnerSection from "../components/home-page/partner-section/PartnerSection.astro";
 
-const { blok } = Astro.props
+const { blok } = Astro.props;
 ---
 
-<PartnerSection {...blok} {...storyblokEditable(blok)} /> 
+<div {...storyblokEditable(blok)}>
+  <PartnerSection {...blok} />
+</div>

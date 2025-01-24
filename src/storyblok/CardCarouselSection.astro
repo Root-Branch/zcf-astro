@@ -5,4 +5,6 @@ import CardCarouselSection from '../components/home-page/card-carousel/CardCarou
 const { blok } = Astro.props
 ---
 
-<CardCarouselSection {...blok} {...storyblokEditable(blok)} /> 
+<div {...storyblokEditable(blok)}>
+  <CardCarouselSection {...blok} />
+</div>

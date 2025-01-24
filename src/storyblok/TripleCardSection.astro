@@ -5,4 +5,6 @@ import TripleCardSection from '../components/home-page/triple-card/TripleCardSec
 const { blok } = Astro.props
 ---
 
-<TripleCardSection {...blok} {...storyblokEditable(blok)} /> 
+<div {...storyblokEditable(blok)}>
+  <TripleCardSection {...blok} />
+</div>
