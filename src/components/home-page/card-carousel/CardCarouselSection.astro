@@ -1,5 +1,8 @@
 ---
 import CarbonCalculatorCard from "./CarbonCalculatorCard.astro";
+import arrowLeft from "../../../assets/arrow-left.png";
+import arrowRight from "../../../assets/arrow-right.png";
+import { Image } from "astro:assets";
 
 const { heading, calculator_cards } = Astro.props;
 ---
@@ -23,11 +26,13 @@ const { heading, calculator_cards } = Astro.props;
         class="ml-10 swiper-button-prev after:text-black after:font-bold after:text-5xl"
         style="opacity: 1;"
       >
+        <Image src={arrowLeft} alt="Previous" />
       </div>
       <div
         class="mr-10 swiper-button-next after:text-black after:font-bold after:text-5xl"
         style="opacity: 0;"
       >
+        <Image src={arrowRight} alt="Next" />
       </div>
     </div>
   </div>
@@ -64,3 +69,10 @@ const { heading, calculator_cards } = Astro.props;
     },
   });
 </script>
+
+<style>
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    content: "";
+  }
+</style>

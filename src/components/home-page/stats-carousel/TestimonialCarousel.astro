@@ -2,27 +2,41 @@
 import TestimonialItem from "./TestimonialItem.astro";
 
 const { testimonials } = Astro.props;
+
+import arrowLeft from "../../../assets/arrow-left.png";
+import arrowRight from "../../../assets/arrow-right.png";
+import { Image } from "astro:assets";
 ---
 
 <div>
   <div class="swiper mySwiper">
     <div class="swiper-wrapper">
-      {testimonials?.map((testimonial) => (
-        <div class="swiper-slide">
-          <TestimonialItem {...testimonial} />
-        </div>
-      ))}
+      {
+        testimonials?.map((testimonial) => (
+          <div class="swiper-slide">
+            <TestimonialItem {...testimonial} />
+          </div>
+        ))
+      }
     </div>
-    <div class="swiper-button-prev ml-10 after:text-black after:font-bold after:text-5xl"></div>
-    <div class="swiper-button-next mr-10 after:text-black after:font-bold after:text-5xl"></div>
+    <div
+      class="swiper-button-prev ml-10 after:text-black after:font-bold after:text-5xl"
+    >
+      <Image src={arrowLeft} alt="Previous" />
+    </div>
+    <div
+      class="swiper-button-next mr-10 after:text-black after:font-bold after:text-5xl"
+    >
+      <Image src={arrowRight} alt="Next" />
+    </div>
   </div>
 </div>
 
 <script>
-  import { Swiper } from 'swiper';
-  import { Navigation } from 'swiper/modules';
-  import 'swiper/css';
-  import 'swiper/css/navigation';
+  import { Swiper } from "swiper";
+  import { Navigation } from "swiper/modules";
+  import "swiper/css";
+  import "swiper/css/navigation";
 
   new Swiper(".mySwiper", {
     modules: [Navigation],
@@ -32,3 +46,10 @@ const { testimonials } = Astro.props;
     },
   });
 </script>
+
+<style>
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    content: "";
+  }
+</style>
