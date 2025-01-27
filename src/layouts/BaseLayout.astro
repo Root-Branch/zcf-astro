@@ -1,6 +1,7 @@
 ---
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 import { getGlobalContent } from "../utils/storyblok";
+import "../styles/global.css";
 
 const { header, footer } = await getGlobalContent();
 ---
@@ -24,119 +25,6 @@ const { header, footer } = await getGlobalContent();
       href="https://fonts.googleapis.com/css2?family=Just+Another+Hand&display=swap"
       rel="stylesheet"
     />
-    <style is:global>
-      /* Headings - Montserrat */
-      .ds-h1 {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 80px;
-        line-height: 100px;
-        font-weight: 650;
-      }
-      .ds-h2 {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 50px;
-        line-height: 60px;
-        font-weight: 650;
-      }
-      .ds-h3 {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 40px;
-        line-height: auto;
-        font-weight: 650;
-      }
-      .ds-h4 {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 30px;
-        line-height: auto;
-        font-weight: 650;
-      }
-
-      /* Highlights - Just Another Hand */
-      .ds-highlight-1 {
-        font-family: 'Just Another Hand', cursive;
-        font-size: 120px;
-        line-height: auto;
-      }
-      .ds-highlight-2 {
-        font-family: 'Just Another Hand', cursive;
-        font-size: 100px;
-        line-height: auto;
-      }
-      .ds-highlight-3 {
-        font-family: 'Just Another Hand', cursive;
-        font-size: 70px;
-        line-height: 1;
-      }
-      .ds-highlight-4 {
-        font-family: 'Just Another Hand', cursive;
-        font-size: 60px;
-        line-height: 1;
-      }
-
-      /* Paragraphs - Source Sans 3 */
-      .ds-p-large {
-        font-family: 'Source Sans 3', sans-serif;
-        font-size: 40px;
-        line-height: auto;
-        font-weight: 500;
-      }
-      .ds-p-1 {
-        font-family: 'Source Sans 3', sans-serif;
-        font-size: 24px;
-        line-height: 30px;
-        font-weight: 350;
-      }
-      .ds-p-2 {
-        font-family: 'Source Sans 3', sans-serif;
-        font-size: 20px;
-        line-height: 25px;
-        font-weight: 300;
-      }
-      .ds-p-3 {
-        font-family: 'Source Sans 3', sans-serif;
-        font-size: 16px;
-        line-height: auto;
-        font-weight: 400;
-      }
-
-      /* Headers - Source Sans 3 */
-      .ds-header {
-        font-family: 'Source Sans 3', sans-serif;
-        font-size: 20px;
-        line-height: auto;
-        font-weight: 400;
-      }
-      .ds-header-active {
-        font-family: 'Source Sans 3', sans-serif;
-        font-size: 20px;
-        line-height: auto;
-        font-weight: 700;
-      }
-
-      /* Button - Source Sans 3 */
-      .ds-button {
-        font-family: 'Source Sans 3', sans-serif;
-        font-size: 25px;
-        line-height: auto;
-        font-weight: 400;
-      }
-
-      /* Numbers - Montserrat */
-      .ds-number {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 40px;
-        line-height: 1;
-        font-weight: 700;
-      }
-
-      /* Number Large - Montserrat */
-      .ds-number-large {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 145.47px;
-        font-weight: 900;
-        line-height: 0.75;
-      }
-    </style>
   </head>
   <body>
     <StoryblokComponent blok={header} />

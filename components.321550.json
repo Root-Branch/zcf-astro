@@ -1133,10 +1133,10 @@
     },
     {
       "name": "site-config",
-      "display_name": null,
+      "display_name": "Header/Footer",
       "description": null,
       "created_at": "2025-01-21T10:58:35.517Z",
-      "updated_at": "2025-01-21T11:01:09.756Z",
+      "updated_at": "2025-01-24T11:01:13.580Z",
       "id": 6826094,
       "schema": {
         "header": {
@@ -1167,7 +1167,7 @@
       "is_nestable": false,
       "all_presets": [],
       "preset_id": null,
-      "real_name": "site-config",
+      "real_name": "Header/Footer",
       "component_group_uuid": "3affc4a3-4a4a-4fe5-be9f-7d30049879f2",
       "color": null,
       "icon": null,
@@ -1572,20 +1572,20 @@
       "display_name": "Triple Card Section",
       "description": "Section with statistics and image cards explaining urgency",
       "created_at": "2025-01-20T18:13:53.871Z",
-      "updated_at": "2025-01-22T15:52:18.813Z",
+      "updated_at": "2025-01-24T11:11:28.569Z",
       "id": 6822347,
       "schema": {
         "heading": {
           "type": "text",
           "pos": 0,
-          "required": true,
+          "required": false,
           "description": "Section heading (e.g., 'WHY NOW?')",
           "id": "OzUzqEgdSxuGrkjvLYZZiA"
         },
         "subheading": {
           "type": "text",
           "pos": 1,
-          "required": true,
+          "required": false,
           "description": "Main statistic text (e.g., '35% of the UK's emissions are from food and drink.')",
           "id": "bxJIJYwRRGWt1-xA2kWZOg",
           "display_name": "Subheading"
@@ -1593,7 +1593,7 @@
         "description": {
           "type": "richtext",
           "pos": 2,
-          "required": true,
+          "required": false,
           "description": "Explanatory text with optional link formatting",
           "id": "QzZ3-ST6Rt-OK0fBLxMxXA"
         },

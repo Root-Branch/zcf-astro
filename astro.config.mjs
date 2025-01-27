@@ -36,14 +36,14 @@ export default defineConfig({
     tailwind(),
   ],
 
-  ...(isLocal && {
-    vite: {
-      plugins: [basicSsl()],
-      server: {
-        https: true,
-      },
-    },
-  }),
+  // ...(isLocal && {
+  //   vite: {
+  //     plugins: [basicSsl()],
+  //     server: {
+  //       https: true,
+  //     },
+  //   },
+  // }),
   ...(isPreview && {
     adapter: netlify(),
     output: "server",

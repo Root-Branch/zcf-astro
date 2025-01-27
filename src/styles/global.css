@@ -1,0 +1,249 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@responsive {
+  /* MOBILE */
+  .ds-h1 {
+    font-family: "Montserrat", sans-serif;
+    font-size: 35px;
+    line-height: 45px;
+    font-weight: 650;
+  }
+
+  .ds-button {
+    font-family: "Source Sans 3", sans-serif;
+    font-size: 18px;
+    line-height: auto;
+    font-weight: 500;
+  }
+
+  /* Headings - Montserrat */
+  .ds-h2 {
+    font-family: "Montserrat", sans-serif;
+    font-size: 25px;
+    line-height: 1.5;
+    font-weight: 650;
+  }
+  .ds-h3 {
+    font-family: "Montserrat", sans-serif;
+    font-size: 20px;
+    line-height: auto;
+    font-weight: 650;
+  }
+  .ds-h4 {
+    font-family: "Montserrat", sans-serif;
+    font-size: 30px;
+    line-height: auto;
+    font-weight: 650;
+  }
+
+  /* Highlights - Just Another Hand */
+  .ds-hl1 {
+    font-family: "Just Another Hand", cursive;
+    font-size: 50px;
+    line-height: auto;
+  }
+  .ds-hl2 {
+    font-family: "Just Another Hand", cursive;
+    font-size: 35px;
+    line-height: auto;
+  }
+  .ds-hl3 {
+    font-family: "Just Another Hand", cursive;
+    font-size: 70px;
+    line-height: 1;
+  }
+  .ds-hl4 {
+    font-family: "Just Another Hand", cursive;
+    font-size: 60px;
+    line-height: 1;
+  }
+
+  /* Paragraphs - Source Sans 3 */
+  .ds-p-large {
+    font-family: "Source Sans 3", sans-serif;
+    font-size: 40px;
+    line-height: auto;
+    font-weight: 500;
+  }
+  .ds-p-1 {
+    font-family: "Source Sans 3", sans-serif;
+    font-size: 18px;
+    line-height: 30px;
+    font-weight: 350;
+  }
+  .ds-p-2 {
+    font-family: "Source Sans 3", sans-serif;
+    font-size: 15px;
+    line-height: 25px;
+    font-weight: 350;
+  }
+  .ds-p-3 {
+    font-family: "Source Sans 3", sans-serif;
+    font-size: 16px;
+    line-height: auto;
+    font-weight: 400;
+  }
+
+  /* Headers - Source Sans 3 */
+  .ds-header {
+    font-family: "Source Sans 3", sans-serif;
+    font-size: 20px;
+    line-height: auto;
+    font-weight: 400;
+  }
+  .ds-header-active {
+    font-family: "Source Sans 3", sans-serif;
+    font-size: 20px;
+    line-height: auto;
+    font-weight: 700;
+  }
+
+  /* Numbers - Montserrat */
+  .ds-number {
+    font-family: "Montserrat", sans-serif;
+    font-size: 40px;
+    line-height: 1;
+    font-weight: 700;
+  }
+
+  /* Number Large - Montserrat */
+  .ds-number-large {
+    font-family: "Montserrat", sans-serif;
+    font-size: 85px;
+    font-weight: 900;
+    line-height: 0.75;
+  }
+
+  @media screen(sm) {
+    .ds-p-2 {
+      font-size: 20px;
+      line-height: 30px;
+    }
+  }
+
+  @media screen(md) {
+    /* Headings - Montserrat */
+    .ds-h1 {
+      font-family: "Montserrat", sans-serif;
+      font-size: 80px;
+      line-height: 1.5;
+      font-weight: 650;
+    }
+    .ds-h2 {
+      font-family: "Montserrat", sans-serif;
+      font-size: 50px;
+      line-height: 60px;
+      font-weight: 650;
+    }
+    .ds-h3 {
+      font-family: "Montserrat", sans-serif;
+      font-size: 40px;
+      line-height: auto;
+      font-weight: 650;
+    }
+    .ds-h4 {
+      font-family: "Montserrat", sans-serif;
+      font-size: 30px;
+      line-height: auto;
+      font-weight: 650;
+    }
+
+    /* Highlights - Just Another Hand */
+    .ds-hl1 {
+      font-family: "Just Another Hand", cursive;
+      font-size: 70px;
+      line-height: auto;
+    }
+    .ds-hl2 {
+      font-family: "Just Another Hand", cursive;
+      font-size: 60px;
+      line-height: auto;
+    }
+    .ds-hl3 {
+      font-family: "Just Another Hand", cursive;
+      font-size: 70px;
+      line-height: 1;
+    }
+    .ds-hl4 {
+      font-family: "Just Another Hand", cursive;
+      font-size: 60px;
+      line-height: 1;
+    }
+
+    /* Paragraphs - Source Sans 3 */
+    .ds-p-large {
+      font-family: "Source Sans 3", sans-serif;
+      font-size: 40px;
+      line-height: auto;
+      font-weight: 500;
+    }
+    .ds-p-1 {
+      font-family: "Source Sans 3", sans-serif;
+      font-size: 24px;
+      line-height: 30px;
+      font-weight: 350;
+    }
+    .ds-p-2 {
+      font-family: "Source Sans 3", sans-serif;
+      font-size: 20px;
+      line-height: 25px;
+      font-weight: 350;
+    }
+    .ds-p-3 {
+      font-family: "Source Sans 3", sans-serif;
+      font-size: 16px;
+      line-height: auto;
+      font-weight: 400;
+    }
+
+    /* Headers - Source Sans 3 */
+    .ds-header {
+      font-family: "Source Sans 3", sans-serif;
+      font-size: 20px;
+      line-height: auto;
+      font-weight: 400;
+    }
+    .ds-header-active {
+      font-family: "Source Sans 3", sans-serif;
+      font-size: 20px;
+      line-height: auto;
+      font-weight: 700;
+    }
+
+    /* Button - Source Sans 3 */
+    .ds-button {
+      font-family: "Source Sans 3", sans-serif;
+      font-size: 25px;
+      line-height: auto;
+      font-weight: 400;
+    }
+
+    /* Numbers - Montserrat */
+    .ds-number {
+      font-family: "Montserrat", sans-serif;
+      font-size: 40px;
+      line-height: 1;
+      font-weight: 700;
+    }
+
+    /* Number Large - Montserrat */
+    .ds-number-large {
+      font-family: "Montserrat", sans-serif;
+      font-size: 145.47px;
+      font-weight: 900;
+      line-height: 0.75;
+    }
+  }
+
+  .number-size {
+    font-size: 35px !important;
+  }
+
+  @media screen(lg) {
+    .number-size {
+      font-size: 50px !important;
+    }
+  }
+}

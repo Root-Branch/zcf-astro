@@ -2,33 +2,43 @@
 import Button from "../../common/Button.astro";
 import { convertToWebP } from "../../../utils/imageConvert";
 
-const { heading, background_image, cta_button, decorative_overlay } = Astro.props;
+const { heading, background_image, cta_button, decorative_overlay } =
+  Astro.props;
 ---
 
-<section class="relative min-h-[905px] flex">
+<section
+  class="relative h-[575px] md:min-h-[905px] w-full flex justify-center items-center"
+>
   {/* Background Image */}
   <div class="absolute inset-0 z-0">
     <img
       src={convertToWebP(background_image.filename)}
       alt={background_image.alt}
       class="w-full h-full object-cover"
+      style="object-position: 30%;"
     />
     <div class="absolute inset-0 bg-ds-blue-900/45"></div>
   </div>
 
   {/* Decorative Overlay */}
-  <div class="absolute -right-[456px] top-[100px] z-10">
+  <div
+    class:list={[
+      "absolute top-1/2 translate-y-[3rem] left-1/2 translate-x-[2rem] h-1/2 w-[100%]",
+      "sm:h-2/3 sm:top-1/4 sm:translate-y-[6rem] sm:translate-x-[1rem]",
+      "lg:h-full md:translate-y-[9rem] lg:top-0",
+    ]}
+  >
     <img
       src={convertToWebP(decorative_overlay.filename)}
       alt="Decorative pattern"
-      class="w-auto h-[912px]"
+      class="w-full h-full object-contain"
     />
   </div>
 
   {/* Content */}
-  <div class="container mx-auto relative z-20 px-4 mt-[313px]">
+  <div class="container mx-auto relative z-20 px-4">
     <h1
-      class="text-ds-white ds-h1 font-bold max-w-[952px] mb-20"
+      class="text-ds-white ds-h1 font-bold max-w-[90%] md:max-w-[952px] mb-20"
     >
       {heading}
     </h1>
@@ -45,4 +55,3 @@ const { heading, background_image, cta_button, decorative_overlay } = Astro.prop
     }
   </div>
 </section>
-

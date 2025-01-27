@@ -13,10 +13,11 @@ const {
 } = Astro.props;
 ---
 
-<footer class="bg-black text-ds-white pt-36 pb-20">
+<footer class="bg-black text-ds-white py-10 lg:py-20">
   <div class="max-w-[1505px] mx-auto px-4">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.5fr_2fr_1fr] gap-16">
-      <div class="flex flex-col gap-8 max-w-[390px]">
+    <div class="flex flex-col lg:grid lg:grid-cols-[1.5fr_2fr_1fr] gap-16">
+      {/* Logo and Social Links - Always at top */}
+      <div class="flex flex-col gap-8">
         <div class="flex gap-8 justify-between items-start">
           <img
             src={logo.filename}
@@ -28,16 +29,51 @@ const {
           </div>
         </div>
 
-        <p class="ds-p-3 !font-[300]">{company_description}</p>
-
-        <div set:html={renderRichText(credit)} class="ds-p-3 !font-[600]" />
+        {/* Desktop only: Company Description and Credit */}
+        <div class="hidden lg:flex lg:flex-col gap-8">
+          <p class="ds-p-3 !font-[300]">{company_description}</p>
+          <div set:html={renderRichText(credit)} class="ds-p-3 !font-[600]" />
+        </div>
       </div>
 
-      {/* Column 2: Quick Links in 3 columns */}
-      <div class="grid grid-cols-3 gap-8">
+      {
+        /* Column 2: Quick Links - 2 columns on mobile (1st column and 2nd column with 2 rows), 3 on desktop */
+      }
+      <div class="grid grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* First column */}
+        <div class="flex flex-col gap-4">
+          <h3 class="font-bold text-ds-p-3">{footer_links?.[0]?.title}</h3>
+          <div class="flex flex-col gap-2">
+            <div
+              set:html={renderRichText(footer_links?.[0]?.link)}
+              class="underline text-ds-p-3 !font-[300]"
+            />
+          </div>
+        </div>
+
         {
-          footer_links?.map((section) => (
-            <div class="flex flex-col gap-4">
+          /* Second column on mobile (contains last two desktop columns stacked) */
+        }
+        <div class="flex flex-col gap-8 lg:hidden">
+          {
+            footer_links?.slice(1).map((section) => (
+              <div class="flex flex-col gap-4">
+                <h3 class="font-bold text-ds-p-3">{section.title}</h3>
+                <div class="flex flex-col gap-2">
+                  <div
+                    set:html={renderRichText(section.link)}
+                    class="underline text-ds-p-3 !font-[300]"
+                  />
+                </div>
+              </div>
+            ))
+          }
+        </div>
+
+        {/* Desktop only: Second and Third columns */}
+        {
+          footer_links?.slice(1).map((section) => (
+            <div class="hidden lg:flex flex-col gap-4">
               <h3 class="font-bold text-ds-p-3">{section.title}</h3>
               <div class="flex flex-col gap-2">
                 <div
@@ -50,17 +86,27 @@ const {
         }
       </div>
 
-      {/* Column 3: Awards */}
-      <div class="flex flex-col gap-6 items-start">
+      {/* Column 3: Awards - smaller on mobile */}
+      <div
+        class="flex flex-row flex-wrap lg:flex-col gap-2 lg:gap-6 items-start justify-start w-full"
+      >
         {
           awards_logo?.map((award) => (
             <img
               src={award.filename}
               alt={award.alt || "Award logo"}
-              class="object-contain h-[64px] w-full"
+              class="object-contain h-auto max-h-[40px] lg:max-h-[64px] w-auto"
             />
           ))
         }
+      </div>
+
+      {
+        /* Company Description and Credit - Bottom on mobile, part of first column on desktop */
+      }
+      <div class="flex flex-col gap-8 order-last lg:hidden">
+        <p class="ds-p-3 !font-[300]">{company_description}</p>
+        <div set:html={renderRichText(credit)} class="ds-p-3 !font-[600]" />
       </div>
     </div>
   </div>

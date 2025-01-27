@@ -8,24 +8,24 @@ import arrowRight from "../../../assets/arrow-right.png";
 import { Image } from "astro:assets";
 ---
 
-<div>
-  <div class="swiper mySwiper">
-    <div class="swiper-wrapper">
+<div class="h-full">
+  <div class="swiper testimonialSwiper h-full">
+    <div class="swiper-wrapper h-full">
       {
         testimonials?.map((testimonial) => (
-          <div class="swiper-slide">
+          <div class="swiper-slide h-full px-4 md:px-0">
             <TestimonialItem {...testimonial} />
           </div>
         ))
       }
     </div>
     <div
-      class="swiper-button-prev ml-10 after:text-black after:font-bold after:text-5xl"
+      class="swiper-button-prev ml-0 lg:ml-10 after:text-black after:font-bold after:text-5xl scale-50 lg:scale-100"
     >
       <Image src={arrowLeft} alt="Previous" />
     </div>
     <div
-      class="swiper-button-next mr-10 after:text-black after:font-bold after:text-5xl"
+      class="swiper-button-next mr-0 lg:mr-10 after:text-black after:font-bold after:text-5xl scale-50 lg:scale-100"
     >
       <Image src={arrowRight} alt="Next" />
     </div>
@@ -38,7 +38,7 @@ import { Image } from "astro:assets";
   import "swiper/css";
   import "swiper/css/navigation";
 
-  new Swiper(".mySwiper", {
+  new Swiper(".testimonialSwiper", {
     modules: [Navigation],
     navigation: {
       nextEl: ".swiper-button-prev",

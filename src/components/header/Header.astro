@@ -4,34 +4,83 @@ import { convertToWebP } from "../../utils/imageConvert";
 import Button from "../common/Button.astro";
 ---
 
-<header class="py-14">
+<header class="py-8 xl:py-14 px-4 overflow-x-hidden relative">
   <nav class="container mx-auto flex justify-between items-center">
     <img
       src={convertToWebP(site_logo.filename)}
       alt={site_logo.alt}
       class="h-[85px]"
     />
-    <div class="flex items-center gap-8">
-      <ul class="flex gap-8">
+    <!-- Hamburger button for mobile -->
+    <button
+      class="xl:hidden z-50 space-y-2"
+      aria-label="Toggle menu"
+      id="menu-toggle"
+    >
+      <div class="w-8 h-0.5 bg-black transition-all"></div>
+      <div class="w-8 h-0.5 bg-black transition-all"></div>
+      <div class="w-8 h-0.5 bg-black transition-all"></div>
+    </button>
+
+    <!-- Navigation menu -->
+    <div
+      class="flex flex-col xl:flex-row xl:items-center xl:relative
+      fixed top-0 left-0 h-[100vh] xl:h-auto xl:w-auto w-[300px]
+      xl:bg-transparent bg-white xl:p-0 py-24 px-8 transition-transform xl:translate-x-0 -translate-x-full z-40"
+      id="nav-menu"
+    >
+      <div class="xl:mr-10 mb-10 xl:mb-0">
+        <ul
+          class="flex xl:flex-row flex-col gap-8 xl:items-center w-full"
+        >
+          {
+            nav_items?.map((item) => (
+              <li class="text-xl font-medium">
+                <a href={item.nav_item_link.url}>{item.nav_item_label}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div>
         {
-          nav_items?.map((item) => (
-            <li class="text-xl font-medium">
-              <a href={item.nav_item_link.url}>{item.nav_item_label}</a>
-            </li>
-          ))
+          contact_button?.[0] && (
+            <Button
+              text={contact_button[0].text}
+              link={contact_button[0].link}
+              style={contact_button[0].style}
+              text_color={contact_button[0].text_color}
+              background_color={contact_button[0].background_color}
+            />
+          )
         }
-      </ul>
-      {
-        contact_button?.[0] && (
-          <Button
-            text={contact_button[0].text}
-            link={contact_button[0].link}
-            style={contact_button[0].style}
-            text_color={contact_button[0].text_color}
-            background_color={contact_button[0].background_color}
-          />
-        )
-      }
+      </div>
     </div>
   </nav>
 </header>
+
+<script>
+  const menuToggle = document.getElementById("menu-toggle");
+  const navMenu = document.getElementById("nav-menu");
+  const menuBars = menuToggle?.getElementsByTagName("div");
+
+  menuToggle?.addEventListener("click", () => {
+    navMenu?.classList.toggle("-translate-x-full");
+    navMenu?.classList.toggle("translate-x-0");
+
+    // Animate hamburger to X
+    if (menuBars) {
+      menuBars[0].classList.toggle("rotate-45");
+      menuBars[0].classList.toggle("translate-y-2.5");
+      menuBars[1].classList.toggle("opacity-0");
+      menuBars[2].classList.toggle("-rotate-45");
+      menuBars[2].classList.toggle("-translate-y-2.5");
+    }
+  });
+</script>
+
+<style>
+  #menu-toggle div {
+    transform-origin: center;
+  }
+</style>

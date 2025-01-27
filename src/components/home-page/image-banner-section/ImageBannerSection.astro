@@ -6,7 +6,7 @@ const { background_image, decorative_text_image, heading } = Astro.props;
 
 <section class="relative h-[400px]">
   {/* Background Image */}
-  <img 
+  <img
     src={convertToWebP(background_image.filename)}
     alt={background_image.alt || "Banner background"}
     class="absolute inset-0 w-full h-full object-cover"
@@ -17,22 +17,21 @@ const { background_image, decorative_text_image, heading } = Astro.props;
 
   {/* Content */}
   <div class="relative z-10 max-w-[1408px] mx-auto px-4 h-full">
-    <div class="flex justify-between items-center h-full">
+    <div
+      class="flex flex-col md:flex-row justify-around items-center h-full"
+    >
       {/* Decorative Text Image (Step up to the table) */}
-      <div>
-        <img 
-          src={convertToWebP(decorative_text_image.filename)}
-          alt={decorative_text_image.alt || "Decorative text"}
-          class="w-auto h-auto"
-        />
-      </div>
+      <img
+        src={convertToWebP(decorative_text_image.filename)}
+        alt={decorative_text_image.alt || "Decorative text"}
+        class="w-auto h-40 md:h-48"
+      />
 
       {/* Main Heading */}
-      <div>
-        <h2 class="ds-h3 text-ds-white text-right">
-          {heading}
-        </h2>
-      </div>
+      <h2 class="ds-h2 md:ds-h3 text-ds-white text-center md:text-right">
+        {heading}
+      </h2>
     </div>
   </div>
-</section> 
+</section>
+

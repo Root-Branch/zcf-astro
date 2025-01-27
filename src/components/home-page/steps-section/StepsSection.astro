@@ -13,60 +13,105 @@ const longArrow = decorative_arrow?.[0];
 <section class="bg-ds-blue-900 py-20">
   <div class="max-w-[1630px] mx-auto px-4">
     {/* Header */}
-    <div class="flex flex-col items-center mb-20">
-      <div class="relative w-fit -ml-20">
+    <div class="flex flex-row md:flex-col items-center mb-8 md:mb-20">
+      <div class="relative w-fit -ml-0 md:-ml-0">
         <img
           src={convertToWebP(heading_image.filename)}
           alt={heading_image.alt || "Steps heading"}
-          class="w-[800px]"
+          class="w-[50rem] md:w-[40rem] lg:w-[50rem]"
         />
-        <p class="ds-p-1 text-ds-white absolute bottom-1 right-[-160px]">
+        <p
+          class="ds-p-2 md:ds-p-1 text-ds-white text-center p-4 md:p-0 md:absolute md:bottom-1 md:right-0 lg:right-[-10rem]"
+        >
           {subheading}
         </p>
       </div>
     </div>
 
     {/* Steps Grid with Arrows */}
-    <div class="grid grid-cols-2 gap-x-20 gap-y-12">
-      {
-        orderedSteps.map((step, index) => (
-          <div class="relative">
-            <StepItem {...step} />
-            {/* Right arrow between 1 and 2 */}
-            {index === 0 && shortArrow && (
-              <img
-                src={convertToWebP(shortArrow.filename)}
-                alt="Arrow"
-                class="max-w-28 absolute left-full top-1 rotate-180 -translate-x-1/2"
-              />
-            )}
-            {/* Down arrow between 2 and 3 */}
-            {index === 1 && shortArrow && (
-              <img
-                src={convertToWebP(shortArrow.filename)}
-                alt="Arrow"
-                class="max-w-28 absolute -rotate-90 left-full -translate-x-1/2"
-              />
-            )}
-            {/* Left arrow between 3 and 4 */}
-            {index === 3 && shortArrow && (
-              <img
-                src={convertToWebP(shortArrow.filename)}
-                alt="Arrow"
-                class="max-w-28 absolute -translate-x-1/2 -translate-y-1/2"
-              />
-            )}
-            {/* Up arrow between 4 and 1 */}
-            {index === 2 && shortArrow && (
-              <img
-                src={convertToWebP(shortArrow.filename)}
-                alt="Arrow"
-                class="max-w-28 absolute rotate-90 bottom-full -translate-y-full"
-              />
-            )}
-          </div>
-        ))
-      }
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-20 gap-y-12">
+      <div class="hidden lg:contents">
+        {
+          orderedSteps.map((step, index) => (
+            <div class="relative">
+              <StepItem {...step} />
+              {/* Right arrow between 1 and 2 */}
+              {index === 0 && shortArrow && (
+                <img
+                  src={convertToWebP(shortArrow.filename)}
+                  alt="Arrow"
+                  class="max-w-28 absolute left-full top-1 rotate-180 -translate-x-1/2"
+                />
+              )}
+              {/* Down arrow between 2 and 3 */}
+              {index === 1 && shortArrow && (
+                <img
+                  src={convertToWebP(shortArrow.filename)}
+                  alt="Arrow"
+                  class="max-w-28 absolute -rotate-90 left-full -translate-x-1/2"
+                />
+              )}
+              {/* Left arrow between 3 and 4 */}
+              {index === 3 && shortArrow && (
+                <img
+                  src={convertToWebP(shortArrow.filename)}
+                  alt="Arrow"
+                  class="max-w-28 absolute -translate-x-1/2 -translate-y-1/2"
+                />
+              )}
+              {/* Up arrow between 4 and 1 */}
+              {index === 2 && shortArrow && (
+                <img
+                  src={convertToWebP(shortArrow.filename)}
+                  alt="Arrow"
+                  class="max-w-28 absolute rotate-90 bottom-full -translate-y-full"
+                />
+              )}
+            </div>
+          ))
+        }
+      </div>
+      <div class="lg:hidden relative">
+        {
+          steps.map((step, index) => (
+            <div class="relative">
+              <StepItem {...step} />
+              {/* Down arrow between 1 and 2 */}
+              {index === 0 && shortArrow && (
+                <img
+                  src={convertToWebP(shortArrow.filename)}
+                  alt="Arrow"
+                  class="max-w-28 absolute left-full top-full -rotate-90 -translate-x-[70%] z-30 scale-75"
+                />
+              )}
+              {/* Down arrow between 2 and 3 */}
+              {index === 1 && shortArrow && (
+                <img
+                  src={convertToWebP(shortArrow.filename)}
+                  alt="Arrow"
+                  class="max-w-28 absolute left-full top-full -rotate-90 -translate-x-[70%] z-30 scale-75"
+                />
+              )}
+              {/* Down arrow between 3 and 4 */}
+              {index === 2 && shortArrow && (
+                <img
+                  src={convertToWebP(shortArrow.filename)}
+                  alt="Arrow"
+                  class="max-w-28 absolute left-full top-full -rotate-90 -translate-x-[70%] -translate-y-[130%] z-30 scale-75"
+                />
+              )}
+            </div>
+          ))
+        }
+        {/* Long arrow positioned absolutely relative to parent container */}
+        {longArrow && (
+          <img
+            src={convertToWebP(longArrow.filename)}
+            alt="Arrow"
+            class="absolute top-[15%] -translate-x-[10%] h-[60%] object-contain z-30"
+          />
+        )}
+      </div>
     </div>
   </div>
 </section>

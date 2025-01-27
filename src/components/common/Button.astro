@@ -17,8 +17,11 @@ const buttonStyle = buttonClasses[style] || buttonClasses.primary;
 
 <a
   href={link.url}
-  class={`px-9 py-4 ds-button inline-block rounded-full hover:opacity-90 ${buttonStyle}`}
+  class:list={[
+    "text-center md:px-9 md:py-4 ds-button inline-block rounded-full hover:opacity-90",
+    buttonStyle,
+    "px-5 py-4",
+  ]}
 >
   {text}
 </a>
-
