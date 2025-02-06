@@ -1,0 +1,27 @@
+---
+import { convertToWebP } from "../../../utils/imageConvert";
+
+const { text, image } = Astro.props;
+---
+
+<section class="py-16">
+  <div class="container mx-auto px-16">
+    <div class="flex flex-col lg:flex-row items-center justify-between">
+      {/* Text Content */}
+      <div class="w-full lg:w-9/12 mb-8 lg:mb-0">
+        <p class="ds-p-large text-ds-black">
+          {text}
+        </p>
+      </div>
+
+      {/* Illustration */}
+      <div class="w-full lg:w-3/12">
+        <img
+          src={convertToWebP(image.filename)}
+          alt={image.alt}
+          class="w-full h-auto"
+        />
+      </div>
+    </div>
+  </div>
+</section>

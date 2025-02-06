@@ -1,0 +1,47 @@
+---
+import { convertToWebP } from "../../../utils/imageConvert";
+import { renderRichText } from "@storyblok/astro";
+
+const { title, description, items, image } = Astro.props;
+---
+
+<section class="py-32">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-col lg:flex-row items-center gap-16">
+      {/* Image */}
+      <div class="w-full lg:w-1/2 flex justify-center">
+        <img
+          src={convertToWebP(image.filename)}
+          alt={image.alt}
+          class="max-w-[552px] h-auto"
+        />
+      </div>
+
+      {/* Content */}
+      <div class="w-full lg:w-1/2">
+        <h2 class="ds-h2 mb-4">{title}</h2>
+        <div
+          class="ds-p-1 mb-12 render-rich-text"
+          set:html={renderRichText(description)}
+        />
+
+        {/* Numbered List */}
+        <div class="space-y-8">
+          {
+            items.map((item) => (
+              <div class="flex gap-6">
+                <div class="text-ds-red-500 ds-p-large">
+                  {item.number.padStart(2, "0")}
+                </div>
+                <div>
+                  <h3 class="ds-h3 mb-2">{item.title}</h3>
+                  <p class="ds-p-1">{item.description}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

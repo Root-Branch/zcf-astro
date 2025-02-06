@@ -1,0 +1,18 @@
+---
+const { card_feature } = Astro.props;
+---
+
+<section class="relative z-20">
+  <div class="container mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-16">
+      {
+        card_feature.map((card) => (
+          <div class="text-center text-white bg-ds-red-500 px-12 py-16 min-h-[336px]">
+            <h3 class="ds-h4 mb-6">{card.title}</h3>
+            <p class="ds-p-2">{card.description}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

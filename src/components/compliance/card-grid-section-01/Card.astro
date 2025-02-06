@@ -1,0 +1,42 @@
+---
+import { convertToWebP } from "../../../utils/imageConvert";
+import { renderRichText } from "@storyblok/astro";
+
+const { card } = Astro.props;
+
+const renderDescription = renderRichText(card.description)
+---
+
+{
+  card.component === "card_grid.component.01" ? (
+    <div class="bg-white px-[40px] py-[50px]">
+      <h3 class="ds-h3 mb-2">{card.title}</h3>
+      <p class="ds-h4 text-ds-red-500 mb-6">{card.subtitle}</p>
+      <div
+        class="ds-p-1 render-rich-text"
+        set:html={renderDescription}
+      />
+    </div>
+  ) : (
+    <div class="overflow-hidden">
+      <img
+        src={convertToWebP(card.image.filename)}
+        alt={card.image.alt}
+        class="w-full h-full object-cover"
+      />
+    </div>
+  )
+}
+
+<style>
+  :global(.render-rich-text ul) {
+    list-style: disc !important;
+    padding-left: 1.5rem !important;
+    margin-top: 2rem !important;
+  }
+
+  :global(.render-rich-text ul li) {
+    list-style-type: disc !important;
+    padding-bottom: 1rem !important;
+  }
+</style> 

@@ -1,0 +1,40 @@
+---
+import { convertToWebP } from "../../../utils/imageConvert";
+
+const { title, items, image } = Astro.props;
+---
+
+<section class="py-32 bg-ds-blue-500">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-col lg:flex-row items-center gap-16">
+      {/* Content */}
+      <div class="w-full lg:w-1/2">
+        <h2 class="ds-h2 mb-16 text-ds-white">{title}</h2>
+
+        {/* Numbered List */}
+        <div class="space-y-8">
+          {
+            items.map((item) => (
+              <div class="flex gap-6">
+                <div class="flex-shrink-0 w-7 h-7 bg-ds-blue-900 mt-4 mr-4" />
+                <div>
+                  <h3 class="ds-h3 mb-2 text-ds-white">{item.title}</h3>
+                  <p class="ds-p-2 text-ds-white">{item.description}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      {/* Image */}
+      <div class="w-full lg:w-1/2 flex justify-center">
+        <img
+          src={convertToWebP(image.filename)}
+          alt={image.alt}
+          class="max-w-[836px] h-auto"
+        />
+      </div>
+    </div>
+  </div>
+</section>

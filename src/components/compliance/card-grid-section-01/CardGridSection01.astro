@@ -1,0 +1,44 @@
+---
+import Button from "../../common/Button.astro";
+import Card from "./Card.astro";
+
+const { title, description, cards, cta_button } = Astro.props;
+---
+
+<section class="relative -mt-[6rem] pt-[13rem] z-10 py-32 bg-ds-blue-900">
+  <div class="container mx-auto">
+    {/* Header */}
+    <div class="text-center mb-16">
+      <h2 class="ds-h3 text-white mb-4">{title}</h2>
+      <p class="ds-p-1 text-white">{description}</p>
+    </div>
+
+    {/* Cards Grid */}
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-32">
+      {cards.map((card) => (
+        <Card card={card} />
+      ))}
+    </div>
+
+    {/* CTA Button */}
+    {
+      cta_button?.[0] && (
+        <div class="text-center">
+          <Button
+            text={cta_button[0].text}
+            link={cta_button[0].link}
+            style={cta_button[0].style}
+            background_color={cta_button[0].background_color}
+            text_color={cta_button[0].text_color}
+          />
+        </div>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .render-rich-text ul {
+    list-style: disc !important;
+  }
+</style>
