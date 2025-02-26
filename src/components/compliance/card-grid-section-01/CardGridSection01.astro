@@ -5,35 +5,42 @@ import Card from "./Card.astro";
 const { title, description, cards, cta_button } = Astro.props;
 ---
 
-<section class="relative -mt-[6rem] pt-[13rem] z-10 py-32 bg-ds-blue-900">
+<section
+  class="relative -mt-[8rem] pt-[10rem] md:pt-[13rem] z-10 pb-16 lg:pb-32 pt-32 bg-ds-blue-900"
+>
   <div class="container mx-auto">
     {/* Header */}
     <div class="text-center mb-16">
-      <h2 class="ds-h3 text-white mb-4">{title}</h2>
-      <p class="ds-p-1 text-white">{description}</p>
+      <h2 class="ds-h2 md:ds-h3 text-white mb-4 px-8 md:px-0">{title}</h2>
+      <p class="ds-p-2 md:ds-p-1 text-white px-4 md:px-0">{description}</p>
     </div>
 
     {/* Cards Grid */}
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-32">
-      {cards.map((card) => (
-        <Card card={card} />
-      ))}
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16 lg:mb-32 px-4 md:px-0"
+    >
+      {cards.map((card) => <Card card={card} />)}
     </div>
 
     {/* CTA Button */}
-    {
-      cta_button?.[0] && (
-        <div class="text-center">
-          <Button
-            text={cta_button[0].text}
-            link={cta_button[0].link}
-            style={cta_button[0].style}
-            background_color={cta_button[0].background_color}
-            text_color={cta_button[0].text_color}
-          />
-        </div>
-      )
-    }
+    <div class="text-center hidden lg:block">
+      <Button
+        text={cta_button[0].text}
+        link={cta_button[0].link}
+        style={cta_button[0].style}
+        background_color={cta_button[0].background_color}
+        text_color={cta_button[0].text_color}
+      />
+    </div>
+    <div class="text-center block lg:hidden">
+      <Button
+        text={cta_button[0].text}
+        link={cta_button[0].link}
+        style="primary"
+        background_color="ds-red-500"
+        text_color="ds-white"
+      />
+    </div>
   </div>
 </section>
 

@@ -1,14 +1,48 @@
 ---
+import { convertToWebP } from "../../../utils/imageConvert";
+import arrowLeft from "../../../assets/arrow-left.png";
+import arrowRight from "../../../assets/arrow-right.png";
+import { Image } from "astro:assets";
+
 const { card_feature } = Astro.props;
 ---
 
-<section class="relative z-20">
-  <div class="container mx-auto">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-16">
+<section class="relative z-20 py-8 lg:py-16">
+  <div class="mx-auto px-8 sm:px-16">
+    <!-- Mobile Carousel (visible on small screens) -->
+    <div class="lg:hidden">
+      <div class="swiper cardFeatureSwiper">
+        <div class="swiper-wrapper">
+          {
+            card_feature.map((card) => (
+              <div class="swiper-slide">
+                <div class="text-center text-white bg-ds-red-500 px-8 py-12 sm:px-12 sm:py-16 min-h-[224px] sm:min-h-[336px]">
+                  <h3 class="ds-h3 sm:ds-h4 mb-6">{card.title}</h3>
+                  <p class="ds-p-2">{card.description}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+      
+      <!-- Navigation buttons (outside the swiper container) -->
+      <div class="flex justify-center gap-12 mt-4">
+        <div class="swiper-button-prev after:content-none static transform-none mx-0 my-0 w-auto h-auto">
+          <Image src={arrowLeft} alt="Previous" height={27} class="filter invert brightness-100" />
+        </div>
+        <div class="swiper-button-next after:content-none static transform-none mx-0 my-0 w-auto h-auto">
+          <Image src={arrowRight} alt="Next" height={27} class="filter invert brightness-100" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Desktop Grid (visible on medium screens and up) -->
+    <div class="hidden lg:grid lg:grid-cols-3 gap-16">
       {
         card_feature.map((card) => (
-          <div class="text-center text-white bg-ds-red-500 px-12 py-16 min-h-[336px]">
-            <h3 class="ds-h4 mb-6">{card.title}</h3>
+          <div class="text-center text-white bg-ds-red-500 px-8 py-12 sm:px-10 sm:py-16 min-h-[224px] sm:min-h-[336px]">
+            <h3 class="ds-h3 sm:ds-h4 mb-6">{card.title}</h3>
             <p class="ds-p-2">{card.description}</p>
           </div>
         ))
@@ -16,3 +50,36 @@ const { card_feature } = Astro.props;
     </div>
   </div>
 </section>
+
+<script>
+  import { Swiper } from "swiper";
+  import { Navigation } from "swiper/modules";
+  import "swiper/css";
+  import "swiper/css/navigation";
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const swiper = new Swiper(".cardFeatureSwiper", {
+      modules: [Navigation],
+      slidesPerView: 1,
+      spaceBetween: 30,
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+  });
+</script>
+
+<style>
+  /* Override Swiper's default button positioning */
+  .swiper-button-next,
+  .swiper-button-prev {
+    position: static !important;
+    margin: 0 !important;
+  }
+  
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    content: "" !important;
+  }
+</style>

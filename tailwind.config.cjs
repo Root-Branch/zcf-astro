@@ -9,6 +9,9 @@ module.exports = {
       "just-another": ['"Just Another Hand"', 'cursive'],
     },
     extend: {
+      screens: {
+        'xs': '440px',
+      },
       colors: {
         "ds-white": "#FFFFFF",
         "ds-black": "#000000",
