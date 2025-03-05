@@ -1,14 +1,18 @@
 ---
 import { convertToWebP } from "../../../utils/imageConvert";
 
-const { logos, section_title } = Astro.props;
+const { logos, section_title, padding_top, padding_bottom } = Astro.props;
+
+const padding_top_class = padding_top ? `pt-${padding_top}` : "";
+const padding_bottom_class = padding_bottom ? `pb-${padding_bottom}` : "";
 
 // Double the logos array to create a repeating pattern
 const repeatedLogos = [...logos, ...logos, ...logos, ...logos];
 ---
 
-<section class="py-8">
+<section class={`${padding_top_class} ${padding_bottom_class}`}>
   <div class="overflow-hidden">
+    <h2 class="ds-h2 md:ds-h3 text-center mb-16 max-w-[1105px] mx-auto">{section_title}</h2>
     <div class="flex justify-center gap-16 -ml-[480px]">
       {repeatedLogos.map((logo) => (
         <div class="flex-shrink-0">

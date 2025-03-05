@@ -1,24 +1,60 @@
 ---
 import { convertToWebP } from "../../../utils/imageConvert";
 
-const { text, image, text_large_screen } = Astro.props;
+const {
+  text,
+  image,
+  text_large_screen,
+  background_color,
+  is_image_left,
+  text_font,
+  text_color,
+  image_proportion,
+  max_width,
+  padding_top,
+  padding_bottom,
+} = Astro.props;
+
+const content_proportion = 100 - (image_proportion || 30);
+
+const background_color_class = background_color ? `bg-${background_color}` : "";
+const is_image_left_class = is_image_left
+  ? "lg:flex-row-reverse"
+  : "lg:flex-row";
+const content_proportion_class = content_proportion
+  ? `lg:w-[${content_proportion}%]`
+  : "lg:w-9/12";
+const text_color_class = text_color ? `text-${text_color}` : "text-ds-black";
+const text_font_class = text_font ? `${text_font}` : "ds-p-large";
+const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
+const image_proportion_class = image_proportion
+  ? `lg:w-[${image_proportion}%]`
+  : "lg:w-3/12";
+const padding_top_class = padding_top ? `pt-${padding_top}` : "pt-8 md:pt-16";
+const padding_bottom_class = padding_bottom ? `pb-${padding_bottom}` : "pb-32";
 ---
 
-<section class="sm:pt-16 pb-8 sm:pb-16">
-  <div class="mx-auto px-8 sm:px-16">
-    <div class="flex flex-col lg:flex-row items-center justify-between">
+<section class={`${padding_top_class} ${padding_bottom_class} ${background_color_class}`}>
+  <div class={`mx-auto px-8 sm:px-16 ${max_width_class}`}>
+    <div
+      class={`flex flex-col items-center justify-between ${is_image_left_class} gap-8`}
+    >
       {/* Text Content */}
-      <div class="w-full lg:w-9/12 mb-8 lg:mb-0">
-        <p class="ds-p-large text-ds-black text-center md:text-left block lg:hidden">
+      <div class={`w-full ${content_proportion_class} mb-8 lg:mb-0`}>
+        <p
+          class={`${text_font_class} ${text_color_class} text-center md:text-left block lg:hidden`}
+        >
           {text}
         </p>
-        <p class="ds-p-large text-ds-black text-center md:text-left hidden lg:block">
+        <p
+          class={`${text_font_class} ${text_color_class} text-center md:text-left hidden lg:block`}
+        >
           {text_large_screen}
         </p>
       </div>
 
       {/* Illustration */}
-      <div class="w-full lg:w-3/12 flex justify-center">
+      <div class={`w-full ${image_proportion_class} flex justify-center`}>
         <img
           src={convertToWebP(image.filename)}
           alt={image.alt}

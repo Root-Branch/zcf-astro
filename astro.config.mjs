@@ -38,6 +38,8 @@ export default defineConfig({
         "list_feature.section.01": "storyblok/compliance/ListFeatureSection01",
         "list_feature.section.02": "storyblok/compliance/ListFeatureSection02",
         "cta_banner.section.01": "storyblok/compliance/CTABannerSection01",
+        "cta_banner.section.02": "storyblok/forum/CTABannerSection02",
+        "statistics_grid.section.01": "storyblok/forum/StatisticsGridSection01",
       },
     }),
     tailwind(),

@@ -5,12 +5,12 @@ module.exports = {
     fontFamily: {
       sans: ['"Source Sans 3"', "sans-serif"],
       "source-sans": ['"Source Sans 3"', "sans-serif"],
-      "montserrat": ['Montserrat', 'sans-serif'],
-      "just-another": ['"Just Another Hand"', 'cursive'],
+      montserrat: ["Montserrat", "sans-serif"],
+      "just-another": ['"Just Another Hand"', "cursive"],
     },
     extend: {
       screens: {
-        'xs': '440px',
+        xs: "440px",
       },
       colors: {
         "ds-white": "#FFFFFF",
@@ -32,6 +32,7 @@ module.exports = {
         },
         "ds-teal": {
           500: "#00B0AE",
+          600: "#089E9C",
         },
         "ds-blue-red-radial":
           "radial-gradient(49.97% 50.02% at 49.99% 50%, #557185 0%, #557185 7.44%, #567185 24.59%, #E47182 33.01%, #7371A8 44.84%, #91719E 58.69%, #B2DF88 74.08%, #D67770 90.54%, #EA615F 100%)",
@@ -60,13 +61,25 @@ module.exports = {
         "ds-blue-red-radial":
           "radial-gradient(49.97% 50.02% at 49.99% 50%, #557185 0%, #557185 7.44%, #567185 24.59%, #E47182 33.01%, #7371A8 44.84%, #91719E 58.69%, #B2DF88 74.08%, #D67770 90.54%, #EA615F 100%)",
       },
+      padding: {
+        "none": "0rem",
+        "xs": "4rem",
+        "sm": "6rem",
+        "md": "8rem",
+        "lg": "10rem",
+        "xl": "12rem",
+        "2xl": "16rem",
+      },
     },
   },
   plugins: [],
   safelist: [
     {
-      pattern:
-        /(bg|text|border|font|text)-.*/,
+      pattern: /(bg|text|border|font|text|pt|pb)-.*/,
     },
+    {
+      pattern: /max-w-.*/,
+    },
+    "max-w-[1525px]",
   ],
 };

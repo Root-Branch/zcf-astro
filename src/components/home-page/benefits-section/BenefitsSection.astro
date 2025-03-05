@@ -3,10 +3,14 @@ import { convertToWebP } from "../../../utils/imageConvert";
 import BenefitItem from "./BenefitItem.astro";
 import Button from "../../common/Button.astro";
 
-const { heading, benefits, cta_button } = Astro.props;
+const { heading, benefits, cta_button, background_color, padding_top, padding_bottom } = Astro.props;
+
+const background_color_class = background_color ? `bg-${background_color}` : "bg-ds-blue-900";
+const padding_top_class = padding_top ? `pt-${padding_top}` : "pt-8 md:pt-16";
+const padding_bottom_class = padding_bottom ? `pb-${padding_bottom}` : "pb-32";
 ---
 
-<section class="bg-ds-blue-900 pt-8 md:pt-16 pb-32">
+<section class={`${background_color_class} ${padding_top_class} ${padding_bottom_class}`}>
   <div class="max-w-[1170px] mx-auto px-4 text-center">
     <h2 class="ds-h2 md:ds-h3 text-ds-white mb-20">{heading}</h2>
 

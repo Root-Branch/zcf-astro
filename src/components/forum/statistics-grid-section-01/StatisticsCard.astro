@@ -1,0 +1,36 @@
+---
+import { convertToWebP } from "../../../utils/imageConvert";
+import { renderRichText } from "@storyblok/astro";
+
+const { card } = Astro.props;
+---
+
+<div
+  class="bg-ds-blue-900 py-8 px-4 h-[356px] max-w-[289px] flex flex-col justify-between items-center"
+>
+  <img
+    src={convertToWebP(card.image.filename)}
+    alt={card.image.alt}
+    class="w-auto h-[100px]"
+  />
+  <div class="flex flex-col items-center">
+    <h2 class="ds-h2 text-ds-white font-bold text-center">
+      {card.stats_number}
+    </h2>
+    <div
+      class="ds-p-1 text-ds-white render-rich-text text-center"
+      set:html={renderRichText(card.stats_description)}
+    />
+  </div>
+  {card.second_stats_number && card.second_stats_description && (
+    <div class="flex flex-col items-center">
+      <h2 class="ds-h2 text-ds-white font-bold text-center">
+        {card.second_stats_number}
+      </h2>
+      <div
+        class="ds-p-1 text-ds-white render-rich-text text-center"
+        set:html={renderRichText(card.second_stats_description)}
+      />
+    </div>
+  )}
+</div>

@@ -1,0 +1,37 @@
+---
+import { convertToWebP } from "../../../utils/imageConvert";
+import { renderRichText } from "@storyblok/astro";
+import StatisticsCard from "./StatisticsCard.astro";
+import EmptyCard from "./EmptyCard.astro";
+
+const { title, description, statistics_card } = Astro.props;
+---
+
+<section class="py-8 relative">
+  <div class="max-w-[1583px] mx-auto px-4 flex flex-row items-center">
+    <div
+      class="w-2/3 grid grid-cols-1 md:grid-cols-3 gap-4 max-w-fit"
+    >
+      <div class="grid gap-4 mt-20">
+        <StatisticsCard card={statistics_card[0]} />
+        <EmptyCard />
+      </div>
+      <div class="grid gap-4 mb-12">
+        <StatisticsCard card={statistics_card[1]} />
+        <StatisticsCard card={statistics_card[2]} />
+      </div>
+      <div class="grid gap-4 mt-20">
+        <EmptyCard />
+        <EmptyCard />
+      </div>
+    </div>
+
+    {/* Header */}
+    <div
+      class="w-full lg:w-1/2 bg-ds-white p-8 lg:absolute lg:right-4 lg:-ml-12 lg:z-10"
+    >
+      <h2 class="ds-p-large mb-4">{title}</h2>
+      <p class="ds-p-2">{description}</p>
+    </div>
+  </div>
+</section>
