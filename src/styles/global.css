@@ -67,6 +67,12 @@
     line-height: auto;
     font-weight: 500;
   }
+  .ds-p-quote {
+    font-family: "Source Sans 3", sans-serif;
+    font-size: 24px;
+    line-height: auto;
+    font-weight: 500;
+  }
   .ds-p-1 {
     font-family: "Source Sans 3", sans-serif;
     font-size: 18px;
@@ -89,13 +95,13 @@
   /* Headers - Source Sans 3 */
   .ds-header {
     font-family: "Source Sans 3", sans-serif;
-    font-size: 20px;
+    font-size: 18px;
     line-height: auto;
-    font-weight: 400;
+    font-weight: 500;
   }
   .ds-header-active {
     font-family: "Source Sans 3", sans-serif;
-    font-size: 20px;
+    font-size: 18px;
     line-height: auto;
     font-weight: 700;
   }
@@ -139,7 +145,7 @@
     }
     .ds-h3 {
       font-family: "Montserrat", sans-serif;
-      font-size: 40px;
+      font-size: 35px;
       line-height: auto;
       font-weight: 650;
     }
@@ -179,6 +185,13 @@
       line-height: auto;
       font-weight: 500;
     }
+    /* Paragraphs - Source Sans 3 */
+    .ds-p-quote {
+      font-family: "Source Sans 3", sans-serif;
+      font-size: 30px;
+      line-height: auto;
+      font-weight: 500;
+    }
     .ds-p-1 {
       font-family: "Source Sans 3", sans-serif;
       font-size: 24px;
@@ -201,13 +214,13 @@
     /* Headers - Source Sans 3 */
     .ds-header {
       font-family: "Source Sans 3", sans-serif;
-      font-size: 20px;
+      font-size: 18px;
       line-height: auto;
-      font-weight: 400;
+      font-weight: 500;
     }
     .ds-header-active {
       font-family: "Source Sans 3", sans-serif;
-      font-size: 20px;
+      font-size: 18px;
       line-height: auto;
       font-weight: 700;
     }
@@ -215,7 +228,7 @@
     /* Button - Source Sans 3 */
     .ds-button {
       font-family: "Source Sans 3", sans-serif;
-      font-size: 25px;
+      font-size: 20px;
       line-height: auto;
       font-weight: 400;
     }

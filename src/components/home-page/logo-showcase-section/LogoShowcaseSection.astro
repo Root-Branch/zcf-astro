@@ -13,13 +13,13 @@ const repeatedLogos = [...logos, ...logos, ...logos, ...logos];
 <section class={`${padding_top_class} ${padding_bottom_class}`}>
   <div class="overflow-hidden">
     <h2 class="ds-h2 md:ds-h3 text-center mb-16 max-w-[1105px] mx-auto">{section_title}</h2>
-    <div class="flex justify-center gap-16 -ml-[480px]">
+    <div class="flex justify-center gap-[6rem] -ml-[480px]">
       {repeatedLogos.map((logo) => (
         <div class="flex-shrink-0">
           <img
             src={convertToWebP(logo.filename)}
             alt={logo.alt || "Partner logo"}
-            class="h-20 md:h-32 w-auto"
+            class="h-20 md:h-[123px] w-auto"
           />
         </div>
       ))}
