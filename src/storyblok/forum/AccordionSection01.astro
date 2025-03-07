@@ -1,0 +1,10 @@
+---
+import { storyblokEditable } from "@storyblok/astro";
+import AccordionSection01 from "../../components/forum/accordion-section-01/AccordionSection01.astro";
+
+const { blok } = Astro.props;
+---
+
+<div {...storyblokEditable(blok)}>
+  <AccordionSection01 {...blok} />
+</div>

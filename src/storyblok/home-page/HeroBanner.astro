@@ -1,10 +1,10 @@
 ---
 import { storyblokEditable } from '@storyblok/astro'
-import StepsSection from '../components/home-page/steps-section/StepsSection.astro'
+import HeroBanner from '../../components/home-page/hero-banner/HeroBanner.astro'
 
 const { blok } = Astro.props
 ---
 
 <div {...storyblokEditable(blok)}>
-  <StepsSection {...blok} />
+  <HeroBanner {...blok} />
 </div>

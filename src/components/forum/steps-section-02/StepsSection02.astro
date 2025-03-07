@@ -1,0 +1,27 @@
+---
+import StepCard from "./StepCard.astro";
+
+const { title, description, step_cards } = Astro.props;
+---
+
+<section class="py-20">
+  <div class="mx-auto px-20">
+    {/* Header */}
+    <div class="text-center mb-12">
+      <h2 class="ds-h2 mb-8">{title}</h2>
+      <p class="ds-p-1 mb-[88px]">{description}</p>
+    </div>
+
+    {/* Step Cards */}
+    <div class="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-4 gap-6 mx-auto">
+      {step_cards.map((card, index) => (
+        <div class={index === 0 ? "self-start" : "self-center"}>
+          <StepCard 
+            card={card} 
+            isHighlighted={index === 0}
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

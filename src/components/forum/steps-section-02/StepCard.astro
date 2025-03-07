@@ -1,0 +1,46 @@
+---
+import { renderRichText } from "@storyblok/astro";
+import checkMark from "../../../assets/check-mark.png";
+const { card, isHighlighted = false } = Astro.props;
+const renderedDescription = renderRichText(card.description);
+
+const bgColor = isHighlighted ? "bg-ds-teal-500" : "bg-ds-blue-900";
+const minHeight = isHighlighted ? "min-h-[737px]" : "min-h-[602px]";
+const textColor = "text-white";
+---
+
+<div class={`${bgColor} ${textColor} px-12 pt-12 h-full flex flex-col ${minHeight}`}>
+  <div class="mb-4">
+    <p class="ds-p-1 !font-bold">{card.number}</p>
+    <h3 class="ds-h3 uppercase font-bold mb-4">{card.title}</h3>
+  </div>
+  
+  <div class="space-y-4 flex-grow">
+    <div class="step-description ds-p-2" set:html={renderedDescription} />
+  </div>
+</div>
+
+<style>
+  :global(.step-description ul) {
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  :global(.step-description ul li) {
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  :global(.step-description ul li::before) {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.25rem;
+    width: 1.25rem;
+    height: 1.25rem;
+    background-image: url('/src/assets/check-mark.png') !important;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+</style> 

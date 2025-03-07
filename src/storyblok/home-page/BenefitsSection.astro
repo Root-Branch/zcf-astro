@@ -1,10 +1,10 @@
 ---
 import { storyblokEditable } from '@storyblok/astro'
-import DualCardSection from '../components/home-page/dual-card/DualCardSection.astro'
+import BenefitsSection from '../../components/home-page/benefits-section/BenefitsSection.astro'
 
 const { blok } = Astro.props
 ---
 
 <div {...storyblokEditable(blok)}>
-  <DualCardSection {...blok} />
+  <BenefitsSection {...blok} />
 </div>

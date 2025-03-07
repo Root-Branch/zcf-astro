@@ -1,0 +1,45 @@
+---
+import { getYouTubeVideoId } from "../../../utils/youtube";
+import Button from "../../common/Button.astro";
+
+const { 
+  video_link,
+  cta_button,
+  padding_top = "xs",
+  padding_bottom = "xs",
+} = Astro.props;
+
+const videoId = getYouTubeVideoId(video_link.url);
+const paddingTopClass = `pt-${padding_top}`;
+const paddingBottomClass = `pb-${padding_bottom}`;
+---
+
+<section class={`${paddingTopClass} ${paddingBottomClass}`}>
+  <div class="container mx-auto px-4 lg:px-8">
+    <div class="max-w-[1520px] mx-auto">
+      {/* Video Container */}
+      <div class="relative pb-[56.25%] mb-16">
+        <iframe
+          class="absolute top-0 left-0 w-full h-full"
+          src={`https://www.youtube.com/embed/${videoId}`}
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+
+      {/* CTA Button */}
+      {cta_button?.[0] && (
+        <div class="text-center">
+          <Button
+            text={cta_button[0].text}
+            link={cta_button[0].link}
+            style={cta_button[0].style}
+            background_color={cta_button[0].background_color}
+            text_color={cta_button[0].text_color}
+          />
+        </div>
+      )}
+    </div>
+  </div>
+</section> 

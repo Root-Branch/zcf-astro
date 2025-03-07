@@ -1,0 +1,23 @@
+---
+import AccordionItem from "./AccordionItem.astro";
+import { renderRichText } from "@storyblok/astro";
+
+const { title, description, items } = Astro.props;
+---
+
+<div class="mb-8 accordion-section">
+  <h3 class="ds-p-large mb-8">{title}</h3>
+  <div class="ds-p-2 mb-10" set:html={renderRichText(description)} />
+  
+  <div class="accordion-container">
+    {items.map((item, index) => (
+      <AccordionItem 
+        title={item.title}
+        number={item.number}
+        description={item.description}
+        isOpen={index === 0}
+        isLast={index === items.length - 1}
+      />
+    ))}
+  </div>
+</div>

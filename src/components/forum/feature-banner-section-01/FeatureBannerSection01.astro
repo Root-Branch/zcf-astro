@@ -1,0 +1,89 @@
+---
+const {
+  title,
+  description,
+  info_text,
+  cta_button,
+  icon_value_pair,
+  background_color,
+  padding_top,
+  padding_bottom,
+} = Astro.props;
+
+const background_color_class = background_color ? `bg-${background_color}` : "";
+const padding_top_class = padding_top ? `pt-${padding_top}` : "pt-8 md:pt-16";
+const padding_bottom_class = padding_bottom ? `pb-${padding_bottom}` : "pb-32";
+---
+
+<section
+  class={`${padding_top_class} ${padding_bottom_class} ${background_color_class}`}
+>
+  <div class={`mx-auto px-8 sm:px-16`}>
+    <div class="flex flex-col items-center text-center text-ds-white">
+      <!-- Title and Description -->
+      <h2 class="ds-h2 font-bold mb-8">
+        {title}
+      </h2>
+      <p class="ds-p-1 mb-16">
+        {description}
+      </p>
+
+      <!-- Pricing Icons and Values -->
+      <div
+        class="flex flex-col md:flex-row items-center justify-center gap-96 mb-16 relative w-full"
+      >
+        {
+          icon_value_pair?.map((item, index) => (
+            <>
+              <div class="flex flex-col items-center">
+                <div class="relative">
+                  <img
+                    src={item.icon.filename}
+                    alt={item.description}
+                    class="w-24 h-24 mb-4"
+                  />
+                  {index === 0 && (
+                    <div class="hidden md:block absolute top-1/2 left-full w-[29rem] -translate-y-1/2">
+                      <div class="border-t border-dashed border-ds-white" />
+                    </div>
+                  )}
+                </div>
+                <div class="text-center">
+                  <p class="ds-h2">{item.value}</p>
+                  <p class="ds-p-1">{item.description}</p>
+                </div>
+              </div>
+            </>
+          ))
+        }
+      </div>
+
+      <!-- CTA Button and Info Text -->
+      <div class="flex flex-col items-center gap-4">
+        <p class="info-text text-ds-white">{info_text}</p>
+        {
+          cta_button?.[0] && (
+            <a
+              href={cta_button[0].link?.cached_url}
+              class={`ds-button px-8 py-4 rounded-full hover:bg-opacity-90 transition-all
+              ${cta_button[0].background_color ? `bg-${cta_button[0].background_color}` : "bg-ds-white"}
+              ${cta_button[0].text_color ? `text-${cta_button[0].text_color}` : "text-ds-blue-600"}`}
+            >
+              {cta_button[0].text}
+            </a>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .info-text {
+    font-family: "Source Sans 3", sans-serif;
+    font-size: 15px;
+    line-height: auto;
+    font-weight: 300;
+    font-style: italic;
+  }
+</style>

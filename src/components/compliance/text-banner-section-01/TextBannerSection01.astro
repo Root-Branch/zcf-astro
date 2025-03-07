@@ -1,18 +1,24 @@
 ---
 import { convertToWebP } from "../../../utils/imageConvert";
+import Button from "../../common/Button.astro";
 
 const {
-  text,
+  title,
   image,
-  text_large_screen,
+  title_large_screen,
   background_color,
   is_image_left,
-  text_font,
-  text_color,
+  title_font,
+  title_color,
   image_proportion,
   max_width,
   padding_top,
   padding_bottom,
+  description,
+  description_font,
+  description_color,
+  gap,
+  cta_button,
 } = Astro.props;
 
 const content_proportion = 100 - (image_proportion || 30);
@@ -24,33 +30,59 @@ const is_image_left_class = is_image_left
 const content_proportion_class = content_proportion
   ? `lg:w-[${content_proportion}%]`
   : "lg:w-9/12";
-const text_color_class = text_color ? `text-${text_color}` : "text-ds-black";
-const text_font_class = text_font ? `${text_font}` : "ds-p-large";
+const title_color_class = title_color ? `text-${title_color}` : "text-ds-black";
+const title_font_class = title_font ? `${title_font}` : "ds-p-large";
+const description_color_class = description_color
+  ? `text-${description_color}`
+  : "text-ds-black";
+const description_font_class = description_font
+  ? `${description_font}`
+  : "ds-p-large";
 const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
 const image_proportion_class = image_proportion
   ? `lg:w-[${image_proportion}%]`
   : "lg:w-3/12";
 const padding_top_class = padding_top ? `pt-${padding_top}` : "pt-8 md:pt-16";
 const padding_bottom_class = padding_bottom ? `pb-${padding_bottom}` : "pb-32";
+const gap_class = gap ? `gap-${gap}` : "gap-8";
 ---
 
-<section class={`${padding_top_class} ${padding_bottom_class} ${background_color_class}`}>
+<section
+  class={`${padding_top_class} ${padding_bottom_class} ${background_color_class}`}
+>
   <div class={`mx-auto px-8 sm:px-16 ${max_width_class}`}>
     <div
-      class={`flex flex-col items-center justify-between ${is_image_left_class} gap-8`}
+      class={`flex flex-col items-center justify-between ${is_image_left_class} ${gap_class}`}
     >
-      {/* Text Content */}
+      {/* title Content */}
       <div class={`w-full ${content_proportion_class} mb-8 lg:mb-0`}>
         <p
-          class={`${text_font_class} ${text_color_class} text-center md:text-left block lg:hidden`}
+          class={`${title_font_class} ${title_color_class} title-center md:title-left block lg:hidden`}
         >
-          {text}
+          {title}
         </p>
         <p
-          class={`${text_font_class} ${text_color_class} text-center md:text-left hidden lg:block`}
+          class={`${title_font_class} ${title_color_class} title-center md:title-left hidden lg:block`}
         >
-          {text_large_screen}
+          {title_large_screen}
         </p>
+        <p
+          class={`${description_font_class} ${description_color_class} text-center md:text-left block mt-8 mb-16`}
+        >
+          {description}
+        </p>
+        {/* CTA Button */}
+        {
+          cta_button?.[0] && (
+            <Button
+              text={cta_button[0].text}
+              link={cta_button[0].link}
+              style={cta_button[0].style}
+              background_color={cta_button[0].background_color}
+              text_color={cta_button[0].text_color}
+            />
+          )
+        }
       </div>
 
       {/* Illustration */}
