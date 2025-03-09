@@ -19,55 +19,56 @@ const {
   description_color,
   gap,
   cta_button,
+  mobile_is_image_bottom,
+  mobile_padding_top,
+  mobile_padding_bottom,
+  mobile_title_font,
+  mobile_description_font,
+  mobile_image_proportion,
 } = Astro.props;
 
 const content_proportion = 100 - (image_proportion || 30);
-
 const background_color_class = background_color ? `bg-${background_color}` : "";
-const is_image_left_class = is_image_left
-  ? "lg:flex-row-reverse"
-  : "lg:flex-row";
-const content_proportion_class = content_proportion
-  ? `lg:w-[${content_proportion}%]`
-  : "lg:w-9/12";
+const is_image_left_class = is_image_left ? "lg:flex-row-reverse" : "lg:flex-row";
+const content_proportion_class = content_proportion ? `lg:w-[${content_proportion}%]` : "lg:w-9/12";
 const title_color_class = title_color ? `text-${title_color}` : "text-ds-black";
 const title_font_class = title_font ? `${title_font}` : "ds-p-large";
-const description_color_class = description_color
-  ? `text-${description_color}`
-  : "text-ds-black";
-const description_font_class = description_font
-  ? `${description_font}`
-  : "ds-p-large";
+const mobile_title_font_class = mobile_title_font || title_font_class;
+const description_color_class = description_color ? `text-${description_color}` : "text-ds-black";
+const description_font_class = description_font ? `${description_font}` : "ds-p-large";
+const mobile_description_font_class = mobile_description_font || description_font_class;
 const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
-const image_proportion_class = image_proportion
-  ? `lg:w-[${image_proportion}%]`
-  : "lg:w-3/12";
-const padding_top_class = padding_top ? `pt-${padding_top}` : "pt-8 md:pt-16";
-const padding_bottom_class = padding_bottom ? `pb-${padding_bottom}` : "pb-32";
-const gap_class = gap ? `gap-${gap}` : "gap-8";
+const image_proportion_class = image_proportion ? `lg:w-[${image_proportion}%]` : "lg:w-3/12";
+const padding_top_class = padding_top ? `lg:pt-${padding_top}` : "lg:pt-8 lg:pt-16";
+const padding_bottom_class = padding_bottom ? `lg:pb-${padding_bottom}` : "lg:pb-32";
+const mobile_padding_top_class = mobile_padding_top ? `pt-${mobile_padding_top}` : "pt-8";
+const mobile_padding_bottom_class = mobile_padding_bottom ? `pb-${mobile_padding_bottom}` : "pb-16";
+const gap_class = gap ? `gap-8 lg:gap-${gap}` : "gap-8";
+const mobile_order_class = mobile_is_image_bottom ? "flex-col" : "flex-col-reverse";
+const mobile_image_proportion_class = mobile_image_proportion ? `w-[${mobile_image_proportion}%]` : "w-full";
 ---
 
 <section
-  class={`${padding_top_class} ${padding_bottom_class} ${background_color_class}`}
+  class={`${mobile_padding_top_class} ${mobile_padding_bottom_class} ${padding_top_class} ${padding_bottom_class} ${background_color_class}`}
 >
-  <div class={`mx-auto px-8 sm:px-16 ${max_width_class}`}>
+  <div class={`mx-auto px-2 sm:px-16 ${max_width_class}`}>
     <div
-      class={`flex flex-col items-center justify-between ${is_image_left_class} ${gap_class}`}
+      class={`flex ${mobile_order_class} items-center justify-between ${is_image_left_class} ${gap_class}`}
     >
-      {/* title Content */}
-      <div class={`w-full ${content_proportion_class} mb-8 lg:mb-0`}>
+      {/* Title Content */}
+      <div class={`w-full ${content_proportion_class} text-center lg:text-left`}>
         <p
-          class={`${title_font_class} ${title_color_class} title-center md:title-left block lg:hidden`}
+          class={`${mobile_title_font_class} lg:${title_font_class} ${title_color_class} text-center lg:text-left block lg:hidden`}
         >
           {title}
         </p>
         <p
-          class={`${title_font_class} ${title_color_class} title-center md:title-left hidden lg:block`}
+          class={`${title_font_class} ${title_color_class} text-center lg:text-left hidden lg:block`}
         >
           {title_large_screen}
         </p>
         <p
-          class={`${description_font_class} ${description_color_class} text-center md:text-left block mt-8 mb-16`}
+          class={`${mobile_description_font_class} lg:${description_font_class} ${description_color_class} text-center lg:text-left block mt-8`}
         >
           {description}
         </p>
@@ -75,6 +76,7 @@ const gap_class = gap ? `gap-${gap}` : "gap-8";
         {
           cta_button?.[0] && (
             <Button
+              class="text-center lg:text-left mt-4 lg:mt-16"
               text={cta_button[0].text}
               link={cta_button[0].link}
               style={cta_button[0].style}
@@ -86,11 +88,11 @@ const gap_class = gap ? `gap-${gap}` : "gap-8";
       </div>
 
       {/* Illustration */}
-      <div class={`w-full ${image_proportion_class} flex justify-center`}>
+      <div class={`w-full ${image_proportion_class} flex justify-center mt-8 lg:mt-0`}>
         <img
           src={convertToWebP(image.filename)}
           alt={image.alt}
-          class="w-2/3 sm:w-1/2 lg:w-full h-auto"
+          class={`${mobile_image_proportion_class} sm:w-1/2 lg:w-full h-auto`}
         />
       </div>
     </div>

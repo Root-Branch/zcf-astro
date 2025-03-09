@@ -63,6 +63,7 @@ module.exports = {
       },
       padding: {
         "none": "0rem",
+        "xxs": "2rem",
         "xs": "4rem",
         "sm": "6rem",
         "md": "8rem",
@@ -84,7 +85,7 @@ module.exports = {
   plugins: [],
   safelist: [
     {
-      pattern: /(bg|text|border|font|pt|pb|w|gap)-.*/,
+      pattern: /(bg|text|border|font|pt|pb|w|gap|lg:gap)-.*/,
     },
     "max-w-[1100px]",
     "max-w-[1525px]",
@@ -110,5 +111,14 @@ module.exports = {
     "max-w-[1640px]",
     "max-w-[1670px]",
     "max-w-[1700px]",
+    ...[...Array(100).keys()].flatMap(i => [`w-[${i*5}px]`, `h-[${i*5}px]`]),
+    ...[...Array(100).keys()].flatMap(i => [`w-[${i*10}%]`, `h-[${i*10}%]`]),
+    "lg:gap-xxs",
+    "lg:gap-xs",
+    "lg:gap-sm",
+    "lg:gap-md",
+    "lg:gap-lg",
+    "lg:gap-xl",
+    "lg:gap-2xl",
   ],
 };

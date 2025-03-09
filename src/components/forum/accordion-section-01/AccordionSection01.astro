@@ -28,10 +28,10 @@ const imageWidthClass = `w-[${image_proportion}%]`;
 
 <section class={`${paddingTopClass} ${paddingBottomClass}`}>
   <div class={`${maxWidthClass} mx-auto px-4 lg:px-8`}>
-    {title && <p class="ds-h4 mb-12 ml-12">{title}</p>}
+    {title && <p class="ds-h3 lg:ds-h4 mb-12 lg:ml-12">{title}</p>}
 
     <div
-      class={`flex flex-col ${is_accordion_left ? "lg:flex-row" : "lg:flex-row-reverse"} gap-16`}
+      class={`flex flex-col ${is_accordion_left ? "lg:flex-row" : "lg:flex-row-reverse"} gap-4 lg:gap-16`}
     >
       {/* Accordion Side */}
       <div class={`w-full lg:${accordionWidthClass} accordion-side`}>
@@ -50,25 +50,27 @@ const imageWidthClass = `w-[${image_proportion}%]`;
       <div class={`w-full lg:${imageWidthClass} image-container`}>
         {
           image && !image_carousel.length && (
-            <img
-              src={convertToWebP(image.filename)}
-              alt={image.alt || ""}
-              class="w-full h-auto dynamic-image"
-            />
+            <div class="aspect-square md:aspect-auto overflow-hidden">
+              <img
+                src={convertToWebP(image.filename)}
+                alt={image.alt || ""}
+                class="w-full h-full object-cover dynamic-image"
+              />
+            </div>
           )
         }
 
         {
           image_carousel.length ? (
-            <div class="w-full h-auto dynamic-image -ml-12">
-              <div class="swiper imageSwiper h-full">
+            <div class="aspect-square lg:aspect-auto overflow-hidden lg:-ml-12">
+              <div class="swiper imageSwiper h-full hidden lg:block">
                 <div class="swiper-wrapper h-full">
                   {image_carousel.map((image) => (
                     <div class="swiper-slide">
                       <img
                         src={convertToWebP(image.filename)}
                         alt={image.alt || ""}
-                        class="w-[80%] h-auto dynamic-image mx-auto"
+                        class="w-[80%] h-full object-cover dynamic-image mx-auto"
                       />
                     </div>
                   ))}
@@ -80,6 +82,12 @@ const imageWidthClass = `w-[${image_proportion}%]`;
                   <Image src={arrowRight} alt="Next" />
                 </div>
               </div>
+
+              <img
+                src={convertToWebP(image_carousel[0].filename)}
+                alt={image_carousel[0].alt || ""}
+                class="w-full h-full object-cover dynamic-image lg:hidden"
+              />
             </div>
           ) : null
         }

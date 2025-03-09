@@ -11,10 +11,15 @@ interface Props {
   }[];
 }
 
-const { heading, logos } = Astro.props;
+const { heading, logos, padding_top, padding_bottom, mobile_padding_top, mobile_padding_bottom } = Astro.props;
+
+const padding_top_class = padding_top ? `lg:pt-${padding_top}` : "lg:pt-10";
+const padding_bottom_class = padding_bottom ? `lg:pb-${padding_bottom}` : "lg:pb-20";
+const mobile_padding_top_class = mobile_padding_top ? `pt-${mobile_padding_top}` : "pt-10";
+const mobile_padding_bottom_class = mobile_padding_bottom ? `pb-${mobile_padding_bottom}` : "pb-20";
 ---
 
-<section class="py-10 lg:py-20">
+<section class={`${padding_top_class} ${padding_bottom_class} ${mobile_padding_top_class} ${mobile_padding_bottom_class}`}>
   <div class="max-w-[1432px] mx-auto px-4">
     <h2 class="ds-h2 md:ds-h4 text-center mb-12">{heading}</h2>
 

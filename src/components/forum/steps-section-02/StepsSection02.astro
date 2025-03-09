@@ -1,27 +1,101 @@
 ---
 import StepCard from "./StepCard.astro";
+import { Image } from "astro:assets";
+import arrowLeft from "../../../assets/arrow-left.png";
+import arrowRight from "../../../assets/arrow-right.png";
 
 const { title, description, step_cards } = Astro.props;
 ---
 
 <section class="py-20">
-  <div class="mx-auto px-20">
+  <div class="mx-auto px-4 lg:px-20">
     {/* Header */}
-    <div class="text-center mb-12">
+    <div class="text-center mb-4 lg:mb-12">
       <h2 class="ds-h2 mb-8">{title}</h2>
-      <p class="ds-p-1 mb-[88px]">{description}</p>
+      <p class="ds-p-2 lg:ds-p-1 mb-8 lg:mb-[88px]">{description}</p>
     </div>
 
-    {/* Step Cards */}
-    <div class="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-4 gap-6 mx-auto">
-      {step_cards.map((card, index) => (
-        <div class={index === 0 ? "self-start" : "self-center"}>
-          <StepCard 
-            card={card} 
-            isHighlighted={index === 0}
+    {/* Mobile Carousel (visible on small screens) */}
+    <div class="xl:hidden">
+      <div class="swiper stepsSwiper">
+        <div class="swiper-wrapper">
+          {
+            step_cards.map((card, index) => (
+              <div class="swiper-slide">
+                <StepCard card={card} isHighlighted={index === 0} />
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Navigation buttons (outside the swiper container) -->
+      <div class="flex justify-center gap-12 mt-4">
+        <div
+          class="swiper-button-prev after:content-none static transform-none mx-0 my-0 w-auto h-auto"
+        >
+          <Image
+            src={arrowLeft}
+            alt="Previous"
+            height={27}
           />
         </div>
-      ))}
+        <div
+          class="swiper-button-next after:content-none static transform-none mx-0 my-0 w-auto h-auto"
+        >
+          <Image
+            src={arrowRight}
+            alt="Next"
+            height={27}
+          />
+        </div>
+      </div>
+    </div>
+
+    {/* Desktop Grid (visible on large screens and up) */}
+    <div
+      class="hidden xl:grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-4 gap-6 mx-auto"
+    >
+      {
+        step_cards.map((card, index) => (
+          <div class={index === 0 ? "self-start" : "self-center"}>
+            <StepCard card={card} isHighlighted={index === 0} />
+          </div>
+        ))
+      }
     </div>
   </div>
 </section>
+
+<script>
+  import { Swiper } from "swiper";
+  import { Navigation } from "swiper/modules";
+  import "swiper/css";
+  import "swiper/css/navigation";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const swiper = new Swiper(".stepsSwiper", {
+      modules: [Navigation],
+      slidesPerView: 1,
+      spaceBetween: 30,
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+  });
+</script>
+
+<style>
+  /* Override Swiper's default button positioning */
+  .swiper-button-next,
+  .swiper-button-prev {
+    position: static !important;
+    margin: 0 !important;
+  }
+
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    content: "" !important;
+  }
+</style>

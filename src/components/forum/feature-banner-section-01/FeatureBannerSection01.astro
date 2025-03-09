@@ -8,17 +8,27 @@ const {
   background_color,
   padding_top,
   padding_bottom,
+  mobile_padding_top,
+  mobile_padding_bottom,
 } = Astro.props;
 
 const background_color_class = background_color ? `bg-${background_color}` : "";
-const padding_top_class = padding_top ? `pt-${padding_top}` : "pt-8 md:pt-16";
-const padding_bottom_class = padding_bottom ? `pb-${padding_bottom}` : "pb-32";
+const padding_top_class = padding_top ? `lg:pt-${padding_top}` : "md:pt-16";
+const padding_bottom_class = padding_bottom
+  ? `lg:pb-${padding_bottom}`
+  : "md:pb-32";
+const mobile_padding_top_class = mobile_padding_top
+  ? `pt-${mobile_padding_top}`
+  : "pt-8";
+const mobile_padding_bottom_class = mobile_padding_bottom
+  ? `pb-${mobile_padding_bottom}`
+  : "pb-32";
 ---
 
 <section
-  class={`${padding_top_class} ${padding_bottom_class} ${background_color_class}`}
+  class={`${padding_top_class} ${padding_bottom_class} ${mobile_padding_top_class} ${mobile_padding_bottom_class} ${background_color_class} -mt-[180px] lg:mt-0`}
 >
-  <div class={`mx-auto px-8 sm:px-16`}>
+  <div class={`mx-auto px-8 sm:px-16 md:mt-0`}>
     <div class="flex flex-col items-center text-center text-ds-white">
       <!-- Title and Description -->
       <h2 class="ds-h2 font-bold mb-8">
@@ -30,25 +40,54 @@ const padding_bottom_class = padding_bottom ? `pb-${padding_bottom}` : "pb-32";
 
       <!-- Pricing Icons and Values -->
       <div
-        class="flex flex-col md:flex-row items-center justify-center gap-96 mb-16 relative w-full"
+        class="flex flex-col md:flex-row items-center justify-center gap-16 md:gap-96 mb-16 relative w-full"
       >
         {
           icon_value_pair?.map((item, index) => (
             <>
-              <div class="flex flex-col items-center">
+              <div
+                class={`flex flex-row md:flex-col items-center relative ${index === 0 ? "-ml-[5rem]" : "-mr-[8.5rem]"} md:ml-0`}
+              >
+                {/* Text for first item - Left aligned */}
+                {index === 0 && (
+                  <div class="flex-1 text-right pr-4 md:hidden">
+                    <p class="ds-h2">{item.value}</p>
+                    <p class="ds-p-2">{item.description}</p>
+                  </div>
+                )}
+
+                {/* Icon */}
                 <div class="relative">
                   <img
                     src={item.icon.filename}
                     alt={item.description}
-                    class="w-24 h-24 mb-4"
+                    class="w-16 h-16 md:w-24 md:h-24"
                   />
                   {index === 0 && (
-                    <div class="hidden md:block absolute top-1/2 left-full w-[29rem] -translate-y-1/2">
-                      <div class="border-t border-dashed border-ds-white" />
-                    </div>
+                    <>
+                      {/* Desktop horizontal dashed line */}
+                      <div class="hidden md:block absolute top-1/2 left-full w-[29rem] -translate-y-1/2">
+                        <div class="border-t border-dashed border-ds-white" />
+                      </div>
+
+                      {/* Mobile vertical dashed line */}
+                      <div class="md:hidden absolute top-full left-1/2 h-[8rem] -translate-x-1/2">
+                        <div class="border-l border-dashed border-ds-white h-full" />
+                      </div>
+                    </>
                   )}
                 </div>
-                <div class="text-center">
+
+                {/* Text for second item - Right aligned */}
+                {index === 1 && (
+                  <div class="flex-1 text-left pl-4 md:hidden">
+                    <p class="ds-h2">{item.value}</p>
+                    <p class="ds-p-2">{item.description}</p>
+                  </div>
+                )}
+
+                {/* Desktop text (centered) */}
+                <div class="hidden md:block text-center">
                   <p class="ds-h2">{item.value}</p>
                   <p class="ds-p-1">{item.description}</p>
                 </div>

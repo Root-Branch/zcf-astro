@@ -5,14 +5,14 @@ const { card, isHighlighted = false } = Astro.props;
 const renderedDescription = renderRichText(card.description);
 
 const bgColor = isHighlighted ? "bg-ds-teal-500" : "bg-ds-blue-900";
-const minHeight = isHighlighted ? "min-h-[737px]" : "min-h-[602px]";
+const minHeight = isHighlighted ? "min-h-[500px] xl:min-h-[737px]" : "min-h-[500px] xl:min-h-[602px]";
 const textColor = "text-white";
 ---
 
 <div class={`${bgColor} ${textColor} px-12 pt-12 h-full flex flex-col ${minHeight}`}>
   <div class="mb-4">
     <p class="ds-p-1 !font-bold">{card.number}</p>
-    <h3 class="ds-h3 uppercase font-bold mb-4">{card.title}</h3>
+    <h3 class="ds-h2 lg:ds-h3 uppercase font-bold mb-4">{card.title}</h3>
   </div>
   
   <div class="space-y-4 flex-grow">
