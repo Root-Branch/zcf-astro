@@ -1,0 +1,102 @@
+---
+import { convertToWebP } from "../../../utils/imageConvert";
+
+const { title, description, images, styling } = Astro.props;
+
+const padding_top = styling?.[0]?.padding_top || "xs";
+const padding_bottom = styling?.[0]?.padding_bottom || "xs";
+const padding_left = styling?.[0]?.padding_left || "xs";
+const padding_right = styling?.[0]?.padding_right || "xs";
+const mobile_padding_top = styling?.[0]?.mobile_padding_top || "xs";
+const mobile_padding_bottom = styling?.[0]?.mobile_padding_bottom || "xs";
+const mobile_padding_left = styling?.[0]?.mobile_padding_left || "xs";
+const mobile_padding_right = styling?.[0]?.mobile_padding_right || "xs";
+
+const padding_top_class = `lg:pt-${padding_top}`;
+const padding_bottom_class = `lg:pb-${padding_bottom}`;
+const padding_left_class = `lg:pl-${padding_left}`;
+const padding_right_class = `lg:pr-${padding_right}`;
+const mobile_padding_top_class = `pt-${mobile_padding_top}`;
+const mobile_padding_bottom_class = `pb-${mobile_padding_bottom}`;
+const mobile_padding_left_class = `pl-${mobile_padding_left}`;
+const mobile_padding_right_class = `pr-${mobile_padding_right}`;
+---
+
+<section
+  class={`${mobile_padding_top_class} ${mobile_padding_bottom_class}
+   ${padding_top_class} ${padding_bottom_class} ${padding_left_class}
+    ${padding_right_class} ${mobile_padding_left_class} ${mobile_padding_right_class}`}
+>
+  <!-- Desktop Layout -->
+  <div class="relative mx-auto w-full h-full hidden lg:flex items-center justify-center min-h-[800px]">
+    {/* Left Image */}
+    <div class="absolute left-0 top-0 w-[40%] h-[65%]">
+      <img
+        src={convertToWebP(images[0].filename)}
+        alt={images[0].alt}
+        class="w-full h-full object-cover"
+      />
+    </div>
+
+    {/* Right Image */}
+    <div class="absolute right-0 bottom-0 w-[45%] h-[65%]">
+      <img
+        src={convertToWebP(images[1].filename)}
+        alt={images[1].alt}
+        class="w-full h-full object-cover"
+      />
+    </div>
+
+    {/* Content Box */}
+    <div class="relative mx-auto max-w-[1170px] px-4">
+      <div
+        class="bg-white mx-auto max-w-[850px] p-16 text-center relative z-10"
+      >
+        <h2 class="ds-h1 mb-6 uppercase">
+          {title}
+        </h2>
+        <p class="ds-p-1">
+          {description}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Layout -->
+  <div class="lg:hidden flex flex-col">
+    {/* Content Box - Mobile */}
+    <div class="relative mx-auto w-full lg:px-4 mb-8">
+      <div
+        class="bg-white mx-auto p-0 lg:p-8 text-center"
+      >
+        <h2 class="ds-h1 mb-6 uppercase">
+          {title}
+        </h2>
+        <p class="ds-p-2">
+          {description}
+        </p>
+      </div>
+    </div>
+
+    {/* Images Container - Mobile */}
+    <div class="relative w-full h-[200px] px-4">
+      {/* First Image (Larger) */}
+      <div class="absolute left-0 top-0 w-[80%] h-[80%]">
+        <img
+          src={convertToWebP(images[1].filename)}
+          alt={images[0].alt}
+          class="w-full h-full object-cover"
+        />
+      </div>
+
+      {/* Second Image (Smaller, Overlapping) */}
+      <div class="absolute right-0 top-[30px] w-[46%] h-[90%] z-10">
+        <img
+          src={convertToWebP(images[0].filename)}
+          alt={images[1].alt}
+          class="w-full h-full object-cover shadow-lg"
+        />
+      </div>
+    </div>
+  </div>
+</section>

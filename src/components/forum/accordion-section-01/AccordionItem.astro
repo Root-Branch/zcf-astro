@@ -10,7 +10,7 @@ const itemId = `accordion-item-${Math.random().toString(36).substring(2, 11)}`;
     aria-controls={itemId}
   >
     <div class="flex items-center">
-      <span class="ds-p-1 mr-2 !font-semibold">{number}.</span>
+      {number && <span class="ds-p-1 mr-2 !font-semibold">{number}.</span>}
       <span class="ds-p-1 !font-semibold">{title}</span>
     </div>
     <span class="accordion-icon ds-p-1">{isOpen ? "−" : "+"}</span>

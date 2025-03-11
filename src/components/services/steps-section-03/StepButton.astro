@@ -1,0 +1,29 @@
+---
+const {
+  text,
+  link,
+  style = "primary",
+  text_color = "white",
+  background_color = "ds-red-500",
+  class: className,
+} = Astro.props;
+
+const buttonClasses = {
+  primary: `bg-${background_color} text-${text_color} hover:opacity-90`,
+  secondary: `border-2 border-${background_color} text-${background_color} hover:bg-${background_color}/5`,
+};
+
+const buttonStyle = buttonClasses[style] || buttonClasses.primary;
+---
+
+<button
+  type="button"
+  data-step-nav={link}
+  class:list={[
+    "ds-button px-5 py-4 md:px-9 md:py-4 rounded-full w-full sm:w-auto",
+    buttonStyle,
+    className
+  ]}
+>
+  {text}
+</button> 

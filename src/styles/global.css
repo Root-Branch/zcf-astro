@@ -186,6 +186,13 @@
       font-weight: 500;
     }
     /* Paragraphs - Source Sans 3 */
+    .ds-p-medium {
+      font-family: "Source Sans 3", sans-serif;
+      font-size: 35px;
+      line-height: 1.3;
+      font-weight: 500;
+    }
+    /* Paragraphs - Source Sans 3 */
     .ds-p-quote {
       font-family: "Source Sans 3", sans-serif;
       font-size: 30px;
