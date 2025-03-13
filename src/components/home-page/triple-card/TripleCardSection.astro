@@ -6,29 +6,124 @@ import { renderRichText } from "@storyblok/astro";
 const { heading, subheading, description, content_blocks } = Astro.props;
 
 const renderedDescription = renderRichText(description);
+
+// Split content blocks into stats cards and overlay image cards
+const statsCards = content_blocks?.filter(block => block.component === "stats_card") || [];
+const overlayImageCards = content_blocks?.filter(block => block.component === "overlay_image_card") || [];
 ---
 
-<section class="pt-20 md:pt-32 pb-10 md:pb-20 px-4">
+<section class="pt-20 md:pt-32 pb-10 md:pb-20 px-4 relative z-10">
   <div class="mx-auto text-center">
     <div class="max-w-[1168px] mx-auto">
-      <h2 class="ds-h2 md:ds-h3 mb-8">{heading}</h2>
-      <p class="ds-p-1 md:ds-p-large mb-4">{subheading}</p>
-      <div class="ds-p-2 md:ds-p-1 mb-12" set:html={renderedDescription} />
+      <h2 class="ds-h3 md:ds-h3 mb-12">{heading}</h2>
+      <p class="ds-p-1 md:ds-p-quote mb-8 md:mb-16">{subheading}</p>
+      <div class="ds-p-2 md:ds-p-1 mb-20" set:html={renderedDescription} />
     </div>
 
     <div class="container mx-auto">
       <div class="grid grid-cols-1 xl:grid-cols-3 gap-16 max-w-[1720px] mx-auto px-4 md:px-10 lg:px-16 justify-items-center">
         {
-          content_blocks?.map((block) => {
-            if (block.component === "stats_card") {
-              return <StatsCard {...block} />;
-            } else if (block.component === "overlay_image_card") {
-              return <OverlayImageCard {...block} />;
-            }
-          })
+          overlayImageCards.map((overlayCard, index) => (
+            <div class="flip-card-container">
+              <div class="flip-card">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <OverlayImageCard {...overlayCard} />
+                  </div>
+                  <div class="flip-card-back">
+                    <StatsCard {...statsCards[index]} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))
         }
       </div>
     </div>
   </div>
 </section>
+
+<style>
+  /* Card Container */
+  .flip-card-container {
+    width: 100%;
+    min-height: 429px;
+    perspective: 1500px;
+    display: block;
+  }
+
+  /* The actual card */
+  .flip-card {
+    width: 100%;
+    height: 100%;
+    min-height: 429px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: all 0.2s ease;
+  }
+
+  /* Inner container for 3D effect */
+  .flip-card-inner {
+    width: 100%;
+    height: 100%;
+    min-height: 429px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  /* Hover effect */
+  .flip-card-container:hover .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+
+  /* Front and back faces */
+  .flip-card-front,
+  .flip-card-back {
+    width: 100%;
+    height: 100%;
+    min-height: 429px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    overflow: hidden;
+    transform-style: preserve-3d;
+  }
+
+  /* Front styling */
+  .flip-card-front {
+    z-index: 2;
+    transform: rotateY(0deg);
+    background-color: transparent;
+  }
+
+  /* Back styling */
+  .flip-card-back {
+    transform: rotateY(180deg);
+    background-color: #fff;
+  }
+
+  @media (max-width: 768px) {
+    .flip-card-inner {
+      transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll('.flip-card-container');
+    
+    cards.forEach(card => {
+      card.addEventListener('touchstart', () => {
+        const inner = card.querySelector('.flip-card-inner');
+        inner.style.transform = inner.style.transform === 'rotateY(180deg)' 
+          ? 'rotateY(0deg)' 
+          : 'rotateY(180deg)';
+      });
+    });
+  });
+</script>
 

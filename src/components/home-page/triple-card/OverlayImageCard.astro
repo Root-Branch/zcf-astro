@@ -8,10 +8,10 @@ const { image, category, overlay_text } = Astro.props;
   <img
     src={convertToWebP(image.filename)}
     alt={image.alt || "Overlay Image"}
-    class="w-full h-full object-cover"
+    class="w-full h-full object-cover min-h-[429px]"
   />
   <div
-    class="absolute inset-0 bg-ds-blue-900/45 flex items-center justify-center"
+    class="absolute inset-0 bg-ds-blue-900/70 flex items-center justify-center"
   >
     <div class="text-center text-ds-white">
       <h4 class="ds-p-2 !xl:font-bold mb-4 xl:mb-10">{category}</h4>
