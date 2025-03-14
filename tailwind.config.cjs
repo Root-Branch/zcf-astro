@@ -40,7 +40,7 @@ module.exports = {
       backgroundColor: {
         "ds-white": "#FFFFFF",
         "ds-black": "#000000",
-        "ds-grey": "#1D1D1B",
+        "ds-grey": "#f5f5f5",
         "ds-red": {
           400: "#EA615F",
           500: "#F26662",

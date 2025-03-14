@@ -1,0 +1,56 @@
+---
+import { renderRichText } from "@storyblok/astro";
+
+const { title, description, styling } = Astro.props;
+
+//Common
+const padding_top_class = styling?.[0]?.padding_top
+  ? `lg:pt-${styling[0].padding_top}`
+  : "lg:pt-8 lg:pt-16";
+const padding_bottom_class = styling?.[0]?.padding_bottom
+  ? `lg:pb-${styling[0].padding_bottom}`
+  : "lg:pb-32";
+const mobile_padding_top_class = styling?.[0]?.mobile_padding_top
+  ? `pt-${styling[0].mobile_padding_top}`
+  : "pt-8";
+const mobile_padding_bottom_class = styling?.[0]?.mobile_padding_bottom
+  ? `pb-${styling[0].mobile_padding_bottom}`
+  : "pb-16";
+const gap_class = styling?.[0]?.gap
+  ? `gap-8 lg:gap-${styling[0].gap}`
+  : "gap-8";
+const max_width_class = styling?.[0]?.max_width
+  ? `max-w-[${styling[0].max_width}px]`
+  : "";
+const max_height_class = styling?.[0]?.max_height
+  ? `max-h-[${styling[0].max_height}px]`
+  : "";
+const background_color_class = styling?.[0]?.background_color
+  ? `bg-${styling[0].background_color}`
+  : "";
+---
+
+<section
+  class={`${mobile_padding_top_class} ${mobile_padding_bottom_class}
+   ${padding_top_class} ${padding_bottom_class} ${background_color_class}`}
+>
+  <div class={`mx-auto px-2 sm:px-16 ${max_width_class} ${max_height_class}`}>
+    <div class={`flex justify-between ${gap_class}`}>
+      {/* Title Content */}
+      <div class={`w-[45%] text-center lg:text-left text-ds-white flex items-start justify-start`}>
+        <div
+          class={`text-center lg:text-left block ds-p-large`}
+          set:html={renderRichText(title)}
+        />
+      </div>
+
+      {/* Description */}
+      <div class={`w-[55%] text-center lg:text-left text-ds-white flex items-start justify-start`}>
+        <div
+          class={`text-center lg:text-left block ds-p-1`}
+          set:html={renderRichText(description)}
+        />
+      </div>
+    </div>
+  </div>
+</section>

@@ -28,6 +28,7 @@
         >
           <div class="pb-6 pr-8">
             <p class="ds-p-2">{{ item.description }}</p>
+            <div class="ds-p-2 render-rich-text" v-html="item.richTextDescription"></div>
           </div>
         </div>
       </div>
@@ -40,6 +41,7 @@ export default {
   props: {
     title: String,
     description: String,
+    richTextDescription: String,
     items: Array
   },
   data() {

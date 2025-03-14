@@ -1,0 +1,101 @@
+---
+import { renderRichText } from "@storyblok/astro";
+import AccordionVue from "../../services/steps-section-03/AccordionVue.vue";
+import Button from "../../common/Button.astro";
+
+const { title, subtitle, description, accordions, styling, cta_button } =
+  Astro.props;
+
+const processedAccordions = accordions.map((accordion) => ({
+  ...accordion,
+  title: "",
+  description: "",
+  items: accordion.items.map((item) => ({
+    ...item,
+    richTextDescription: renderRichText(item.richtext_description),
+  })),
+}));
+
+const padding_top = styling?.[0]?.padding_top || "xs";
+const padding_bottom = styling?.[0]?.padding_bottom || "xs";
+const mobile_padding_top = styling?.[0]?.mobile_padding_top || "xs";
+const mobile_padding_bottom = styling?.[0]?.mobile_padding_bottom || "xs";
+const background_color = styling?.[0]?.background_color || "ds-white";
+
+const padding_top_class = `lg:pt-${padding_top}`;
+const padding_bottom_class = `lg:pb-${padding_bottom}`;
+const mobile_padding_top_class = `pt-${mobile_padding_top}`;
+const mobile_padding_bottom_class = `pb-${mobile_padding_bottom}`;
+const bg_color_class = `bg-${background_color}`;
+---
+
+<section
+  class={`${mobile_padding_top_class} ${mobile_padding_bottom_class} ${padding_top_class} ${padding_bottom_class} ${bg_color_class}`}
+>
+  <div class="container mx-auto px-4 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-0 lg:gap-16">
+      <!-- Left Column - Content -->
+      <div class="flex flex-col h-full max-h-[600px]">
+        <!-- Title and Subtitle -->
+        <h2 class="ds-h2 mb-4">{title}</h2>
+        <h3 class="ds-h4 text-ds-red-500 mb-8">{subtitle}</h3>
+        <div>
+          <!-- Description -->
+          {
+            description && (
+              <div class="ds-p-2" set:html={renderRichText(description)} />
+            )
+          }
+        </div>
+
+        <!-- CTA Button -->
+        {
+          cta_button && (
+            <div class="mt-[200px] hidden lg:flex">
+              {cta_button.map((button) => (
+                <Button
+                  text={button.text}
+                  link={button.link}
+                  style={button.style}
+                  background_color={button.background_color}
+                  text_color={button.text_color}
+                />
+              ))}
+            </div>
+          )
+        }
+      </div>
+
+      <!-- Right Column - Accordions -->
+      <div class="flex items-center">
+        {
+          processedAccordions.map((accordion) => (
+            <div class="w-full">
+              <AccordionVue
+                client:load
+                title={accordion.title}
+                description={accordion.description}
+                items={accordion.items}
+              />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Navigation Buttons (Mobile Only) -->
+    <div class="lg:hidden mt-8">
+      {
+        cta_button && (
+          <Button
+            text={cta_button[0].text}
+            link={cta_button[0].link}
+            style={cta_button[0].style}
+            background_color={cta_button[0].background_color}
+            text_color={cta_button[0].text_color}
+          />
+        )
+      }
+    </div>
+  </div>
+</section>

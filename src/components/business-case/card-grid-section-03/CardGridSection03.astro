@@ -1,0 +1,192 @@
+---
+import { renderRichText } from "@storyblok/astro";
+import Button from "../../common/Button.astro";
+
+const { title, description, cards, styling } = Astro.props;
+
+const renderedDescription = description || "";
+
+const padding_top = styling?.[0]?.padding_top || "xs";
+const padding_bottom = styling?.[0]?.padding_bottom || "xs";
+const padding_left = styling?.[0]?.padding_left || "xs";
+const padding_right = styling?.[0]?.padding_right || "xs";
+const mobile_padding_top = styling?.[0]?.mobile_padding_top || "xs";
+const mobile_padding_bottom = styling?.[0]?.mobile_padding_bottom || "xs";
+const mobile_padding_left = styling?.[0]?.mobile_padding_left || "xs";
+const mobile_padding_right = styling?.[0]?.mobile_padding_right || "xs";
+const background_color = styling?.[0]?.background_color || "";
+
+const padding_top_class = `lg:pt-${padding_top}`;
+const padding_bottom_class = `lg:pb-${padding_bottom}`;
+const padding_left_class = `lg:pl-${padding_left}`;
+const padding_right_class = `lg:pr-${padding_right}`;
+const mobile_padding_top_class = `pt-${mobile_padding_top}`;
+const mobile_padding_bottom_class = `pb-${mobile_padding_bottom}`;
+const mobile_padding_left_class = `pl-${mobile_padding_left}`;
+const mobile_padding_right_class = `pr-${mobile_padding_right}`;
+
+const max_width_class = `max-w-[${styling?.[0]?.max_width}px]` || "";
+const bg_color_class = background_color ? `bg-${background_color}` : "";
+---
+
+<section
+  class={`${mobile_padding_top_class} ${mobile_padding_bottom_class} 
+  ${padding_top_class} ${padding_bottom_class} 
+  ${bg_color_class} ${padding_left_class} ${padding_right_class} 
+  ${mobile_padding_left_class} ${mobile_padding_right_class} ${max_width_class}`}
+>
+  <div class="relative overflow-hidden">
+    <div class="flex flex-col lg:flex-row-reverse">
+      <div class="w-full lg:w-[30%] px-4 lg:pl-16 text-ds-white text-center lg:text-left mb-24 lg:mb-0">
+        <h2 class="ds-h1 lg:ds-h2 mb-12">{title}</h2>
+        <p class="ds-p-2 lg:ds-p-1">{renderedDescription}</p>
+      </div>
+
+      <!-- Cards Carousel (Left Side) - Takes about 80% width on desktop -->
+      <div class="w-full lg:w-[70%] overflow-x-auto pb-8 carousel-container">
+        <div
+          class="flex space-x-12 ml-[-50px] lg:ml-[-100px] pl-[50px] lg:pl-[100px] pr-4"
+        >
+          {
+            cards.map((card) => (
+              <div class="flex-shrink-0 max-w-[547px] max-h-[783px] p-8 bg-ds-white">
+                <h3 class="ds-h4 mb-8">{card.title}</h3>
+                {card.image && (
+                  <div class="h-[309px] overflow-hidden mb-8">
+                    <img
+                      src={card.image.filename}
+                      alt={card.image.alt || card.title}
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                )}
+                <p class="ds-p-2 mb-8">{card.description}</p>
+                {card.cta_button && card.cta_button.length > 0 && (
+                  <Button
+                    text={card.cta_button[0].text}
+                    link={card.cta_button[0].link}
+                    style={card.cta_button[0].style}
+                    background_color={card.cta_button[0].background_color}
+                    text_color={card.cta_button[0].text_color}
+                  />
+                )}
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Custom Horizontal Scrollbar -->
+    <div
+      class="px-4 lg:pl-8 lg:pr-0 lg:w-[70%] mt-4 custom-scrollbar-container"
+    >
+      <div class="h-4 bg-ds-blue-900 rounded-full relative">
+        <div
+          class="custom-scrollbar-thumb absolute h-4 bg-white cursor-pointer rounded-full"
+        >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Hide default scrollbar */
+  .carousel-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  .carousel-container {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  /* Custom scrollbar thumb styling */
+  .custom-scrollbar-thumb {
+    width: 20%;
+    left: 0;
+    transition: left 0.1s ease;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const container = document.querySelector(".carousel-container");
+    const thumb = document.querySelector(".custom-scrollbar-thumb");
+    const track = document.querySelector(".custom-scrollbar-container > div");
+
+    if (!container || !thumb || !track) return;
+
+    // Initialize scrollbar and scroll to end
+    function initScrollbar() {
+      // Set thumb width based on visible portion
+      const visibleRatio = container.clientWidth / container.scrollWidth;
+      thumb.style.width = `${Math.max(visibleRatio * 100, 10)}%`;
+
+      // Scroll to the right end initially
+      container.scrollLeft = container.scrollWidth;
+      updateThumbPosition();
+    }
+
+    // Update thumb position based on scroll
+    function updateThumbPosition() {
+      const scrollRatio =
+        container.scrollLeft / (container.scrollWidth - container.clientWidth);
+      const maxLeft = track.clientWidth - thumb.clientWidth;
+      thumb.style.left = `${scrollRatio * maxLeft}px`;
+    }
+
+    // Handle thumb dragging
+    function setupDragging() {
+      let isDragging = false;
+      let startX, startLeft;
+
+      thumb.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        startX = e.clientX;
+        startLeft = parseInt(getComputedStyle(thumb).left);
+        e.preventDefault();
+      });
+
+      document.addEventListener("mousemove", (e) => {
+        if (!isDragging) return;
+
+        const dx = e.clientX - startX;
+        const maxLeft = track.clientWidth - thumb.clientWidth;
+        const newLeft = Math.max(0, Math.min(startLeft + dx, maxLeft));
+
+        thumb.style.left = `${newLeft}px`;
+        container.scrollLeft =
+          (newLeft / maxLeft) * (container.scrollWidth - container.clientWidth);
+      });
+
+      document.addEventListener("mouseup", () => {
+        isDragging = false;
+      });
+
+      // Click on track to move thumb
+      track.addEventListener("click", (e) => {
+        if (e.target === thumb) return;
+
+        const clickX = e.clientX - track.getBoundingClientRect().left;
+        const thumbCenter = thumb.clientWidth / 2;
+        const newLeft = Math.max(
+          0,
+          Math.min(clickX - thumbCenter, track.clientWidth - thumb.clientWidth)
+        );
+
+        thumb.style.left = `${newLeft}px`;
+        container.scrollLeft =
+          (newLeft / (track.clientWidth - thumb.clientWidth)) *
+          (container.scrollWidth - container.clientWidth);
+      });
+    }
+
+    // Initialize everything
+    initScrollbar();
+    container.addEventListener("scroll", updateThumbPosition);
+    window.addEventListener("resize", initScrollbar);
+    setupDragging();
+  });
+</script>

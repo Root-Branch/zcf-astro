@@ -1,0 +1,154 @@
+---
+const { title, cards, styling } = Astro.props;
+
+// Extract styling properties
+const padding_top = styling?.[0]?.padding_top || "xs";
+const padding_bottom = styling?.[0]?.padding_bottom || "xs";
+const padding_left = styling?.[0]?.padding_left || "xs";
+const padding_right = styling?.[0]?.padding_right || "xs";
+const mobile_padding_top = styling?.[0]?.mobile_padding_top || "xs";
+const mobile_padding_bottom = styling?.[0]?.mobile_padding_bottom || "xs";
+const mobile_padding_left = styling?.[0]?.mobile_padding_left || "xs";
+const mobile_padding_right = styling?.[0]?.mobile_padding_right || "xs";
+const background_color = styling?.[0]?.background_color || "";
+
+const padding_top_class = `lg:pt-${padding_top}`;
+const padding_bottom_class = `lg:pb-${padding_bottom}`;
+const padding_left_class = `lg:pl-${padding_left}`;
+const padding_right_class = `lg:pr-${padding_right}`;
+const mobile_padding_top_class = `pt-${mobile_padding_top}`;
+const mobile_padding_bottom_class = `pb-${mobile_padding_bottom}`;
+const mobile_padding_left_class = `pl-${mobile_padding_left}`;
+const mobile_padding_right_class = `pr-${mobile_padding_right}`;
+
+const max_width_class = `max-w-[${styling?.[0]?.max_width}px]` || "";
+const bg_color_class = background_color ? `bg-${background_color}` : "";
+---
+
+<section
+  class={`${bg_color_class} ${padding_top_class} ${padding_bottom_class} 
+  ${padding_left_class} ${padding_right_class} ${mobile_padding_top_class} 
+  ${mobile_padding_bottom_class} ${mobile_padding_left_class} ${mobile_padding_right_class}`}
+>
+  <div class={`mx-auto ${max_width_class}`}>
+    <h2 class="ds-h2 text-center text-white mb-24">{title}</h2>
+
+    <div class="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-4 gap-6 md:gap-8">
+      {
+        cards.map((card, index) => (
+          <div
+            class={`card-container min-w-[368px] ${card.is_long_content ? "max-h-[500px]" : "max-h-[420px]"} ${index % 2 === 1 ? "md:mt-12" : ""}`}
+          >
+            <div class="bg-white py-10 h-full relative flex flex-col justify-center items-center">
+              <div class="card-header text-center px-[0.5rem]">
+                <h3 class="ds-hl4 mb-2">{card.title}</h3>
+                <p class="ds-h4 text-ds-red-500 font-bold mb-4">
+                  {card.subtitle}
+                </p>
+              </div>
+
+              <div class="card-content hidden md:block text-center px-4">
+                <p class="ds-p-2">{card.description}</p>
+
+                <a
+                  href="#"
+                  class="underline mt-4 flex items-center text-ds-blue-900 font-medium flex justify-center"
+                >
+                  Read more
+                  <svg
+                    class="ml-2"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="15"
+                    height="9"
+                    viewBox="0 0 15 9"
+                    fill="none"
+                  >
+                    <path
+                      d="M7.58635 6.7641C8.17196 6.04243 8.61059 5.52275 9.02375 4.98979C10.063 3.64981 11.0763 2.29561 12.1341 0.965586C12.3754 0.662597 12.7261 0.403228 13.0773 0.177527C13.4338 -0.0519665 13.9065 -0.078043 14.2017 0.212618C14.4065 0.414136 14.5442 0.767386 14.4869 1.01822C14.3984 1.40513 14.1606 1.78399 13.91 2.12918C12.8354 3.61093 11.7562 5.09126 10.6307 6.54694C10.1475 7.17188 9.603 7.77881 8.98672 8.31746C7.89593 9.27099 6.82077 9.23116 5.88796 8.16193C4.4494 6.5128 3.09764 4.81246 1.71347 3.13155C1.41372 2.7674 1.11281 2.40229 0.847784 2.02059C0.687494 1.79015 0.498848 1.52699 0.500006 1.27901C0.501162 1.01158 0.624418 0.661174 0.854149 0.506123C1.01097 0.399911 1.53292 0.48194 1.73372 0.626559C2.38009 1.09313 3.02646 1.58247 3.53974 2.14482C4.60159 3.30794 5.57375 4.52606 6.59162 5.71668C6.84334 6.01113 7.13036 6.28567 7.58693 6.76458L7.58635 6.7641Z"
+                      fill="#0B3048"
+                    />
+                  </svg>
+                </a>
+              </div>
+
+              <button class="toggle-btn absolute top-6 right-6 w-6 h-6 flex items-center justify-center md:hidden">
+                <span class="plus-icon">+</span>
+                <span class="minus-icon hidden">-</span>
+              </button>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const toggleBtns = document.querySelectorAll(".toggle-btn");
+
+    toggleBtns.forEach((btn) => {
+      const card = btn.closest(".card-container");
+      const content = card.querySelector(".card-content");
+      const plusIcon = btn.querySelector(".plus-icon");
+      const minusIcon = btn.querySelector(".minus-icon");
+
+      btn.addEventListener("click", () => {
+        content.classList.toggle("hidden");
+        plusIcon.classList.toggle("hidden");
+        minusIcon.classList.toggle("hidden");
+
+        // Toggle max-height for the card container for animation
+        const cardDiv = btn.closest(".bg-white");
+        cardDiv.classList.toggle("expanded");
+      });
+    });
+
+    // Handle resize events
+    window.addEventListener("resize", () => {
+      const isMobile = window.innerWidth < 768;
+      const contents = document.querySelectorAll(".card-content");
+      const plusIcons = document.querySelectorAll(".plus-icon");
+      const minusIcons = document.querySelectorAll(".minus-icon");
+
+      contents.forEach((content, i) => {
+        if (!isMobile) {
+          content.classList.remove("hidden");
+          // Reset icons when switching to desktop
+          if (!plusIcons[i].classList.contains("hidden")) {
+            plusIcons[i].classList.remove("hidden");
+            minusIcons[i].classList.add("hidden");
+          }
+        } else if (
+          !content
+            .closest(".card-container")
+            .querySelector(".toggle-btn")
+            .classList.contains("active")
+        ) {
+          content.classList.add("hidden");
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .card-container {
+    transition: all 0.3s ease;
+  }
+
+  .bg-white {
+    transition: max-height 0.3s ease-in-out;
+    overflow: hidden;
+  }
+
+  .bg-white.expanded {
+    max-height: 800px !important;
+  }
+
+  @media (min-width: 768px) {
+    .card-content {
+      display: block !important;
+    }
+  }
+</style>

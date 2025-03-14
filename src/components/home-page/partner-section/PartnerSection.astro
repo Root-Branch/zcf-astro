@@ -1,41 +1,22 @@
 ---
 import { Image } from "astro:assets";
 import { convertToWebP } from "../../../utils/imageConvert";
-import { renderRichText } from "@storyblok/astro";
 
-const {
-  heading,
-  logos,
-  padding_top,
-  padding_bottom,
-  mobile_padding_top,
-  mobile_padding_bottom,
-  logo_height,
-  heading_font,
-} = Astro.props;
+interface Props {
+  heading: string;
+  logos: {
+    filename: string;
+    alt: string;
+    id: number;
+  }[];
+}
 
-const padding_top_class = padding_top ? `lg:pt-${padding_top}` : "lg:pt-10";
-const padding_bottom_class = padding_bottom
-  ? `lg:pb-${padding_bottom}`
-  : "lg:pb-20";
-const mobile_padding_top_class = mobile_padding_top
-  ? `pt-${mobile_padding_top}`
-  : "pt-10";
-const mobile_padding_bottom_class = mobile_padding_bottom
-  ? `pb-${mobile_padding_bottom}`
-  : "pb-20";
-const logo_height_class = logo_height ? `h-[${logo_height}px]` : "h-[50px]";
-const heading_font_class = heading_font ? `${heading_font}` : "ds-h2 md:ds-h4";
+const { heading, logos } = Astro.props;
 ---
 
-<section
-  class={`${padding_top_class} ${padding_bottom_class} ${mobile_padding_top_class} ${mobile_padding_bottom_class}`}
->
+<section class="py-20">
   <div class="max-w-[1432px] mx-auto px-4">
-    <div
-      class={`${heading_font_class} text-center mb-12`}
-      set:html={renderRichText(heading)}
-    />
+    <h2 class="ds-h4 text-center mb-12">{heading}</h2>
 
     <div class="flex flex-wrap items-center justify-center gap-12">
       {
@@ -44,7 +25,7 @@ const heading_font_class = heading_font ? `${heading_font}` : "ds-h2 md:ds-h4";
             <img
               src={convertToWebP(logo.filename)}
               alt={logo.alt || "Partner logo"}
-              class={`w-full ${logo_height_class} object-contain`}
+              class="w-full h-[50px] object-contain"
             />
           </div>
         ))

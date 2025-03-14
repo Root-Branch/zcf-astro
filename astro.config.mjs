@@ -48,6 +48,11 @@ export default defineConfig({
       "testimonial.section.01": "storyblok/home-page/TestimonialSection01",
       "feature_banner.section.02": "storyblok/services/FeatureBannerSection02",
       "steps.section.03": "storyblok/services/StepsSection03",
+      "cta_banner.section.03": "storyblok/business-case/CtaBannerSection03",
+      "text_banner.section.03": "storyblok/business-case/TextBannerSection03",
+      "card_grid.section.02": "storyblok/business-case/CardGridSection02",
+      "accordion.section.02": "storyblok/business-case/AccordionSection02",
+      "card_grid.section.03": "storyblok/business-case/CardGridSection03",
     },
   }), tailwind(), vue()],
 

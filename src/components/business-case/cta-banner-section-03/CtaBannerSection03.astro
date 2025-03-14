@@ -1,0 +1,71 @@
+---
+import Button from "../../common/Button.astro";
+import { convertToWebP } from "../../../utils/imageConvert";
+
+const { title, description, image, cta_button, styling } = Astro.props;
+
+const padding_top = styling?.[0]?.padding_top || "xs";
+const padding_bottom = styling?.[0]?.padding_bottom || "xs";
+const padding_left = styling?.[0]?.padding_left || "xs";
+const padding_right = styling?.[0]?.padding_right || "xs";
+const mobile_padding_top = styling?.[0]?.mobile_padding_top || "xs";
+const mobile_padding_bottom = styling?.[0]?.mobile_padding_bottom || "xs";
+const mobile_padding_left = styling?.[0]?.mobile_padding_left || "xs";
+const mobile_padding_right = styling?.[0]?.mobile_padding_right || "xs";
+
+const padding_top_class = `lg:pt-${padding_top}`;
+const padding_bottom_class = `lg:pb-${padding_bottom}`;
+const padding_left_class = `lg:pl-${padding_left}`;
+const padding_right_class = `lg:pr-${padding_right}`;
+const mobile_padding_top_class = `pt-${mobile_padding_top}`;
+const mobile_padding_bottom_class = `pb-${mobile_padding_bottom}`;
+const mobile_padding_left_class = `pl-${mobile_padding_left}`;
+const mobile_padding_right_class = `pr-${mobile_padding_right}`;
+
+const max_width_class = `max-w-[${styling?.[0]?.max_width}px]` || "";
+---
+
+<section
+  class={`relative ${padding_top_class} ${padding_bottom_class} 
+  ${padding_left_class} ${padding_right_class} ${mobile_padding_top_class} 
+  ${mobile_padding_bottom_class} ${mobile_padding_left_class} ${mobile_padding_right_class}`}
+>
+  <div class={`mx-auto ${max_width_class}`}>
+    <div class="flex flex-col lg:flex-row items-center">
+      {/* Content */}
+      <div class="w-full lg:w-[60%] text-center lg:text-left z-10">
+        <h2 class="ds-h1 !font-bold mb-12 uppercase">{title}</h2>
+        <p class="ds-p-2 md:ds-p-1 mb-12">
+          {description}
+        </p>
+
+        <div class="flex justify-center lg:justify-start mb-16 lg:mb-0">
+          {
+            cta_button?.[0] && (
+              <Button
+                text={cta_button[0].text}
+                link={cta_button[0].link}
+                style={cta_button[0].style}
+                background_color={cta_button[0].background_color}
+                text_color={cta_button[0].text_color}
+              />
+            )
+          }
+        </div>
+      </div>
+
+      {/* Image */}
+      <div
+        class="w-full lg:w-[42%] absolute right-[8.75rem] h-[100%] top-[4rem]"
+      >
+        <div class="relative w-full h-full">
+          <img
+            src={convertToWebP(image.filename)}
+            alt={image.alt || ""}
+            class="w-full h-auto object-contain"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

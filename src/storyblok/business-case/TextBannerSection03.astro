@@ -1,0 +1,10 @@
+---
+import { storyblokEditable } from "@storyblok/astro";
+import TextBannerSection03 from "../../components/business-case/text-banner-section-03/TextBannerSection03.astro";
+
+const { blok } = Astro.props;
+---
+
+<div {...storyblokEditable(blok)}>
+  <TextBannerSection03 {...blok} />
+</div>
