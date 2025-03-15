@@ -38,7 +38,7 @@ const bg_color_class = background_color ? `bg-${background_color}` : "";
   <div class="relative overflow-hidden">
     <div class="flex flex-col lg:flex-row-reverse">
       <div class="w-full lg:w-[30%] px-4 lg:pl-16 text-ds-white text-center lg:text-left mb-24 lg:mb-0">
-        <h2 class="ds-h1 lg:ds-h2 mb-12">{title}</h2>
+        <h2 class="ds-h1 lg:ds-h2 mb-4 lg:mb-12">{title}</h2>
         <p class="ds-p-2 lg:ds-p-1">{renderedDescription}</p>
       </div>
 
@@ -49,8 +49,8 @@ const bg_color_class = background_color ? `bg-${background_color}` : "";
         >
           {
             cards.map((card) => (
-              <div class="flex-shrink-0 max-w-[547px] max-h-[783px] p-8 bg-ds-white">
-                <h3 class="ds-h4 mb-8">{card.title}</h3>
+              <div class="card flex-shrink-0 lg:w-auto lg:max-w-[547px] max-h-[783px] py-16 px-8 lg:p-8 bg-ds-white">
+                <h3 class="ds-h3 lg:ds-h4 mb-8">{card.title}</h3>
                 {card.image && (
                   <div class="h-[309px] overflow-hidden mb-8">
                     <img
@@ -107,6 +107,10 @@ const bg_color_class = background_color ? `bg-${background_color}` : "";
     width: 20%;
     left: 0;
     transition: left 0.1s ease;
+  }
+
+  .card {
+    width: calc(100vw - 32px);
   }
 </style>
 

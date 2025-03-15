@@ -6,19 +6,29 @@ const { title, description, styling } = Astro.props;
 //Common
 const padding_top_class = styling?.[0]?.padding_top
   ? `lg:pt-${styling[0].padding_top}`
-  : "lg:pt-8 lg:pt-16";
+  : "";
 const padding_bottom_class = styling?.[0]?.padding_bottom
   ? `lg:pb-${styling[0].padding_bottom}`
-  : "lg:pb-32";
+  : "";
 const mobile_padding_top_class = styling?.[0]?.mobile_padding_top
   ? `pt-${styling[0].mobile_padding_top}`
-  : "pt-8";
+  : "";
 const mobile_padding_bottom_class = styling?.[0]?.mobile_padding_bottom
   ? `pb-${styling[0].mobile_padding_bottom}`
-  : "pb-16";
-const gap_class = styling?.[0]?.gap
-  ? `gap-8 lg:gap-${styling[0].gap}`
-  : "gap-8";
+  : "";
+const padding_left_class = styling?.[0]?.padding_left
+  ? `lg:pl-${styling[0].padding_left}`
+  : "";
+const padding_right_class = styling?.[0]?.padding_right
+  ? `lg:pr-${styling[0].padding_right}`
+  : "";
+const mobile_padding_left_class = styling?.[0]?.mobile_padding_left
+  ? `pl-${styling[0].mobile_padding_left}`
+  : "";
+const mobile_padding_right_class = styling?.[0]?.mobile_padding_right
+  ? `pr-${styling[0].mobile_padding_right}`
+  : "";
+const gap_class = styling?.[0]?.gap ? `gap-8 lg:gap-${styling[0].gap}` : "";
 const max_width_class = styling?.[0]?.max_width
   ? `max-w-[${styling[0].max_width}px]`
   : "";
@@ -32,22 +42,29 @@ const background_color_class = styling?.[0]?.background_color
 
 <section
   class={`${mobile_padding_top_class} ${mobile_padding_bottom_class}
-   ${padding_top_class} ${padding_bottom_class} ${background_color_class}`}
+   ${padding_top_class} ${padding_bottom_class} ${background_color_class}
+   ${padding_left_class} ${padding_right_class}
+   ${mobile_padding_left_class} ${mobile_padding_right_class}
+   -mt-[95px] lg:-mt-[250px] xl:-mt-[165px] 2xl:-mt-[100px]`}
 >
   <div class={`mx-auto px-2 sm:px-16 ${max_width_class} ${max_height_class}`}>
-    <div class={`flex justify-between ${gap_class}`}>
+    <div class={`flex flex-col lg:flex-row justify-between ${gap_class}`}>
       {/* Title Content */}
-      <div class={`w-[45%] text-center lg:text-left text-ds-white flex items-start justify-start`}>
+      <div
+        class={`w-full lg:w-[45%] text-left text-ds-white flex items-start justify-start`}
+      >
         <div
-          class={`text-center lg:text-left block ds-p-large`}
+          class={`text-left block ds-p-large`}
           set:html={renderRichText(title)}
         />
       </div>
 
       {/* Description */}
-      <div class={`w-[55%] text-center lg:text-left text-ds-white flex items-start justify-start`}>
+      <div
+        class={`w-full lg:w-[55%] text-left text-ds-white flex items-start justify-start`}
+      >
         <div
-          class={`text-center lg:text-left block ds-p-1`}
+          class={`text-left block ds-p-1`}
           set:html={renderRichText(description)}
         />
       </div>

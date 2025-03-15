@@ -31,28 +31,28 @@ const bg_color_class = background_color ? `bg-${background_color}` : "";
   ${mobile_padding_bottom_class} ${mobile_padding_left_class} ${mobile_padding_right_class}`}
 >
   <div class={`mx-auto ${max_width_class}`}>
-    <h2 class="ds-h2 text-center text-white mb-24">{title}</h2>
+    <h2 class="ds-h2 text-center text-white mb-12 lg:mb-24">{title}</h2>
 
-    <div class="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-4 gap-6 md:gap-8">
+    <div class="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-4 gap-2 md:gap-8">
       {
         cards.map((card, index) => (
           <div
-            class={`card-container min-w-[368px] ${card.is_long_content ? "max-h-[500px]" : "max-h-[420px]"} ${index % 2 === 1 ? "md:mt-12" : ""}`}
+            class={`card-container ${card.is_long_content ? "xl:h-[500px] max-h-[600px]" : "xl:h-[420px] max-h-[500px]"} ${index % 2 === 1 ? "md:mt-12" : ""}`}
           >
-            <div class="bg-white py-10 h-full relative flex flex-col justify-center items-center">
-              <div class="card-header text-center px-[0.5rem]">
-                <h3 class="ds-hl4 mb-2">{card.title}</h3>
-                <p class="ds-h4 text-ds-red-500 font-bold mb-4">
+            <div class="bg-white px-4 py-4 lg:py-10 h-full relative flex flex-col justify-center items-start lg:items-center">
+              <div class="card-header text-left lg:text-center lg:px-[0.5rem]">
+                <h3 class="ds-hl2 lg:ds-hl4 mb-2">{card.title}</h3>
+                <p class="ds-h3 lg:ds-h4 text-ds-red-500 font-bold mb-4">
                   {card.subtitle}
                 </p>
               </div>
 
-              <div class="card-content hidden md:block text-center px-4">
+              <div class="card-content hidden md:block text-left lg:text-center">
                 <p class="ds-p-2">{card.description}</p>
 
                 <a
                   href="#"
-                  class="underline mt-4 flex items-center text-ds-blue-900 font-medium flex justify-center"
+                  class="underline mt-4 flex items-center text-ds-blue-900 font-medium flex lg:justify-center justify-start"
                 >
                   Read more
                   <svg
@@ -71,7 +71,7 @@ const bg_color_class = background_color ? `bg-${background_color}` : "";
                 </a>
               </div>
 
-              <button class="toggle-btn absolute top-6 right-6 w-6 h-6 flex items-center justify-center md:hidden">
+              <button class="toggle-btn absolute top-6 right-6 w-6 h-6 md:hidden flex items-center justify-center">
                 <span class="plus-icon">+</span>
                 <span class="minus-icon hidden">-</span>
               </button>
@@ -97,42 +97,20 @@ const bg_color_class = background_color ? `bg-${background_color}` : "";
         content.classList.toggle("hidden");
         plusIcon.classList.toggle("hidden");
         minusIcon.classList.toggle("hidden");
-
-        // Toggle max-height for the card container for animation
         const cardDiv = btn.closest(".bg-white");
         cardDiv.classList.toggle("expanded");
-      });
-    });
-
-    // Handle resize events
-    window.addEventListener("resize", () => {
-      const isMobile = window.innerWidth < 768;
-      const contents = document.querySelectorAll(".card-content");
-      const plusIcons = document.querySelectorAll(".plus-icon");
-      const minusIcons = document.querySelectorAll(".minus-icon");
-
-      contents.forEach((content, i) => {
-        if (!isMobile) {
-          content.classList.remove("hidden");
-          // Reset icons when switching to desktop
-          if (!plusIcons[i].classList.contains("hidden")) {
-            plusIcons[i].classList.remove("hidden");
-            minusIcons[i].classList.add("hidden");
-          }
-        } else if (
-          !content
-            .closest(".card-container")
-            .querySelector(".toggle-btn")
-            .classList.contains("active")
-        ) {
-          content.classList.add("hidden");
-        }
       });
     });
   });
 </script>
 
 <style>
+  .plus-icon,
+  .minus-icon {
+    font-size: 3rem;
+    font-weight: 100;
+  }
+
   .card-container {
     transition: all 0.3s ease;
   }
