@@ -53,6 +53,8 @@ export default defineConfig({
       "card_grid.section.02": "storyblok/business-case/CardGridSection02",
       "accordion.section.02": "storyblok/business-case/AccordionSection02",
       "card_grid.section.03": "storyblok/business-case/CardGridSection03",
+      "form.section.01": "storyblok/contact/FormSection01",
+      "contact.section.01": "storyblok/contact/ContactSection01",
     },
   }), tailwind(), vue()],
 

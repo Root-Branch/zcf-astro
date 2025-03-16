@@ -1,0 +1,94 @@
+---
+const {
+  title,
+  image,
+  hubspot_region,
+  hubspot_form_id,
+  hubspot_portal_id,
+  styling,
+} = Astro.props;
+
+const padding_top = styling?.[0]?.padding_top || "md";
+const padding_bottom = styling?.[0]?.padding_bottom || "md";
+const mobile_padding_top = styling?.[0]?.mobile_padding_top || "sm";
+const mobile_padding_bottom = styling?.[0]?.mobile_padding_bottom || "sm";
+const background_color = styling?.[0]?.background_color || "ds-white";
+const max_width = styling?.[0]?.max_width || "";
+
+const padding_top_class = `lg:pt-${padding_top}`;
+const padding_bottom_class = `lg:pb-${padding_bottom}`;
+const mobile_padding_top_class = `pt-${mobile_padding_top}`;
+const mobile_padding_bottom_class = `pb-${mobile_padding_bottom}`;
+const bg_color_class = `bg-${background_color}`;
+---
+
+<section
+  class={`relative ${max_width} ${mobile_padding_top_class} ${mobile_padding_bottom_class} ${padding_top_class} ${padding_bottom_class} ${bg_color_class}`}
+>
+  <div
+    class="relative mx-auto px-4 lg:px-8 flex flex-col items-center justify-center"
+  >
+    <!-- Image - Desktop (fixed to top right) -->
+    {
+      image && (
+        <div class="hidden xl:block absolute -top-[6rem] xl:right-[5rem] 2xl:right-[12rem]">
+          <img
+            src={image.filename}
+            alt={image.alt || "We're here to help"}
+            class="w-[424px]"
+          />
+        </div>
+      )
+    }
+
+    <!-- Title -->
+    <h2 class="ds-h1 lg:ds-h2 text-center mb-8 lg:mb-12">{title}</h2>
+
+    <!-- Image - Mobile (centered at top) -->
+    {
+      image && (
+        <div class="flex justify-center xl:hidden">
+          <img
+            src={image.filename}
+            alt={image.alt || "We're here to help"}
+            class="w-[80%]"
+          />
+        </div>
+      )
+    }
+
+    <!-- HubSpot Form -->
+    <div class="bg-white w-full max-w-3xl">
+      <div
+        class="hs-form-frame"
+        data-region={hubspot_region}
+        data-form-id={hubspot_form_id}
+        data-portal-id={hubspot_portal_id}
+      >
+      </div>
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ hubspot_portal_id }}>
+  document.addEventListener("DOMContentLoaded", function () {
+    const script = document.createElement("script");
+    script.src = `https://js.hsforms.net/forms/embed/${hubspot_portal_id}.js`;
+    script.defer = true;
+    document.head.appendChild(script);
+
+    script.onload = function () {
+      if (window.hbspt) {
+        const formContainers = document.querySelectorAll(".hs-form-frame");
+        formContainers.forEach((container) => {
+          window.hbspt.forms.create({
+            region: container.getAttribute("data-region"),
+            portalId: container.getAttribute("data-portal-id"),
+            formId: container.getAttribute("data-form-id"),
+            target: container,
+          });
+        });
+      }
+    };
+  });
+</script>
