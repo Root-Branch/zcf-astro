@@ -2,15 +2,20 @@
 const { nav_items = [], site_logo, contact_button } = Astro.props;
 import { convertToWebP } from "../../utils/imageConvert";
 import Button from "../common/Button.astro";
+
+// Get the current URL path to compare with nav items
+const currentPath = Astro.url.pathname;
 ---
 
 <header class="py-8 xl:py-10 px-4 overflow-x-hidden relative">
   <nav class="container mx-auto flex justify-between items-center">
-    <img
-      src={convertToWebP(site_logo.filename)}
-      alt={site_logo.alt}
-      class="h-[64px]"
-    />
+    <a href="/" aria-label="Go to homepage">
+      <img
+        src={convertToWebP(site_logo.filename)}
+        alt={site_logo.alt}
+        class="h-[64px]"
+      />
+    </a>
     <!-- Hamburger button for mobile -->
     <button
       class="xl:hidden z-50 space-y-2"
@@ -31,14 +36,27 @@ import Button from "../common/Button.astro";
     >
       <div class="xl:mr-10 mb-10 xl:mb-0">
         <ul
-          class="flex xl:flex-row flex-col gap-8 xl:items-center w-full"
+          class="flex xl:flex-row flex-col gap-8 xl:items-center w-full nav-list"
         >
           {
-            nav_items?.map((item) => (
-              <li class="ds-header">
-                <a href={item.nav_item_link.url}>{item.nav_item_label}</a>
-              </li>
-            ))
+            nav_items?.map((item) => {
+              const itemPath = new URL(item.nav_item_link.url, Astro.url).pathname;
+              const isActive = 
+                (currentPath === itemPath) || 
+                (itemPath !== '/' && currentPath.startsWith(itemPath));
+              
+              return (
+                <li class="ds-header nav-item">
+                  <a 
+                    href={item.nav_item_link.url} 
+                    class={`nav-link ${isActive ? 'active' : ''}`}
+                    aria-current={isActive ? 'page' : undefined}
+                  >
+                    {item.nav_item_label}
+                  </a>
+                </li>
+              );
+            })
           }
         </ul>
       </div>
@@ -82,5 +100,38 @@ import Button from "../common/Button.astro";
 <style>
   #menu-toggle div {
     transform-origin: center;
+  }
+  
+  .nav-list li, 
+  .nav-list a {
+    display: inline-block;
+  }
+  
+  .nav-link {
+    letter-spacing: 0.235px;
+    padding-left: 2px;
+    padding-right: 2px;
+    transition: all 0.2s ease;
+  }
+  
+  .nav-link:hover, 
+  .nav-link:focus,
+  .nav-link.active {
+    font-weight: bold;
+    letter-spacing: 0;
+    text-decoration: underline;
+  }
+  
+  @media (max-width: 1279px) {
+    .nav-list li {
+      display: block;
+      width: 100%;
+    }
+    
+    .nav-link {
+      display: block;
+      padding-left: 0;
+      padding-right: 0;
+    }
   }
 </style>

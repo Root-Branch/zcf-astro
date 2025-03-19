@@ -8,12 +8,12 @@ const { icon, number, description } = Astro.props;
   <img
     src={convertToWebP(icon.filename)}
     alt={icon.alt || "Stat Icon"}
-    class="h-2/3 xl:h-full mr-4"
+    class="h-3/4 mr-6"
   />
   <div class="flex flex-col max-w-[249px] w-[45%] lg:w-fit">
-    <p class="number-size ds-h1 lg:ds-h2 !leading-1">
+    <p class="ds-h1 lg:ds-h3 !leading-1">
       {number}
     </p>
-    <p class="ds-p-2 lg:ds-p-1 !leading-1">{description}</p>
+    <p class="ds-p-2 !leading-1">{description}</p>
   </div>
 </div>

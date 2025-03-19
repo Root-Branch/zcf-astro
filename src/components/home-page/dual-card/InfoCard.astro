@@ -8,12 +8,12 @@ const { title, subtitle, description, cta_button, background_color } =
 <div
   class={`bg-${background_color} p-8 md:px-20 md:py-16 text-ds-white min-h-[508px] flex flex-col items-center justify-center text-center max-w-[810px]`}
 >
-  <h3 class="ds-h2 lg:ds-h3 mb-11">{title}</h3>
+  <h3 class="ds-h2 lg:ds-h3 mb-[2rem]">{title}</h3>
   <p class="ds-p-1 !font-semibold mb-10">{subtitle}</p>
-  <p class="ds-p-2 mb-2 text-center">{description}</p>
+  <p class="ds-p-2 text-center">{description}</p>
   {
     cta_button?.[0] && (
-      <div class="mt-auto">
+      <div class="mt-[3rem]">
         <Button
           text={cta_button[0].text}
           link={cta_button[0].link}

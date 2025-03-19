@@ -12,12 +12,12 @@ const statsCards = content_blocks?.filter(block => block.component === "stats_ca
 const overlayImageCards = content_blocks?.filter(block => block.component === "overlay_image_card") || [];
 ---
 
-<section class="pt-20 md:pt-32 pb-10 md:pb-20 px-4 relative z-10">
+<section class="py-md px-4 relative z-10">
   <div class="mx-auto text-center">
     <div class="max-w-[1168px] mx-auto">
       <h2 class="ds-h3 md:ds-h3 mb-12">{heading}</h2>
       <p class="ds-p-1 md:ds-p-quote mb-8 md:mb-16">{subheading}</p>
-      <div class="ds-p-2 md:ds-p-1 mb-20" set:html={renderedDescription} />
+      <div class="ds-p-2 mb-20 2xl:max-w-[73%] mx-auto" set:html={renderedDescription} />
     </div>
 
     <div class="container mx-auto">

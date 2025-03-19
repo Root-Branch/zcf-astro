@@ -10,7 +10,7 @@ const shortArrow = decorative_arrow?.[1];
 const longArrow = decorative_arrow?.[0];
 ---
 
-<section class="bg-ds-blue-900 py-20">
+<section class="bg-ds-blue-900 py-md">
   <div class="max-w-[1630px] mx-auto px-4">
     {/* Header */}
     <div class="flex flex-row md:flex-col items-center mb-8 md:mb-20">
@@ -29,7 +29,7 @@ const longArrow = decorative_arrow?.[0];
     </div>
 
     {/* Steps Grid with Arrows */}
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-20 gap-y-12">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-[3rem] gap-y-12 2xl:ml-[40px]">
       <div class="hidden lg:contents">
         {
           orderedSteps.map((step, index) => (
@@ -40,7 +40,7 @@ const longArrow = decorative_arrow?.[0];
                 <img
                   src={convertToWebP(shortArrow.filename)}
                   alt="Arrow"
-                  class="max-w-28 absolute left-full top-1 rotate-180 -translate-x-1/2"
+                  class="max-w-28 absolute left-full top-1 rotate-180 -translate-x-1/2 z-10"
                 />
               )}
               {/* Down arrow between 2 and 3 */}
@@ -48,7 +48,7 @@ const longArrow = decorative_arrow?.[0];
                 <img
                   src={convertToWebP(shortArrow.filename)}
                   alt="Arrow"
-                  class="max-w-28 absolute -rotate-90 left-full -translate-x-1/2"
+                  class="max-w-28 absolute -rotate-90 left-full -translate-x-[105%] -translate-y-[111%] z-10"
                 />
               )}
               {/* Left arrow between 3 and 4 */}
@@ -56,7 +56,7 @@ const longArrow = decorative_arrow?.[0];
                 <img
                   src={convertToWebP(shortArrow.filename)}
                   alt="Arrow"
-                  class="max-w-28 absolute -translate-x-1/2 -translate-y-1/2"
+                  class="max-w-28 absolute -translate-x-1/2 -translate-y-1/2 z-10"
                 />
               )}
               {/* Up arrow between 4 and 1 */}
@@ -64,7 +64,7 @@ const longArrow = decorative_arrow?.[0];
                 <img
                   src={convertToWebP(shortArrow.filename)}
                   alt="Arrow"
-                  class="max-w-28 absolute rotate-90 bottom-full -translate-y-full"
+                  class="max-w-28 absolute rotate-90 bottom-full -translate-y-full -translate-x-[20%] z-10"
                 />
               )}
             </div>

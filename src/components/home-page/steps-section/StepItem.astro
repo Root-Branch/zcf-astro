@@ -9,7 +9,9 @@ const textClass =
 const renderedHeading = renderRichText(step_heading);
 ---
 
-<div class={`bg-${background_color} flex flex-row p-8 md:p-12 ${background_color === "ds-white" ? "xl:ml-12" : ""}`}>
+<div
+  class={`bg-${background_color} flex flex-row p-8 md:p-12 ${background_color === "ds-white" || number == 1 ? "xl:ml-12" : ""} `}
+>
   <div class="flex justify-center mr-4 md:mr-8">
     <span class="inline-block ds-number-large text-ds-red-500">{number}</span>
   </div>
@@ -24,7 +26,7 @@ const renderedHeading = renderRichText(step_heading);
       set:html={renderedHeading}
     />
 
-    <p class={`ds-p-2 ${textClass}`}>
+    <p class={`ds-p-2 ${textClass} max-w-[90%]`}>
       {step_description}
     </p>
   </div>
