@@ -11,6 +11,7 @@ const mobile_padding_top = styling?.[0]?.mobile_padding_top || "xs";
 const mobile_padding_bottom = styling?.[0]?.mobile_padding_bottom || "xs";
 const mobile_padding_left = styling?.[0]?.mobile_padding_left || "xs";
 const mobile_padding_right = styling?.[0]?.mobile_padding_right || "xs";
+const max_width = styling?.[0]?.max_width || "";
 
 const padding_top_class = `lg:pt-${padding_top}`;
 const padding_bottom_class = `lg:pb-${padding_bottom}`;
@@ -20,12 +21,13 @@ const mobile_padding_top_class = `pt-${mobile_padding_top}`;
 const mobile_padding_bottom_class = `pb-${mobile_padding_bottom}`;
 const mobile_padding_left_class = `pl-${mobile_padding_left}`;
 const mobile_padding_right_class = `pr-${mobile_padding_right}`;
+const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
 ---
 
 <section
-  class={`${mobile_padding_top_class} ${mobile_padding_bottom_class}
+  class={`mx-auto ${mobile_padding_top_class} ${mobile_padding_bottom_class}
    ${padding_top_class} ${padding_bottom_class} ${padding_left_class}
-    ${padding_right_class} ${mobile_padding_left_class} ${mobile_padding_right_class}`}
+    ${padding_right_class} ${mobile_padding_left_class} ${mobile_padding_right_class} ${max_width_class}`}
 >
   <!-- Desktop Layout -->
   <div class="relative mx-auto w-full h-full hidden lg:flex items-center justify-center min-h-[800px]">

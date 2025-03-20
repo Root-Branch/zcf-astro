@@ -22,6 +22,7 @@ const {
   mobile_description_font,
   cta_button,
   styling,
+  is_content_center,
 } = Astro.props;
 
 const content_proportion = 100 - (image_proportion || 30);
@@ -96,7 +97,7 @@ const max_height_class = styling?.[0]?.max_height
 >
   <div class={`mx-auto px-2 sm:px-16 ${max_width_class} ${max_height_class}`}>
     <div
-      class={`flex ${mobile_order_class} items-start justify-between ${is_image_left_class} ${gap_class}`}
+      class={`flex ${mobile_order_class} ${is_content_center ? "items-center" : "items-start"} justify-between ${is_image_left_class} ${gap_class}`}
     >
       {/* Title Content */}
       <div
