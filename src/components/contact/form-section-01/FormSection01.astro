@@ -31,18 +31,18 @@ const bg_color_class = `bg-${background_color}`;
     <!-- Image - Desktop (fixed to top right) -->
     {
       image && (
-        <div class="hidden xl:block absolute -top-[6rem] xl:right-[5rem] 2xl:right-[12rem]">
+        <div class="hidden xl:block absolute -top-[6rem] xl:right-[5rem] 2xl:right-[17rem]">
           <img
             src={image.filename}
             alt={image.alt || "We're here to help"}
-            class="w-[424px]"
+            class="w-[352px]"
           />
         </div>
       )
     }
 
     <!-- Title -->
-    <h2 class="ds-h1 lg:ds-h2 text-center mb-8 lg:mb-12">{title}</h2>
+    <h2 class="ds-h3 text-center mb-8">{title}</h2>
 
     <!-- Image - Mobile (centered at top) -->
     {
