@@ -19,9 +19,9 @@ const { title, description, items, image } = Astro.props;
 
       {/* Content */}
       <div class="w-full lg:w-1/2">
-        <h2 class="ds-h2 mb-4 text-center lg:text-left">{title}</h2>
+        <h2 class="ds-h3 mb-4 text-center lg:text-left">{title}</h2>
         <div
-          class="ds-p-2 md:ds-p-1 mb-12 render-rich-text text-center lg:text-left"
+          class="ds-p-2 mb-12 render-rich-text text-center lg:text-left"
           set:html={renderRichText(description)}
         />
 
@@ -32,12 +32,12 @@ const { title, description, items, image } = Astro.props;
           {
             items.map((item) => (
               <div class="flex gap-3 lg:gap-6">
-                <div class="text-ds-red-500 ds-p-large">
+                <div class="text-ds-red-500 ds-h3">
                   {item.number.padStart(2, "0")}
                 </div>
                 <div>
                   <h3 class="ds-h3 mb-2">{item.title}</h3>
-                  <p class="ds-p-2 md:ds-p-1">{item.description}</p>
+                  <p class="ds-p-2">{item.description}</p>
                 </div>
               </div>
             ))

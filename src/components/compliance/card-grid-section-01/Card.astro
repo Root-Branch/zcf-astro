@@ -10,10 +10,10 @@ const renderDescription = renderRichText(card.description)
 {
   card.component === "card_grid.component.01" ? (
     <div class="bg-white px-[40px] py-[50px]">
-      <h3 class="ds-h2 md:ds-h3 mb-2">{card.title}</h3>
-      <p class="ds-h3 md:ds-h4 text-ds-red-500 mb-6">{card.subtitle}</p>
+      <h3 class="ds-h3 mb-2">{card.title}</h3>
+      <p class="ds-h3 text-ds-red-500 mb-6">{card.subtitle}</p>
       <div
-        class="ds-p-2 md:ds-p-1 render-rich-text"
+        class="ds-p-2 render-rich-text"
         set:html={renderDescription}
       />
     </div>
