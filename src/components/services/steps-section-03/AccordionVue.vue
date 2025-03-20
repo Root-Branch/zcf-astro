@@ -1,6 +1,6 @@
 <template>
   <div class="mb-8 accordion-section">
-    <h3 class="ds-p-large mb-8" v-html="title"></h3>
+    <h3 class="ds-h3 mb-8" v-html="title"></h3>
     <div class="ds-p-2 mb-10" v-html="description"></div>
     
     <div class="accordion-container">

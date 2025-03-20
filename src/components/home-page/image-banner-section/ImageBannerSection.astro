@@ -32,7 +32,7 @@ const { background_image, decorative_text_image, heading } = Astro.props;
       {/* Main Heading */}
       <h2
         class={`ds-h2 md:ds-h3 text-ds-white text-center ${
-          decorative_text_image?.id ? "md:text-right" : "md:text-center"
+          decorative_text_image?.id ? "md:text-right" : "md:text-center max-w-[80%]"
         }`}
       >
         {heading}
