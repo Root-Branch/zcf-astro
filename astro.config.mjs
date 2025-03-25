@@ -55,6 +55,9 @@ export default defineConfig({
       "card_grid.section.03": "storyblok/business-case/CardGridSection03",
       "form.section.01": "storyblok/contact/FormSection01",
       "contact.section.01": "storyblok/contact/ContactSection01",
+      "icon_feature_list.section.01": "storyblok/free-resources/IconFeatureListSection01",
+      "cta_banner.section.04": "storyblok/case-studies/CTABannerSection04",
+      "card_grid.section.04": "storyblok/case-studies/CardGridSection04",
     },
   }), tailwind(), vue()],
 

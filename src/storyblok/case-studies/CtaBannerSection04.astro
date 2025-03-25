@@ -1,0 +1,10 @@
+---
+import { storyblokEditable } from "@storyblok/astro";
+import CTABannerSection04 from "../../components/case-studies/cta-banner-section-04/CTABannerSection04.astro";
+
+const { blok } = Astro.props;
+---
+
+<div {...storyblokEditable(blok)}>
+  <CTABannerSection04 {...blok} />
+</div>

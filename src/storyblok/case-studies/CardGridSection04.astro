@@ -1,0 +1,10 @@
+---
+import { storyblokEditable } from "@storyblok/astro";
+import CardGridSection04 from "../../components/case-studies/card-grid-section-04/CardGridSection04.astro";
+
+const { blok } = Astro.props;
+---
+
+<div {...storyblokEditable(blok)}>
+  <CardGridSection04 {...blok} />
+</div>

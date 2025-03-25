@@ -1,0 +1,66 @@
+---
+import { convertToWebP } from "../../../utils/imageConvert";
+
+const {
+  title,
+  description,
+  image,
+  styling,
+} = Astro.props;
+
+const padding_top = styling?.[0]?.padding_top || "xs";
+const padding_bottom = styling?.[0]?.padding_bottom || "xs";
+const padding_left = styling?.[0]?.padding_left || "xs";
+const padding_right = styling?.[0]?.padding_right || "xs";
+const mobile_padding_top = styling?.[0]?.mobile_padding_top || "xs";
+const mobile_padding_bottom = styling?.[0]?.mobile_padding_bottom || "xs";
+const mobile_padding_left = styling?.[0]?.mobile_padding_left || "xs";
+const mobile_padding_right = styling?.[0]?.mobile_padding_right || "xs";
+const max_width = styling?.[0]?.max_width || "1440px";
+
+const padding_top_class = `lg:pt-${padding_top}`;
+const padding_bottom_class = `lg:pb-${padding_bottom}`;
+const padding_left_class = `lg:pl-${padding_left}`;
+const padding_right_class = `lg:pr-${padding_right}`;
+const mobile_padding_top_class = `pt-${mobile_padding_top}`;
+const mobile_padding_bottom_class = `pb-${mobile_padding_bottom}`;
+const mobile_padding_left_class = `pl-${mobile_padding_left}`;
+const mobile_padding_right_class = `pr-${mobile_padding_right}`;
+const gap_class = styling?.[0]?.gap ? `gap-${styling?.[0]?.gap}` : "";
+const max_width_class = `max-w-[${max_width}px]` || "";
+---
+
+<section
+  class={`relative ${padding_top_class} ${padding_bottom_class} 
+  ${padding_left_class} ${padding_right_class} ${mobile_padding_top_class} 
+  ${mobile_padding_bottom_class} ${mobile_padding_left_class} ${mobile_padding_right_class}`}
+>
+  <div class={`mx-auto ${max_width_class}`}>
+    <div
+      class={`flex flex-col lg:flex-row ${gap_class} items-center`}
+    >
+      {/* Content */}
+      <div
+        class={`lg:w-[55%] text-center lg:text-left z-10`}
+      >
+        <h2 class="ds-h2 2xl:ds-h1 !font-bold uppercase">{title}</h2>
+        <p class="ds-p-2 md:ds-p-1 mt-8 lg:mt-12">
+          {description}
+        </p>
+      </div>
+
+      {/* Image */}
+      <div
+        class="lg:w-[45%]"
+      >
+        <div class="relative w-full h-full">
+          <img
+            src={convertToWebP(image.filename)}
+            alt={image.alt || ""}
+            class="w-full h-auto object-contain"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

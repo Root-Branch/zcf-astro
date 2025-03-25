@@ -1,0 +1,43 @@
+---
+import Button from "../../common/Button.astro";
+
+const { title, description, video, cta_button } = Astro.props;
+---
+
+<div
+  class="card flex-shrink-0 lg:w-auto max-w-[525px] min-h-[700px] py-16 px-8 lg:p-10 bg-ds-white"
+>
+  {
+    video && (
+      <div class="h-[259px] overflow-hidden mb-6">
+        <iframe
+          src={video}
+          class="w-full h-full"
+          frameborder="0"
+          allow="autoplay; fullscreen; picture-in-picture"
+          allowfullscreen
+          title={title}
+        />
+      </div>
+    )
+  }
+  <h3 class="ds-p-1 !font-bold mb-6">{title}</h3>
+  <p class="ds-p-2 mb-6">{description}</p>
+  {
+    cta_button && cta_button.length > 0 && (
+      <Button
+        text={cta_button[0].text}
+        link={cta_button[0].link}
+        style={cta_button[0].style}
+        background_color={cta_button[0].background_color}
+        text_color={cta_button[0].text_color}
+      />
+    )
+  }
+</div>
+
+<style>
+  .card {
+    width: calc(100vw - 32px);
+  }
+</style>

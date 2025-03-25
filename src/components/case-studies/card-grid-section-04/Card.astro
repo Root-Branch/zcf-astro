@@ -1,0 +1,46 @@
+---
+import Button from "../../common/Button.astro";
+
+const { title, description, image, cta_button, tags } = Astro.props;
+---
+
+<div
+  class="card lg:w-auto lg:max-w-[542px] min-h-[783px] py-16 px-8 lg:p-8 bg-ds-white"
+>
+  <h3 class="ds-h3 lg:ds-h4 mb-8">{title}</h3>
+  {
+    tags && tags.length > 0 && (
+      <div class="flex flex-wrap gap-2 mb-8">
+        {tags.map((tag) => (
+          <span class="bg-ds-teal-500 text-ds-white px-2 py-1 rounded-full ds-p-3 min-w-[54px] text-center">
+            {tag.title}
+          </span>
+        ))}
+      </div>
+    )
+  }
+  {
+    image && image.filename && (
+      <div class="h-[309px] overflow-hidden mb-8">
+        <img
+          src={image.filename}
+          alt={image.alt || title}
+          class="w-full h-full object-cover"
+        />
+      </div>
+    )
+  }
+  <p class="ds-p-2 mb-8">{description}</p>
+  {
+    cta_button && cta_button.length > 0 && (
+      <Button
+        text={cta_button[0].text}
+        link={cta_button[0].link}
+        style={cta_button[0].style}
+        background_color={cta_button[0].background_color}
+        text_color={cta_button[0].text_color}
+      />
+    )
+  }
+</div>
+

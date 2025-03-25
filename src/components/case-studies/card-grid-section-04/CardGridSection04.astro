@@ -1,0 +1,162 @@
+---
+import { renderRichText } from "@storyblok/astro";
+import Card from "./Card.astro";
+
+const { cards, styling } = Astro.props;
+
+const padding_top = styling?.[0]?.padding_top || "xs";
+const padding_bottom = styling?.[0]?.padding_bottom || "xs";
+const padding_left = styling?.[0]?.padding_left || "xs";
+const padding_right = styling?.[0]?.padding_right || "xs";
+const mobile_padding_top = styling?.[0]?.mobile_padding_top || "xs";
+const mobile_padding_bottom = styling?.[0]?.mobile_padding_bottom || "xs";
+const mobile_padding_left = styling?.[0]?.mobile_padding_left || "xs";
+const mobile_padding_right = styling?.[0]?.mobile_padding_right || "xs";
+const background_color = styling?.[0]?.background_color || "";
+const max_width = styling?.[0]?.max_width || "";
+
+const padding_classes = `
+  pt-${mobile_padding_top} pb-${mobile_padding_bottom}
+  pl-${mobile_padding_left} pr-${mobile_padding_right}
+  lg:pt-${padding_top} lg:pb-${padding_bottom}
+  lg:pl-${padding_left} lg:pr-${padding_right}
+`;
+
+const bg_color_class = background_color ? `bg-${background_color}` : "";
+const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
+
+const allTags = [...new Set(cards.flatMap(card => card.tags?.map(tag => tag.title) || []))];
+---
+
+<section class={`${padding_classes} ${bg_color_class} 2xl:-mt-[10rem]`}>
+  <!-- Controls Bar -->
+  <div class={`flex items-center gap-4 mb-8 ${max_width_class} mx-auto`}>
+    <!-- Search Button/Input -->
+    <div id="searchContainer" class="relative w-auto transition-all duration-300">
+      <button 
+        id="searchBtn" 
+        class="flex items-center bg-white rounded-full px-6 py-2 text-ds-teal-500 ds-p-2 transition-all duration-300"
+      >
+        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <span>Search</span>
+      </button>
+      <input
+        type="text"
+        id="searchInput"
+        class="absolute left-0 top-0 w-0 h-full opacity-0 bg-white rounded-full px-6 py-2 text-ds-teal-500 ds-p-2 outline-none transition-all duration-300"
+        placeholder="Search..."
+      />
+    </div>
+
+    <!-- Tags Dropdown -->
+    <div class="relative">
+      <button 
+        id="tagsButton" 
+        class="flex items-center bg-white rounded-full px-6 py-2 text-ds-teal-500 ds-p-2"
+      >
+        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+        Tags
+      </button>
+      <!-- Dropdown Menu -->
+      <div 
+        id="tagsDropdown" 
+        class="hidden absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg overflow-hidden z-10"
+      >
+        <div class="p-2">
+          <button 
+            class="w-full text-left px-4 py-2 ds-p-2 text-ds-teal-500 hover:bg-ds-gray-700 rounded-md transition-colors"
+            data-tag="all"
+          >
+            All
+          </button>
+          {allTags.map(tag => (
+            <button 
+              class="w-full text-left px-4 py-2 ds-p-2 text-ds-teal-500 hover:bg-ds-gray-700 rounded-md transition-colors"
+              data-tag={tag}
+            >
+              {tag}
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Filter and Sort -->
+    <div class="flex items-center gap-4 ml-auto text-white ds-p-2">
+      <button class="underline">Filter</button>
+      <div class="w-px h-6 bg-white"></div>
+      <button class="underline">Sort</button>
+    </div>
+  </div>
+
+  <div id="cardGrid" class={`grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 justify-around items-center mx-auto gap-4 ${max_width_class}`}>
+    {cards.map((card) => (
+      <Card
+        title={card.title}
+        description={card.description}
+        image={card.image}
+        cta_button={card.cta_button}
+        tags={card.tags}
+      />
+    ))}
+  </div>
+</section>
+
+<script>
+  const searchContainer = document.getElementById('searchContainer');
+  const searchBtn = document.getElementById('searchBtn');
+  const searchInput = document.getElementById('searchInput');
+  const tagsButton = document.getElementById('tagsButton');
+  const tagsDropdown = document.getElementById('tagsDropdown');
+  const cardGrid = document.getElementById('cardGrid');
+  let isSearchExpanded = false;
+
+  function filterCards(searchText = '', tag = 'all') {
+    Array.from(cardGrid?.children || []).forEach(card => {
+      const title = card.querySelector('h3')?.textContent?.toLowerCase() || '';
+      const cardTags = Array.from(card.querySelectorAll('.tag')).map(t => t.textContent);
+      const matchesSearch = title.includes(searchText.toLowerCase());
+      const matchesTag = tag === 'all' || cardTags.includes(tag);
+      card.classList.toggle('hidden', !(matchesSearch && matchesTag));
+    });
+  }
+
+  // Search animation and functionality
+  searchBtn?.addEventListener('click', () => {
+    if (!isSearchExpanded) {
+      searchContainer.style.width = '300px';
+      searchBtn.style.width = '0';
+      searchBtn.style.opacity = '0';
+      searchInput.style.width = '100%';
+      searchInput.style.opacity = '1';
+      searchInput.focus();
+      isSearchExpanded = true;
+    }
+  });
+
+  // Tags dropdown toggle
+  tagsButton?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    tagsDropdown?.classList.toggle('hidden');
+  });
+
+  searchInput?.addEventListener('input', e => filterCards((e.target as HTMLInputElement).value));
+  tagsDropdown?.addEventListener('click', e => {
+    const target = e.target as HTMLElement;
+    const tag = target.getAttribute('data-tag');
+    if (tag) {
+      filterCards(searchInput?.value || '', tag);
+      tagsDropdown.classList.add('hidden');
+    }
+  });
+
+  document.addEventListener('click', e => {
+    if (!tagsButton?.contains(e.target as Node) && !tagsDropdown?.contains(e.target as Node)) {
+      tagsDropdown?.classList.add('hidden');
+    }
+  });
+</script>
