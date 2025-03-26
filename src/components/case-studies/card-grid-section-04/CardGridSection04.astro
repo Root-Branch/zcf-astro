@@ -25,20 +25,39 @@ const padding_classes = `
 const bg_color_class = background_color ? `bg-${background_color}` : "";
 const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
 
-const allTags = [...new Set(cards.flatMap(card => card.tags?.map(tag => tag.title) || []))];
+const allTags = [
+  ...new Set(cards.flatMap((card) => card.tags?.map((tag) => tag.title) || [])),
+];
+
+const cardData = cards.map((card, index) => ({
+  index,
+  title: card.title || "",
+  date: card.date || "",
+  tagTitles: card.tags?.map((tag) => tag.title) || [],
+}));
 ---
 
 <section class={`${padding_classes} ${bg_color_class} 2xl:-mt-[10rem]`}>
-  <!-- Controls Bar -->
   <div class={`flex items-center gap-4 mb-8 ${max_width_class} mx-auto`}>
-    <!-- Search Button/Input -->
-    <div id="searchContainer" class="relative w-auto transition-all duration-300">
-      <button 
-        id="searchBtn" 
+    <div
+      id="searchContainer"
+      class="relative w-auto transition-all duration-300"
+    >
+      <button
+        id="searchBtn"
         class="flex items-center bg-white rounded-full px-6 py-2 text-ds-teal-500 ds-p-2 transition-all duration-300"
       >
-        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        <svg
+          class="w-5 h-5 mr-3"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
         </svg>
         <span>Search</span>
       </button>
@@ -52,35 +71,46 @@ const allTags = [...new Set(cards.flatMap(card => card.tags?.map(tag => tag.titl
 
     <!-- Tags Dropdown -->
     <div class="relative">
-      <button 
-        id="tagsButton" 
+      <button
+        id="tagsButton"
         class="flex items-center bg-white rounded-full px-6 py-2 text-ds-teal-500 ds-p-2"
       >
-        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        <svg
+          class="w-5 h-5 mr-3"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M19 9l-7 7-7-7"></path>
         </svg>
-        Tags
+        <span id="tagButtonText">Tags</span>
       </button>
       <!-- Dropdown Menu -->
-      <div 
-        id="tagsDropdown" 
+      <div
+        id="tagsDropdown"
         class="hidden absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg overflow-hidden z-10"
       >
         <div class="p-2">
-          <button 
+          <button
             class="w-full text-left px-4 py-2 ds-p-2 text-ds-teal-500 hover:bg-ds-gray-700 rounded-md transition-colors"
             data-tag="all"
           >
             All
           </button>
-          {allTags.map(tag => (
-            <button 
-              class="w-full text-left px-4 py-2 ds-p-2 text-ds-teal-500 hover:bg-ds-gray-700 rounded-md transition-colors"
-              data-tag={tag}
-            >
-              {tag}
-            </button>
-          ))}
+          {
+            allTags.map((tag) => (
+              <button
+                class="w-full text-left px-4 py-2 ds-p-2 text-ds-teal-500 hover:bg-ds-gray-700 rounded-md transition-colors"
+                data-tag={tag}
+              >
+                {tag}
+              </button>
+            ))
+          }
         </div>
       </div>
     </div>
@@ -89,74 +119,228 @@ const allTags = [...new Set(cards.flatMap(card => card.tags?.map(tag => tag.titl
     <div class="flex items-center gap-4 ml-auto text-white ds-p-2">
       <button class="underline">Filter</button>
       <div class="w-px h-6 bg-white"></div>
-      <button class="underline">Sort</button>
+      
+      <!-- Sort Button and Dropdown -->
+      <div class="relative">
+        <button id="sortButton" class="underline">Sort</button>
+        
+        <!-- Sort Dropdown Menu -->
+        <div 
+          id="sortDropdown" 
+          class="hidden absolute top-full right-0 mt-2 w-48 bg-white rounded-lg shadow-lg overflow-hidden z-10"
+        >
+          <div class="p-2">
+            <button 
+              class="w-full text-left px-4 py-2 ds-p-2 text-ds-teal-500 hover:bg-ds-gray-700 rounded-md transition-colors"
+              data-sort="date-newest"
+            >
+              Date (Newest)
+            </button>
+            <button 
+              class="w-full text-left px-4 py-2 ds-p-2 text-ds-teal-500 hover:bg-ds-gray-700 rounded-md transition-colors"
+              data-sort="date-oldest"
+            >
+              Date (Oldest)
+            </button>
+            <button 
+              class="w-full text-left px-4 py-2 ds-p-2 text-ds-teal-500 hover:bg-ds-gray-700 rounded-md transition-colors"
+              data-sort="title-asc"
+            >
+              Title (A-Z)
+            </button>
+            <button 
+              class="w-full text-left px-4 py-2 ds-p-2 text-ds-teal-500 hover:bg-ds-gray-700 rounded-md transition-colors"
+              data-sort="title-desc"
+            >
+              Title (Z-A)
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div id="cardGrid" class={`grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 justify-around items-center mx-auto gap-4 ${max_width_class}`}>
-    {cards.map((card) => (
-      <Card
-        title={card.title}
-        description={card.description}
-        image={card.image}
-        cta_button={card.cta_button}
-        tags={card.tags}
-      />
-    ))}
+  <div
+    id="cardGrid"
+    class={`grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 justify-around items-start mx-auto gap-4 ${max_width_class} min-h-[500px]`}
+  >
+    {
+      cards.map((card, index) => (
+        <div class="card-container" data-index={index}>
+          <Card
+            title={card.title}
+            description={card.description}
+            image={card.image}
+            cta_button={card.cta_button}
+            tags={card.tags}
+            date={card.date}
+          />
+        </div>
+      ))
+    }
+  </div>
+  <!-- No results message -->
+  <div
+    id="noResults"
+    class="hidden text-center py-12 text-white ds-p-2 max-w-[800px] mx-auto flex justify-center items-center min-h-[500px]"
+  >
+    No matching results found.
   </div>
 </section>
 
-<script>
-  const searchContainer = document.getElementById('searchContainer');
-  const searchBtn = document.getElementById('searchBtn');
-  const searchInput = document.getElementById('searchInput');
-  const tagsButton = document.getElementById('tagsButton');
-  const tagsDropdown = document.getElementById('tagsDropdown');
-  const cardGrid = document.getElementById('cardGrid');
-  let isSearchExpanded = false;
+<script define:vars={{ cardData }}>
+  const cardInfoArray = cardData;
 
-  function filterCards(searchText = '', tag = 'all') {
-    Array.from(cardGrid?.children || []).forEach(card => {
-      const title = card.querySelector('h3')?.textContent?.toLowerCase() || '';
-      const cardTags = Array.from(card.querySelectorAll('.tag')).map(t => t.textContent);
-      const matchesSearch = title.includes(searchText.toLowerCase());
-      const matchesTag = tag === 'all' || cardTags.includes(tag);
-      card.classList.toggle('hidden', !(matchesSearch && matchesTag));
+  const searchContainer = document.getElementById("searchContainer");
+  const searchBtn = document.getElementById("searchBtn");
+  const searchInput = document.getElementById("searchInput");
+  const tagsButton = document.getElementById("tagsButton");
+  const tagsDropdown = document.getElementById("tagsDropdown");
+  const sortButton = document.getElementById("sortButton");
+  const sortDropdown = document.getElementById("sortDropdown");
+  const noResults = document.getElementById("noResults");
+  const cardContainers = document.querySelectorAll(".card-container");
+  const cardGrid = document.getElementById("cardGrid");
+  const tagButtonText = document.getElementById("tagButtonText");
+
+  let isSearchExpanded = false;
+  let currentTag = "all";
+  let currentSearch = "";
+  let currentSort = ""; // Default sort
+
+  function filterCards() {
+    let visibleCount = 0;
+    const visibleCards = [];
+
+    cardContainers.forEach((container) => {
+      const index = parseInt(container.getAttribute("data-index"));
+      const cardInfo = cardInfoArray[index];
+
+      if (!cardInfo) return;
+
+      const matchesSearch =
+        !currentSearch ||
+        cardInfo.title.toLowerCase().includes(currentSearch.toLowerCase());
+
+      const matchesTag =
+        currentTag === "all" || cardInfo.tagTitles.includes(currentTag);
+
+      const shouldShow = matchesSearch && matchesTag;
+      container.classList.toggle("hidden", !shouldShow);
+      
+      if (shouldShow) {
+        visibleCount++;
+        visibleCards.push({container, info: cardInfo});
+      }
     });
+
+    // Sort visible cards if sorting is active
+    if (currentSort && visibleCards.length > 0) {
+      sortCards(visibleCards);
+    }
+
+    noResults.classList.toggle("hidden", visibleCount > 0);
+    cardGrid.classList.toggle("hidden", visibleCount === 0);
   }
 
-  // Search animation and functionality
-  searchBtn?.addEventListener('click', () => {
+  // Sort the visible cards
+  function sortCards(visibleCards) {
+    // Sort based on the selected sort option
+    visibleCards.sort((a, b) => {
+      switch (currentSort) {
+        case "date-newest":
+          return new Date(b.info.date) - new Date(a.info.date);
+        case "date-oldest":
+          return new Date(a.info.date) - new Date(b.info.date);
+        case "title-asc":
+          return a.info.title.localeCompare(b.info.title);
+        case "title-desc":
+          return b.info.title.localeCompare(a.info.title);
+        default:
+          return 0;
+      }
+    });
+
+    // Reorder the cards in the DOM
+    const fragment = document.createDocumentFragment();
+    visibleCards.forEach(item => {
+      fragment.appendChild(item.container);
+    });
+    cardGrid.appendChild(fragment);
+  }
+
+  searchBtn?.addEventListener("click", () => {
     if (!isSearchExpanded) {
-      searchContainer.style.width = '300px';
-      searchBtn.style.width = '0';
-      searchBtn.style.opacity = '0';
-      searchInput.style.width = '100%';
-      searchInput.style.opacity = '1';
+      searchContainer.style.width = "300px";
+      searchBtn.style.width = "0";
+      searchBtn.style.opacity = "0";
+      searchInput.style.width = "100%";
+      searchInput.style.opacity = "1";
       searchInput.focus();
       isSearchExpanded = true;
     }
   });
 
-  // Tags dropdown toggle
-  tagsButton?.addEventListener('click', (e) => {
+  searchInput?.addEventListener("blur", () => {
+    if (!searchInput.value) {
+      searchContainer.style.width = "auto";
+      searchBtn.style.width = "";
+      searchBtn.style.opacity = "1";
+      searchInput.style.width = "0";
+      searchInput.style.opacity = "0";
+      isSearchExpanded = false;
+    }
+  });
+
+  tagsButton?.addEventListener("click", (e) => {
     e.stopPropagation();
-    tagsDropdown?.classList.toggle('hidden');
+    tagsDropdown?.classList.toggle("hidden");
   });
 
-  searchInput?.addEventListener('input', e => filterCards((e.target as HTMLInputElement).value));
-  tagsDropdown?.addEventListener('click', e => {
-    const target = e.target as HTMLElement;
-    const tag = target.getAttribute('data-tag');
-    if (tag) {
-      filterCards(searchInput?.value || '', tag);
-      tagsDropdown.classList.add('hidden');
+  searchInput?.addEventListener("input", (e) => {
+    currentSearch = e.target.value;
+    filterCards();
+  });
+
+  tagsDropdown?.addEventListener("click", (e) => {
+    const target = e.target;
+    if (target.hasAttribute("data-tag")) {
+      currentTag = target.getAttribute("data-tag") || "all";
+      if (tagButtonText) {
+        tagButtonText.textContent = currentTag === "all" ? "Tags" : currentTag;
+      }
+      filterCards();
+      tagsDropdown.classList.add("hidden");
     }
   });
 
-  document.addEventListener('click', e => {
-    if (!tagsButton?.contains(e.target as Node) && !tagsDropdown?.contains(e.target as Node)) {
-      tagsDropdown?.classList.add('hidden');
+  // Toggle sort dropdown
+  sortButton?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    sortDropdown?.classList.toggle("hidden");
+  });
+
+  // Handle sort selection
+  sortDropdown?.addEventListener("click", (e) => {
+    const target = e.target;
+    if (target.hasAttribute("data-sort")) {
+      currentSort = target.getAttribute("data-sort") || "";
+      
+      // Re-filter to apply the sort
+      filterCards();
+      sortDropdown.classList.add("hidden");
     }
   });
+
+  // Close dropdowns when clicking outside
+  document.addEventListener("click", (e) => {
+    if (!tagsButton?.contains(e.target) && !tagsDropdown?.contains(e.target)) {
+      tagsDropdown?.classList.add("hidden");
+    }
+    if (!sortButton?.contains(e.target) && !sortDropdown?.contains(e.target)) {
+      sortDropdown?.classList.add("hidden");
+    }
+  });
+
+  document.addEventListener("DOMContentLoaded", filterCards);
 </script>
