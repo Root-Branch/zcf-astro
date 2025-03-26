@@ -1,0 +1,65 @@
+---
+import { renderRichText } from "@storyblok/astro";
+import quoteIcon from "../../../assets/quote-icon.png";
+import { Image } from "astro:assets";
+import { convertToWebP } from "../../../utils/imageConvert";
+
+const { title, description, image, quote, author, styling } = Astro.props;
+
+const padding_top = styling?.[0]?.padding_top || "";
+const padding_bottom = styling?.[0]?.padding_bottom || "";
+const padding_left = styling?.[0]?.padding_left || "";
+const padding_right = styling?.[0]?.padding_right || "";
+const mobile_padding_top = styling?.[0]?.mobile_padding_top || "";
+const mobile_padding_bottom = styling?.[0]?.mobile_padding_bottom || "";
+const mobile_padding_left = styling?.[0]?.mobile_padding_left || "";
+const mobile_padding_right = styling?.[0]?.mobile_padding_right || "";
+const max_width = styling?.[0]?.max_width || "";
+const background_color = styling?.[0]?.background_color || "";
+
+const padding_classes = `
+  pt-${mobile_padding_top} pb-${mobile_padding_bottom}
+  pl-${mobile_padding_left} pr-${mobile_padding_right}
+  lg:pt-${padding_top} lg:pb-${padding_bottom}
+  lg:pl-${padding_left} lg:pr-${padding_right}
+`;
+
+const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
+const background_color_class = background_color ? `bg-${background_color}` : "";
+---
+
+<section class={`${padding_classes} ${background_color_class}`}>
+  <div class={`${max_width_class} mx-auto px-4`}>
+    <div class="flex flex-col xl:flex-row gap-8 xl:gap-24 2xl:gap-40">
+      <!-- Left Column: Image -->
+      <div class="xl:w-[45%] -mt-[16rem] flex justify-center items-center">
+        {image?.filename && (
+          <img
+            src={convertToWebP(image.filename)}
+            alt={image.alt || title}
+            class="w-full md:w-[70%] xl:w-full h-auto max-h-[500px] xl:max-h-[930px] object-cover"
+          />
+        )}
+      </div>
+
+      <!-- Right Column: Content -->
+      <div class="xl:w-[55%] text-white">
+        <h2 class="ds-h3 mb-8">{title}</h2>
+        
+        <div class="space-y-6 mb-8 md:mb-20 ds-p-2" set:html={renderRichText(description)} />
+        
+        <!-- Quote Section -->
+        <div class="relative my-8">
+          <!-- Quote mark using Image component -->
+          <div class="absolute -left-8 -top-6">
+            <Image src={quoteIcon} alt="Quote Icon" width={25} height={25} />
+          </div>
+          
+          <!-- Quote content -->
+          <p class="ds-p-1 md:ds-p-medium !font-normal mb-8">{quote}</p>
+          <div class="ds-p-2" set:html={renderRichText(author)} />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

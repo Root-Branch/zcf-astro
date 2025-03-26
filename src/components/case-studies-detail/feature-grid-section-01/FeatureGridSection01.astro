@@ -1,0 +1,67 @@
+---
+import { renderRichText } from "@storyblok/astro";
+import { convertToWebP } from "../../../utils/imageConvert";
+
+const { title, features, styling } = Astro.props;
+
+const padding_top = styling?.[0]?.padding_top || "";
+const padding_bottom = styling?.[0]?.padding_bottom || "";
+const padding_left = styling?.[0]?.padding_left || "";
+const padding_right = styling?.[0]?.padding_right || "";
+const mobile_padding_top = styling?.[0]?.mobile_padding_top || "";
+const mobile_padding_bottom = styling?.[0]?.mobile_padding_bottom || "";
+const mobile_padding_left = styling?.[0]?.mobile_padding_left || "";
+const mobile_padding_right = styling?.[0]?.mobile_padding_right || "";
+const max_width = styling?.[0]?.max_width || "";
+
+const padding_classes = `
+  pt-${mobile_padding_top} pb-${mobile_padding_bottom}
+  pl-${mobile_padding_left} pr-${mobile_padding_right}
+  lg:pt-${padding_top} lg:pb-${padding_bottom}
+  lg:pl-${padding_left} lg:pr-${padding_right}
+`;
+
+const max_width_class = max_width ? `max-w-[${max_width}px]` : "max-w-[1200px]";
+---
+
+<section class={padding_classes}>
+  <div class={`${max_width_class} mx-auto px-4`}>
+    <!-- Section Title -->
+    <h2 class="ds-h3 mb-16 text-center lg:text-left">{title}</h2>
+
+    <!-- Features Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
+      {features.map((feature) => (
+        <div class="flex flex-col">
+          <!-- Icon and Title -->
+          <div class="flex flex-col items-center md:items-start mb-6">
+            <img
+              src={convertToWebP(feature.image.filename)}
+              alt={feature.image.alt || feature.title}
+              class="h-16 mb-4"
+            />
+            <h3 class="ds-p-1 !font-bold text-[#4B6BB7] text-center md:text-left">{feature.title}</h3>
+          </div>
+
+          <!-- Feature Description List -->
+          <div 
+            class="ds-p-2 space-y-2 description"
+            set:html={renderRichText(feature.description)}
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  :global(.description ul) {
+    list-style: disc !important;
+    padding-left: 1.5rem !important;
+  }
+
+  :global(.description ul li) {
+    list-style-type: disc !important;
+    padding-bottom: 1rem !important;
+  }
+</style>

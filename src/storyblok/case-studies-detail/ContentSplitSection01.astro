@@ -1,0 +1,10 @@
+---
+import { storyblokEditable } from "@storyblok/astro";
+import ContentSplitSection01 from "../../components/case-studies-detail/content-split-section-01/ContentSplitSection01.astro";
+
+const { blok } = Astro.props;
+---
+
+<div {...storyblokEditable(blok)}>
+  <ContentSplitSection01 {...blok} />
+</div>

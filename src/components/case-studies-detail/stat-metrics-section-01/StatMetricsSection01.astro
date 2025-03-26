@@ -1,0 +1,45 @@
+---
+import { renderRichText } from "@storyblok/astro";
+import { convertToWebP } from "../../../utils/imageConvert";
+
+const { stats, styling } = Astro.props;
+
+const padding_top = styling?.[0]?.padding_top || "";
+const padding_bottom = styling?.[0]?.padding_bottom || "";
+const padding_left = styling?.[0]?.padding_left || "";
+const padding_right = styling?.[0]?.padding_right || "";
+const mobile_padding_top = styling?.[0]?.mobile_padding_top || "";
+const mobile_padding_bottom = styling?.[0]?.mobile_padding_bottom || "";
+const mobile_padding_left = styling?.[0]?.mobile_padding_left || "";
+const mobile_padding_right = styling?.[0]?.mobile_padding_right || "";
+const max_width = styling?.[0]?.max_width || "";
+
+const padding_classes = `
+  pt-${mobile_padding_top} pb-${mobile_padding_bottom}
+  pl-${mobile_padding_left} pr-${mobile_padding_right}
+  lg:pt-${padding_top} lg:pb-${padding_bottom}
+  lg:pl-${padding_left} lg:pr-${padding_right}
+`;
+
+const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
+---
+
+<section class={padding_classes}>
+  <div class={`${max_width_class} mx-auto px-4`}>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-16">
+      {
+        stats.map((stat) => (
+          <div class="flex flex-col items-center text-center md:items-start md:text-left">
+            <img
+              src={convertToWebP(stat.image.filename)}
+              alt={stat.image.alt || stat.title}
+              class="h-[60px] mb-6"
+            />
+            <div class="ds-h4 mb-4" set:html={renderRichText(stat.title)} />
+            <p class="ds-p-2 text-ds-gray-400">{stat.description}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

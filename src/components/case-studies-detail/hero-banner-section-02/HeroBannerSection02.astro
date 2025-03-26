@@ -1,0 +1,64 @@
+---
+import { convertToWebP } from "../../../utils/imageConvert";
+
+const { title, description, image, date, styling } = Astro.props;
+
+const padding_top = styling?.[0]?.padding_top || "";
+const padding_bottom = styling?.[0]?.padding_bottom || "";
+const padding_left = styling?.[0]?.padding_left || "";
+const padding_right = styling?.[0]?.padding_right || "";
+const mobile_padding_top = styling?.[0]?.mobile_padding_top || "";
+const mobile_padding_bottom = styling?.[0]?.mobile_padding_bottom || "";
+const mobile_padding_left = styling?.[0]?.mobile_padding_left || "";
+const mobile_padding_right = styling?.[0]?.mobile_padding_right || "";
+const max_width = styling?.[0]?.max_width || "";
+
+const padding_classes = `
+  pt-${mobile_padding_top} pb-${mobile_padding_bottom}
+  pl-${mobile_padding_left} pr-${mobile_padding_right}
+  lg:pt-${padding_top} lg:pb-${padding_bottom}
+  lg:pl-${padding_left} lg:pr-${padding_right}
+`;
+
+const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
+
+// Format date
+const formattedDate = new Date(date).toLocaleDateString('en-GB', {
+  day: '2-digit',
+  month: '2-digit',
+  year: 'numeric'
+});
+---
+
+<section class={padding_classes}>
+  <div class={`${max_width_class} mx-auto px-4`}>
+    <!-- Back Button -->
+    <a href="/case-studies" class="inline-flex items-center text-ds-black mb-8 ds-p-2 hover:opacity-80 underline">
+      <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+      </svg>
+      Back to Case Studies
+    </a>
+
+    <div class="flex flex-col lg:flex-row gap-8 lg:gap-0">
+      <!-- Left Column: Text Content -->
+      <div class="lg:w-[55%] flex flex-col justify-center">
+        <h1 class="ds-h1 mb-6">{title}</h1>
+        <p class="ds-p-3 mb-4">{formattedDate}</p>
+        <p class="ds-p-2">{description}</p>
+      </div>
+
+      <!-- Right Column: Image -->
+      <div class="lg:w-[45%]">
+        {image?.filename && (
+          <img
+            src={convertToWebP(image.filename)}
+            alt={image.alt || title}
+            class="w-full h-auto rounded-lg"
+          />
+        )}
+      </div>
+    </div>
+  </div>
+</section>
+
