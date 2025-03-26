@@ -1,4 +1,6 @@
 ---
+import { convertToWebP } from "../../../utils/imageConvert";
+
 const {
   title,
   image,
@@ -33,7 +35,7 @@ const bg_color_class = `bg-${background_color}`;
       image && (
         <div class="hidden xl:block absolute -top-[6rem] xl:right-[5rem] 2xl:right-[17rem]">
           <img
-            src={image.filename}
+            src={convertToWebP(image.filename)}
             alt={image.alt || "We're here to help"}
             class="w-[352px]"
           />
@@ -49,7 +51,7 @@ const bg_color_class = `bg-${background_color}`;
       image && (
         <div class="flex justify-center xl:hidden">
           <img
-            src={image.filename}
+            src={convertToWebP(image.filename)}
             alt={image.alt || "We're here to help"}
             class="w-[80%]"
           />

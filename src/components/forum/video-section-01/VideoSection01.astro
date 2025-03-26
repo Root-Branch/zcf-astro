@@ -36,14 +36,13 @@ const background_color_class = background_color ? `bg-${background_color}` : "";
   <div class={`${max_width_class} mx-auto px-4`}>
     <div class="max-w-[1520px] mx-auto">
       {/* Video Container */}
-      <div class="relative pb-[56.25%]">
-        <iframe
-          class="absolute top-0 left-0 w-full h-full"
-          src={`https://www.youtube.com/embed/${videoId}`}
-          title="YouTube video player"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
+      <div class="relative">
+        <lite-youtube 
+          class="!max-w-full"
+          videoid={videoId}
+          playlabel={`Play: YouTube Video`}
+          params="modestbranding=1&rel=0"
+        ></lite-youtube>
       </div>
 
       {/* CTA Button */}
@@ -60,4 +59,9 @@ const background_color_class = background_color ? `bg-${background_color}` : "";
       )}
     </div>
   </div>
-</section> 
+</section>
+
+<script>
+  import 'lite-youtube-embed/src/lite-yt-embed.js';
+  import 'lite-youtube-embed/src/lite-yt-embed.css';
+</script> 

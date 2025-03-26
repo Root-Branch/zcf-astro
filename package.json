@@ -15,8 +15,12 @@
     "@astrojs/vue": "^5.0.7",
     "@storyblok/astro": "^5.1.2",
     "astro": "^5.1.9",
+    "astro-compress": "^2.3.6",
+    "cssnano": "^7.0.6",
+    "lite-youtube-embed": "^0.3.3",
     "swiper": "^11.2.1",
     "vite": "^4.5.2",
+    "vite-plugin-compression": "^0.5.1",
     "vue": "^3.5.13"
   },
   "optionalDependencies": {

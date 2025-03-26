@@ -1,5 +1,6 @@
 ---
 import Button from "../../common/Button.astro";
+import { convertToWebP } from "../../../utils/imageConvert";
 
 const { title, description, image, cta_button } = Astro.props;
 ---
@@ -12,7 +13,7 @@ const { title, description, image, cta_button } = Astro.props;
     image && (
       <div class="h-[309px] overflow-hidden mb-8">
         <img
-          src={image.filename}
+          src={convertToWebP(image.filename)}
           alt={image.alt || title}
           class="w-full h-full object-cover"
         />

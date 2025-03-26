@@ -1,4 +1,6 @@
 ---
+import { convertToWebP } from "../../../utils/imageConvert";
+
 const {
   title,
   description,
@@ -59,7 +61,7 @@ const mobile_padding_bottom_class = mobile_padding_bottom
                 {/* Icon */}
                 <div class="relative">
                   <img
-                    src={item.icon.filename}
+                    src={convertToWebP(item.icon.filename)}
                     alt={item.description}
                     class="w-16 h-16 md:w-24 md:h-24"
                   />
