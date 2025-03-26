@@ -56,7 +56,7 @@ export default defineConfig({
       "form.section.01": "storyblok/contact/FormSection01",
       "contact.section.01": "storyblok/contact/ContactSection01",
       "icon_feature_list.section.01": "storyblok/free-resources/IconFeatureListSection01",
-      "cta_banner.section.04": "storyblok/case-studies/CTABannerSection04",
+      "cta_banner.section.04": "storyblok/case-studies/CtaBannerSection04",
       "card_grid.section.04": "storyblok/case-studies/CardGridSection04",
       "hero_banner.section.02": "storyblok/case-studies-detail/HeroBannerSection02",
       "stat_metrics.section.01": "storyblok/case-studies-detail/StatMetricsSection01",
