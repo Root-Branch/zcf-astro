@@ -26,12 +26,43 @@ const {
 } = Astro.props;
 
 const content_proportion = 100 - (image_proportion || 30);
+
+const padding_top = styling?.[0]?.padding_top || "";
+const padding_bottom = styling?.[0]?.padding_bottom || "";
+const padding_left = styling?.[0]?.padding_left || "";
+const padding_right = styling?.[0]?.padding_right || "";
+const mobile_padding_top = styling?.[0]?.mobile_padding_top || "";
+const mobile_padding_bottom = styling?.[0]?.mobile_padding_bottom || "";
+const mobile_padding_left = styling?.[0]?.mobile_padding_left || "";
+const mobile_padding_right = styling?.[0]?.mobile_padding_right || "";
+const max_width = styling?.[0]?.max_width || "";
+const max_height = styling?.[0]?.max_height || "";
+const shifted_up = styling?.[0]?.shifted_up || "";
+const mobile_shifted_up = styling?.[0]?.mobile_shifted_up || "";
+const gap = styling?.[0]?.gap || "";
+
+const padding_classes = `
+  ${mobile_padding_top ? `pt-${mobile_padding_top}` : "pt-8"}
+  ${mobile_padding_bottom ? `pb-${mobile_padding_bottom}` : "pb-16"}
+  ${mobile_padding_left ? `pl-${mobile_padding_left}` : ""}
+  ${mobile_padding_right ? `pr-${mobile_padding_right}` : ""}
+  ${padding_top ? `lg:pt-${padding_top}` : "lg:pt-8 lg:pt-16"}
+  ${padding_bottom ? `lg:pb-${padding_bottom}` : "lg:pb-32"}
+  ${padding_left ? `lg:pl-${padding_left}` : ""}
+  ${padding_right ? `lg:pr-${padding_right}` : ""}
+`;
+
 const background_color_class = styling?.[0]?.background_color
   ? `bg-${styling[0].background_color}`
   : "";
 const content_proportion_class = content_proportion
   ? `lg:w-[${content_proportion}%]`
   : "lg:w-9/12";
+const gap_class = gap ? `gap-8 lg:gap-${gap}` : "gap-8";
+const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
+const max_height_class = max_height ? `max-h-[${max_height}px]` : "";
+const shifted_up_class = shifted_up ? `lg:-mt-${shifted_up}` : "";
+const mobile_shifted_up_class = mobile_shifted_up ? `-mt-${mobile_shifted_up}` : "";
 
 // Title
 const title_color_class = title_color ? `text-${title_color}` : "text-ds-black";
@@ -64,36 +95,10 @@ const mobile_order_class = mobile_is_image_bottom
 const mobile_is_image_full_width_class = mobile_is_image_full_width
   ? "w-[103%]"
   : "w-full";
-
-//Common
-const padding_top_class = styling?.[0]?.padding_top
-  ? `lg:pt-${styling[0].padding_top}`
-  : "lg:pt-8 lg:pt-16";
-const padding_bottom_class = styling?.[0]?.padding_bottom
-  ? `lg:pb-${styling[0].padding_bottom}`
-  : "lg:pb-32";
-const mobile_padding_top_class = styling?.[0]?.mobile_padding_top
-  ? `pt-${styling[0].mobile_padding_top}`
-  : "pt-8";
-const mobile_padding_bottom_class = styling?.[0]?.mobile_padding_bottom
-  ? `pb-${styling[0].mobile_padding_bottom}`
-  : "pb-16";
-const gap_class = styling?.[0]?.gap
-  ? `gap-8 lg:gap-${styling[0].gap}`
-  : "gap-8";
-const max_width_class = styling?.[0]?.max_width
-  ? `max-w-[${styling[0].max_width}px]`
-  : "";
-const max_height_class = styling?.[0]?.max_height
-  ? `max-h-[${styling[0].max_height}px]`
-  : "";
 ---
 
 <section
-  class={`${mobile_padding_top_class} ${mobile_padding_bottom_class}
-   ${padding_top_class} ${padding_bottom_class} ${background_color_class}
-   ${styling?.[0]?.is_shifted_up ? "lg:-mt-[100px] -mt-[50px]" : ""}
-   `}
+  class={`${padding_classes} ${background_color_class} ${shifted_up_class} ${mobile_shifted_up_class}`}
 >
   <div class={`mx-auto px-2 sm:px-16 ${max_width_class} ${max_height_class}`}>
     <div

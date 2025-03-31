@@ -1,12 +1,8 @@
 ---
 import { convertToWebP } from "../../../utils/imageConvert";
+import Button from "../../common/Button.astro";
 
-const {
-  title,
-  description,
-  image,
-  styling,
-} = Astro.props;
+const { title, description, cta_button, image, styling, content_proportion } = Astro.props;
 
 const padding_top = styling?.[0]?.padding_top || "xs";
 const padding_bottom = styling?.[0]?.padding_bottom || "xs";
@@ -16,43 +12,51 @@ const mobile_padding_top = styling?.[0]?.mobile_padding_top || "xs";
 const mobile_padding_bottom = styling?.[0]?.mobile_padding_bottom || "xs";
 const mobile_padding_left = styling?.[0]?.mobile_padding_left || "xs";
 const mobile_padding_right = styling?.[0]?.mobile_padding_right || "xs";
-const max_width = styling?.[0]?.max_width || "1440px";
+const background_color = styling?.[0]?.background_color || "";
+const max_width = styling?.[0]?.max_width || "";
 
-const padding_top_class = `lg:pt-${padding_top}`;
-const padding_bottom_class = `lg:pb-${padding_bottom}`;
-const padding_left_class = `lg:pl-${padding_left}`;
-const padding_right_class = `lg:pr-${padding_right}`;
-const mobile_padding_top_class = `pt-${mobile_padding_top}`;
-const mobile_padding_bottom_class = `pb-${mobile_padding_bottom}`;
-const mobile_padding_left_class = `pl-${mobile_padding_left}`;
-const mobile_padding_right_class = `pr-${mobile_padding_right}`;
+const padding_classes = `
+  pt-${mobile_padding_top} pb-${mobile_padding_bottom}
+  pl-${mobile_padding_left} pr-${mobile_padding_right}
+  lg:pt-${padding_top} lg:pb-${padding_bottom}
+  lg:pl-${padding_left} lg:pr-${padding_right}
+`;
+
+const bg_color_class = background_color ? `bg-${background_color}` : "";
+const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
 const gap_class = styling?.[0]?.gap ? `gap-${styling?.[0]?.gap}` : "";
-const max_width_class = `max-w-[${max_width}px]` || "";
+const content_proportion_class = content_proportion ? `lg:w-[${content_proportion}%]` : "lg:w-[55%]";
+const image_proportion_class = content_proportion ? `lg:w-[${100 - content_proportion}%]` : "lg:w-[45%]";
 ---
 
 <section
-  class={`relative ${padding_top_class} ${padding_bottom_class} 
-  ${padding_left_class} ${padding_right_class} ${mobile_padding_top_class} 
-  ${mobile_padding_bottom_class} ${mobile_padding_left_class} ${mobile_padding_right_class}`}
+  class={`relative ${padding_classes} ${bg_color_class} ${max_width_class} mx-auto`}
 >
   <div class={`mx-auto ${max_width_class}`}>
-    <div
-      class={`flex flex-col lg:flex-row ${gap_class} items-center`}
-    >
+    <div class={`flex flex-col lg:flex-row ${gap_class} items-center`}>
       {/* Content */}
-      <div
-        class={`lg:w-[55%] text-center lg:text-left z-10`}
-      >
+      <div class={`${content_proportion_class} text-center lg:text-left z-10`}>
         <h2 class="ds-h2 2xl:ds-h1 !font-bold uppercase">{title}</h2>
         <p class="ds-p-2 md:ds-p-1 mt-8 lg:mt-12">
           {description}
         </p>
+        {
+          cta_button?.[0] && (
+            <div class="mt-8 lg:mt-12">
+              <Button
+                text={cta_button[0].text}
+                link={cta_button[0].link}
+                style={cta_button[0].style}
+                background_color={cta_button[0].background_color}
+                text_color={cta_button[0].text_color}
+              />
+            </div>
+          )
+        }
       </div>
 
       {/* Image */}
-      <div
-        class="lg:w-[45%]"
-      >
+      <div class={`${image_proportion_class} hidden lg:block`}>
         <div class="relative w-full h-full">
           <img
             src={convertToWebP(image.filename)}

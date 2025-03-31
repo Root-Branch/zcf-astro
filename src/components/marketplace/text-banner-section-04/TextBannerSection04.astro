@@ -1,0 +1,46 @@
+---
+const { title, description, styling } = Astro.props;
+
+const padding_top = styling?.[0]?.padding_top || "xs";
+const padding_bottom = styling?.[0]?.padding_bottom || "xs";
+const padding_left = styling?.[0]?.padding_left || "xs";
+const padding_right = styling?.[0]?.padding_right || "xs";
+const mobile_padding_top = styling?.[0]?.mobile_padding_top || "xs";
+const mobile_padding_bottom = styling?.[0]?.mobile_padding_bottom || "xs";
+const mobile_padding_left = styling?.[0]?.mobile_padding_left || "xs";
+const mobile_padding_right = styling?.[0]?.mobile_padding_right || "xs";
+const background_color = styling?.[0]?.background_color || "";
+const max_width = styling?.[0]?.max_width || "1250";
+const shifted_up = styling?.[0]?.shifted_up || "";
+const mobile_shifted_up = styling?.[0]?.mobile_shifted_up || "";
+
+const padding_classes = `
+  pt-${mobile_padding_top} pb-${mobile_padding_bottom}
+  pl-${mobile_padding_left} pr-${mobile_padding_right}
+  lg:pt-${padding_top} lg:pb-${padding_bottom}
+  lg:pl-${padding_left} lg:pr-${padding_right}
+`;
+
+const bg_color_class = background_color
+  ? `bg-${background_color}`
+  : "bg-ds-grey";
+const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
+const shifted_up_class = shifted_up ? `lg:-mt-${shifted_up}` : "";
+const mobile_shifted_up_class = mobile_shifted_up
+  ? `-mt-${mobile_shifted_up}`
+  : "";
+---
+
+<section
+  class={`relative ${padding_classes} ${bg_color_class} ${shifted_up_class} ${mobile_shifted_up_class} z-10`}
+>
+  <div class={`mx-auto ${max_width_class} px-4 md:px-8`}>
+    <div class="flex flex-col items-center text-center">
+      {title && <p class="ds-h3 font-bold mb-6 text-center">{title}</p>}
+
+      {description && (
+        <p class="ds-p-2 md:w-[65%] mx-auto">{description}</p>
+      )}
+    </div>
+  </div>
+</section>

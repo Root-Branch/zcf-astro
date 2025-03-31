@@ -1,0 +1,10 @@
+---
+import { storyblokEditable } from "@storyblok/astro";
+import FormSection02 from "../../components/marketplace/form-section-02/FormSection02.astro";
+
+const { blok } = Astro.props;
+---
+
+<div {...storyblokEditable(blok)}>
+  <FormSection02 {...blok} />
+</div>

@@ -75,6 +75,13 @@ export default defineConfig({
           "storyblok/case-studies-detail/FeatureGridSection01",
         "content_split.section.01":
           "storyblok/case-studies-detail/ContentSplitSection01",
+        "content_split.section.02":
+          "storyblok/marketplace/ContentSplitSection02",
+        "text_banner.section.04":
+          "storyblok/marketplace/TextBannerSection04",
+        "content_split.section.03":
+          "storyblok/marketplace/ContentSplitSection03",
+        "form.section.02": "storyblok/marketplace/FormSection02",
       },
     }),
     vue(),

@@ -146,7 +146,7 @@ module.exports = {
     "border-ds-blue-900-60",
     "border-ds-teal-500",
 
-    // Generate padding and margin utilities with your custom sizes
+    // Padding and gap
     ...["none", "3xs", "xxs", "xs", "sm", "md", "lg", "xl", "2xl"].flatMap(
       (size) => [
         `pt-${size}`,
@@ -157,8 +157,18 @@ module.exports = {
         `lg:pb-${size}`,
         `lg:pl-${size}`,
         `lg:pr-${size}`,
+        `mt-${size}`,
+        `mb-${size}`,
+        `ml-${size}`,
+        `mr-${size}`,
+        `lg:mt-${size}`,
+        `lg:mb-${size}`,
+        `lg:ml-${size}`,
+        `lg:mr-${size}`,
         `gap-${size}`,
         `lg:gap-${size}`,
+        `-mt-${size}`,
+        `lg:-mt-${size}`,
       ]
     ),
 

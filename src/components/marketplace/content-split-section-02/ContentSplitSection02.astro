@@ -1,0 +1,130 @@
+---
+import { convertToWebP } from "../../../utils/imageConvert";
+import Button from "../../common/Button.astro";
+import { renderRichText } from "@storyblok/astro";
+
+const { 
+  title, 
+  description, 
+  cta_button, 
+  image, 
+  styling, 
+  card 
+} = Astro.props;
+
+const parsedDescription = description ? renderRichText(description) : "";
+const cardDescription = card?.[0]?.description ? renderRichText(card[0].description) : "";
+
+const padding_top = styling?.[0]?.padding_top || "xs";
+const padding_bottom = styling?.[0]?.padding_bottom || "xs";
+const padding_left = styling?.[0]?.padding_left || "xs";
+const padding_right = styling?.[0]?.padding_right || "xs";
+const mobile_padding_top = styling?.[0]?.mobile_padding_top || "xs";
+const mobile_padding_bottom = styling?.[0]?.mobile_padding_bottom || "xs";
+const mobile_padding_left = styling?.[0]?.mobile_padding_left || "xs";
+const mobile_padding_right = styling?.[0]?.mobile_padding_right || "xs";
+const background_color = styling?.[0]?.background_color || "";
+const max_width = styling?.[0]?.max_width || "";
+const gap = styling?.[0]?.gap || "xs";
+
+const padding_classes = `
+  pt-${mobile_padding_top} pb-${mobile_padding_bottom}
+  pl-${mobile_padding_left} pr-${mobile_padding_right}
+  lg:pt-${padding_top} lg:pb-${padding_bottom}
+  lg:pl-${padding_left} lg:pr-${padding_right}
+`;
+
+const bg_color_class = background_color ? `bg-${background_color}` : "";
+const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
+const gap_class = `gap-${gap}`;
+---
+
+<section class={`relative ${padding_classes} ${bg_color_class}`}>
+  <div class={`mx-auto ${max_width_class}`}>
+    <div class={`flex flex-col lg:flex-row ${gap_class} justify-between`}>
+      <div class="w-full lg:w-[60%] mb-12 lg:mb-0">
+        <div class="flex flex-col">
+          {image && (
+            <div class="mb-6">
+              <img 
+                src={convertToWebP(image.filename)} 
+                alt={image.alt || ""} 
+                class="w-auto h-[70px]"
+              />
+            </div>
+          )}
+          
+          <p class="ds-h3 font-bold mb-6">{title}</p>
+          
+          <div class="content-section ds-p-2 mb-6" set:html={parsedDescription} />
+          
+          {cta_button?.[0] && (
+            <div class="mt-6">
+              <Button
+                text={cta_button[0].text || "Apply today"}
+                link={cta_button[0].link}
+                style={cta_button[0].style}
+                background_color={cta_button[0].background_color}
+                text_color={cta_button[0].text_color}
+              />
+            </div>
+          )}
+        </div>
+      </div>
+      
+      {card?.[0] && (
+        <div class="w-full lg:w-[40%] bg-ds-teal-500 p-10 text-ds-white z-20">
+          <div class="flex flex-col">
+            {card[0].image && (
+              <div class="mb-6">
+                <img 
+                  src={convertToWebP(card[0].image.filename)} 
+                  alt={card[0].image.alt || ""} 
+                  class="w-auto h-[70px]"
+                />
+              </div>
+            )}
+            
+            <p class="ds-h3 font-bold mb-6">{card[0].title}</p>
+            
+            <div class="content-section ds-p-2 mb-6" set:html={cardDescription} />
+            
+            {card[0].cta_button?.[0] && (
+              <div class="mt-6">
+                <Button
+                  text={card[0].cta_button[0].text || "Get in touch"}
+                  link={card[0].cta_button[0].link}
+                  style={card[0].cta_button[0].style}
+                  background_color={card[0].cta_button[0].background_color}
+                  text_color={card[0].cta_button[0].text_color}
+                />
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  </div>
+</section>
+
+<style>
+  :global(.content-section ul) {
+    list-style: disc !important;
+    padding-left: 1.5rem !important;
+  }
+
+  :global(.content-section ul li) {
+    list-style-type: disc !important;
+    padding-bottom: 1rem !important;
+  }
+
+  :global(.content-section ol) {
+    list-style: decimal !important;
+    padding-left: 1.5rem !important;
+  }
+
+  :global(.content-section ol li) {
+    list-style-type: decimal !important;
+    padding-bottom: 1rem !important;
+  }
+</style>

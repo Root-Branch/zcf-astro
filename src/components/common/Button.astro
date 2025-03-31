@@ -6,6 +6,7 @@ const {
   style = "primary",
   text_color,
   background_color,
+  type,
 } = Astro.props;
 
 const buttonClasses = {
@@ -14,16 +15,28 @@ const buttonClasses = {
 };
 
 const buttonStyle = buttonClasses[style] || buttonClasses.primary;
+const commonClasses = [
+  "text-center md:px-[2rem] md:py-[0.8rem] ds-button inline-block rounded-full hover:opacity-90",
+  buttonStyle,
+  "px-5 py-4",
+  class_name,
+];
 ---
 
-<a
-  href={link.url}
-  class:list={[
-    "text-center md:px-[2rem] md:py-[0.8rem] ds-button inline-block rounded-full hover:opacity-90",
-    buttonStyle,
-    "px-5 py-4",
-    class_name,
-  ]}
->
-  {text}
-</a>
+{
+  type ? (
+    <button
+      type={type}
+      class:list={commonClasses}
+    >
+      {text}
+    </button>
+  ) : (
+    <a
+      href={link.url}
+      class:list={commonClasses}
+    >
+      {text}
+    </a>
+  )
+}

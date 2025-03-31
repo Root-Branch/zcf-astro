@@ -1,0 +1,127 @@
+---
+import { convertToWebP } from "../../../utils/imageConvert";
+import Button from "../../common/Button.astro";
+import { renderRichText } from "@storyblok/astro";
+
+const {
+  title,
+  subtitle,
+  description,
+  note,
+  image,
+  cta_button,
+  is_image_left,
+  subtitle_color,
+  content_background_color,
+  styling
+} = Astro.props;
+
+const parsedDescription = description ? renderRichText(description) : "";
+const parsedNote = note ? renderRichText(note) : "";
+
+const padding_top = styling?.[0]?.padding_top || "";
+const padding_bottom = styling?.[0]?.padding_bottom || "";
+const padding_left = styling?.[0]?.padding_left || "";
+const padding_right = styling?.[0]?.padding_right || "";
+const mobile_padding_top = styling?.[0]?.mobile_padding_top || "";
+const mobile_padding_bottom = styling?.[0]?.mobile_padding_bottom || "";
+const mobile_padding_left = styling?.[0]?.mobile_padding_left || "";
+const mobile_padding_right = styling?.[0]?.mobile_padding_right || "";
+const max_width = styling?.[0]?.max_width || "";
+
+const padding_classes = `
+  ${mobile_padding_top ? `pt-${mobile_padding_top}` : ""}
+  ${mobile_padding_bottom ? `pb-${mobile_padding_bottom}` : ""}
+  ${mobile_padding_left ? `pl-${mobile_padding_left}` : ""}
+  ${mobile_padding_right ? `pr-${mobile_padding_right}` : ""}
+  ${padding_top ? `lg:pt-${padding_top}` : ""}
+  ${padding_bottom ? `lg:pb-${padding_bottom}` : ""}
+  ${padding_left ? `lg:pl-${padding_left}` : ""}
+  ${padding_right ? `lg:pr-${padding_right}` : ""}
+`;
+
+const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
+const subtitle_color_class = subtitle_color ? `text-${subtitle_color}` : "text-ds-teal-500";
+const content_bg_class = content_background_color ? `bg-${content_background_color}` : "bg-ds-blue-900";
+const image_order_class = is_image_left ? "lg:flex-row-reverse" : "lg:flex-row";
+---
+
+<section class={`relative`}>
+  <div class={`w-full ${max_width_class} mx-auto`}>
+    <div class={`flex flex-col ${image_order_class} h-full`}>
+      <!-- Text Content -->
+      <div class={`${padding_classes} w-full lg:w-1/2 ${content_bg_class} text-ds-white py-12 px-8 lg:px-16`}>
+        <div class="flex flex-col h-full justify-center">
+          {subtitle && (
+            <p class={`ds-h4 uppercase font-bold ${subtitle_color_class}`}>
+              {subtitle}
+            </p>
+          )}
+          
+          {title && (
+            <h2 class="ds-h3 font-bold mb-16 text-ds-white">
+              {title}
+            </h2>
+          )}
+          
+          {description && (
+            <div class="content-section ds-p-2 mb-12" set:html={parsedDescription} />
+          )}
+
+          {note && (
+            <div class="note-section ds-p-3 mb-16" set:html={parsedNote} />
+          )}
+          
+          {cta_button?.[0] && (
+            <div>
+              <Button
+                text={cta_button[0].text}
+                link={cta_button[0].link}
+                style={cta_button[0].style}
+                background_color={cta_button[0].background_color}
+                text_color={cta_button[0].text_color}
+              />
+            </div>
+          )}
+        </div>
+      </div>
+      
+      <!-- Image -->
+      <div class="w-full lg:w-1/2 lg:flex h-auto lg:h-auto">
+        {image?.filename && (
+          <img
+            src={convertToWebP(image.filename)}
+            alt={image.alt || ""}
+            class="w-full h-full object-cover"
+          />
+        )}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  :global(.content-section p) {
+    margin-bottom: 1rem !important;
+  }
+
+  :global(.content-section ul) {
+    list-style: disc !important;
+    padding-left: 1.5rem !important;
+    padding-top: 1rem !important;
+  }
+
+  :global(.content-section ul li) {
+    list-style-type: disc !important;
+    padding-bottom: 0rem !important;
+  }
+
+  :global(.content-section ol) {
+    list-style: decimal !important;
+    padding-left: 1.5rem !important;
+  }
+
+  :global(.content-section ol li) {
+    list-style-type: decimal !important;
+  }
+</style>
