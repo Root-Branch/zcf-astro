@@ -1,5 +1,4 @@
 ---
-import { convertToWebP } from "../../../utils/imageConvert";
 import BenefitItem from "./BenefitItem.astro";
 import Button from "../../common/Button.astro";
 
@@ -8,7 +7,7 @@ const {
   benefits, 
   cta_button, 
   styling,
-  title_font,
+  benefit_item_width
 } = Astro.props;
 
 // Extract styling properties
@@ -40,7 +39,7 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
 
     <div class="flex flex-wrap flex-row justify-center items-center gap-16 md:gap-8">
       {benefits?.map((benefit) => (
-        <BenefitItem {...benefit} />
+        <BenefitItem {...benefit} width={benefit_item_width} />
       ))}
     </div>
 

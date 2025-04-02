@@ -2,7 +2,7 @@
 import { convertToWebP } from "../../../utils/imageConvert";
 import { renderRichText } from "@storyblok/astro";
 
-const { icon, title, description, title_font, mobile_title_font, icon_height } = Astro.props;
+const { icon, title, description, title_font, mobile_title_font, icon_height, width } = Astro.props;
 
 const title_font_class = title_font ? `${title_font}` : "ds-h4";
 const mobile_title_font_class = mobile_title_font || title_font_class;
@@ -23,7 +23,7 @@ const icon_height_class = icon_height ? `h-[${icon_height}px]` : "h-[82px]";
   <h3 class={`${mobile_title_font_class} md:${title_font_class} text-ds-white mb-4`} set:html={renderRichText(title)}/>
 
   {/* Description */}
-  <p class="ds-p-2 text-ds-white max-w-[311px]">
+  <p class={`ds-p-2 text-ds-white ${width === "md" ? "max-w-[261px]" : "max-w-[311px]"}`}>
     {description}
   </p>
 </div> 

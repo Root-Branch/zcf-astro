@@ -1,5 +1,5 @@
 ---
-const { title, description, styling } = Astro.props;
+const { title, description, styling, content_color, content_width } = Astro.props;
 
 const padding_top = styling?.[0]?.padding_top || "xs";
 const padding_bottom = styling?.[0]?.padding_bottom || "xs";
@@ -29,17 +29,19 @@ const shifted_up_class = shifted_up ? `lg:-mt-${shifted_up}` : "";
 const mobile_shifted_up_class = mobile_shifted_up
   ? `-mt-${mobile_shifted_up}`
   : "";
+const content_color_class = content_color ? `text-${content_color}` : "text-ds-black";
+const content_width_class = content_width ? `${content_width === "md" ? "md:w-[45%]" : "md:w-[65%]"}` : "";
 ---
 
 <section
   class={`relative ${padding_classes} ${bg_color_class} ${shifted_up_class} ${mobile_shifted_up_class} z-10`}
 >
-  <div class={`mx-auto ${max_width_class} px-4 md:px-8`}>
+  <div class={`mx-auto ${max_width_class} px-4 md:px-8 ${content_color_class}`}>
     <div class="flex flex-col items-center text-center">
       {title && <p class="ds-h3 font-bold mb-6 text-center">{title}</p>}
 
       {description && (
-        <p class="ds-p-2 md:w-[65%] mx-auto">{description}</p>
+        <p class={`ds-p-2 ${content_width_class} mx-auto`}>{description}</p>
       )}
     </div>
   </div>
