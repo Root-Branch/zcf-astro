@@ -87,6 +87,7 @@ export default defineConfig({
         "story.section.01": "storyblok/about-us/StorySection01",
         "overlap_cards.section.01": "storyblok/about-us/OverlapCardsSection01",
         "team_grid.section.01": "storyblok/about-us/TeamGridSection01",
+        "partner.section.02": "storyblok/about-us/PartnerSection02",
       },
     }),
     vue(),

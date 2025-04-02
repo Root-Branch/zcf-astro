@@ -23,7 +23,7 @@ const icon_height_class = icon_height ? `h-[${icon_height}px]` : "h-[82px]";
   <h3 class={`${mobile_title_font_class} md:${title_font_class} text-ds-white mb-4`} set:html={renderRichText(title)}/>
 
   {/* Description */}
-  <p class={`ds-p-2 text-ds-white ${width === "md" ? "max-w-[261px]" : "max-w-[311px]"}`}>
+  <p class={`ds-p-2 text-ds-white ${width === "md" ? "max-w-[250px]" : "max-w-[311px]"} min-h-[80px]`}>
     {description}
   </p>
 </div> 
