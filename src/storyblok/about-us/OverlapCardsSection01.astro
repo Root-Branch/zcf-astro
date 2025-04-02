@@ -1,0 +1,10 @@
+---
+import { storyblokEditable } from "@storyblok/astro";
+import OverlapCardsSection01 from "../../components/about-us/overlap-cards-section-01/OverlapCardsSection01.astro";
+
+const { blok } = Astro.props;
+---
+
+<div {...storyblokEditable(blok)}>
+  <OverlapCardsSection01 {...blok} />
+</div>

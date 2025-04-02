@@ -1,0 +1,10 @@
+---
+import { storyblokEditable } from "@storyblok/astro";
+import TeamGridSection01 from "../../components/about-us/team-grid-section-01/TeamGridSection01.astro";
+
+const { blok } = Astro.props;
+---
+
+<div {...storyblokEditable(blok)}>
+  <TeamGridSection01 {...blok} />
+</div>

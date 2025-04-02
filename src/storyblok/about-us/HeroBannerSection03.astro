@@ -1,0 +1,10 @@
+---
+import { storyblokEditable } from "@storyblok/astro";
+import HeroBannerSection03 from "../../components/about-us/hero-banner-section-03/HeroBannerSection03.astro";
+
+const { blok } = Astro.props;
+---
+
+<div {...storyblokEditable(blok)}>
+  <HeroBannerSection03 {...blok} />
+</div>

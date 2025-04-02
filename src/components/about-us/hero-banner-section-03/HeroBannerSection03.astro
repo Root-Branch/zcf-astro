@@ -1,0 +1,77 @@
+---
+import { convertToWebP } from "../../../utils/imageConvert";
+
+const { title, description, image, cards = [], styling = [] } = Astro.props;
+
+// Extract styling properties
+const padding_top = styling?.[0]?.padding_top || "none";
+const padding_bottom = styling?.[0]?.padding_bottom || "md";
+const padding_left = styling?.[0]?.padding_left || "";
+const padding_right = styling?.[0]?.padding_right || "";
+const mobile_padding_top = styling?.[0]?.mobile_padding_top || "none";
+const mobile_padding_bottom = styling?.[0]?.mobile_padding_bottom || "xs";
+const mobile_padding_left = styling?.[0]?.mobile_padding_left || "";
+const mobile_padding_right = styling?.[0]?.mobile_padding_right || "";
+const background_color = styling?.[0]?.background_color || "";
+const max_width = styling?.[0]?.max_width || "1520";
+const shifted_up = styling?.[0]?.shifted_up || "";
+const mobile_shifted_up = styling?.[0]?.mobile_shifted_up || "";
+
+// Create CSS classes
+const padding_classes = `
+  ${mobile_padding_top ? `pt-${mobile_padding_top}` : ""}
+  ${mobile_padding_bottom ? `pb-${mobile_padding_bottom}` : ""}
+  ${mobile_padding_left ? `pl-${mobile_padding_left}` : ""}
+  ${mobile_padding_right ? `pr-${mobile_padding_right}` : ""}
+  ${padding_top ? `lg:pt-${padding_top}` : ""}
+  ${padding_bottom ? `lg:pb-${padding_bottom}` : ""}
+  ${padding_left ? `lg:pl-${padding_left}` : ""}
+  ${padding_right ? `lg:pr-${padding_right}` : ""}
+`;
+
+const bg_color_class = background_color ? `bg-${background_color}` : "";
+const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
+const shifted_up_class = shifted_up ? `lg:-mt-${shifted_up}` : "";
+const mobile_shifted_up_class = mobile_shifted_up ? `-mt-${mobile_shifted_up}` : "";
+---
+
+<section class={`relative ${padding_classes} ${bg_color_class} ${shifted_up_class} ${mobile_shifted_up_class}`}>
+  <div class={`mx-auto ${max_width_class}`}>
+    <div class="flex flex-col items-center xl:items-start xl:flex-row gap-8">
+      <!-- Left Content Column -->
+      <div class="w-full xl:w-[30%] z-10 text-center xl:text-left xl:mt-16 max-w-[400px]">
+        <h1 class="ds-h2 font-bold mb-4 text-ds-black">{title}</h1>
+        <p class="ds-p-2 text-ds-black max-w-md">{description}</p>
+      </div>
+
+      <!-- Right Column with Image -->
+      <div class="w-[90%] relative flex self-start xl:self-end">
+        {image?.filename && (
+          <img
+            src={convertToWebP(image.filename)}
+            alt={image.alt || "Team photo"}
+            class="w-auto h-[300px] object-cover md:w-full md:h-auto"
+          />
+        )}
+      </div>
+    </div>
+
+    <!-- Cards overlapping the image -->
+    <div class="relative flex justify-end xl:justify-start mt-[-80px] xl:mt-[-5rem] xl:ml-[16rem] z-20 md:max-w-full ml-[20px] xs:ml-0">
+      <div class="bg-ds-red-500 p-6 md:py-10 md:px-8 max-w-md grid grid-cols-2 gap-2 md:gap-8">
+        {cards.map((card) => (
+          <a href="#" class="flex items-center space-x-4 group hover:opacity-90 transition-opacity duration-200">
+            {card.image?.filename && (
+              <img
+                src={convertToWebP(card.image.filename)}
+                alt={card.image.alt || "Arrow icon"}
+                class="w-8 h-auto"
+              />
+            )}
+            <span class="text-ds-white ds-p-2 font-semibold underline">{card.title}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

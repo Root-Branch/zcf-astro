@@ -7,26 +7,38 @@ const {
   heading, 
   benefits, 
   cta_button, 
-  background_color, 
-  padding_top, 
-  padding_bottom, 
-  mobile_padding_top, 
-  mobile_padding_bottom,
-  title_font
+  styling,
+  title_font,
 } = Astro.props;
 
-const background_color_class = background_color ? `bg-${background_color}` : "bg-ds-blue-900";
-const padding_top_class = padding_top ? `lg:pt-${padding_top}` : "lg:pt-16";
-const padding_bottom_class = padding_bottom ? `lg:pb-${padding_bottom}` : "lg:pb-32";
-const mobile_padding_top_class = mobile_padding_top ? `pt-${mobile_padding_top}` : "pt-8";
-const mobile_padding_bottom_class = mobile_padding_bottom ? `pb-${mobile_padding_bottom}` : "pb-16";
+// Extract styling properties
+const padding_top = styling?.[0]?.padding_top || "";
+const padding_bottom = styling?.[0]?.padding_bottom || "";
+const padding_left = styling?.[0]?.padding_left || "";
+const padding_right = styling?.[0]?.padding_right || "";
+const mobile_padding_top = styling?.[0]?.mobile_padding_top || "";
+const mobile_padding_bottom = styling?.[0]?.mobile_padding_bottom || "";
+const mobile_padding_left = styling?.[0]?.mobile_padding_left || "";
+const mobile_padding_right = styling?.[0]?.mobile_padding_right || "";
+const background_color = styling?.[0]?.background_color || "";
+const max_width = styling?.[0]?.max_width || "";
+
+const padding_classes = `
+  pt-${mobile_padding_top} pb-${mobile_padding_bottom}
+  pl-${mobile_padding_left} pr-${mobile_padding_right}
+  lg:pt-${padding_top} lg:pb-${padding_bottom}
+  lg:pl-${padding_left} lg:pr-${padding_right}
+`;
+
+const bg_color_class = background_color ? `bg-${background_color}` : "";
+const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
 ---
 
-<section class={`${background_color_class} ${mobile_padding_top_class} ${mobile_padding_bottom_class} ${padding_top_class} ${padding_bottom_class}`}>
-  <div class="max-w-[1170px] mx-auto px-4 text-center">
+<section class={`${bg_color_class} ${padding_classes}`}>
+  <div class={`mx-auto ${max_width_class} px-4 text-center`}>
     {heading && <h2 class="ds-h2 md:ds-h3 text-ds-white mb-20">{heading}</h2>}
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-8">
+    <div class="flex flex-wrap flex-row justify-center items-center gap-16 md:gap-8">
       {benefits?.map((benefit) => (
         <BenefitItem {...benefit} />
       ))}

@@ -1,0 +1,80 @@
+---
+import { convertToWebP } from "../../../utils/imageConvert";
+import { renderRichText } from "@storyblok/astro";
+
+const { title, description, image, list = [], styling = [] } = Astro.props;
+
+// Parse rich text content
+const parsedTitle = title ? renderRichText(title) : "";
+
+// Extract styling properties
+const padding_top = styling?.[0]?.padding_top || "none";
+const padding_bottom = styling?.[0]?.padding_bottom || "none";
+const padding_left = styling?.[0]?.padding_left || "";
+const padding_right = styling?.[0]?.padding_right || "";
+const mobile_padding_top = styling?.[0]?.mobile_padding_top || "none";
+const mobile_padding_bottom = styling?.[0]?.mobile_padding_bottom || "none";
+const mobile_padding_left = styling?.[0]?.mobile_padding_left || "";
+const mobile_padding_right = styling?.[0]?.mobile_padding_right || "";
+const background_color = styling?.[0]?.background_color || "";
+const max_width = styling?.[0]?.max_width || "1520";
+const gap = styling?.[0]?.gap || "sm";
+
+// Create CSS classes
+const padding_classes = `
+  ${mobile_padding_top ? `pt-${mobile_padding_top}` : ""}
+  ${mobile_padding_bottom ? `pb-${mobile_padding_bottom}` : ""}
+  ${mobile_padding_left ? `pl-${mobile_padding_left}` : ""}
+  ${mobile_padding_right ? `pr-${mobile_padding_right}` : ""}
+  ${padding_top ? `lg:pt-${padding_top}` : ""}
+  ${padding_bottom ? `lg:pb-${padding_bottom}` : ""}
+  ${padding_left ? `lg:pl-${padding_left}` : ""}
+  ${padding_right ? `lg:pr-${padding_right}` : ""}
+`;
+
+const bg_color_class = background_color ? `bg-${background_color}` : "";
+const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
+const gap_class = `gap-${gap}`;
+---
+
+<section class={`relative ${padding_classes} ${bg_color_class} text-ds-black z-20`}>
+  <div class={`mx-auto ${max_width_class} px-4 xl:px-8`}>
+    <div class={`flex flex-col-reverse xl:flex-row ${gap_class} justify-between`}>
+      <!-- Left Column: Image -->
+      <div class="w-full md:w-[70%] xl:w-[40%] mb-8 xl:mb-0 mx-auto">
+        {image?.filename && (
+          <img
+            src={convertToWebP(image.filename)}
+            alt={image.alt || ""}
+            class="w-full h-auto rounded-none"
+          />
+        )}
+      </div>
+      
+      <!-- Right Column: Content -->
+      <div class="w-full xl:w-[55%]">
+        <!-- Title with mixed styling -->
+        <div class="ds-p-medium font-bold mb-6 text-ds-black" set:html={parsedTitle} />
+        
+        <!-- Description -->
+        <p class="ds-p-2 mb-12">{description}</p>
+        
+        <!-- List Items -->
+        <div class="space-y-10">
+          {list.map((item) => (
+            <div class="flex items-start">
+              {item.image?.filename && (
+                <img
+                  src={item.image.filename}
+                  alt={item.image.alt || ""}
+                  class="w-[30px] h-auto mr-6 mt-1"
+                />
+              )}
+              <p class="ds-p-2">{item.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -82,6 +82,11 @@ export default defineConfig({
         "content_split.section.03":
           "storyblok/marketplace/ContentSplitSection03",
         "form.section.02": "storyblok/marketplace/FormSection02",
+        "hero_banner.section.03": "storyblok/about-us/HeroBannerSection03",
+        "content_split.section.04": "storyblok/about-us/ContentSplitSection04",
+        "story.section.01": "storyblok/about-us/StorySection01",
+        "overlap_cards.section.01": "storyblok/about-us/OverlapCardsSection01",
+        "team_grid.section.01": "storyblok/about-us/TeamGridSection01",
       },
     }),
     vue(),

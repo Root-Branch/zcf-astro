@@ -1,7 +1,13 @@
 ---
 import { convertToWebP } from "../../../utils/imageConvert";
 
-const { background_image, decorative_text_image, heading } = Astro.props;
+const {
+  background_image,
+  decorative_text_image,
+  heading,
+  heading_font,
+  author,
+} = Astro.props;
 ---
 
 <section class="relative h-[400px]">
@@ -30,13 +36,22 @@ const { background_image, decorative_text_image, heading } = Astro.props;
       }
 
       {/* Main Heading */}
-      <h2
-        class={`ds-h2 md:ds-h3 text-ds-white text-center ${
-          decorative_text_image?.id ? "md:text-right" : "md:text-center max-w-[80%]"
-        }`}
-      >
-        {heading}
-      </h2>
+      <div class="flex flex-col items-center">
+        <h2
+          class={`${heading_font ? `${heading_font}` : "ds-h2"} text-ds-white text-center ${
+            decorative_text_image?.id
+              ? "md:text-right"
+              : "md:text-center max-w-[80%]"
+          }`}
+        >
+          {heading}
+        </h2>
+        {
+          author ? (
+            <p class="ds-p-2 text-ds-white text-center mt-4">{author}</p>
+          ) : null
+        }
+      </div>
     </div>
   </div>
 </section>
