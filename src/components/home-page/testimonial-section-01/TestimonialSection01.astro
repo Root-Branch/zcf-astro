@@ -12,7 +12,23 @@ const {
   is_full_width,
   quote_icon,
   is_small_quote_size,
+  height_size,
 } = Astro.props;
+
+let height_size_class;
+switch (height_size) {
+  case "sm":
+    height_size_class = "max-h-[500px]";
+    break;
+  case "md":
+    height_size_class = "max-h-[600px]";
+    break;
+  case "lg":
+    height_size_class = "max-h-[700px]";
+    break;
+  default:
+    height_size_class = "max-h-[700px]";
+}
 
 const is_full_width_class = is_full_width
   ? ""
@@ -55,7 +71,7 @@ const is_full_width_class = is_full_width
     <img
       src={convertToWebP(image.filename)}
       alt={image.alt || `${author_name} testimonial`}
-      class="w-full h-[30vh] lg:h-full max-h-[700px] object-cover"
+      class={`w-full h-[30vh] lg:h-full object-cover ${height_size_class}`}
     />
   </div>
 </div>
