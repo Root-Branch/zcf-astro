@@ -5,11 +5,11 @@ const { title, items, image } = Astro.props;
 ---
 
 <section class="pt-32 pb-16 lg:pb-32 bg-ds-blue-500 mt-[-8rem] md:mt-0">
-  <div class="container mx-auto px-4">
-    <div class="flex flex-col lg:flex-row items-center gap-16">
+  <div class="max-w-[1440px] mx-auto px-4">
+    <div class="flex flex-col lg:flex-row items-center gap-16 xl:gap-[13rem] justify-between">
       {/* Content */}
-      <div class="w-full lg:w-1/2">
-        <h2 class="ds-h2 mb-16 text-ds-white text-center lg:text-left">
+      <div class="w-full lg:w-[55%]">
+        <h2 class="ds-h3 mb-16 text-ds-white text-center lg:text-left">
           {title}
         </h2>
 
@@ -18,9 +18,9 @@ const { title, items, image } = Astro.props;
           {
             items.map((item) => (
               <div class="flex gap-3 lg:gap-6">
-                <div class="flex-shrink-0 w-4 h-4 lg:w-7 lg:h-7 bg-ds-blue-900 mt-4 mr-4" />
+                <div class="flex-shrink-0 w-4 h-4 bg-ds-blue-900 mt-[10px] mr-2" />
                 <div>
-                  <h3 class="ds-h3 mb-2 text-ds-white">{item.title}</h3>
+                  <h3 class="ds-h4 mb-2 text-ds-white">{item.title}</h3>
                   <p class="ds-p-2 text-ds-white">{item.description}</p>
                 </div>
               </div>
@@ -30,11 +30,11 @@ const { title, items, image } = Astro.props;
       </div>
 
       {/* Image */}
-      <div class="hidden lg:block w-full lg:w-1/2 flex justify-center">
+      <div class="hidden lg:block w-full lg:w-[45%] flex justify-center">
         <img
           src={convertToWebP(image.filename)}
           alt={image.alt}
-          class="max-w-[836px] w-full h-auto"
+          class="max-h-[480px] w-auto"
         />
       </div>
     </div>

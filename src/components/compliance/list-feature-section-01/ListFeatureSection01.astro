@@ -7,13 +7,13 @@ const { title, description, items, image } = Astro.props;
 
 <section class="py-16 lg:py-32">
   <div class="container mx-auto px-4">
-    <div class="flex flex-col-reverse lg:flex-row items-center gap-16">
+    <div class="flex flex-col-reverse lg:flex-row items-center gap-[10rem]">
       {/* Image */}
       <div class="w-full lg:w-1/2 flex justify-center px-4 lg:px-0">
         <img
           src={convertToWebP(image.filename)}
           alt={image.alt}
-          class="aspect-square lg:aspect-auto max-w-[552px] w-full h-auto"
+          class="max-h-[440px] h-auto"
         />
       </div>
 
@@ -32,11 +32,11 @@ const { title, description, items, image } = Astro.props;
           {
             items.map((item) => (
               <div class="flex gap-3 lg:gap-6">
-                <div class="text-ds-red-500 ds-h3">
+                <div class="text-ds-red-500 ds-h3 md:ds-h4 w-[25.188px] md:w-[31.477px]">
                   {item.number.padStart(2, "0")}
                 </div>
                 <div>
-                  <h3 class="ds-h3 mb-2">{item.title}</h3>
+                  <h3 class="ds-h3 md:ds-h4 mb-2">{item.title}</h3>
                   <p class="ds-p-2">{item.description}</p>
                 </div>
               </div>
