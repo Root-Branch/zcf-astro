@@ -91,6 +91,12 @@
     line-height: auto;
     font-weight: 400;
   }
+  .ds-p-4 {
+    font-family: "Source Sans 3", sans-serif;
+    font-size: 13px;
+    line-height: auto;
+    font-weight: 400;
+  }
 
   /* Headers - Source Sans 3 */
   .ds-header {
@@ -214,6 +220,12 @@
     .ds-p-3 {
       font-family: "Source Sans 3", sans-serif;
       font-size: 16px;
+      line-height: auto;
+      font-weight: 400;
+    }
+    .ds-p-4 {
+      font-family: "Source Sans 3", sans-serif;
+      font-size: 13px;
       line-height: auto;
       font-weight: 400;
     }

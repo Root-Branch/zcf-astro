@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-8 accordion-section">
+  <div class="lg:mt-[10rem] accordion-section">
     <h3 class="ds-h3 mb-8" v-html="title"></h3>
     <div class="ds-p-2 mb-10" v-html="description"></div>
     

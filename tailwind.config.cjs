@@ -62,6 +62,16 @@ module.exports = {
         "ds-blue-red-radial":
           "radial-gradient(49.97% 50.02% at 49.99% 50%, #557185 0%, #557185 7.44%, #567185 24.59%, #E47182 33.01%, #7371A8 44.84%, #91719E 58.69%, #B2DF88 74.08%, #D67770 90.54%, #EA615F 100%)",
       },
+      borderColor: {
+        "ds-white": "#FFFFFF",
+        "ds-black": "#000000",
+        "ds-grey": "#f5f5f5",
+      },
+      placeholderColor: {
+        "ds-white": "#FFFFFF",
+        "ds-black": "#000000",
+        "ds-grey": "#f5f5f5",
+      },
       padding: {
         none: "0rem",
         "3xs": "1rem",

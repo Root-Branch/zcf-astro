@@ -5,7 +5,7 @@
       <img
         :src="currentStep.progress_image.filename"
         :alt="currentStep.progress_image.alt"
-        class="max-w-[600px] w-full"
+        class="max-w-[500px] w-full"
       />
     </div>
 
@@ -14,13 +14,13 @@
       <!-- Left Column - Content -->
       <div class="flex flex-col justify-between h-full">
         <div>
-          <p class="ds-h1 text-ds-red-500 mb-4">{{ currentStep.number }}</p>
-          <h2 class="ds-h2 mb-6" v-html="currentStep.title"></h2>
-          <div class="ds-p-2 lg:ds-p-1 mb-12 lg:mb-24" v-html="currentStep.description"></div>
+          <p class="ds-h2 text-ds-red-500 mb-4">{{ currentStep.number }}</p>
+          <h2 class="ds-h3 mb-6" v-html="currentStep.title"></h2>
+          <div class="ds-p-2 mb-12 lg:mb-24" v-html="currentStep.description"></div>
         </div>
 
         <!-- Navigation Buttons (Desktop Only) -->
-        <div class="mt-auto hidden lg:flex flex-col sm:flex-row gap-4">
+        <div class="mt-[3rem] hidden lg:flex flex-col sm:flex-row gap-4">
           <button
             v-if="currentIndex > 0"
             @click="prevStep"
@@ -42,7 +42,7 @@
       </div>
 
       <!-- Right Column - Accordions -->
-      <div class="flex items-center">
+      <div class="flex items-start">
         <AccordionVue 
           :title="currentStep.accordions[0].title"
           :description="currentStep.accordions[0].description"

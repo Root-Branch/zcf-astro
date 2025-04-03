@@ -30,9 +30,9 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
     ${padding_right_class} ${mobile_padding_left_class} ${mobile_padding_right_class} ${max_width_class}`}
 >
   <!-- Desktop Layout -->
-  <div class="relative mx-auto w-full h-full hidden lg:flex items-center justify-center min-h-[800px]">
+  <div class="relative mx-auto w-full h-full hidden lg:flex items-center justify-center min-h-[700px]">
     {/* Left Image */}
-    <div class="absolute left-0 top-0 w-[40%] h-[65%]">
+    <div class="absolute left-0 top-0 w-[36%] h-[65%]">
       <img
         src={convertToWebP(images[0].filename)}
         alt={images[0].alt}
@@ -41,7 +41,7 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
     </div>
 
     {/* Right Image */}
-    <div class="absolute right-0 bottom-0 w-[45%] h-[65%]">
+    <div class="absolute right-0 bottom-0 w-[40%] h-[65%]">
       <img
         src={convertToWebP(images[1].filename)}
         alt={images[1].alt}

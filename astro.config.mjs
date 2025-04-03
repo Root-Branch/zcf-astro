@@ -61,6 +61,8 @@ export default defineConfig({
         "contact.section.01": "storyblok/contact/ContactSection01",
         "icon_feature_list.section.01":
           "storyblok/free-resources/IconFeatureListSection01",
+        "info_download_section.01":
+          "storyblok/free-resources/InfoDownloadSection01",
         "cta_banner.section.04": "storyblok/case-studies/CtaBannerSection04",
         "card_grid.section.04": "storyblok/case-studies/CardGridSection04",
         "hero_banner.section.02":

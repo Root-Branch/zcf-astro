@@ -1,0 +1,113 @@
+---
+import FormInitializer from "../../marketplace/form-section-02/FormInitializer.vue";
+import Button from "../../common/Button.astro";
+
+const {
+  placeholder = "Enter email to download",
+  description,
+  footer,
+  pdf_link,
+  cta_button = [],
+  hubspot_name = "email",
+  hubspot_formId,
+  hubspot_portalId,
+  is_center_align = false,
+  form_input_color = "ds-white",
+  form_background_color = "ds-white",
+  is_button_full_width = false,
+} = Astro.props;
+
+const formId = `download-form-${crypto.randomUUID().substring(0, 8)}`;
+const formSectionId = `${formId}-form-section`;
+const successSectionId = `${formId}-success`;
+
+const pdfUrl = pdf_link?.cached_url || pdf_link?.url || "";
+
+const inputBgClass = `bg-${form_background_color} text-${form_input_color}`;
+const inputBorderAndTextColor = `border-${form_input_color} placeholder-${form_input_color} text-${form_input_color}`;
+const alignClass = is_center_align ? "text-center" : "";
+---
+
+<!-- Form Section -->
+<div class={`${alignClass}`}>
+  <div id={formSectionId} class="w-full">
+    <form id={formId} class="w-full">
+      <div class="relative">
+        <input
+          type="email"
+          name={hubspot_name}
+          placeholder={placeholder}
+          required
+          class={`w-full px-4 py-3 border focus:border-none focus:outline-none focus:ring-1 focus:ring-ds-red-500 ${inputBgClass} ${inputBorderAndTextColor}`}
+        />
+        <input type="hidden" name="portalId" value={hubspot_portalId} />
+        <input type="hidden" name="formId" value={hubspot_formId} />
+      </div>
+
+      {description && <div class="my-2 ds-p-3 !font-light">{description}</div>}
+
+      <div class={`mt-6 ${is_button_full_width ? "w-full" : ""}`}>
+        {
+          cta_button && (
+            <Button
+              type="submit"
+              text={cta_button[0].text}
+              link={cta_button[0].link}
+              style={cta_button[0].style}
+              background_color={cta_button[0].background_color}
+              text_color={cta_button[0].text_color}
+            />
+          )
+        }
+      </div>
+    </form>
+  </div>
+
+  <!-- Success Section (hidden initially) -->
+  <div id={successSectionId} class="hidden text-left">
+    <h2 class="ds-h3 text-ds-black">Thank you!</h2>
+  </div>
+
+  {footer && <div class="mt-6 ds-p-4 text-gray-600">{footer}</div>}
+
+  <!-- FormInitializer for HubSpot integration -->
+  <FormInitializer
+    formId={formId}
+    portalId={hubspot_portalId}
+    formGuid={hubspot_formId}
+    client:load
+  />
+
+  <!-- Script to open PDF after successful form submission -->
+  <script define:vars={{ pdfUrl, formSectionId, successSectionId }}>
+    document.addEventListener("DOMContentLoaded", () => {
+      const observer = new MutationObserver((mutations) => {
+        for (const mutation of mutations) {
+          if (
+            mutation.type === "attributes" &&
+            mutation.attributeName === "class"
+          ) {
+            const formSection = document.getElementById(formSectionId);
+            const successSection = document.getElementById(successSectionId);
+
+            if (
+              formSection.classList.contains("hidden") &&
+              !successSection.classList.contains("hidden")
+            ) {
+              if (pdfUrl) {
+                window.open(pdfUrl, "_blank");
+              }
+
+              observer.disconnect();
+            }
+          }
+        }
+      });
+
+      const successSection = document.getElementById(successSectionId);
+      if (successSection) {
+        observer.observe(successSection, { attributes: true });
+      }
+    });
+  </script>
+</div>
