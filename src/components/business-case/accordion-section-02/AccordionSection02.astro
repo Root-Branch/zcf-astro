@@ -30,14 +30,15 @@ const bg_color_class = `bg-${background_color}`;
 ---
 
 <section
+  id={`${title}`}
   class={`${mobile_padding_top_class} ${mobile_padding_bottom_class} ${padding_top_class} ${padding_bottom_class} ${bg_color_class}`}
 >
   <div class="container mx-auto px-4 lg:px-8">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-0 lg:gap-16">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-0 lg:gap-16 items-start">
       <!-- Left Column - Content -->
-      <div class="flex flex-col h-full max-h-[600px]">
+      <div class="flex flex-col h-full">
         <!-- Title and Subtitle -->
-        <h2 class="ds-h2 mb-4">{title}</h2>
+        <h2 class="ds-h3 mb-4">{title}</h2>
         <h3 class="ds-h4 text-ds-red-500 mb-8">{subtitle}</h3>
         <div>
           <!-- Description -->
@@ -51,7 +52,7 @@ const bg_color_class = `bg-${background_color}`;
         <!-- CTA Button -->
         {
           cta_button && (
-            <div class="mt-[200px] hidden lg:flex">
+            <div class="mt-[157px] hidden lg:flex">
               {cta_button.map((button) => (
                 <Button
                   text={button.text}
@@ -67,7 +68,7 @@ const bg_color_class = `bg-${background_color}`;
       </div>
 
       <!-- Right Column - Accordions -->
-      <div class="flex items-center">
+      <div class="flex items-start xl:-mt-20">
         {
           processedAccordions.map((accordion) => (
             <div class="w-full">

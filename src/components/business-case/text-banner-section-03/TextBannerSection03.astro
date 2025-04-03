@@ -1,51 +1,47 @@
 ---
 import { renderRichText } from "@storyblok/astro";
 
-const { title, description, styling } = Astro.props;
+const { title, description, styling = [] } = Astro.props;
 
-//Common
-const padding_top_class = styling?.[0]?.padding_top
-  ? `lg:pt-${styling[0].padding_top}`
-  : "";
-const padding_bottom_class = styling?.[0]?.padding_bottom
-  ? `lg:pb-${styling[0].padding_bottom}`
-  : "";
-const mobile_padding_top_class = styling?.[0]?.mobile_padding_top
-  ? `pt-${styling[0].mobile_padding_top}`
-  : "";
-const mobile_padding_bottom_class = styling?.[0]?.mobile_padding_bottom
-  ? `pb-${styling[0].mobile_padding_bottom}`
-  : "";
-const padding_left_class = styling?.[0]?.padding_left
-  ? `lg:pl-${styling[0].padding_left}`
-  : "";
-const padding_right_class = styling?.[0]?.padding_right
-  ? `lg:pr-${styling[0].padding_right}`
-  : "";
-const mobile_padding_left_class = styling?.[0]?.mobile_padding_left
-  ? `pl-${styling[0].mobile_padding_left}`
-  : "";
-const mobile_padding_right_class = styling?.[0]?.mobile_padding_right
-  ? `pr-${styling[0].mobile_padding_right}`
-  : "";
-const gap_class = styling?.[0]?.gap ? `gap-8 lg:gap-${styling[0].gap}` : "";
-const max_width_class = styling?.[0]?.max_width
-  ? `max-w-[${styling[0].max_width}px]`
-  : "";
-const max_height_class = styling?.[0]?.max_height
-  ? `max-h-[${styling[0].max_height}px]`
-  : "";
-const background_color_class = styling?.[0]?.background_color
-  ? `bg-${styling[0].background_color}`
+// Extract styling properties
+const padding_top = styling?.[0]?.padding_top || "";
+const padding_bottom = styling?.[0]?.padding_bottom || "";
+const padding_left = styling?.[0]?.padding_left || "";
+const padding_right = styling?.[0]?.padding_right || "";
+const mobile_padding_top = styling?.[0]?.mobile_padding_top || "";
+const mobile_padding_bottom = styling?.[0]?.mobile_padding_bottom || "";
+const mobile_padding_left = styling?.[0]?.mobile_padding_left || "";
+const mobile_padding_right = styling?.[0]?.mobile_padding_right || "";
+const background_color = styling?.[0]?.background_color || "";
+const gap = styling?.[0]?.gap || "";
+const max_width = styling?.[0]?.max_width || "";
+const max_height = styling?.[0]?.max_height || "";
+const shifted_up = styling?.[0]?.shifted_up || "95";
+const mobile_shifted_up = styling?.[0]?.mobile_shifted_up || "95";
+
+// Create CSS classes
+const padding_y_classes = `
+  pt-${mobile_padding_top} pb-${mobile_padding_bottom}
+  lg:pt-${padding_top} lg:pb-${padding_bottom}
+`;
+
+const padding_x_classes = `
+  pl-${mobile_padding_left} pr-${mobile_padding_right}
+  lg:pl-${padding_left} lg:pr-${padding_right}
+`;
+
+const bg_color_class = background_color ? `bg-${background_color}` : "";
+const gap_class = gap ? `gap-8 lg:gap-${gap}` : "gap-8 lg:gap-16";
+const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
+const max_height_class = max_height ? `max-h-[${max_height}px]` : "";
+const shifted_up_class = shifted_up ? `lg:-mt-${shifted_up}` : "";
+const mobile_shifted_up_class = mobile_shifted_up
+  ? `-mt-${mobile_shifted_up}`
   : "";
 ---
 
 <section
-  class={`${mobile_padding_top_class} ${mobile_padding_bottom_class}
-   ${padding_top_class} ${padding_bottom_class} ${background_color_class}
-   ${padding_left_class} ${padding_right_class}
-   ${mobile_padding_left_class} ${mobile_padding_right_class}
-   -mt-[95px] lg:-mt-[250px] xl:-mt-[165px] 2xl:-mt-[100px]`}
+  class={`relative ${padding_y_classes} ${padding_x_classes} ${bg_color_class} ${shifted_up_class} ${mobile_shifted_up_class} z-10`}
 >
   <div class={`mx-auto px-2 sm:px-16 ${max_width_class} ${max_height_class}`}>
     <div class={`flex flex-col lg:flex-row justify-between ${gap_class}`}>

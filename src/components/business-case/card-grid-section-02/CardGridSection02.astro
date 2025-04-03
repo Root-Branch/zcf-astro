@@ -1,5 +1,5 @@
 ---
-const { title, cards, styling } = Astro.props;
+const { title, cards, styling, link } = Astro.props;
 
 // Extract styling properties
 const padding_top = styling?.[0]?.padding_top || "xs";
@@ -37,9 +37,9 @@ const bg_color_class = background_color ? `bg-${background_color}` : "";
       {
         cards.map((card, index) => (
           <div
-            class={`card-container ${card.is_long_content ? "xl:h-[500px] max-h-[600px]" : "xl:h-[420px] max-h-[500px]"} ${index % 2 === 1 ? "md:mt-12" : ""}`}
+            class={`card-container ${card.is_long_content ? "xl:h-[500px] max-h-[600px]" : "xl:h-[420px] max-h-[500px]"} ${index % 2 === 1 ? "xl:mt-12" : ""}`}
           >
-            <div class="bg-white px-4 py-4 lg:py-10 h-full relative flex flex-col justify-center items-start lg:items-center">
+            <div class="bg-white px-4 py-4 lg:py-10 relative flex flex-col justify-center items-start lg:items-center">
               <div class="card-header text-left lg:text-center lg:px-[0.5rem]">
                 <h3 class="ds-hl2 lg:ds-hl4 mb-2">{card.title}</h3>
                 <p class="ds-h3 lg:ds-h4 text-ds-red-500 font-bold mb-4">
@@ -51,7 +51,7 @@ const bg_color_class = background_color ? `bg-${background_color}` : "";
                 <p class="ds-p-2">{card.description}</p>
 
                 <a
-                  href="#"
+                  href={card.link.url}
                   class="underline mt-4 flex items-center text-ds-blue-900 font-medium flex lg:justify-center justify-start"
                 >
                   Read more
