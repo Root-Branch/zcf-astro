@@ -21,7 +21,7 @@ const { title, description, step_cards } = Astro.props;
         <div class="swiper-wrapper">
           {
             step_cards.map((card, index) => (
-              <div class="swiper-slide">
+              <div class="swiper-slide step-card-container" data-index={index}>
                 <StepCard card={card} isHighlighted={index === 0} />
               </div>
             ))
@@ -31,34 +31,20 @@ const { title, description, step_cards } = Astro.props;
 
       <!-- Navigation buttons (outside the swiper container) -->
       <div class="flex justify-center gap-12 mt-4">
-        <div
-          class="swiper-button-prev after:content-none static transform-none mx-0 my-0 w-auto h-auto"
-        >
-          <Image
-            src={arrowLeft}
-            alt="Previous"
-            height={27}
-          />
+        <div class="swiper-button-prev after:content-none static transform-none mx-0 my-0 w-auto h-auto">
+          <Image src={arrowLeft} alt="Previous" height={27} />
         </div>
-        <div
-          class="swiper-button-next after:content-none static transform-none mx-0 my-0 w-auto h-auto"
-        >
-          <Image
-            src={arrowRight}
-            alt="Next"
-            height={27}
-          />
+        <div class="swiper-button-next after:content-none static transform-none mx-0 my-0 w-auto h-auto">
+          <Image src={arrowRight} alt="Next" height={27} />
         </div>
       </div>
     </div>
 
     {/* Desktop Grid (visible on large screens and up) */}
-    <div
-      class="hidden xl:grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-4 gap-6 mx-auto"
-    >
+    <div class="hidden xl:grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-4 gap-6 mx-auto" id="steps-desktop-grid">
       {
         step_cards.map((card, index) => (
-          <div class={index === 0 ? "self-start" : "self-center"}>
+          <div class="step-card-container self-center" data-index={index}>
             <StepCard card={card} isHighlighted={index === 0} />
           </div>
         ))
@@ -74,6 +60,7 @@ const { title, description, step_cards } = Astro.props;
   import "swiper/css/navigation";
 
   document.addEventListener("DOMContentLoaded", () => {
+    // Initialize Swiper
     const swiper = new Swiper(".stepsSwiper", {
       modules: [Navigation],
       slidesPerView: 1,
@@ -83,6 +70,37 @@ const { title, description, step_cards } = Astro.props;
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
       },
+    });
+    
+    // Handle desktop card highlighting
+    const desktopCards = document.querySelectorAll('#steps-desktop-grid .step-card-container');
+    let activeCardIndex = 0;
+    
+    function updateCardHighlighting(highlightIndex) {
+      desktopCards.forEach((container, idx) => {
+        const card = container.querySelector('div[class*="bg-ds-"]');
+        if (!card) return;
+        
+        if (idx === highlightIndex) {
+          card.classList.add('lg:bg-ds-teal-500', 'xl:min-h-[604px]');
+          card.classList.remove('xl:min-h-[518px]');
+        } else {
+          card.classList.remove('lg:bg-ds-teal-500', 'xl:min-h-[604px]');
+          card.classList.add('xl:min-h-[518px]');
+        }
+      });
+    }
+    
+    // Add hover events to cards
+    desktopCards.forEach((cardContainer, index) => {
+      cardContainer.addEventListener('mouseenter', () => {
+        updateCardHighlighting(index);
+        activeCardIndex = index;
+      });
+      
+      cardContainer.addEventListener('mouseleave', () => {
+        updateCardHighlighting(activeCardIndex);
+      });
     });
   });
 </script>
