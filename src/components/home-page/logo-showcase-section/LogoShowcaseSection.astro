@@ -20,11 +20,11 @@ const duplicatedLogos = [...logos, ...logos, ...logos, ...logos];
       <div class="marquee-track flex whitespace-nowrap">
         <div class="marquee-content flex">
           {duplicatedLogos.map((logo) => (
-            <div class="flex items-center justify-center mx-10 flex-shrink-0">
+            <div class="flex items-center justify-center mx-6 lg:mx-10 flex-shrink-0">
               <img
                 src={convertToWebP(logo.filename)}
                 alt={logo.alt || "Partner logo"}
-                class="h-[100px] w-auto"
+                class="h-[53px] lg:h-[100px] w-auto max-w-[100px]"
               />
             </div>
           ))}
@@ -32,11 +32,11 @@ const duplicatedLogos = [...logos, ...logos, ...logos, ...logos];
         
         <div class="marquee-content flex">
           {duplicatedLogos.map((logo) => (
-            <div class="flex items-center justify-center mx-10 flex-shrink-0">
+            <div class="flex items-center justify-center mx-6 lg:mx-10 flex-shrink-0">
               <img
                 src={convertToWebP(logo.filename)}
                 alt={logo.alt || "Partner logo"}
-                class="h-[100px] w-auto"
+                class="h-[53px] lg:h-[100px] w-auto"
               />
             </div>
           ))}

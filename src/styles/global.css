@@ -8,12 +8,12 @@
     font-family: "Montserrat", sans-serif;
     font-size: 35px;
     line-height: 45px;
-    font-weight: 650;
+    font-weight: 700;
   }
 
   .ds-button {
     font-family: "Source Sans 3", sans-serif;
-    font-size: 16px;
+    font-size: 12px;
     line-height: auto;
     font-weight: 500;
   }
@@ -23,26 +23,26 @@
     font-family: "Montserrat", sans-serif;
     font-size: 25px;
     line-height: 1.5;
-    font-weight: 650;
+    font-weight: 700;
   }
   .ds-h3 {
     font-family: "Montserrat", sans-serif;
     font-size: 20px;
     line-height: auto;
-    font-weight: 650;
+    font-weight: 700;
   }
   .ds-h4 {
     font-family: "Montserrat", sans-serif;
     font-size: 15px;
     line-height: auto;
-    font-weight: 650;
+    font-weight: 700;
   }
 
   /* Highlights - Just Another Hand */
   .ds-hl1 {
     font-family: "Just Another Hand", cursive;
     font-size: 50px;
-    line-height: auto;
+    line-height: 1;
   }
   .ds-hl2 {
     font-family: "Just Another Hand", cursive;
@@ -82,8 +82,8 @@
   .ds-p-2 {
     font-family: "Source Sans 3", sans-serif;
     font-size: 15px;
-    line-height: 25px;
-    font-weight: 350;
+    line-height: 20px;
+    font-weight: 400;
   }
   .ds-p-3 {
     font-family: "Source Sans 3", sans-serif;
@@ -166,7 +166,7 @@
     .ds-hl1 {
       font-family: "Just Another Hand", cursive;
       font-size: 70px;
-      line-height: auto;
+      line-height: 1;
     }
     .ds-hl2 {
       font-family: "Just Another Hand", cursive;

@@ -6,10 +6,10 @@ const { title, subtitle, description, cta_button, background_color } =
 ---
 
 <div
-  class={`bg-${background_color} p-8 md:px-20 md:py-16 text-ds-white min-h-[508px] flex flex-col items-center justify-center text-center max-w-[810px]`}
+  class={`bg-${background_color} px-8 py-0 md:px-20 md:py-16 text-ds-white min-h-[400px] lg:min-h-[508px] flex flex-col items-center justify-center text-center max-w-[810px]`}
 >
-  <h3 class="ds-h2 lg:ds-h3 mb-[2rem]">{title}</h3>
-  <p class="ds-p-1 !font-semibold mb-10">{subtitle}</p>
+  <h3 class="ds-h2 lg:ds-h3 mb-[1rem] lg:mb-[2rem]">{title}</h3>
+  <p class="ds-p-1 !font-semibold mb-6 lg:mb-10">{subtitle}</p>
   <p class="ds-p-2 text-center">{description}</p>
   {
     cta_button?.[0] && (

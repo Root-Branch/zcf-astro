@@ -10,10 +10,13 @@ const renderedHeading = renderRichText(step_heading);
 ---
 
 <div
-  class={`bg-${background_color} flex flex-row p-8 md:p-12 ${background_color === "ds-white" || number == 1 ? "xl:ml-12" : ""} `}
+  class={`bg-${background_color} flex flex-row p-8 md:p-12 ${background_color === "ds-white" || number == 1 ? "xl:ml-12" : ""} 
+    ${number == 4 ? "mt-6 lg:mt-0" : ""} `}
 >
   <div class="flex justify-center mr-4 md:mr-8">
-    <span class="inline-block ds-number-large text-ds-red-500">{number}</span>
+    <span class="inline-block ds-number-large text-ds-red-500 min-w-[51.688px]"
+      >{number}</span
+    >
   </div>
 
   <div class="flex flex-col">

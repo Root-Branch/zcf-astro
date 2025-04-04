@@ -29,8 +29,8 @@ const currentPath = Astro.url.pathname;
     <!-- Navigation menu -->
     <div
       class="flex flex-col xl:flex-row xl:items-center xl:relative
-      fixed top-0 left-0 h-[100vh] xl:h-auto xl:w-auto w-[300px]
-      xl:bg-transparent bg-white xl:p-0 py-24 px-8 transition-transform xl:translate-x-0 -translate-x-full z-40"
+      fixed top-0 right-0 h-[100vh] xl:h-auto xl:w-auto w-[300px]
+      xl:bg-transparent bg-white xl:p-0 py-24 px-8 transition-transform xl:translate-x-0 translate-x-full z-40"
       id="nav-menu"
     >
       <div class="xl:mr-10 mb-10 xl:mb-0">
@@ -82,7 +82,7 @@ const currentPath = Astro.url.pathname;
   const menuBars = menuToggle?.getElementsByTagName("div");
 
   menuToggle?.addEventListener("click", () => {
-    navMenu?.classList.toggle("-translate-x-full");
+    navMenu?.classList.toggle("translate-x-full");
     navMenu?.classList.toggle("translate-x-0");
 
     // Animate hamburger to X

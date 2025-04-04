@@ -3,6 +3,7 @@ import { convertToWebP } from "../../../utils/imageConvert";
 
 const {
   background_image,
+  mobile_background_image,
   decorative_text_image,
   heading,
   heading_font,
@@ -10,19 +11,31 @@ const {
 } = Astro.props;
 ---
 
-<section class="relative h-[400px]">
+<section class="relative h-[500px] lg:h-[400px]">
   {/* Background Image */}
-  <img
-    src={convertToWebP(background_image.filename)}
-    alt={background_image.alt || "Banner background"}
-    class="absolute inset-0 w-full h-full object-cover"
-  />
+  <div class="absolute inset-0">
+    {/* Desktop Background Image - hidden on mobile */}
+    <img
+      src={convertToWebP(background_image.filename)}
+      alt={background_image.alt || "Banner background"}
+      class="absolute inset-0 w-full h-full object-cover hidden md:block"
+    />
+    
+    {/* Mobile Background Image - hidden on desktop */}
+    {mobile_background_image?.filename && (
+      <img
+        src={convertToWebP(mobile_background_image.filename)}
+        alt={mobile_background_image.alt || "Banner background mobile"}
+        class="absolute inset-0 w-full h-full object-cover md:hidden"
+      />
+    )}
+  </div>
 
   {/* Overlay */}
   <div class="absolute inset-0 bg-ds-blue-900/45"></div>
 
   {/* Content */}
-  <div class="relative z-10 max-w-[1408px] mx-auto px-4 h-full">
+  <div class="relative z-10 max-w-[1408px] mx-auto px-[3rem] lg:px-4 h-full">
     <div class="flex flex-col md:flex-row justify-around items-center h-full">
       {/* Decorative Text Image (Step up to the table) */}
       {
