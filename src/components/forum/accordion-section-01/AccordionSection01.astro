@@ -12,22 +12,41 @@ const {
   image,
   image_carousel,
   is_accordion_left = true,
-  padding_top = "xs",
-  padding_bottom = "xs",
-  max_width = "1695",
   accordion_proportion = "60",
+  styling,
 } = Astro.props;
 
+const padding_top = styling?.[0]?.padding_top || "md";
+const padding_bottom = styling?.[0]?.padding_bottom || "md";
+const padding_left = styling?.[0]?.padding_left || "";
+const padding_right = styling?.[0]?.padding_right || "";
+const mobile_padding_top = styling?.[0]?.mobile_padding_top || "xs";
+const mobile_padding_bottom = styling?.[0]?.mobile_padding_bottom || "xs";
+const mobile_padding_left = styling?.[0]?.mobile_padding_left || "";
+const mobile_padding_right = styling?.[0]?.mobile_padding_right || "";
+const background_color = styling?.[0]?.background_color || "";
+const max_width = styling?.[0]?.max_width || "1695";
+
+const padding_classes = `
+  ${mobile_padding_top ? `pt-${mobile_padding_top}` : ""}
+  ${mobile_padding_bottom ? `pb-${mobile_padding_bottom}` : ""}
+  ${mobile_padding_left ? `pl-${mobile_padding_left}` : ""}
+  ${mobile_padding_right ? `pr-${mobile_padding_right}` : ""}
+  ${padding_top ? `lg:pt-${padding_top}` : ""}
+  ${padding_bottom ? `lg:pb-${padding_bottom}` : ""}
+  ${padding_left ? `lg:pl-${padding_left}` : ""}
+  ${padding_right ? `lg:pr-${padding_right}` : ""}
+`;
+
+const bg_color_class = background_color ? `bg-${background_color}` : "";
+const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
 const image_proportion = 100 - accordion_proportion;
-const paddingTopClass = `pt-${padding_top}`;
-const paddingBottomClass = `pb-${padding_bottom}`;
 const accordionWidthClass = `w-[${accordion_proportion}%]`;
-const maxWidthClass = `max-w-[${max_width}px]`;
 const imageWidthClass = `w-[${image_proportion}%]`;
 ---
 
-<section class={`${paddingTopClass} ${paddingBottomClass}`}>
-  <div class={`${maxWidthClass} mx-auto px-4 lg:px-8`}>
+<section class={`${padding_classes} ${bg_color_class}`}>
+  <div class={`${max_width_class} mx-auto px-4 lg:px-8`}>
     {title && <p class="ds-h3 lg:ds-h4 mb-12">{title}</p>}
 
     <div

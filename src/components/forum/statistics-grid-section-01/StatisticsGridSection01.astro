@@ -28,12 +28,12 @@ const { title, description, statistics_card } = Astro.props;
       <div
         class="w-full lg:w-1/2 bg-ds-white px-2 py-4 lg:px-8 lg:py-8 lg:absolute lg:right-4 2xl:right-[7rem] lg:-ml-12 lg:z-10"
       >
-        <h2 class="ds-p-title !leading-1 mb-4 !font-bold">{title}</h2>
+        <h2 class="ds-p-large !leading-[1.2] mb-4 lg:!font-bold">{title}</h2>
         <p class="ds-p-2">{description}</p>
       </div>
 
       {/* Mobile Layout */}
-      <div class="grid lg:hidden grid-cols-3 gap-2 lg:gap-4 max-w-fit">
+      <div class="mt-8 grid lg:hidden grid-cols-3 gap-2 lg:gap-4 max-w-fit">
         <div class="grid gap-4 mt-8 lg:mt-20">
           <StatisticsCard card={statistics_card[0]} />
           <EmptyCard />

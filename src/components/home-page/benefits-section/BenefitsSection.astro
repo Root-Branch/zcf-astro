@@ -2,13 +2,7 @@
 import BenefitItem from "./BenefitItem.astro";
 import Button from "../../common/Button.astro";
 
-const { 
-  heading, 
-  benefits, 
-  cta_button, 
-  styling,
-  benefit_item_width
-} = Astro.props;
+const { heading, benefits, cta_button, styling, gap } = Astro.props;
 
 // Extract styling properties
 const padding_top = styling?.[0]?.padding_top || "";
@@ -31,28 +25,44 @@ const padding_classes = `
 
 const bg_color_class = background_color ? `bg-${background_color}` : "";
 const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
+
+let gap_class;
+switch (gap) {
+  case "sm":
+    gap_class = "gap-2 md:gap-4";
+    break;
+  case "md":
+    gap_class = "gap-4 md:gap-8";
+    break;
+  case "lg":
+    gap_class = "gap-8 md:gap-16";
+    break;
+  default:
+    gap_class = "gap-8 md:gap-16";
+}
 ---
 
 <section class={`${bg_color_class} ${padding_classes}`}>
   <div class={`mx-auto ${max_width_class} px-4 text-center`}>
     {heading && <h2 class="ds-h2 md:ds-h3 text-ds-white mb-20">{heading}</h2>}
 
-    <div class="flex flex-wrap flex-row justify-center items-center gap-16 md:gap-8">
-      {benefits?.map((benefit) => (
-        <BenefitItem {...benefit} width={benefit_item_width} />
-      ))}
+    <div
+      class={`flex flex-wrap flex-row justify-center items-center ${gap_class}`}
+    >
+      {benefits?.map((benefit) => <BenefitItem {...benefit} />)}
     </div>
-
-    {cta_button?.[0] && (
-      <div class="mt-16">
-        <Button
-          text={cta_button[0].text}
-          link={cta_button[0].link}
-          style={cta_button[0].style}
-          background_color={cta_button[0].background_color}
-          text_color={cta_button[0].text_color}
-        />
-      </div>
-    )}
+    {
+      cta_button?.[0] && (
+        <div class="mt-16">
+          <Button
+            text={cta_button[0].text}
+            link={cta_button[0].link}
+            style={cta_button[0].style}
+            background_color={cta_button[0].background_color}
+            text_color={cta_button[0].text_color}
+          />
+        </div>
+      )
+    }
   </div>
-</section> 
+</section>

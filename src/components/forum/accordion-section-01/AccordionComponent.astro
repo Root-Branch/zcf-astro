@@ -6,7 +6,7 @@ const { title, description, items } = Astro.props;
 ---
 
 <div class="mb-8 accordion-section">
-  <h3 class="ds-p-medium mb-8">{title}</h3>
+  <h3 class="ds-p-large lg:ds-p-medium  mb-8">{title}</h3>
   <div class="ds-p-2 mb-10" set:html={renderRichText(description)} />
   
   <div class="accordion-container">
