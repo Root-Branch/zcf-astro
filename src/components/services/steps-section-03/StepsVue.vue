@@ -16,7 +16,10 @@
         <div>
           <p class="ds-h2 text-ds-red-500 mb-4">{{ currentStep.number }}</p>
           <h2 class="ds-h3 mb-6" v-html="currentStep.title"></h2>
-          <div class="ds-p-2 mb-12 lg:mb-24" v-html="currentStep.description"></div>
+          <div
+            class="ds-p-2 mb-12 lg:mb-24"
+            v-html="currentStep.description"
+          ></div>
         </div>
 
         <!-- Navigation Buttons (Desktop Only) -->
@@ -24,8 +27,8 @@
           <button
             v-if="currentIndex > 0"
             @click="prevStep"
-            type="button" 
-            class="ds-button px-5 py-4 md:px-9 md:py-4 rounded-full w-full sm:w-auto border-2 border-ds-red-500 text-ds-red-500 hover:bg-ds-red-500/5"
+            type="button"
+            class="ds-button px-[15px] py-[10px] md:px-[2rem] md:py-[0.8rem] rounded-full w-full sm:w-auto border-2 border-ds-red-500 text-ds-red-500 hover:bg-ds-red-500/5"
           >
             Previous step: {{ steps[currentIndex - 1].name }}
           </button>
@@ -33,8 +36,8 @@
           <button
             v-if="currentIndex < steps.length - 1"
             @click="nextStep"
-            type="button" 
-            class="ds-button px-5 py-4 md:px-9 md:py-4 rounded-full w-full sm:w-auto bg-ds-red-500 text-white hover:opacity-90"
+            type="button"
+            class="ds-button px-[15px] py-[10px] md:px-[2rem] md:py-[0.8rem] rounded-full w-full sm:w-auto bg-ds-red-500 text-white hover:opacity-90"
           >
             Next step: {{ steps[currentIndex + 1].name }}
           </button>
@@ -43,21 +46,21 @@
 
       <!-- Right Column - Accordions -->
       <div class="flex items-start">
-        <AccordionVue 
+        <AccordionVue
           :title="currentStep.accordions[0].title"
           :description="currentStep.accordions[0].description"
           :items="currentStep.accordions[0].items"
         />
       </div>
     </div>
-    
+
     <!-- Navigation Buttons (Mobile Only) -->
-    <div class="flex lg:hidden flex-col sm:flex-row gap-4 mt-8">
+    <div class="flex lg:hidden flex-row gap-4 mt-8">
       <button
         v-if="currentIndex > 0"
         @click="prevStep"
-        type="button" 
-        class="ds-button px-5 py-4 md:px-9 md:py-4 rounded-full w-1/2 sm:w-auto border-2 border-ds-red-500 text-ds-red-500 hover:bg-ds-red-500/5"
+        type="button"
+        class="ds-button px-[15px] py-[10px] md:px-[2rem] md:py-[0.8rem] rounded-full w-[30%] sm:w-auto border-2 border-ds-red-500 text-ds-red-500 hover:bg-ds-red-500/5"
       >
         Previous step: {{ steps[currentIndex - 1].name }}
       </button>
@@ -65,8 +68,8 @@
       <button
         v-if="currentIndex < steps.length - 1"
         @click="nextStep"
-        type="button" 
-        class="ds-button px-5 py-4 md:px-9 md:py-4 rounded-full w-1/2 sm:w-auto bg-ds-red-500 text-white hover:opacity-90"
+        type="button"
+        class="ds-button px-[15px] py-[10px] md:px-[2rem] md:py-[0.8rem] rounded-full w-[30%] sm:w-auto bg-ds-red-500 text-white hover:opacity-90"
       >
         Next step: {{ steps[currentIndex + 1].name }}
       </button>
@@ -75,27 +78,27 @@
 </template>
 
 <script>
-import AccordionVue from './AccordionVue.vue';
+import AccordionVue from "./AccordionVue.vue";
 
 export default {
   components: {
-    AccordionVue
+    AccordionVue,
   },
   props: {
     steps: {
       type: Array,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
-      currentIndex: 0
+      currentIndex: 0,
     };
   },
   computed: {
     currentStep() {
       return this.steps[this.currentIndex];
-    }
+    },
   },
   methods: {
     nextStep() {
@@ -107,7 +110,7 @@ export default {
       if (this.currentIndex > 0) {
         this.currentIndex--;
       }
-    }
-  }
-}
-</script> 
+    },
+  },
+};
+</script>

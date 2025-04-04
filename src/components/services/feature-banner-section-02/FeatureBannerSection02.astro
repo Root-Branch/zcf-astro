@@ -81,7 +81,7 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
     </div>
 
     {/* Images Container - Mobile */}
-    <div class="relative w-full h-[200px] px-4">
+    <div class="relative w-full h-[200px] px-4 -mb-[2.5rem]">
       {/* First Image (Larger) */}
       <div class="absolute left-0 top-0 w-[80%] h-[80%]">
         <img
@@ -96,7 +96,7 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
         <img
           src={convertToWebP(images[0].filename)}
           alt={images[1].alt}
-          class="w-full h-full object-cover shadow-lg"
+          class="w-full h-full object-cover object-left"
         />
       </div>
     </div>

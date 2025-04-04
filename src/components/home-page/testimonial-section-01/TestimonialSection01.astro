@@ -13,6 +13,7 @@ const {
   quote_icon,
   is_small_quote_size,
   height_size,
+  is_image_hidden_on_mobile,
 } = Astro.props;
 
 let height_size_class;
@@ -46,7 +47,7 @@ const is_full_width_class = is_full_width
       <img
         src={convertToWebP(quote_icon.filename)}
         alt="Quote Icon"
-        class="w-10 h-10 mb-4 absolute top-0 left-0 translate-x-[-40px] translate-y-[-30px] hidden lg:block"
+        class="w-8 h-8 lg:w-10 lg:h-10 mb-4 absolute top-0 left-0 translate-x-[-30px] lg:translate-x-[-40px] translate-y-[-30px]"
       />
     </blockquote>
 
@@ -62,12 +63,12 @@ const is_full_width_class = is_full_width
       <img
         src={convertToWebP(company_logo.filename)}
         alt={company_logo.alt || `${author_company} logo`}
-        class="h-[90px] w-auto lg:ml-4"
+        class="h-[90px] w-auto lg:ml-4 mt-4"
       />
     </div>
   </div>
 
-  <div class="hidden lg:block lg:w-[45%]">
+  <div class={`${is_image_hidden_on_mobile ? "hidden lg:block" : ""} lg:w-[45%]`}>
     <img
       src={convertToWebP(image.filename)}
       alt={image.alt || `${author_name} testimonial`}
