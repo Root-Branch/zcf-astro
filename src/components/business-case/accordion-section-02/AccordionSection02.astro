@@ -3,7 +3,7 @@ import { renderRichText } from "@storyblok/astro";
 import AccordionVue from "../../services/steps-section-03/AccordionVue.vue";
 import Button from "../../common/Button.astro";
 
-const { title, subtitle, description, accordions, styling, cta_button } =
+const { id, title, subtitle, description, accordions, styling, cta_button } =
   Astro.props;
 
 const processedAccordions = accordions.map((accordion) => ({
@@ -30,7 +30,7 @@ const bg_color_class = `bg-${background_color}`;
 ---
 
 <section
-  id={`${title}`}
+  id={`${id}`}
   class={`${mobile_padding_top_class} ${mobile_padding_bottom_class} ${padding_top_class} ${padding_bottom_class} ${bg_color_class}`}
 >
   <div class="container mx-auto px-4 lg:px-8">
@@ -38,8 +38,8 @@ const bg_color_class = `bg-${background_color}`;
       <!-- Left Column - Content -->
       <div class="flex flex-col h-full">
         <!-- Title and Subtitle -->
-        <h2 class="ds-h3 mb-4">{title}</h2>
-        <h3 class="ds-h4 text-ds-red-500 mb-8">{subtitle}</h3>
+        <h2 class="ds-h2 lg:ds-h3 mb-4">{title}</h2>
+        <h3 class="ds-h2 lg:ds-h4 text-ds-red-500 mb-8">{subtitle}</h3>
         <div>
           <!-- Description -->
           {
@@ -85,7 +85,7 @@ const bg_color_class = `bg-${background_color}`;
     </div>
 
     <!-- Navigation Buttons (Mobile Only) -->
-    <div class="lg:hidden mt-8">
+    <div class="lg:hidden mt-16">
       {
         cta_button && (
           <Button

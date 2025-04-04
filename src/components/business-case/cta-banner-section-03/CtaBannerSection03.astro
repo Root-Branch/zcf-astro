@@ -68,7 +68,7 @@ const max_width_class = `max-w-[${styling?.[0]?.max_width}px]` || "";
             class="w-full h-auto object-contain"
           />
         </div>
-        <div class="relative w-full h-full xl:hidden">
+        <div class="relative w-full h-full xl:hidden z-20">
           <img
             src={convertToWebP(mobile_image.filename)}
             alt={mobile_image.alt || ""}

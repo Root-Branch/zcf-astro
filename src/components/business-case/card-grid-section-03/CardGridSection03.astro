@@ -42,7 +42,7 @@ const scrollbar_background_color_class = scrollbar_background_color ? `bg-${scro
     <div class="flex flex-col lg:flex-row-reverse">
       <div class="w-full lg:w-[30%] px-4 lg:pl-16 text-ds-white text-center lg:text-left mb-24 lg:mb-0">
         <p class="ds-h4 text-ds-teal-500 mb-4 lg:mb-8">{subtitle}</p>
-        <p class="ds-h3 mb-4 lg:mb-8">{title}</p>
+        <p class="ds-h2 lg:ds-h3 mb-4 lg:mb-8">{title}</p>
         <p class="ds-p-2">{renderedDescription}</p>
       </div>
 
@@ -119,18 +119,14 @@ const scrollbar_background_color_class = scrollbar_background_color ? `bg-${scro
 
     if (!container || !thumb || !track) return;
 
-    // Initialize scrollbar and scroll to end
     function initScrollbar() {
-      // Set thumb width based on visible portion
       const visibleRatio = container.clientWidth / container.scrollWidth;
       thumb.style.width = `${Math.max(visibleRatio * 100, 10)}%`;
 
-      // Scroll to the right end initially
-      container.scrollLeft = container.scrollWidth;
+      container.scrollLeft = 0;
       updateThumbPosition();
     }
 
-    // Update thumb position based on scroll
     function updateThumbPosition() {
       const scrollRatio =
         container.scrollLeft / (container.scrollWidth - container.clientWidth);
@@ -138,7 +134,6 @@ const scrollbar_background_color_class = scrollbar_background_color ? `bg-${scro
       thumb.style.left = `${scrollRatio * maxLeft}px`;
     }
 
-    // Handle thumb dragging
     function setupDragging() {
       let isDragging = false;
       let startX, startLeft;
@@ -166,7 +161,6 @@ const scrollbar_background_color_class = scrollbar_background_color ? `bg-${scro
         isDragging = false;
       });
 
-      // Click on track to move thumb
       track.addEventListener("click", (e) => {
         if (e.target === thumb) return;
 
@@ -184,7 +178,6 @@ const scrollbar_background_color_class = scrollbar_background_color ? `bg-${scro
       });
     }
 
-    // Initialize everything
     initScrollbar();
     container.addEventListener("scroll", updateThumbPosition);
     window.addEventListener("resize", initScrollbar);

@@ -31,7 +31,9 @@ const bg_color_class = background_color ? `bg-${background_color}` : "";
   ${mobile_padding_bottom_class} ${mobile_padding_left_class} ${mobile_padding_right_class}`}
 >
   <div class={`mx-auto ${max_width_class}`}>
-    <h2 class="ds-h3 text-center text-white mb-12 lg:mb-24">{title}</h2>
+    <h2 class="ds-h2 lg:ds-h3 text-center text-white mb-12 lg:mb-24">
+      {title}
+    </h2>
 
     <div class="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-4 gap-2 md:gap-8">
       {
@@ -42,7 +44,7 @@ const bg_color_class = background_color ? `bg-${background_color}` : "";
             <div class="bg-white px-4 py-4 lg:py-10 relative flex flex-col justify-center items-start lg:items-center">
               <div class="card-header text-left lg:text-center lg:px-[0.5rem]">
                 <h3 class="ds-hl2 lg:ds-hl4 mb-2">{card.title}</h3>
-                <p class="ds-h3 lg:ds-h4 text-ds-red-500 font-bold mb-4">
+                <p class="ds-h4 text-ds-red-500 font-bold mb-4">
                   {card.subtitle}
                 </p>
               </div>
@@ -89,16 +91,42 @@ const bg_color_class = background_color ? `bg-${background_color}` : "";
 
     toggleBtns.forEach((btn) => {
       const card = btn.closest(".card-container");
-      const content = card.querySelector(".card-content");
+      const content = card.querySelector(".card-content") as HTMLElement;
       const plusIcon = btn.querySelector(".plus-icon");
       const minusIcon = btn.querySelector(".minus-icon");
+      const cardDiv = btn.closest(".bg-white");
 
       btn.addEventListener("click", () => {
-        content.classList.toggle("hidden");
+        // Toggle classes for visual states
         plusIcon.classList.toggle("hidden");
         minusIcon.classList.toggle("hidden");
-        const cardDiv = btn.closest(".bg-white");
         cardDiv.classList.toggle("expanded");
+        
+        // Handle content visibility with animation
+        if (content.classList.contains("hidden")) {
+          // Opening the card
+          content.classList.remove("hidden");
+          content.style.opacity = "0";
+          content.style.maxHeight = "0";
+          
+          // Trigger reflow
+          void content.offsetWidth;
+          
+          // Animate in
+          content.style.maxHeight = content.scrollHeight + "px";
+          content.style.opacity = "1";
+        } else {
+          // Closing the card
+          content.style.maxHeight = "0";
+          content.style.opacity = "0";
+          
+          // Wait for animation to complete before hiding
+          setTimeout(() => {
+            if (!cardDiv.classList.contains("expanded")) {
+              content.classList.add("hidden");
+            }
+          }, 300); // Match the transition duration
+        }
       });
     });
   });
@@ -116,17 +144,31 @@ const bg_color_class = background_color ? `bg-${background_color}` : "";
   }
 
   .bg-white {
-    transition: max-height 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
     overflow: hidden;
   }
 
   .bg-white.expanded {
-    max-height: 800px !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-content {
+    transition: max-height 0.3s ease-out, opacity 0.25s ease-in-out;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+  }
+
+  .expanded .card-content {
+    max-height: 500px;
+    opacity: 1;
   }
 
   @media (min-width: 768px) {
     .card-content {
       display: block !important;
+      max-height: none !important;
+      opacity: 1 !important;
     }
   }
 </style>
