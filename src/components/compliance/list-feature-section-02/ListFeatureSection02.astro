@@ -18,7 +18,7 @@ const { title, items, image } = Astro.props;
           {
             items.map((item) => (
               <div class="flex gap-3 lg:gap-6">
-                <div class="flex-shrink-0 w-4 h-4 bg-ds-blue-900 mt-[10px] mr-2" />
+                <div class="flex-shrink-0 w-[0.75rem] h-[0.75rem] lg:w-4 lg:h-4 bg-ds-blue-900 mt-[5px] lg:mt-[10px] mr-0 lg:mr-2" />
                 <div>
                   <h3 class="ds-h4 mb-2 text-ds-white">{item.title}</h3>
                   <p class="ds-p-2 text-ds-white">{item.description}</p>

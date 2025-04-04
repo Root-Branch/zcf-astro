@@ -2,14 +2,16 @@
 import { convertToWebP } from "../../../utils/imageConvert";
 import { renderRichText } from "@storyblok/astro";
 
-const { title, description, items, image } = Astro.props;
+const { title, description, items, image, mobile_image } = Astro.props;
 ---
 
 <section class="py-16 lg:py-32">
   <div class="container mx-auto px-4">
-    <div class="flex flex-col-reverse lg:flex-row items-center gap-[10rem]">
+    <div class="flex flex-col-reverse lg:flex-row items-center gap-[4rem] lg:gap-[10rem]">
       {/* Image */}
-      <div class="w-full lg:w-1/2 flex justify-center px-4 lg:px-0">
+      <div
+        class="w-full lg:w-1/2 flex justify-center px-4 lg:px-0 hidden lg:block"
+      >
         <img
           src={convertToWebP(image.filename)}
           alt={image.alt}
@@ -17,9 +19,18 @@ const { title, description, items, image } = Astro.props;
         />
       </div>
 
+      {/* Mobile Image */}
+      <div class="w-full lg:hidden">
+        <img
+          src={convertToWebP(mobile_image.filename)}
+          alt={mobile_image.alt}
+          class="w-full h-auto aspect-square"
+        />
+      </div>
+
       {/* Content */}
       <div class="w-full lg:w-1/2">
-        <h2 class="ds-h3 mb-4 text-center lg:text-left">{title}</h2>
+        <h2 class="ds-h2 lg:ds-h3 mb-4 text-center lg:text-left">{title}</h2>
         <div
           class="ds-p-2 mb-12 render-rich-text text-center lg:text-left"
           set:html={renderRichText(description)}
