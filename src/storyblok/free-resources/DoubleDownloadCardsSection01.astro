@@ -1,0 +1,10 @@
+---
+import { storyblokEditable } from "@storyblok/astro";
+import DoubleDownloadCardsSection01 from "../../components/free-resources/double-download-cards-section-01/DoubleDownloadCardsSection01.astro";
+
+const { blok } = Astro.props;
+---
+
+<div {...storyblokEditable(blok)}>
+  <DoubleDownloadCardsSection01 {...blok} />
+</div>

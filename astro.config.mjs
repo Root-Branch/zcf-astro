@@ -63,6 +63,12 @@ export default defineConfig({
           "storyblok/free-resources/IconFeatureListSection01",
         "info_download_section.01":
           "storyblok/free-resources/InfoDownloadSection01",
+        "info_download.section.02":
+          "storyblok/free-resources/InfoDownloadSection02",
+        "content_icon_block.section.01":
+          "storyblok/free-resources/ContentIconBlockSection01",
+        "double_download_cards.section.01":
+          "storyblok/free-resources/DoubleDownloadCardsSection01",
         "cta_banner.section.04": "storyblok/case-studies/CtaBannerSection04",
         "card_grid.section.04": "storyblok/case-studies/CardGridSection04",
         "hero_banner.section.02":
@@ -79,8 +85,7 @@ export default defineConfig({
           "storyblok/case-studies-detail/ContentSplitSection01",
         "content_split.section.02":
           "storyblok/marketplace/ContentSplitSection02",
-        "text_banner.section.04":
-          "storyblok/marketplace/TextBannerSection04",
+        "text_banner.section.04": "storyblok/marketplace/TextBannerSection04",
         "content_split.section.03":
           "storyblok/marketplace/ContentSplitSection03",
         "form.section.02": "storyblok/marketplace/FormSection02",

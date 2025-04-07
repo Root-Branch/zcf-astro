@@ -7,6 +7,8 @@ const {
   text_color,
   background_color,
   type,
+  is_button_full_width_desktop = false,
+  is_button_full_width_mobile = false,
 } = Astro.props;
 
 const buttonClasses = {
@@ -16,9 +18,10 @@ const buttonClasses = {
 
 const buttonStyle = buttonClasses[style] || buttonClasses.primary;
 const commonClasses = [
-  "text-center md:px-[2rem] md:py-[0.8rem] ds-button inline-block rounded-full hover:opacity-90",
+  "text-center md:px-[2rem] md:py-[0.8rem] ds-button inline-block rounded-full hover:opacity-90 px-[15px] py-[10px]",
   buttonStyle,
-  "px-[15px] py-[10px]",
+  is_button_full_width_mobile ? "w-full lg:w-auto" : "w-auto",
+  is_button_full_width_desktop ? "lg:w-full" : "",
   class_name,
 ];
 ---

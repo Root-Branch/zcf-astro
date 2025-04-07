@@ -2,8 +2,22 @@
 import { renderRichText } from "@storyblok/astro";
 import ImageCard from "./ImageCard.astro";
 import VideoCard from "./VideoCard.astro";
+import CustomScrollbar from "../../common/CustomScrollbar.astro";
+import DownloadCard from "../../free-resources/double-download-cards-section-01/DownloadCard.astro";
 
-const { title, description, cards, styling, subtitle, scrollbar_color, scrollbar_background_color } = Astro.props;
+const {
+  title,
+  title_color,
+  description,
+  description_color,
+  cards,
+  styling,
+  subtitle,
+  subtitle_color,
+  scrollbar_color,
+  scrollbar_background_color,
+  is_cards_left = true,
+} = Astro.props;
 
 const renderedDescription = description || "";
 
@@ -28,8 +42,12 @@ const mobile_padding_right_class = `pr-${mobile_padding_right}`;
 
 const max_width_class = `max-w-[${styling?.[0]?.max_width}px]` || "";
 const bg_color_class = background_color ? `bg-${background_color}` : "";
-const scrollbar_color_class = scrollbar_color ? `bg-${scrollbar_color}` : "";
-const scrollbar_background_color_class = scrollbar_background_color ? `bg-${scrollbar_background_color}` : "";
+const scrollbar_color_val = scrollbar_color || "ds-teal-500";
+const scrollbar_background_color_val = scrollbar_background_color || "ds-white";
+
+// Determine content alignment based on cards position
+const content_alignment = is_cards_left ? "lg:text-left" : "lg:text-right";
+const content_padding = is_cards_left ? "lg:pl-16" : "lg:pr-16";
 ---
 
 <section
@@ -39,21 +57,46 @@ const scrollbar_background_color_class = scrollbar_background_color ? `bg-${scro
   ${mobile_padding_left_class} ${mobile_padding_right_class} ${max_width_class}`}
 >
   <div class="relative overflow-hidden">
-    <div class="flex flex-col lg:flex-row-reverse">
-      <div class="w-full lg:w-[30%] px-4 lg:pl-16 text-ds-white text-center lg:text-left mb-24 lg:mb-0">
-        <p class="ds-h4 text-ds-teal-500 mb-4 lg:mb-8">{subtitle}</p>
-        <p class="ds-h2 lg:ds-h3 mb-4 lg:mb-8">{title}</p>
-        <p class="ds-p-2">{renderedDescription}</p>
+    <div
+      class={`flex flex-col ${is_cards_left ? "lg:flex-row-reverse" : "lg:flex-row"}`}
+    >
+      <div
+        class={`w-full lg:w-[30%] px-4 ${content_padding} text-ds-white text-center ${content_alignment} mb-24 lg:mb-0`}
+      >
+        <p
+          class={`ds-h4 ${subtitle_color ? `text-${subtitle_color}` : "text-ds-teal-500"} mb-4 lg:mb-8`}
+        >
+          {subtitle}
+        </p>
+        <p
+          class={`ds-h2 ${title_color ? `text-${title_color}` : "text-ds-white"} lg:ds-h3 mb-4 lg:mb-8`}
+        >
+          {title}
+        </p>
+        <p
+          class={`ds-p-2 ${description_color ? `text-${description_color}` : "text-ds-white"}`}
+        >
+          {renderedDescription}
+        </p>
       </div>
 
-      <!-- Cards Carousel (Left Side) - Takes about 80% width on desktop -->
+      <!-- Cards Carousel -->
       <div class="w-full lg:w-[70%] overflow-x-auto pb-8 carousel-container">
         <div
           class="flex space-x-12 ml-[-50px] lg:ml-[-100px] pl-[50px] lg:pl-[100px] pr-4"
         >
           {
-            cards.map((card) => (
-              card.video ? (
+            cards.map((card) =>
+              // Check if card has download_form
+              card.download_form ? (
+                <DownloadCard
+                  title={card.title}
+                  description={card.description}
+                  image={card.image}
+                  download_form={card.download_form}
+                  is_desktop={true}
+                />
+              ) : card.video ? (
                 <VideoCard
                   title={card.title}
                   description={card.description}
@@ -68,23 +111,19 @@ const scrollbar_background_color_class = scrollbar_background_color ? `bg-${scro
                   cta_button={card.cta_button}
                 />
               )
-            ))
+            )
           }
         </div>
       </div>
     </div>
 
-    <!-- Custom Horizontal Scrollbar -->
-    <div
-      class="px-4 lg:pl-8 lg:pr-0 lg:w-[70%] mt-4 custom-scrollbar-container"
-    >
-      <div class={`h-4 ${scrollbar_background_color_class} rounded-full relative`}>
-        <div
-          class={`custom-scrollbar-thumb absolute h-4 ${scrollbar_color_class} cursor-pointer rounded-full`}
-        >
-        </div>
-      </div>
-    </div>
+    <!-- Use the Custom Scrollbar Component -->
+    <CustomScrollbar
+      scrollbar_color={scrollbar_color_val}
+      scrollbar_background_color={scrollbar_background_color_val}
+      container_class={`px-4 lg:w-[70%] ${is_cards_left ? "lg:pl-8 lg:pr-0" : "lg:ml-auto lg:pr-8 lg:pl-0"}`}
+      is_cards_left={is_cards_left}
+    />
   </div>
 </section>
 
@@ -97,13 +136,6 @@ const scrollbar_background_color_class = scrollbar_background_color ? `bg-${scro
   .carousel-container {
     scrollbar-width: none;
     -ms-overflow-style: none;
-  }
-
-  /* Custom scrollbar thumb styling */
-  .custom-scrollbar-thumb {
-    width: 20%;
-    left: 0;
-    transition: left 0.1s ease;
   }
 
   .card {

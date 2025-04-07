@@ -1,0 +1,50 @@
+---
+import { convertToWebP } from "../../../utils/imageConvert";
+import DownloadForm from "../download-form/DownloadForm.astro";
+
+const {
+  title,
+  description,
+  image,
+  download_form = [],
+  card_width = "md",
+} = Astro.props;
+---
+
+<div
+  class={`card flex flex-col bg-ds-blue-900 ${card_width == "md" ? "max-w-[500px]" : "max-w-[547px]"} text-white flex-shrink-0`}
+>
+  <div class="p-8 lg:p-12">
+    {
+      image?.filename && (
+        <div class="mb-12 2xl:mb-6">
+          <img
+            src={convertToWebP(image.filename)}
+            alt={image.alt || title}
+            class="w-full object-cover max-h-[200px]"
+          />
+        </div>
+      )
+    }
+
+    <h3 class="ds-p-1 !font-semibold mb-4 hidden 2xl:block">{title}</h3>
+    <p class="ds-p-2 mb-12 hidden 2xl:block">{description}</p>
+
+    {
+      download_form && download_form.length > 0 && (
+        <div class="hidden lg:block">
+          <DownloadForm {...download_form[0]} is_desktop={true} />
+        </div>
+        <div class="block lg:hidden">
+          <DownloadForm {...download_form[0]} is_desktop={false} />
+        </div>
+      )
+    }
+  </div>
+</div>
+
+<style>
+  .card {
+    width: calc(100vw - 32px);
+  }
+</style>

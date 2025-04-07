@@ -1,0 +1,104 @@
+---
+import { renderRichText } from "@storyblok/astro";
+import { convertToWebP } from "../../../utils/imageConvert";
+import DownloadForm from "../download-form/DownloadForm.astro";
+
+const {
+  title,
+  subtitle,
+  description,
+  logos = [],
+  card_title,
+  card_description,
+  card_image,
+  card_download_form = [],
+  styling = [],
+} = Astro.props;
+
+// Extract styling properties
+const padding_top = styling?.[0]?.padding_top || "md";
+const padding_bottom = styling?.[0]?.padding_bottom || "md";
+const padding_left = styling?.[0]?.padding_left || "xs";
+const padding_right = styling?.[0]?.padding_right || "xs";
+const mobile_padding_top = styling?.[0]?.mobile_padding_top || "xs";
+const mobile_padding_bottom = styling?.[0]?.mobile_padding_bottom || "xs";
+const mobile_padding_left = styling?.[0]?.mobile_padding_left || "xxs";
+const mobile_padding_right = styling?.[0]?.mobile_padding_right || "xxs";
+const background_color = styling?.[0]?.background_color || "";
+const max_width = styling?.[0]?.max_width || "1520";
+
+// Parse rich text if needed
+const parsedDescription = description ? renderRichText(description) : "";
+
+// Create CSS classes
+const padding_classes = `
+  pt-${mobile_padding_top} pb-${mobile_padding_bottom}
+  pl-${mobile_padding_left} pr-${mobile_padding_right}
+  lg:pt-${padding_top} lg:pb-${padding_bottom}
+  lg:pl-${padding_left} lg:pr-${padding_right}
+`;
+
+const bg_color_class = background_color ? `bg-${background_color}` : "";
+const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
+---
+
+<section class={`relative ${padding_classes} ${bg_color_class}`}>
+  <div class={`mx-auto ${max_width_class}`}>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+      <!-- Left Column: Content -->
+      <div>
+        {subtitle && <p class="text-ds-red-500 ds-h4 mb-4">{subtitle}</p>}
+        {title && <h2 class="ds-h3 mb-8">{title}</h2>}
+
+        {
+          parsedDescription && (
+            <div class="mb-8 ds-p-2" set:html={parsedDescription} />
+          )
+        }
+
+        <!-- Partner Logos -->
+        <div class="flex flex-wrap items-center justify-start gap-8 mt-12">
+          {
+            logos.map((logo) => (
+              <div class="max-w-[50px] lg:max-w-[80px]">
+                <img
+                  src={convertToWebP(logo.filename)}
+                  alt={logo.alt || "Partner logo"}
+                  class="max-h-20 w-auto object-contain"
+                />
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Right Column: Card with Form -->
+      <div class="bg-ds-blue-900 text-white p-8 lg:p-12">
+        <div class="flex flex-row mb-8 gap-8">
+          {
+            card_image?.filename && (
+              <img
+                src={convertToWebP(card_image.filename)}
+                alt={card_image.alt || "Card icon"}
+                class="w-36 h-36 mb-6 mt-2 hidden lg:block"
+              />
+            )
+          }
+          <div>
+            <h3 class="ds-h3 mb-4">{card_title}</h3>
+            <p class="ds-p-2 mb-0 lg:mb-6">{card_description}</p>
+          </div>
+        </div>
+
+        <!-- Download Form Component -->
+        {
+          card_download_form && card_download_form.length > 0 && (
+            <div class="max-w-full">
+              <DownloadForm {...card_download_form[0]} />
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</section>

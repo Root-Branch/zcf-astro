@@ -1,0 +1,10 @@
+---
+import { storyblokEditable } from "@storyblok/astro";
+import ContentIconBlockSection01 from "../../components/free-resources/content-icon-block-section-01/ContentIconBlockSection01.astro";
+
+const { blok } = Astro.props;
+---
+
+<div {...storyblokEditable(blok)}>
+  <ContentIconBlockSection01 {...blok} />
+</div>

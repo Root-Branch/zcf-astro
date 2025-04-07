@@ -1,0 +1,232 @@
+---
+import { convertToWebP } from "../../../utils/imageConvert";
+import DownloadCard from "./DownloadCard.astro";
+import CustomScrollbar from "../../common/CustomScrollbar.astro";
+
+const {
+  title,
+  subtitle,
+  description,
+  download_cards = [],
+  background_image,
+  styling = [],
+  scrollbar_color = "ds-red-500",
+  scrollbar_background_color = "ds-white",
+} = Astro.props;
+
+// Extract styling properties
+const padding_top = styling?.[0]?.padding_top || "md";
+const padding_bottom = styling?.[0]?.padding_bottom || "md";
+const padding_left = styling?.[0]?.padding_left || "xs";
+const padding_right = styling?.[0]?.padding_right || "xs";
+const mobile_padding_top = styling?.[0]?.mobile_padding_top || "xs";
+const mobile_padding_bottom = styling?.[0]?.mobile_padding_bottom || "xs";
+const mobile_padding_left = styling?.[0]?.mobile_padding_left || "3xs";
+const mobile_padding_right = styling?.[0]?.mobile_padding_right || "3xs";
+const background_color = styling?.[0]?.background_color || "";
+const max_width = styling?.[0]?.max_width || "1520";
+
+// Create CSS classes
+const padding_classes = `
+  pt-${mobile_padding_top} pb-${mobile_padding_bottom}
+  pl-${mobile_padding_left} pr-${mobile_padding_right}
+  lg:pt-${padding_top} lg:pb-${padding_bottom}
+  lg:pl-${padding_left} lg:pr-${padding_right}
+`;
+
+const bg_color_class = background_color ? `bg-${background_color}` : "";
+const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
+---
+
+<!-- Desktop Layout -->
+<section
+  class={`relative ${padding_classes} ${bg_color_class} max-h-[1200px] hidden 2xl:block`}
+>
+  {
+    background_image?.filename && (
+      <div class="absolute inset-0 z-0 w-full">
+        <img
+          src={convertToWebP(background_image.filename)}
+          alt={background_image.alt || "Background image"}
+          class="w-full h-full object-cover"
+        />
+      </div>
+    )
+  }
+
+  <div class={`relative z-10 mx-auto ${max_width_class} px-4`}>
+    <div class="relative flex flex-row">
+      <!-- Info Box -->
+      <div
+        class="bg-ds-blue-500 text-white p-16 pr-[12rem] w-full md:w-auto md:max-w-[600px] max-h-[450px]"
+      >
+        {subtitle && <p class="ds-h4 !text-[20px] mb-6">{subtitle}</p>}
+        {title && <p class="ds-h3 !leading-[1.2] mb-6">{title}</p>}
+        {description && <p class="ds-p-2">{description}</p>}
+      </div>
+
+      <!-- Download Cards -->
+      <div
+        class="mt-[10rem] grid grid-cols-1 md:grid-cols-2 gap-16 -ml-[8rem]"
+      >
+        {
+          download_cards.map((card) => (
+            <DownloadCard 
+              title={card.title}
+              description={card.description}
+              image={card.image}
+              download_form={card.download_form}
+              is_desktop={true}
+              card_width={card.card_width}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Mobile Layout -->
+<section class={`${padding_classes} ${bg_color_class} block 2xl:hidden`}>
+  <!-- Background Image as Top Image on Mobile -->
+  {
+    background_image?.filename && (
+      <div class="w-full h-[300px]">
+        <img
+          src={convertToWebP(background_image.filename)}
+          alt={background_image.alt || "Background image"}
+          class="w-full h-full object-cover"
+        />
+      </div>
+    )
+  }
+
+  <div class={`mx-auto ${max_width_class}`}>
+    <!-- Info Box -->
+    <div class="bg-ds-blue-500 text-white py-xs px-8 pb-[7rem] text-center">
+      {subtitle && <p class="ds-h4 !text-[16px] !lg:text-[20px] mb-4">{subtitle}</p>}
+      {title && <p class="ds-h3 !leading-[1.2] mb-4">{title}</p>}
+      {description && <p class="ds-p-2">{description}</p>}
+    </div>
+
+    <!-- Cards Carousel -->
+    <div class="relative overflow-hidden -mt-[4rem] px-4">
+      <div class="w-full overflow-x-auto pb-8 carousel-container">
+        <div class="flex space-x-12 ml-[-50px] lg:ml-[-100px] pl-[50px] lg:pl-[100px] pr-4">
+          {
+            download_cards.map((card) => (
+              <DownloadCard 
+                title={card.title}
+                description={card.description}
+                image={card.image}
+                download_form={card.download_form}
+                is_desktop={false}
+              />
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Use the Custom Scrollbar Component -->
+      <CustomScrollbar 
+        scrollbar_color="ds-red-500"
+        scrollbar_background_color="ds-blue-900"
+        container_class="px-4"
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Hide default scrollbar */
+  .carousel-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  .carousel-container {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const container = document.querySelector(".carousel-container");
+    const thumb = document.querySelector(".custom-scrollbar-thumb");
+    const track = document.querySelector(".custom-scrollbar-container > div");
+
+    if (!container || !thumb || !track) return;
+
+    function initScrollbar() {
+      const visibleRatio = container.clientWidth / container.scrollWidth;
+      // @ts-ignore
+      thumb.style.width = `${Math.max(visibleRatio * 100, 10)}%`;
+
+      container.scrollLeft = 0;
+      updateThumbPosition();
+    }
+
+    function updateThumbPosition() {
+      const scrollRatio =
+        container.scrollLeft / (container.scrollWidth - container.clientWidth);
+      const maxLeft = track.clientWidth - thumb.clientWidth;
+      // @ts-ignore
+      thumb.style.left = `${scrollRatio * maxLeft}px`;
+    }
+
+    function setupDragging() {
+      let isDragging = false;
+      let startX, startLeft;
+
+      thumb.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        // @ts-ignore
+        startX = e.clientX;
+        // @ts-ignore
+        startLeft = parseInt(getComputedStyle(thumb).left);
+        e.preventDefault();
+      });
+
+      document.addEventListener("mousemove", (e) => {
+        if (!isDragging) return;
+
+        // @ts-ignore
+        const dx = e.clientX - startX;
+        const maxLeft = track.clientWidth - thumb.clientWidth;
+        const newLeft = Math.max(0, Math.min(startLeft + dx, maxLeft));
+
+        // @ts-ignore
+        thumb.style.left = `${newLeft}px`;
+        container.scrollLeft =
+          (newLeft / maxLeft) * (container.scrollWidth - container.clientWidth);
+      });
+
+      document.addEventListener("mouseup", () => {
+        isDragging = false;
+      });
+
+      track.addEventListener("click", (e) => {
+        if (e.target === thumb) return;
+
+        // @ts-ignore
+        const clickX = e.clientX - track.getBoundingClientRect().left;
+        const thumbCenter = thumb.clientWidth / 2;
+        const newLeft = Math.max(
+          0,
+          Math.min(clickX - thumbCenter, track.clientWidth - thumb.clientWidth)
+        );
+
+        // @ts-ignore
+        thumb.style.left = `${newLeft}px`;
+        container.scrollLeft =
+          (newLeft / (track.clientWidth - thumb.clientWidth)) *
+          (container.scrollWidth - container.clientWidth);
+      });
+    }
+
+    initScrollbar();
+    container.addEventListener("scroll", updateThumbPosition);
+    window.addEventListener("resize", initScrollbar);
+    setupDragging();
+  });
+</script>

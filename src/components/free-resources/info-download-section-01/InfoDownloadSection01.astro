@@ -42,8 +42,8 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
 ---
 
 <section class={`relative ${padding_classes} ${bg_color_class}`}>
-  <div class={`mx-auto ${max_width_class} px-4`}>
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+  <div class={`mx-auto ${max_width_class}`}>
+    <div class="grid grid-cols-1 lg:grid-cols-2 lg:gap-16 items-center">
       <!-- Left Column: Content and Form -->
       <div class="order-2 lg:order-1">
         {subtitle && <p class="text-ds-red-500 ds-h4 mb-2">{subtitle}</p>}
@@ -57,29 +57,45 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
 
         {
           parsedDescription && (
-            <div class="mb-24 ds-p-2" set:html={parsedDescription} />
+            <div class="mb-8 lg:mb-24 ds-p-2" set:html={parsedDescription} />
           )
         }
 
-        <!-- Download Form Component -->
         {
-          download_form &&
-            download_form.length > 0 &&
-            !is_download_form_right && <DownloadForm {...download_form[0]} />
+          image?.filename && (
+            <div class="relative overflow-hidden block lg:hidden mb-8">
+              <img
+                src={convertToWebP(image.filename)}
+                alt={image.alt || "Resource preview"}
+                class="w-full h-full object-cover"
+              />
+            </div>
+          )
+        }
+
+        <!-- Download Form Component (Mobile: always show here / Desktop: show if not on right) -->
+        {
+          download_form && download_form.length > 0 && (
+            <div class={`block ${!is_download_form_right ? "lg:block" : "lg:hidden"}`}>
+              <DownloadForm {...download_form[0]} />
+            </div>
+          )
         }
       </div>
 
       <!-- Right Column: Image -->
       <div class="order-1 lg:order-2">
-        <!-- Download Form Component -->
+        <!-- Download Form Component (Desktop only: show if set to right) -->
         {
-          download_form &&
-            download_form.length > 0 &&
-            is_download_form_right && <DownloadForm {...download_form[0]} />
+          download_form && download_form.length > 0 && is_download_form_right && (
+            <div class="hidden lg:block">
+              <DownloadForm {...download_form[0]} />
+            </div>
+          )
         }
         {
           image?.filename && (
-            <div class="relative overflow-hidden">
+            <div class="relative overflow-hidden hidden lg:block">
               <img
                 src={convertToWebP(image.filename)}
                 alt={image.alt || "Resource preview"}

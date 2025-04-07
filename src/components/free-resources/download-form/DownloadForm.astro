@@ -15,6 +15,8 @@ const {
   form_input_color = "ds-white",
   form_background_color = "ds-white",
   is_button_full_width = false,
+  is_button_field_same_row = false,
+  is_desktop = true,
 } = Astro.props;
 
 const formId = `download-form-${crypto.randomUUID().substring(0, 8)}`;
@@ -25,14 +27,14 @@ const pdfUrl = pdf_link?.cached_url || pdf_link?.url || "";
 
 const inputBgClass = `bg-${form_background_color} text-${form_input_color}`;
 const inputBorderAndTextColor = `border-${form_input_color} placeholder-${form_input_color} text-${form_input_color}`;
-const alignClass = is_center_align ? "text-center" : "";
+const alignClass = is_center_align ? "text-left lg:text-center" : "";
 ---
 
 <!-- Form Section -->
 <div class={`${alignClass}`}>
   <div id={formSectionId} class="w-full">
     <form id={formId} class="w-full">
-      <div class="relative">
+      <div class="relative flex flex-row">
         <input
           type="email"
           name={hubspot_name}
@@ -42,13 +44,36 @@ const alignClass = is_center_align ? "text-center" : "";
         />
         <input type="hidden" name="portalId" value={hubspot_portalId} />
         <input type="hidden" name="formId" value={hubspot_formId} />
+
+        {
+          cta_button && is_button_field_same_row && is_desktop && (
+            <div class="ml-4">
+              {cta_button && (
+                <Button
+                  type="submit"
+                  text={cta_button[0].text}
+                  link={cta_button[0].link}
+                  style={cta_button[0].style}
+                  background_color={cta_button[0].background_color}
+                  text_color={cta_button[0].text_color}
+                  is_button_full_width_desktop={is_button_full_width}
+                  is_button_full_width_mobile={true}
+                />
+              )}
+            </div>
+          )
+        }
       </div>
 
-      {description && <div class="my-2 ds-p-3 !font-light">{description}</div>}
+      {
+        description && (
+          <div class="my-2 ds-p-3 italic lg:not-italic !font-light !text-[15px]">{description}</div>
+        )
+      }
 
       <div class={`mt-6 ${is_button_full_width ? "w-full" : ""}`}>
         {
-          cta_button && (
+          cta_button && (!is_button_field_same_row || !is_desktop) && (
             <Button
               type="submit"
               text={cta_button[0].text}
@@ -56,6 +81,8 @@ const alignClass = is_center_align ? "text-center" : "";
               style={cta_button[0].style}
               background_color={cta_button[0].background_color}
               text_color={cta_button[0].text_color}
+              is_button_full_width_desktop={is_button_full_width || is_button_field_same_row}
+              is_button_full_width_mobile={true}
             />
           )
         }
@@ -64,11 +91,11 @@ const alignClass = is_center_align ? "text-center" : "";
   </div>
 
   <!-- Success Section (hidden initially) -->
-  <div id={successSectionId} class="hidden text-left">
-    <h2 class="ds-h3 text-ds-black">Thank you!</h2>
+  <div id={successSectionId} class="hidden">
+    <h2 class="ds-h3">Thank you!</h2>
   </div>
 
-  {footer && <div class="mt-6 ds-p-4 text-gray-600">{footer}</div>}
+  {footer && <div class="mt-6 ds-p-4 text-left">{footer}</div>}
 
   <!-- FormInitializer for HubSpot integration -->
   <FormInitializer

@@ -1,0 +1,74 @@
+---
+import { renderRichText } from "@storyblok/astro";
+import { convertToWebP } from "../../../utils/imageConvert";
+
+const {
+  title,
+  subtitle,
+  description,
+  icon_blocks = [],
+  styling = [],
+} = Astro.props;
+
+// Extract styling properties
+const padding_top = styling?.[0]?.padding_top || "md";
+const padding_bottom = styling?.[0]?.padding_bottom || "md";
+const padding_left = styling?.[0]?.padding_left || "xs";
+const padding_right = styling?.[0]?.padding_right || "xs";
+const mobile_padding_top = styling?.[0]?.mobile_padding_top || "xs";
+const mobile_padding_bottom = styling?.[0]?.mobile_padding_bottom || "xs";
+const mobile_padding_left = styling?.[0]?.mobile_padding_left || "xxs";
+const mobile_padding_right = styling?.[0]?.mobile_padding_right || "xxs";
+const background_color = styling?.[0]?.background_color || "";
+const max_width = styling?.[0]?.max_width || "1520";
+
+// Create CSS classes
+const padding_classes = `
+  pt-${mobile_padding_top} pb-${mobile_padding_bottom}
+  pl-${mobile_padding_left} pr-${mobile_padding_right}
+  lg:pt-${padding_top} lg:pb-${padding_bottom}
+  lg:pl-${padding_left} lg:pr-${padding_right}
+`;
+
+const bg_color_class = background_color
+  ? `bg-${background_color}`
+  : "bg-ds-blue-500";
+const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
+---
+
+<section class={`relative ${padding_classes} ${bg_color_class}`}>
+  <div class={`mx-auto ${max_width_class} px-4`}>
+    <!-- Title and Description -->
+    <div class="max-w-5xl mx-auto text-center text-white mb-12">
+      {title && <p class="ds-h3 mb-12">{title}</p>}
+
+      {
+        description && (
+          <p class="ds-p-2 mb-16 max-w-6xl mx-auto">{description}</p>
+        )
+      }
+
+      {subtitle && <p class="ds-p-2 mb-16 !font-bold">{subtitle}</p>}
+    </div>
+
+    <!-- Icon Blocks -->
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 max-w-4xl mx-auto"
+    >
+      {
+        icon_blocks.map((block) => (
+          <div class="flex flex-col items-center text-center text-white">
+            {block.image?.filename && (
+              <img
+                src={convertToWebP(block.image.filename)}
+                alt={block.image.alt || ""}
+                class="h-16 w-auto object-contain mb-8"
+              />
+            )}
+            <p class="ds-p-2 max-w-72">{block.description}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
