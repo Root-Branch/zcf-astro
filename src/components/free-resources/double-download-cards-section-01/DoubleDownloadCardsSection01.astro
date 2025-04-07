@@ -4,6 +4,7 @@ import DownloadCard from "./DownloadCard.astro";
 import CustomScrollbar from "../../common/CustomScrollbar.astro";
 
 const {
+  id,
   title,
   subtitle,
   description,
@@ -40,6 +41,7 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
 
 <!-- Desktop Layout -->
 <section
+  id={id}
   class={`relative ${padding_classes} ${bg_color_class} max-h-[1200px] hidden 2xl:block`}
 >
   {
@@ -66,12 +68,10 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
       </div>
 
       <!-- Download Cards -->
-      <div
-        class="mt-[10rem] grid grid-cols-1 md:grid-cols-2 gap-16 -ml-[8rem]"
-      >
+      <div class="mt-[10rem] grid grid-cols-1 md:grid-cols-2 gap-16 -ml-[8rem]">
         {
           download_cards.map((card) => (
-            <DownloadCard 
+            <DownloadCard
               title={card.title}
               description={card.description}
               image={card.image}
@@ -104,7 +104,11 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
   <div class={`mx-auto ${max_width_class}`}>
     <!-- Info Box -->
     <div class="bg-ds-blue-500 text-white py-xs px-8 pb-[7rem] text-center">
-      {subtitle && <p class="ds-h4 !text-[16px] !lg:text-[20px] mb-4">{subtitle}</p>}
+      {
+        subtitle && (
+          <p class="ds-h4 !text-[16px] !lg:text-[20px] mb-4">{subtitle}</p>
+        )
+      }
       {title && <p class="ds-h3 !leading-[1.2] mb-4">{title}</p>}
       {description && <p class="ds-p-2">{description}</p>}
     </div>
@@ -112,10 +116,12 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
     <!-- Cards Carousel -->
     <div class="relative overflow-hidden -mt-[4rem] px-4">
       <div class="w-full overflow-x-auto pb-8 carousel-container">
-        <div class="flex space-x-12 ml-[-50px] lg:ml-[-100px] pl-[50px] lg:pl-[100px] pr-4">
+        <div
+          class="flex space-x-12 ml-[-50px] lg:ml-[-100px] pl-[50px] lg:pl-[100px] pr-4"
+        >
           {
             download_cards.map((card) => (
-              <DownloadCard 
+              <DownloadCard
                 title={card.title}
                 description={card.description}
                 image={card.image}
@@ -128,7 +134,7 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
       </div>
 
       <!-- Use the Custom Scrollbar Component -->
-      <CustomScrollbar 
+      <CustomScrollbar
         scrollbar_color="ds-red-500"
         scrollbar_background_color="ds-blue-900"
         container_class="px-4"

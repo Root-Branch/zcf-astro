@@ -1,5 +1,6 @@
 ---
-const { title, description, styling, content_color, content_width } = Astro.props;
+const { id, title, description, styling, content_color, content_width } =
+  Astro.props;
 
 const padding_top = styling?.[0]?.padding_top || "xs";
 const padding_bottom = styling?.[0]?.padding_bottom || "xs";
@@ -29,20 +30,27 @@ const shifted_up_class = shifted_up ? `lg:-mt-${shifted_up}` : "";
 const mobile_shifted_up_class = mobile_shifted_up
   ? `-mt-${mobile_shifted_up}`
   : "";
-const content_color_class = content_color ? `text-${content_color}` : "text-ds-black";
-const content_width_class = content_width ? `${content_width === "md" ? "lg:w-[45%]" : "lg:w-[65%]"}` : "";
+const content_color_class = content_color
+  ? `text-${content_color}`
+  : "text-ds-black";
+const content_width_class = content_width
+  ? `${content_width === "md" ? "lg:w-[45%]" : "lg:w-[65%]"}`
+  : "";
 ---
 
 <section
+  id={id}
   class={`relative ${padding_classes} ${bg_color_class} ${shifted_up_class} ${mobile_shifted_up_class} z-10`}
 >
   <div class={`mx-auto ${max_width_class} px-4 md:px-8 ${content_color_class}`}>
     <div class="flex flex-col items-center text-center">
-      {title && <p class="ds-h3 font-bold mb-6 text-center">{title}</p>}
+      {title && <p class="ds-h2 lg:ds-h3 font-bold mb-6 text-center">{title}</p>}
 
-      {description && (
-        <p class={`ds-p-2 ${content_width_class} mx-auto`}>{description}</p>
-      )}
+      {
+        description && (
+          <p class={`ds-p-2 ${content_width_class} mx-auto`}>{description}</p>
+        )
+      }
     </div>
   </div>
 </section>

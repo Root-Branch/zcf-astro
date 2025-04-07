@@ -1,13 +1,18 @@
 ---
 import { convertToWebP } from "../../../utils/imageConvert";
+import FormInitializer from "../../marketplace/form-section-02/FormInitializer.vue";
+import Button from "../../common/Button.astro";
 
 const {
   title,
   image,
-  hubspot_region,
+  form_fields = [],
+  form_submit_button = [],
   hubspot_form_id,
   hubspot_portal_id,
-  styling,
+  hubspot_formId = hubspot_form_id,
+  hubspot_portalId = hubspot_portal_id,
+  styling = [],
 } = Astro.props;
 
 const padding_top = styling?.[0]?.padding_top || "md";
@@ -22,6 +27,10 @@ const padding_bottom_class = `lg:pb-${padding_bottom}`;
 const mobile_padding_top_class = `pt-${mobile_padding_top}`;
 const mobile_padding_bottom_class = `pb-${mobile_padding_bottom}`;
 const bg_color_class = `bg-${background_color}`;
+
+const formId = `form-${crypto.randomUUID().substring(0, 8)}`;
+const formSectionId = `${formId}-form-section`;
+const successSectionId = `${formId}-success`;
 ---
 
 <section
@@ -44,12 +53,12 @@ const bg_color_class = `bg-${background_color}`;
     }
 
     <!-- Title -->
-    <h2 class="ds-h3 text-center mb-8">{title}</h2>
+    <h1 class="ds-h1 text-center mb-12">{title}</h1>
 
     <!-- Image - Mobile (centered at top) -->
     {
       image && (
-        <div class="flex justify-center xl:hidden">
+        <div class="flex justify-center xl:hidden mb-6">
           <img
             src={convertToWebP(image.filename)}
             alt={image.alt || "We're here to help"}
@@ -59,38 +68,68 @@ const bg_color_class = `bg-${background_color}`;
       )
     }
 
-    <!-- HubSpot Form -->
-    <div class="bg-white w-full max-w-3xl">
-      <div
-        class="hs-form-frame"
-        data-region={hubspot_region}
-        data-form-id={hubspot_form_id}
-        data-portal-id={hubspot_portal_id}
-      >
+    <!-- Form Container -->
+    <div class="w-full max-w-2xl" id={`${formId}-container`}>
+      <!-- Form Section -->
+      <div id={formSectionId} class="w-full">
+        <form id={formId} class="flex flex-col gap-6">
+          <input type="hidden" name="portalId" value={hubspot_portalId} />
+          <input type="hidden" name="formId" value={hubspot_formId} />
+
+          {
+            form_fields &&
+              form_fields.map((field) => (
+                <div class="form-field">
+                  <label class="block mb-2 text-left">{field.name}</label>
+                  <input
+                    type={field.type || "text"}
+                    name={field.hubspot_name}
+                    placeholder={field.placeholder || `Enter`}
+                    class="w-full px-4 py-3 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-ds-red-500"
+                    required={field.required !== false}
+                  />
+                </div>
+              ))
+          }
+
+          <div class="flex justify-center mt-4">
+            {
+              form_submit_button && form_submit_button[0] ? (
+                <Button
+                  text={form_submit_button[0].text || "Submit"}
+                  link={{ url: "#" }}
+                  style={form_submit_button[0].style || "primary"}
+                  background_color={
+                    form_submit_button[0].background_color || "ds-red-500"
+                  }
+                  text_color={form_submit_button[0].text_color || "ds-white"}
+                  type="submit"
+                />
+              ) : (
+                <button
+                  type="submit"
+                  class="ds-btn bg-ds-red-500 text-white px-12 py-3 rounded-full hover:bg-ds-red-600 transition-colors"
+                >
+                  Submit
+                </button>
+              )
+            }
+          </div>
+        </form>
       </div>
+
+      <!-- Success Section -->
+      <div id={successSectionId} class="hidden text-center py-8">
+        <h2 class="ds-h3 mb-6">Thank you!</h2>
+      </div>
+
+      <!-- FormInitializer for HubSpot integration -->
+      <FormInitializer
+        client:load
+        formId={formId}
+        portalId={hubspot_portalId}
+        formGuid={hubspot_formId}
+      />
     </div>
   </div>
 </section>
-
-<script define:vars={{ hubspot_portal_id }}>
-  document.addEventListener("DOMContentLoaded", function () {
-    const script = document.createElement("script");
-    script.src = `https://js-eu1.hsforms.net/forms/embed/${hubspot_portal_id}.js`;
-    script.defer = true;
-    document.head.appendChild(script);
-
-    script.onload = function () {
-      if (window.hbspt) {
-        const formContainers = document.querySelectorAll(".hs-form-frame");
-        formContainers.forEach((container) => {
-          window.hbspt.forms.create({
-            region: container.getAttribute("data-region"),
-            portalId: container.getAttribute("data-portal-id"),
-            formId: container.getAttribute("data-form-id"),
-            target: container,
-          });
-        });
-      }
-    };
-  });
-</script>

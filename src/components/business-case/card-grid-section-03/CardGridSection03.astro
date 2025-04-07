@@ -6,6 +6,7 @@ import CustomScrollbar from "../../common/CustomScrollbar.astro";
 import DownloadCard from "../../free-resources/double-download-cards-section-01/DownloadCard.astro";
 
 const {
+  id,
   title,
   title_color,
   description,
@@ -51,6 +52,7 @@ const content_padding = is_cards_left ? "lg:pl-16" : "lg:pr-16";
 ---
 
 <section
+  id={id}
   class={`${mobile_padding_top_class} ${mobile_padding_bottom_class} 
   ${padding_top_class} ${padding_bottom_class} 
   ${bg_color_class} ${padding_left_class} ${padding_right_class} 

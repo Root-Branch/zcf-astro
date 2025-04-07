@@ -44,12 +44,12 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
   <div class={`mx-auto ${max_width_class}`}>
     <!-- Title & Description Section -->
     <div class="text-center mb-12 md:mb-16 px-4">
-      <h2 class="ds-p-medium mb-6 max-w-3xl mx-auto" set:html={parsedTitle} />
+      <h2 class="ds-p-large lg:ds-p-medium !font-bold !lg:font-normal mb-6 max-w-3xl mx-auto" set:html={parsedTitle} />
       <p class="ds-p-2 mx-auto max-w-4xl">{description}</p>
     </div>
 
     <!-- Overlapping Cards Container -->
-    <div class="relative mt-12 px-4 md:px-8 text-center md:text-left">
+    <div class="relative mt-12 text-center md:text-left">
       <!-- Left Card (Dark Blue) -->
       <div class="bg-ds-blue-900 text-ds-white p-8 md:p-12 mb-0 md:mb-0 md:w-[80%] lg:w-[70%] xl:w-[75%] z-0 relative pb-[8rem]">
         <h3 class="ds-h3 mb-8 max-w-full md:max-w-[70%] lg:max-w-[80%]">{left_card_title}</h3>

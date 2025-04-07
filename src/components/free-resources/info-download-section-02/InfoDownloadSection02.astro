@@ -4,6 +4,7 @@ import { convertToWebP } from "../../../utils/imageConvert";
 import DownloadForm from "../download-form/DownloadForm.astro";
 
 const {
+  id,
   title,
   subtitle,
   description,
@@ -42,7 +43,7 @@ const bg_color_class = background_color ? `bg-${background_color}` : "";
 const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
 ---
 
-<section class={`relative ${padding_classes} ${bg_color_class}`}>
+<section id={id} class={`relative ${padding_classes} ${bg_color_class}`}>
   <div class={`mx-auto ${max_width_class}`}>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
       <!-- Left Column: Content -->

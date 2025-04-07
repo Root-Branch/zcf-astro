@@ -1,7 +1,7 @@
 ---
 import { convertToWebP } from "../../../utils/imageConvert";
 
-const { title, description, profile_cards = [], styling = [] } = Astro.props;
+const { id, title, description, profile_cards = [], styling = [] } = Astro.props;
 
 // Extract styling properties
 const padding_top = styling?.[0]?.padding_top || "md";
@@ -27,7 +27,7 @@ const bg_color_class = background_color ? `bg-${background_color}` : "";
 const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
 ---
 
-<section class={`relative ${padding_classes} ${bg_color_class}`}>
+<section id={id} class={`relative ${padding_classes} ${bg_color_class}`}>
   <div class={`mx-auto ${max_width_class} px-4`}>
     <!-- Header Section -->
     <div class="text-center mb-12 lg:mb-16">

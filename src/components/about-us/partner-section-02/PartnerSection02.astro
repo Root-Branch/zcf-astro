@@ -26,21 +26,19 @@ const padding_classes = `
 
 const bg_color_class = background_color ? `bg-${background_color}` : "";
 const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
-const gap_class = gap === "md" ? "gap-8 md:gap-12" : gap === "lg" ? "gap-12 md:gap-16" : "gap-4 md:gap-8";
+const gap_class = gap === "md" ? "gap-4 md:gap-12" : gap === "lg" ? "gap-12 md:gap-16" : "gap-4 md:gap-8";
 ---
 
 <style>
-  .grid-template-columns-auto-fit {
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    margin-left: auto;
-    margin-right: auto;
+  .partner-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
   }
 
-  @media (max-width: 640px) {
-    .grid-template-columns-auto-fit {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+  @media (min-width: 768px) {
+    .partner-grid {
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     }
   }
 </style>
@@ -53,9 +51,9 @@ const gap_class = gap === "md" ? "gap-8 md:gap-12" : gap === "lg" ? "gap-12 md:g
     </div>
 
     <!-- Partners Grid -->
-    <div class={`grid grid-cols-1 grid-template-columns-auto-fit mx-auto ${gap_class} justify-center`}>
+    <div class={`partner-grid ${gap_class} justify-center`}>
       {partners.map((partner) => (
-        <div class="text-center mb-4 w-full sm:w-auto">
+        <div class="text-center mb-4">
           <!-- Partner Logo -->
           <div class="flex items-center justify-center mb-8">
             {partner.image?.filename && (
