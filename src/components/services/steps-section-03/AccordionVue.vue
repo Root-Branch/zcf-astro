@@ -31,7 +31,7 @@
         </button>
 
         <div
-          class="accordion-content overflow-hidden transition-all duration-300"
+          class="accordion-content overflow-hidden transition-all duration-200"
           :style="{
             maxHeight:
               openIndex === index ? contentHeight[index] + 'px' : '0px',
@@ -85,6 +85,7 @@ export default {
   methods: {
     toggleAccordion(index) {
       this.openIndex = this.openIndex === index ? -1 : index;
+      this.$nextTick(() => this.updateContentHeights());
     },
     updateContentHeights() {
       this.$nextTick(() => {
@@ -107,6 +108,12 @@ export default {
 .accordion-content {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.3s ease-out;
+  transition: max-height 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: max-height;
+}
+
+.accordion-button {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 </style>
