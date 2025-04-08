@@ -70,13 +70,28 @@ export default {
         this.openIndex = 0;
         this.$nextTick(() => {
           this.updateContentHeights();
+          // Additional check after content has been updated
+          setTimeout(() => this.updateContentHeights(), 100);
         });
       },
       immediate: true,
     },
   },
   mounted() {
+    // Force an immediate update and a second update after a short delay
     this.updateContentHeights();
+    
+    // Additional attempt after a delay to ensure contents are properly measured
+    setTimeout(() => {
+      this.updateContentHeights();
+      // Force a redraw
+      if (this.$el) {
+        this.$el.style.display = 'none';
+        this.$el.offsetHeight; // Force a reflow
+        this.$el.style.display = '';
+      }
+    }, 50);
+    
     window.addEventListener("resize", this.updateContentHeights);
   },
   beforeDestroy() {

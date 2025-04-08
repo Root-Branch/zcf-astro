@@ -119,6 +119,9 @@ export default defineConfig({
       },
     },
   },
+  server: {
+    allowedHosts: true,
+  },
   ...(isPreview && {
     adapter: netlify(),
     output: "server",

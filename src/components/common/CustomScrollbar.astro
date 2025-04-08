@@ -89,6 +89,7 @@ const {
           let isDragging = false;
           let startX, startLeft;
 
+          // Mouse events for desktop
           thumb.addEventListener("mousedown", (e) => {
             isDragging = true;
             // @ts-ignore
@@ -117,6 +118,36 @@ const {
             isDragging = false;
           });
 
+          // Touch events for mobile
+          thumb.addEventListener("touchstart", (e) => {
+            isDragging = true;
+            // @ts-ignore
+            startX = e.touches[0].clientX;
+            // @ts-ignore
+            startLeft = parseInt(getComputedStyle(thumb).left);
+            e.preventDefault();
+          }, { passive: false });
+
+          document.addEventListener("touchmove", (e) => {
+            if (!isDragging) return;
+
+            // @ts-ignore
+            const dx = e.touches[0].clientX - startX;
+            const maxLeft = track.clientWidth - thumb.clientWidth;
+            const newLeft = Math.max(0, Math.min(startLeft + dx, maxLeft));
+
+            // @ts-ignore
+            thumb.style.left = `${newLeft}px`;
+            container.scrollLeft =
+              (newLeft / maxLeft) *
+              (container.scrollWidth - container.clientWidth);
+          }, { passive: false });
+
+          document.addEventListener("touchend", () => {
+            isDragging = false;
+          });
+
+          // Make track clickable/tappable
           track.addEventListener("click", (e) => {
             if (e.target === thumb) return;
 
@@ -136,6 +167,35 @@ const {
             container.scrollLeft =
               (newLeft / (track.clientWidth - thumb.clientWidth)) *
               (container.scrollWidth - container.clientWidth);
+          });
+
+          // Handle track touch tap on mobile
+          track.addEventListener("touchend", (e) => {
+            if (e.target === thumb) return;
+            
+            // Cast the event to TouchEvent to access touchend properties
+            // @ts-ignore
+            const touchEvent = e as TouchEvent;
+            
+            // Prevent other handlers if this was a tap (not a scroll)
+            if (startX && Math.abs(touchEvent.changedTouches[0].clientX - startX) < 10) {
+              // @ts-ignore
+              const clickX = touchEvent.changedTouches[0].clientX - track.getBoundingClientRect().left;
+              const thumbCenter = thumb.clientWidth / 2;
+              const newLeft = Math.max(
+                0,
+                Math.min(
+                  clickX - thumbCenter,
+                  track.clientWidth - thumb.clientWidth
+                )
+              );
+
+              // @ts-ignore
+              thumb.style.left = `${newLeft}px`;
+              container.scrollLeft =
+                (newLeft / (track.clientWidth - thumb.clientWidth)) *
+                (container.scrollWidth - container.clientWidth);
+            }
           });
         }
 
