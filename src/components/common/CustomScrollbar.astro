@@ -3,12 +3,15 @@ const {
   scrollbar_color = "ds-red-500",
   scrollbar_background_color = "ds-blue-900",
   container_class = "px-4",
-  is_cards_left = true,
+  is_cards_left,
 } = Astro.props;
 ---
 
 <!-- Custom Horizontal Scrollbar -->
-<div class={`${container_class} custom-scrollbar-container`}>
+<div
+  class={`${container_class} custom-scrollbar-container`}
+  data-cards-left={is_cards_left}
+>
   <div
     class={`h-4 mt-4 bg-${scrollbar_background_color} rounded-full relative`}
   >
@@ -28,100 +31,121 @@ const {
   }
 </style>
 
-<script define:vars={{ is_cards_left }}>
+<script>
   document.addEventListener("DOMContentLoaded", () => {
-    const containers = document.querySelectorAll(".carousel-container");
+    // Wait a bit for everything to initialize
+    setTimeout(() => {
+      const containers = document.querySelectorAll(".carousel-container");
 
-    containers.forEach((container) => {
-      const closestSection = container.closest("section");
-      if (!closestSection) return;
+      containers.forEach((container) => {
+        const closestSection = container.closest("section");
+        if (!closestSection) return;
 
-      const thumb = closestSection.querySelector(".custom-scrollbar-thumb");
-      const track = closestSection.querySelector(
-        ".custom-scrollbar-container > div"
-      );
+        const scrollbarContainer = closestSection.querySelector(
+          ".custom-scrollbar-container"
+        );
+        if (!scrollbarContainer) return;
 
-      if (!container || !thumb || !track) return;
-
-      function initScrollbar() {
-        const visibleRatio = container.clientWidth / container.scrollWidth;
+        // Get is_cards_left value from data attribute
         // @ts-ignore
-        thumb.style.width = `${Math.max(visibleRatio * 100, 10)}%`;
+        const isCardsLeft =
+          scrollbarContainer.getAttribute("data-cards-left") === "true";
 
-        // Reset scroll position based on card position preference
-        container.scrollLeft = 0;
+        const thumb = closestSection.querySelector(".custom-scrollbar-thumb");
+        const track = closestSection.querySelector(
+          ".custom-scrollbar-container > div"
+        );
 
-        updateThumbPosition();
-      }
+        if (!container || !thumb || !track) return;
 
-      function updateThumbPosition() {
-        const scrollRatio =
-          container.scrollLeft /
-          (container.scrollWidth - container.clientWidth);
-        const maxLeft = track.clientWidth - thumb.clientWidth;
-        // @ts-ignore
-        thumb.style.left = `${scrollRatio * maxLeft}px`;
-      }
+        function updateScrollPosition() {
+          if (isCardsLeft) {
+            container.scrollLeft =
+              container.scrollWidth - container.clientWidth;
+          } else {
+            container.scrollLeft = 0;
+          }
+        }
 
-      function setupDragging() {
-        let isDragging = false;
-        let startX, startLeft;
-
-        thumb.addEventListener("mousedown", (e) => {
-          isDragging = true;
+        function initScrollbar() {
+          const visibleRatio = container.clientWidth / container.scrollWidth;
           // @ts-ignore
-          startX = e.clientX;
-          // @ts-ignore
-          startLeft = parseInt(getComputedStyle(thumb).left);
-          e.preventDefault();
-        });
+          thumb.style.width = `${Math.max(visibleRatio * 100, 10)}%`;
 
-        document.addEventListener("mousemove", (e) => {
-          if (!isDragging) return;
+          updateScrollPosition();
+          updateThumbPosition();
+        }
 
-          // @ts-ignore
-          const dx = e.clientX - startX;
+        function updateThumbPosition() {
+          const scrollRatio =
+            container.scrollLeft /
+            (container.scrollWidth - container.clientWidth);
           const maxLeft = track.clientWidth - thumb.clientWidth;
-          const newLeft = Math.max(0, Math.min(startLeft + dx, maxLeft));
-
           // @ts-ignore
-          thumb.style.left = `${newLeft}px`;
-          container.scrollLeft =
-            (newLeft / maxLeft) *
-            (container.scrollWidth - container.clientWidth);
-        });
+          thumb.style.left = `${scrollRatio * maxLeft}px`;
+        }
 
-        document.addEventListener("mouseup", () => {
-          isDragging = false;
-        });
+        function setupDragging() {
+          let isDragging = false;
+          let startX, startLeft;
 
-        track.addEventListener("click", (e) => {
-          if (e.target === thumb) return;
+          thumb.addEventListener("mousedown", (e) => {
+            isDragging = true;
+            // @ts-ignore
+            startX = e.clientX;
+            // @ts-ignore
+            startLeft = parseInt(getComputedStyle(thumb).left);
+            e.preventDefault();
+          });
 
-          // @ts-ignore
-          const clickX = e.clientX - track.getBoundingClientRect().left;
-          const thumbCenter = thumb.clientWidth / 2;
-          const newLeft = Math.max(
-            0,
-            Math.min(
-              clickX - thumbCenter,
-              track.clientWidth - thumb.clientWidth
-            )
-          );
+          document.addEventListener("mousemove", (e) => {
+            if (!isDragging) return;
 
-          // @ts-ignore
-          thumb.style.left = `${newLeft}px`;
-          container.scrollLeft =
-            (newLeft / (track.clientWidth - thumb.clientWidth)) *
-            (container.scrollWidth - container.clientWidth);
-        });
-      }
+            // @ts-ignore
+            const dx = e.clientX - startX;
+            const maxLeft = track.clientWidth - thumb.clientWidth;
+            const newLeft = Math.max(0, Math.min(startLeft + dx, maxLeft));
 
-      initScrollbar();
-      container.addEventListener("scroll", updateThumbPosition);
-      window.addEventListener("resize", initScrollbar);
-      setupDragging();
-    });
+            // @ts-ignore
+            thumb.style.left = `${newLeft}px`;
+            container.scrollLeft =
+              (newLeft / maxLeft) *
+              (container.scrollWidth - container.clientWidth);
+          });
+
+          document.addEventListener("mouseup", () => {
+            isDragging = false;
+          });
+
+          track.addEventListener("click", (e) => {
+            if (e.target === thumb) return;
+
+            // @ts-ignore
+            const clickX = e.clientX - track.getBoundingClientRect().left;
+            const thumbCenter = thumb.clientWidth / 2;
+            const newLeft = Math.max(
+              0,
+              Math.min(
+                clickX - thumbCenter,
+                track.clientWidth - thumb.clientWidth
+              )
+            );
+
+            // @ts-ignore
+            thumb.style.left = `${newLeft}px`;
+            container.scrollLeft =
+              (newLeft / (track.clientWidth - thumb.clientWidth)) *
+              (container.scrollWidth - container.clientWidth);
+          });
+        }
+
+        initScrollbar();
+        setTimeout(updateScrollPosition, 100);
+        setupDragging();
+
+        container.addEventListener("scroll", updateThumbPosition);
+        window.addEventListener("resize", initScrollbar);
+      });
+    }, 0);
   });
 </script>
-

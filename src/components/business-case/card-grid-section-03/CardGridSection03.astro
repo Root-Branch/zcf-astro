@@ -85,36 +85,40 @@ const content_padding = is_cards_left ? "lg:pl-16" : "lg:pr-16";
       <!-- Cards Carousel -->
       <div class="w-full lg:w-[70%] overflow-x-auto pb-8 carousel-container">
         <div
-          class="flex space-x-12 ml-[-50px] lg:ml-[-100px] pl-[50px] lg:pl-[100px] pr-4"
+          class="flex space-x-12 ml-[-50px] lg:ml-[-100px] pl-[50px] lg:pl-[100px]"
         >
-          {
-            cards.map((card) =>
-              // Check if card has download_form
-              card.download_form ? (
-                <DownloadCard
-                  title={card.title}
-                  description={card.description}
-                  image={card.image}
-                  download_form={card.download_form}
-                  is_desktop={true}
-                />
-              ) : card.video ? (
-                <VideoCard
-                  title={card.title}
-                  description={card.description}
-                  video={card.video}
-                  cta_button={card.cta_button}
-                />
-              ) : (
-                <ImageCard
-                  title={card.title}
-                  description={card.description}
-                  image={card.image}
-                  cta_button={card.cta_button}
-                />
+          <div class="flex space-x-12">
+            {is_cards_left && <div />}
+            {
+              cards.map((card) =>
+                // Check if card has download_form
+                card.download_form ? (
+                  <DownloadCard
+                    title={card.title}
+                    description={card.description}
+                    image={card.image}
+                    download_form={card.download_form}
+                    is_desktop={true}
+                  />
+                ) : card.video ? (
+                  <VideoCard
+                    title={card.title}
+                    description={card.description}
+                    video={card.video}
+                    cta_button={card.cta_button}
+                  />
+                ) : (
+                  <ImageCard
+                    title={card.title}
+                    description={card.description}
+                    image={card.image}
+                    cta_button={card.cta_button}
+                  />
+                )
               )
-            )
-          }
+            }
+            {!is_cards_left && <div />}
+          </div>
         </div>
       </div>
     </div>
