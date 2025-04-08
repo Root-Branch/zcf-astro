@@ -13,7 +13,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-0 lg:gap-16">
       <!-- Left Column - Content -->
       <div class="flex flex-col justify-between h-full">
-        <div>
+        <div class="lg:min-h-[585px]">
           <p class="ds-h2 text-ds-red-500 mb-4">{{ currentStep.number }}</p>
           <h2 class="ds-h3 mb-6" v-html="currentStep.title"></h2>
           <div
@@ -23,7 +23,7 @@
         </div>
 
         <!-- Navigation Buttons (Desktop Only) -->
-        <div class="mt-[3rem] hidden lg:flex flex-col sm:flex-row gap-4">
+        <div class="mt-[3rem] lg:mt-0 hidden lg:flex flex-col sm:flex-row gap-4">
           <button
             v-if="currentIndex > 0"
             @click="prevStep"
