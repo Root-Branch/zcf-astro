@@ -116,10 +116,12 @@ const mobile_is_image_full_width_class = mobile_is_image_full_width
           class={`${title_font_class} ${title_color_class} text-center lg:text-left hidden lg:block`}
           set:html={renderRichText(title_large_screen)}
         />
-        <div
-          class={`${mobile_description_font_class} lg:${description_font_class} ${description_color_class} text-center lg:text-left block mt-8`}
-          set:html={renderRichText(description)}
-        />
+        {description && (
+          <div
+            class={`${mobile_description_font_class} lg:${description_font_class} ${description_color_class} text-center lg:text-left block mt-8`}
+            set:html={renderRichText(description)}
+          />
+        )}
         {/* CTA Button */}
         {
           cta_button?.[0] && (

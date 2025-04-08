@@ -31,17 +31,24 @@ const { title, description, step_cards } = Astro.props;
 
       <!-- Navigation buttons (outside the swiper container) -->
       <div class="flex justify-center gap-12 mt-4">
-        <div class="swiper-button-prev after:content-none static transform-none mx-0 my-0 w-auto h-auto">
+        <div
+          class="swiper-button-prev after:content-none static transform-none mx-0 my-0 w-auto h-auto"
+        >
           <Image src={arrowLeft} alt="Previous" height={27} />
         </div>
-        <div class="swiper-button-next after:content-none static transform-none mx-0 my-0 w-auto h-auto">
+        <div
+          class="swiper-button-next after:content-none static transform-none mx-0 my-0 w-auto h-auto"
+        >
           <Image src={arrowRight} alt="Next" height={27} />
         </div>
       </div>
     </div>
 
     {/* Desktop Grid (visible on large screens and up) */}
-    <div class="hidden xl:grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-4 gap-6 mx-auto" id="steps-desktop-grid">
+    <div
+      class="hidden xl:grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-4 gap-6 mx-auto min-h-[604px]"
+      id="steps-desktop-grid"
+    >
       {
         step_cards.map((card, index) => (
           <div class="step-card-container self-center" data-index={index}>
@@ -71,34 +78,45 @@ const { title, description, step_cards } = Astro.props;
         prevEl: ".swiper-button-prev",
       },
     });
-    
-    // Handle desktop card highlighting
-    const desktopCards = document.querySelectorAll('#steps-desktop-grid .step-card-container');
+
+    // Handle desktop card highlighting with transitions
+    const desktopCards = document.querySelectorAll(
+      "#steps-desktop-grid .step-card-container"
+    );
     let activeCardIndex = 0;
-    
+
+    // Apply transition to all card elements for smooth animation
+    desktopCards.forEach((container) => {
+      const card = container.querySelector('div[class*="bg-ds-"]');
+      if (card) {
+        // Add faster transition for smoother animation
+        card.style.transition = "all 0.25s ease-in-out";
+      }
+    });
+
     function updateCardHighlighting(highlightIndex) {
       desktopCards.forEach((container, idx) => {
         const card = container.querySelector('div[class*="bg-ds-"]');
         if (!card) return;
-        
+
         if (idx === highlightIndex) {
-          card.classList.add('lg:bg-ds-teal-500', 'xl:min-h-[604px]');
-          card.classList.remove('xl:min-h-[518px]');
+          card.classList.add("lg:bg-ds-teal-500", "xl:min-h-[604px]");
+          card.classList.remove("xl:min-h-[518px]");
         } else {
-          card.classList.remove('lg:bg-ds-teal-500', 'xl:min-h-[604px]');
-          card.classList.add('xl:min-h-[518px]');
+          card.classList.remove("lg:bg-ds-teal-500", "xl:min-h-[604px]");
+          card.classList.add("xl:min-h-[518px]");
         }
       });
     }
-    
+
     // Add hover events to cards
     desktopCards.forEach((cardContainer, index) => {
-      cardContainer.addEventListener('mouseenter', () => {
+      cardContainer.addEventListener("mouseenter", () => {
         updateCardHighlighting(index);
         activeCardIndex = index;
       });
-      
-      cardContainer.addEventListener('mouseleave', () => {
+
+      cardContainer.addEventListener("mouseleave", () => {
         updateCardHighlighting(activeCardIndex);
       });
     });
