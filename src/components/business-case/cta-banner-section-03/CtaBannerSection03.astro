@@ -2,7 +2,7 @@
 import Button from "../../common/Button.astro";
 import { convertToWebP } from "../../../utils/imageConvert";
 
-const { title, description, image, mobile_image, cta_button, styling } =
+const { title, description, image, mobile_image, cta_button, styling, id } =
   Astro.props;
 
 const padding_top = styling?.[0]?.padding_top || "xs";
@@ -27,6 +27,7 @@ const max_width_class = `max-w-[${styling?.[0]?.max_width}px]` || "";
 ---
 
 <section
+  id={id}
   class={`relative ${padding_top_class} ${padding_bottom_class} 
   ${padding_left_class} ${padding_right_class} ${mobile_padding_top_class} 
   ${mobile_padding_bottom_class} ${mobile_padding_left_class} ${mobile_padding_right_class}`}
