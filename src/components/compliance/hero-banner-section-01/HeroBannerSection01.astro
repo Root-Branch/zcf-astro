@@ -2,13 +2,46 @@
 import Button from "../../common/Button.astro";
 import { convertToWebP } from "../../../utils/imageConvert";
 
-const { title, background_image, cta_button } = Astro.props;
+const { title, background_image, cta_button, styling } = Astro.props;
+
+// Extract styling properties
+const padding_top = styling?.[0]?.padding_top || "none";
+const padding_bottom = styling?.[0]?.padding_bottom || "none";
+const padding_left = styling?.[0]?.padding_left || "";
+const padding_right = styling?.[0]?.padding_right || "";
+const mobile_padding_top = styling?.[0]?.mobile_padding_top || "none";
+const mobile_padding_bottom = styling?.[0]?.mobile_padding_bottom || "none";
+const mobile_padding_left = styling?.[0]?.mobile_padding_left || "";
+const mobile_padding_right = styling?.[0]?.mobile_padding_right || "";
+const background_color = styling?.[0]?.background_color || "";
+const max_width = styling?.[0]?.max_width || "";
+const gap = styling?.[0]?.gap || "sm";
+
+// Create CSS classes
+const padding_classes = `
+  ${mobile_padding_top ? `pt-${mobile_padding_top}` : ""}
+  ${mobile_padding_bottom ? `pb-${mobile_padding_bottom}` : ""}
+  ${mobile_padding_left ? `pl-${mobile_padding_left}` : ""}
+  ${mobile_padding_right ? `pr-${mobile_padding_right}` : ""}
+  ${padding_top ? `lg:pt-${padding_top}` : ""}
+  ${padding_bottom ? `lg:pb-${padding_bottom}` : ""}
+  ${padding_left ? `lg:pl-${padding_left}` : ""}
+  ${padding_right ? `lg:pr-${padding_right}` : ""}
+`;
+
+const bg_color_class = background_color ? `bg-${background_color}` : "";
+const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
+const gap_class = `gap-${gap}`;
 ---
 
-<section class="md:px-0 pb-32 relative overflow-hidden">
+<section
+  class={`md:px-0 pb-32 relative overflow-hidden mx-auto ${padding_classes} ${bg_color_class} ${max_width_class} ${gap_class}`}
+>
   <div class="px-4 flex flex-row items-center">
     {/* Content */}
-    <div class="w-full 2xl:w-[70%] z-20 xl:pl-16 sm:pt-16 2xl:pl-32 2xl:pt-32 flex flex-col justify-center">
+    <div
+      class="w-full 2xl:w-[70%] z-20 2xl:pt-32 flex flex-col justify-center"
+    >
       <h1 class="ds-h1 padded-multiline mx-auto my-5 !mb-32">
         <span>
           {title}

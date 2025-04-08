@@ -7,15 +7,17 @@ const { title, description, items, image, mobile_image } = Astro.props;
 
 <section class="py-16 lg:py-32">
   <div class="container mx-auto px-4">
-    <div class="flex flex-col-reverse lg:flex-row items-center gap-[4rem] lg:gap-[10rem]">
+    <div
+      class="flex flex-col-reverse lg:flex-row items-center gap-[4rem] lg:gap-[10rem]"
+    >
       {/* Image */}
       <div
-        class="w-full lg:w-1/2 flex justify-center px-4 lg:px-0 hidden lg:block"
+        class="w-full lg:w-1/2 flex justify-center items-center mx-auto px-4 lg:pl-16 hidden lg:block relative"
       >
         <img
           src={convertToWebP(image.filename)}
           alt={image.alt}
-          class="max-h-[440px] h-auto"
+          class="max-h-[440px] h-auto w-auto object-contain mx-auto"
         />
       </div>
 
