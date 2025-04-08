@@ -46,8 +46,6 @@ const bg_color_class = background_color ? `bg-${background_color}` : "";
 const scrollbar_color_val = scrollbar_color || "ds-teal-500";
 const scrollbar_background_color_val = scrollbar_background_color || "ds-white";
 
-// Determine content alignment based on cards position
-const content_alignment = is_cards_left ? "lg:text-left" : "lg:text-right";
 const content_padding = is_cards_left ? "lg:pl-16" : "lg:pr-16";
 ---
 
@@ -63,7 +61,7 @@ const content_padding = is_cards_left ? "lg:pl-16" : "lg:pr-16";
       class={`flex flex-col ${is_cards_left ? "lg:flex-row-reverse" : "lg:flex-row"}`}
     >
       <div
-        class={`w-full lg:w-[30%] px-4 ${content_padding} text-ds-white text-center ${content_alignment} mb-24 lg:mb-0`}
+        class={`w-full lg:w-[30%] px-4 ${content_padding} text-ds-white text-center lg:text-left mb-24 lg:mb-0`}
       >
         <p
           class={`ds-h4 ${subtitle_color ? `text-${subtitle_color}` : "text-ds-teal-500"} mb-4 lg:mb-8`}
