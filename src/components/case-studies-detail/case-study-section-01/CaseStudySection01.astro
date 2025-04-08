@@ -38,13 +38,13 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
     <!-- Main Content -->
     <div class="flex flex-col lg:flex-row gap-8 lg:gap-16 bg-ds-black relative z-10">
       <!-- Left Column: Text Sections -->
-      <div class="lg:w-1/2 py-[7rem] px-[2.5rem] md:px-[6.25rem]">
+      <div class="lg:w-1/2 pb-md px-[2.5rem] md:px-[6.25rem] pt-lg">
         {
           sections.map((section, index) => (
             <div class={`${index === 0 ? '' : 'mt-12'}`}>
               <h3 class="ds-h3 text-white mb-4">{section.title}</h3>
               <div
-                class="content-section text-white space-y-4"
+                class="case-study-content-section text-white space-y-4"
                 set:html={renderRichText(section.content)}
               />
             </div>
@@ -69,24 +69,24 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
 </section>
 
 <style>
-  :global(.content-section ul) {
+  :global(.case-study-content-section ul) {
     list-style: disc !important;
     padding-left: 1.5rem !important;
   }
 
-  :global(.content-section ul li) {
+  :global(.case-study-content-section ul li) {
     list-style-type: disc !important;
-    padding-bottom: 1rem !important;
+    margin-bottom: 1rem !important;
   }
 
-  :global(.content-section ol) {
+  :global(.case-study-content-section ol) {
     list-style: decimal !important;
     padding-left: 1.5rem !important;
   }
 
-  :global(.content-section ol li) {
+  :global(.case-study-content-section ol li) {
     list-style-type: decimal !important;
-    padding-bottom: 1rem !important;
+    margin-bottom: 1rem !important;
   }
 </style>
 

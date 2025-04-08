@@ -26,16 +26,17 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
 
 <section class={padding_classes}>
   <div class={`${max_width_class} mx-auto px-4`}>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-16">
+    <div class="flex flex-col lg:flex-row items-center lg:justify-between gap-8 lg:gap-16">
       {
         stats.map((stat) => (
-          <div class="flex flex-col items-center text-center md:items-start md:text-left">
+          <div class="w-fit max-w-fit flex flex-col items-center lg:items-start">
             <img
               src={convertToWebP(stat.image.filename)}
               alt={stat.image.alt || stat.title}
               class="h-[60px] mb-6"
             />
-            <div class="ds-h4 mb-4" set:html={renderRichText(stat.title)} />
+            <div class="ds-h4 mb-4 hidden lg:block" set:html={renderRichText(stat.title)} />
+            <div class="ds-h4 mb-4 block lg:hidden" set:html={renderRichText(stat.mobile_title)} />
             <p class="ds-p-2 text-ds-gray-400">{stat.description}</p>
           </div>
         ))

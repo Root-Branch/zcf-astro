@@ -32,12 +32,12 @@ const background_color_class = background_color ? `bg-${background_color}` : "";
   <div class={`${max_width_class} mx-auto px-4`}>
     <div class="flex flex-col xl:flex-row gap-8 xl:gap-24 2xl:gap-40">
       <!-- Left Column: Image -->
-      <div class="xl:w-[45%] -mt-[16rem] flex justify-center items-center">
+      <div class="xl:w-[45%] -mt-[13rem] flex justify-center items-center">
         {image?.filename && (
           <img
             src={convertToWebP(image.filename)}
             alt={image.alt || title}
-            class="w-full md:w-[70%] xl:w-full h-auto max-h-[500px] xl:max-h-[930px] object-cover"
+            class="w-full md:w-[70%] xl:w-full h-auto max-h-[500px] xl:max-h-[940px] object-cover"
           />
         )}
       </div>
