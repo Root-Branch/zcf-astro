@@ -65,7 +65,7 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
         {
           image?.filename && (
             <div class="relative overflow-hidden block lg:hidden mb-8">
-              <img
+              <img loading="lazy" 
                 src={convertToWebP(image.filename)}
                 alt={image.alt || "Resource preview"}
                 class="w-full h-full object-cover"
@@ -97,7 +97,7 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
         {
           image?.filename && (
             <div class="relative overflow-hidden hidden lg:block">
-              <img
+              <img loading="lazy" 
                 src={convertToWebP(image.filename)}
                 alt={image.alt || "Resource preview"}
                 class="w-full h-full object-cover"

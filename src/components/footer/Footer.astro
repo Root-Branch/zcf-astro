@@ -19,7 +19,7 @@ const {
       {/* Logo and Social Links - Always at top */}
       <div class="flex flex-col gap-8">
         <div class="flex gap-8 justify-between items-start">
-          <img
+          <img loading="lazy" 
             src={logo.filename}
             alt={logo.alt || "Footer logo"}
             class="object-contain h-[85px]"
@@ -92,7 +92,7 @@ const {
       >
         {
           awards_logo?.map((award) => (
-            <img
+            <img loading="lazy" 
               src={award.filename}
               alt={award.alt || "Award logo"}
               class="object-contain h-auto max-h-[40px] lg:max-h-[64px] w-auto"

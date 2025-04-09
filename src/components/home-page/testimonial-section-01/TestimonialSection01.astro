@@ -46,7 +46,7 @@ const bg_color_class = background_color ? `bg-${background_color}` : "bg-black";
       class={`ds-p-1 2xl:ds-p-quote !leading-[1.25] text-ds-white mb-8 relative`}
     >
       {quote}
-      <img
+      <img loading="lazy" 
         src={convertToWebP(quote_icon.filename)}
         alt="Quote Icon"
         class="w-8 h-8 lg:w-10 lg:h-10 mb-4 absolute top-0 left-0 translate-x-[-30px] lg:translate-x-[-40px] translate-y-[-30px]"
@@ -62,7 +62,7 @@ const bg_color_class = background_color ? `bg-${background_color}` : "bg-black";
         </p>
       </div>
 
-      <img
+      <img loading="lazy" 
         src={convertToWebP(company_logo.filename)}
         alt={company_logo.alt || `${author_company} logo`}
         class="h-[90px] w-auto lg:ml-4 mt-4"
@@ -71,7 +71,7 @@ const bg_color_class = background_color ? `bg-${background_color}` : "bg-black";
   </div>
 
   <div class={`${is_image_hidden_on_mobile ? "hidden lg:block" : ""} lg:w-[45%]`}>
-    <img
+    <img loading="lazy" 
       src={convertToWebP(image.filename)}
       alt={image.alt || `${author_name} testimonial`}
       class={`w-full h-[30vh] lg:h-full object-cover ${height_size_class}`}

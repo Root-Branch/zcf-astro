@@ -49,12 +49,12 @@ const gap_class = `gap-${gap}`;
       <div class="w-full md:w-[70%] xl:w-[40%] mb-8 xl:mb-0 mx-auto">
         {
           image?.filename && (
-            <img
+            <img loading="lazy" 
               src={convertToWebP(image.filename)}
               alt={image.alt || ""}
               class="w-full h-auto object-contain hidden lg:block"
             />
-            <img
+            <img loading="lazy" 
               src={convertToWebP(mobile_image.filename)}
               alt={mobile_image.alt || ""}
               class="w-full h-auto object-contain block lg:hidden"
@@ -80,7 +80,7 @@ const gap_class = `gap-${gap}`;
             list.map((item) => (
               <div class="flex flex-col lg:flex-row items-center lg:items-start">
                 {item.image?.filename && (
-                  <img
+                  <img loading="lazy" 
                     src={item.image.filename}
                     alt={item.image.alt || ""}
                     class="w-[40px] lg:w-[30px] lg:h-auto mb-4 lg:mb-0 lg:mr-6 mt-1"

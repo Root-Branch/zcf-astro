@@ -9,7 +9,7 @@ const { image, title, description, link, index } = Astro.props;
 >
   <div class="flex items-start">
     <div class="w-1/5 mr-4">
-      <img 
+      <img loading="lazy"  
         src={convertToWebP(image.filename)} 
         alt={image.alt || title} 
         class="h-[51px] w-auto"

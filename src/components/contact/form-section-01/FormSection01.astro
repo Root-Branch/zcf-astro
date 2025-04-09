@@ -43,7 +43,7 @@ const successSectionId = `${formId}-success`;
     {
       image && (
         <div class="hidden xl:block absolute -top-[6rem] xl:right-[5rem] 2xl:right-[17rem]">
-          <img
+          <img loading="lazy" 
             src={convertToWebP(image.filename)}
             alt={image.alt || "We're here to help"}
             class="w-[352px]"
@@ -59,7 +59,7 @@ const successSectionId = `${formId}-success`;
     {
       image && (
         <div class="flex justify-center xl:hidden mb-6">
-          <img
+          <img loading="lazy" 
             src={convertToWebP(image.filename)}
             alt={image.alt || "We're here to help"}
             class="w-[60%]"

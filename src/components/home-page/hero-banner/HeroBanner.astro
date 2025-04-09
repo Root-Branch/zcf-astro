@@ -11,7 +11,7 @@ const { heading, background_image, cta_button, decorative_overlay } =
 >
   {/* Background Image */}
   <div class="absolute inset-0 z-0">
-    <img
+    <img loading="lazy" 
       src={convertToWebP(background_image.filename)}
       alt={background_image.alt}
       class="w-full h-full object-cover"
@@ -28,7 +28,7 @@ const { heading, background_image, cta_button, decorative_overlay } =
       "lg:h-full md:translate-y-[9rem] lg:top-0",
     ]}
   >
-    <img
+    <img loading="lazy" 
       src={convertToWebP(decorative_overlay.filename)}
       alt="Decorative pattern"
       class="w-full h-[90%] object-contain"

@@ -68,7 +68,7 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
       <!-- Horizontal Arrow Image -->
       {
         decorative_image?.filename && (
-          <img
+          <img loading="lazy" 
             src={convertToWebP(decorative_image.filename)}
             alt={decorative_image.alt || "Horizontal arrow decoration"}
             class="w-full h-auto z-10"
@@ -100,7 +100,7 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
         <div>
           {
             mobile_decorative_image?.filename && (
-              <img
+              <img loading="lazy" 
                 src={convertToWebP(mobile_decorative_image.filename)}
                 alt={mobile_decorative_image.alt || "Vertical arrow decoration"}
                 class="h-[795px] w-[190px] object-cover xs:object-contain"

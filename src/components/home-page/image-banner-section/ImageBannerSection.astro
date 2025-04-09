@@ -45,7 +45,7 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
   {/* Background Image */}
   <div class="absolute inset-0">
     {/* Desktop Background Image - hidden on mobile */}
-    <img
+    <img loading="lazy" 
       src={convertToWebP(background_image.filename)}
       alt={background_image.alt || "Banner background"}
       class="absolute inset-0 w-full h-full object-cover hidden md:block"
@@ -54,7 +54,7 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
     {/* Mobile Background Image - hidden on desktop */}
     {
       mobile_background_image?.filename && (
-        <img
+        <img loading="lazy" 
           src={convertToWebP(mobile_background_image.filename)}
           alt={mobile_background_image.alt || "Banner background mobile"}
           class="absolute inset-0 w-full h-full object-cover md:hidden"
@@ -72,7 +72,7 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
       {/* Decorative Text Image (Step up to the table) */}
       {
         decorative_text_image?.id ? (
-          <img
+          <img loading="lazy" 
             src={convertToWebP(decorative_text_image?.filename)}
             alt={decorative_text_image?.alt || "Decorative text"}
             class="w-auto h-40 md:h-52"

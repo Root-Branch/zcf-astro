@@ -145,7 +145,7 @@ const mobile_is_image_full_width_class = mobile_is_image_full_width
       <div
         class={`${mobile_is_image_full_width_class} ${image_proportion_class} flex justify-center mt-8 lg:mt-0 ${is_image_shifted_down ? "-mb-[200px]" : ""}`}
       >
-        <img
+        <img loading="lazy" 
           src={convertToWebP(image.filename)}
           alt={image.alt}
           class={`${mobile_image_proportion_class} lg:w-full h-auto`}

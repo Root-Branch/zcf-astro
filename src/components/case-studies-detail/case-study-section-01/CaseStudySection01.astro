@@ -60,7 +60,7 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
       <div class="lg:w-1/2">
         {
           image?.filename && (
-            <img
+            <img loading="lazy" 
               src={convertToWebP(image.filename)}
               alt={image.alt || title}
               class="w-full h-full object-cover"

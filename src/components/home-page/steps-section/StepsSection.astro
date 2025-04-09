@@ -15,7 +15,7 @@ const longArrow = decorative_arrow?.[0];
     {/* Header */}
     <div class="flex flex-row md:flex-col items-center mb-8 md:mb-20">
       <div class="flex flex-col items-center">
-        <img
+        <img loading="lazy" 
           src={convertToWebP(heading_image.filename)}
           alt={heading_image.alt || "Steps heading"}
           class="w-[38.5rem] md:w-[28.5rem] lg:w-[35rem]"
@@ -37,7 +37,7 @@ const longArrow = decorative_arrow?.[0];
               <StepItem {...step} />
               {/* Right arrow between 1 and 2 */}
               {index === 0 && shortArrow && (
-                <img
+                <img loading="lazy" 
                   src={convertToWebP(shortArrow.filename)}
                   alt="Arrow"
                   class="max-w-28 absolute left-full top-1 rotate-180 -translate-x-1/2 z-10"
@@ -45,7 +45,7 @@ const longArrow = decorative_arrow?.[0];
               )}
               {/* Down arrow between 2 and 3 */}
               {index === 1 && shortArrow && (
-                <img
+                <img loading="lazy" 
                   src={convertToWebP(shortArrow.filename)}
                   alt="Arrow"
                   class="max-w-28 absolute -rotate-90 left-full -translate-x-[105%] -translate-y-[111%] z-10"
@@ -53,7 +53,7 @@ const longArrow = decorative_arrow?.[0];
               )}
               {/* Left arrow between 3 and 4 */}
               {index === 3 && shortArrow && (
-                <img
+                <img loading="lazy" 
                   src={convertToWebP(shortArrow.filename)}
                   alt="Arrow"
                   class="max-w-28 absolute -translate-x-1/2 -translate-y-1/2 z-10"
@@ -61,7 +61,7 @@ const longArrow = decorative_arrow?.[0];
               )}
               {/* Up arrow between 4 and 1 */}
               {index === 2 && shortArrow && (
-                <img
+                <img loading="lazy" 
                   src={convertToWebP(shortArrow.filename)}
                   alt="Arrow"
                   class="max-w-28 absolute rotate-90 bottom-full -translate-y-full -translate-x-[20%] z-10"
@@ -78,7 +78,7 @@ const longArrow = decorative_arrow?.[0];
               <StepItem {...step} />
               {/* Down arrow between 1 and 2 */}
               {index === 0 && shortArrow && (
-                <img
+                <img loading="lazy" 
                   src={convertToWebP(shortArrow.filename)}
                   alt="Arrow"
                   class="max-w-28 absolute left-full top-[90%] lg:top-full -rotate-90 -translate-x-[70%] z-30 scale-75"
@@ -86,7 +86,7 @@ const longArrow = decorative_arrow?.[0];
               )}
               {/* Down arrow between 2 and 3 */}
               {index === 1 && shortArrow && (
-                <img
+                <img loading="lazy" 
                   src={convertToWebP(shortArrow.filename)}
                   alt="Arrow"
                   class="max-w-28 absolute left-full top-full -rotate-90 -translate-x-[70%] z-30 scale-75"
@@ -94,7 +94,7 @@ const longArrow = decorative_arrow?.[0];
               )}
               {/* Down arrow between 3 and 4 */}
               {index === 2 && shortArrow && (
-                <img
+                <img loading="lazy" 
                   src={convertToWebP(shortArrow.filename)}
                   alt="Arrow"
                   class="max-w-28 absolute left-full top-full -rotate-90 -translate-x-[70%] -translate-y-[130%] z-30 scale-75"
@@ -105,7 +105,7 @@ const longArrow = decorative_arrow?.[0];
         }
         {/* Long arrow positioned absolutely relative to parent container */}
         {longArrow && (
-          <img
+          <img loading="lazy" 
             src={convertToWebP(longArrow.filename)}
             alt="Arrow"
             class="absolute top-[15%] -translate-x-[10%] h-[60%] object-contain z-30"

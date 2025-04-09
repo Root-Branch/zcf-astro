@@ -64,7 +64,7 @@ const gap_class = `gap-${gap}`;
 
     {/* Image */}
     <div class="w-full xl:w-[50%] absolute inset-y-0 right-[1rem] flex justify-end items-center md:items-start pl-4">
-      <img
+      <img loading="lazy" 
         src={convertToWebP(background_image.filename)}
         alt={background_image.alt}
         class="w-[83%] h-[55%] xs:h-[60%] sm:h-[100%] mt-[10%] xs:m-0 xl:w-full xl:h-full object-cover xl:object-contain object-right"

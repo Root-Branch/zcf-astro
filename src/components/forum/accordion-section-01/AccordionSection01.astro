@@ -70,7 +70,7 @@ const imageWidthClass = `w-[${image_proportion}%]`;
         {
           image && !image_carousel.length && (
             <div class="aspect-square md:aspect-auto overflow-hidden">
-              <img
+              <img loading="lazy" 
                 src={convertToWebP(image.filename)}
                 alt={image.alt || ""}
                 class="w-full h-full object-cover dynamic-image"
@@ -86,7 +86,7 @@ const imageWidthClass = `w-[${image_proportion}%]`;
                 <div class="swiper-wrapper h-full">
                   {image_carousel.map((image) => (
                     <div class="swiper-slide">
-                      <img
+                      <img loading="lazy" 
                         src={convertToWebP(image.filename)}
                         alt={image.alt || ""}
                         class="w-[80%] h-full object-cover dynamic-image mx-auto"
@@ -102,7 +102,7 @@ const imageWidthClass = `w-[${image_proportion}%]`;
                 </div>
               </div>
 
-              <img
+              <img loading="lazy" 
                 src={convertToWebP(image_carousel[0].filename)}
                 alt={image_carousel[0].alt || ""}
                 class="w-full h-full object-cover dynamic-image lg:hidden"

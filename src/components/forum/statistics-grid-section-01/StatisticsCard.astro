@@ -8,7 +8,7 @@ const { card } = Astro.props;
 <div
   class="bg-ds-blue-900 py-4 px-2 lg:py-8 lg:px-4 min-h-[152px] lg:min-h-[356px] max-w-[289px] flex flex-col justify-center items-center"
 >
-  <img
+  <img loading="lazy" 
     src={convertToWebP(card.image.filename)}
     alt={card.image.alt}
     class="w-auto h-[40px] md:h-[60px] lg:h-[80px] mb-6"

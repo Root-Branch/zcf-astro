@@ -33,7 +33,7 @@ const mobile_padding_bottom_class = mobile_padding_bottom
       {
         logos?.map((logo) => (
           <div class="flex items-center justify-center max-w-[60px] lg:max-w-[120px]">
-            <img
+            <img loading="lazy" 
               src={convertToWebP(logo.filename)}
               alt={logo.alt || "Partner logo"}
               class={`w-full h-[50px] ${logo_height ? `lg:h-[${logo_height}px]` : "lg:h-[50px]"} object-contain`}

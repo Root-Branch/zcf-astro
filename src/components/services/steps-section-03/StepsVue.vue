@@ -2,7 +2,7 @@
   <div>
     <!-- Progress Image -->
     <div class="flex justify-center mb-16">
-      <img
+      <img loading="lazy" 
         :src="currentStep.progress_image.filename"
         :alt="currentStep.progress_image.alt"
         class="max-w-[500px] w-full"

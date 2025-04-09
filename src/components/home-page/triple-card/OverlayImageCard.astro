@@ -5,7 +5,7 @@ const { image, category, overlay_text } = Astro.props;
 ---
 
 <div class="relative max-w-[503px] min-h-[429px]">
-  <img
+  <img loading="lazy" 
     src={convertToWebP(image.filename)}
     alt={image.alt || "Overlay Image"}
     class="w-full h-full object-cover min-h-[429px]"

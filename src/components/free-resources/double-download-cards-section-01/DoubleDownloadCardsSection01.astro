@@ -47,7 +47,7 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
   {
     background_image?.filename && (
       <div class="absolute inset-0 z-0 w-full">
-        <img
+        <img loading="lazy" 
           src={convertToWebP(background_image.filename)}
           alt={background_image.alt || "Background image"}
           class="w-full h-full object-cover"
@@ -92,7 +92,7 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
   {
     background_image?.filename && (
       <div class="w-full h-[300px]">
-        <img
+        <img loading="lazy" 
           src={convertToWebP(background_image.filename)}
           alt={background_image.alt || "Background image"}
           class="w-full h-full object-cover"

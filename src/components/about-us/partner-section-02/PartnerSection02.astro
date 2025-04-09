@@ -57,7 +57,7 @@ const gap_class = gap === "md" ? "gap-4 md:gap-12" : gap === "lg" ? "gap-12 md:g
           <!-- Partner Logo -->
           <div class="flex items-center justify-center mb-8">
             {partner.image?.filename && (
-              <img
+              <img loading="lazy" 
                 src={convertToWebP(partner.image.filename)}
                 alt={partner.image.alt || "Partner logo"}
                 class={`w-full ${logo_height ? `h-[${logo_height}px]` : "h-[50px]"} object-contain`}

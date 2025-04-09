@@ -30,7 +30,7 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
       {
         stats.map((stat) => (
           <div class="w-fit max-w-fit flex flex-col items-center lg:items-start">
-            <img
+            <img loading="lazy" 
               src={convertToWebP(stat.image.filename)}
               alt={stat.image.alt || stat.title}
               class="h-[60px] mb-6"

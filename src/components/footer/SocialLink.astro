@@ -22,7 +22,7 @@ const href = link.email ? `mailto:${link.email}` : link.url;
   target={link.email ? undefined : "_blank"}
   rel={link.email ? undefined : "noopener noreferrer"}
 >
-  <img 
+  <img loading="lazy"  
     src={logo.filename} 
     alt={logo.alt || "Social media icon"}
     class="object-contain h-[39px] w-full"

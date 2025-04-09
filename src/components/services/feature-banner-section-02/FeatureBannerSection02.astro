@@ -33,7 +33,7 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
   <div class="relative mx-auto w-full h-full hidden lg:flex items-center justify-center min-h-[700px]">
     {/* Left Image */}
     <div class="absolute left-0 top-0 w-[36%] h-[65%]">
-      <img
+      <img loading="lazy" 
         src={convertToWebP(images[0].filename)}
         alt={images[0].alt}
         class="w-full h-full object-cover"
@@ -42,7 +42,7 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
 
     {/* Right Image */}
     <div class="absolute right-0 bottom-0 w-[40%] h-[65%]">
-      <img
+      <img loading="lazy" 
         src={convertToWebP(images[1].filename)}
         alt={images[1].alt}
         class="w-full h-full object-cover"
@@ -84,7 +84,7 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
     <div class="relative w-full h-[200px] px-4 -mb-[2.5rem]">
       {/* First Image (Larger) */}
       <div class="absolute left-0 top-0 w-[80%] h-[80%]">
-        <img
+        <img loading="lazy" 
           src={convertToWebP(images[1].filename)}
           alt={images[0].alt}
           class="w-full h-full object-cover"
@@ -93,7 +93,7 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
 
       {/* Second Image (Smaller, Overlapping) */}
       <div class="absolute right-0 top-[30px] w-[46%] h-[90%] z-10">
-        <img
+        <img loading="lazy" 
           src={convertToWebP(images[0].filename)}
           alt={images[1].alt}
           class="w-full h-full object-cover object-left"

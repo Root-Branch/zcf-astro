@@ -42,7 +42,7 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
           <!-- Profile Image -->
           <div class="mb-4 w-full h-[335px]">
             {card.image?.filename ? (
-              <img
+              <img loading="lazy" 
                 src={convertToWebP(card.image.filename)}
                 alt={card.image.alt || `Photo of ${card.name}`}
                 class="w-full h-full object-cover object-top"

@@ -54,7 +54,7 @@ const mobile_shifted_up_class = mobile_shifted_up
       <div class="w-[90%] relative flex self-start xl:self-end">
         {
           image?.filename && (
-            <img
+            <img loading="lazy" 
               src={convertToWebP(image.filename)}
               alt={image.alt || "Team photo"}
               class="w-auto h-[300px] object-cover md:w-full md:h-auto"
@@ -78,7 +78,7 @@ const mobile_shifted_up_class = mobile_shifted_up
               class="flex items-center space-x-4 group hover:opacity-90 transition-opacity duration-200"
             >
               {card.image?.filename && (
-                <img
+                <img loading="lazy" 
                   src={convertToWebP(card.image.filename)}
                   alt={card.image.alt || "Arrow icon"}
                   class="w-8 h-auto"

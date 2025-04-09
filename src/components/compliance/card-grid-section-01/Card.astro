@@ -19,7 +19,7 @@ const renderDescription = renderRichText(card.description)
     </div>
   ) : (
     <div class="hidden lg:block overflow-hidden">
-      <img
+      <img loading="lazy" 
         src={convertToWebP(card.image.filename)}
         alt={card.image.alt}
         class="w-full h-full object-cover"

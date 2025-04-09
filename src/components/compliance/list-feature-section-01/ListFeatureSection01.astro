@@ -14,7 +14,7 @@ const { title, description, items, image, mobile_image } = Astro.props;
       <div
         class="w-full lg:w-1/2 flex justify-center items-center mx-auto px-4 lg:pl-16 hidden lg:block relative"
       >
-        <img
+        <img loading="lazy" 
           src={convertToWebP(image.filename)}
           alt={image.alt}
           class="max-h-[440px] h-auto w-auto object-contain mx-auto"
@@ -23,7 +23,7 @@ const { title, description, items, image, mobile_image } = Astro.props;
 
       {/* Mobile Image */}
       <div class="w-full lg:hidden">
-        <img
+        <img loading="lazy" 
           src={convertToWebP(mobile_image.filename)}
           alt={mobile_image.alt}
           class="w-full h-auto aspect-square"

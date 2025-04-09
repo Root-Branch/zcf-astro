@@ -63,14 +63,14 @@ const max_width_class = `max-w-[${styling?.[0]?.max_width}px]` || "";
         2xl:w-[42%] 2xl:right-[8.75rem] 2xl:top-[1rem]"
       >
         <div class="relative w-full h-full hidden xl:block z-20">
-          <img
+          <img loading="lazy" 
             src={convertToWebP(image.filename)}
             alt={image.alt || ""}
             class="w-full h-auto object-contain"
           />
         </div>
         <div class="relative w-full h-full xl:hidden z-20">
-          <img
+          <img loading="lazy" 
             src={convertToWebP(mobile_image.filename)}
             alt={mobile_image.alt || ""}
             class="w-full h-auto object-contain"

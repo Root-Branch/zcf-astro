@@ -32,7 +32,7 @@ const { title, description, image, cta_button } = Astro.props;
       <div
         class="w-full lg:w-[40%] absolute -right-[11.75rem] top-[11rem] md:top-[21rem] h-[100%] bottom-0 lg:right-0 lg:top-0 lg:bottom-[-20%] lg:h-[120%]"
       >
-        <img
+        <img loading="lazy" 
           src={convertToWebP(image.filename)}
           alt={image.alt}
           class="w-full h-full object-contain object-top"

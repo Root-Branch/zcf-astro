@@ -20,7 +20,7 @@ const {
   <div class="mx-auto px-4 max-w-[1423px]">
     {/* Header */}
     <div class="mb-md flex justify-center xl:justify-start px-8">
-      <img
+      <img loading="lazy" 
         src={convertToWebP(heading_image.filename)}
         alt={heading_image.alt || "Move to Zero"}
         class="w-[24.7rem] h-auto"
@@ -41,7 +41,7 @@ const {
         <div
           class="xl:w-[60%] -mt-[330px] pb-20 xl:pb-0 xl:translate-x-[100px] xl:-mt-[380px]"
         >
-          <img
+          <img loading="lazy" 
             src={convertToWebP(feature_image.filename)}
             alt={feature_image.alt || "Feature"}
             class="w-full h-[379px] xl:h-full object-cover"

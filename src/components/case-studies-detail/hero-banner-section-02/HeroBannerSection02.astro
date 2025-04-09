@@ -51,7 +51,7 @@ const formattedDate = new Date(date).toLocaleDateString('en-GB', {
       <!-- Right Column: Image -->
       <div class="lg:w-[45%]">
         {image?.filename && (
-          <img
+          <img loading="lazy" 
             src={convertToWebP(image.filename)}
             alt={image.alt || title}
             class="w-full h-auto rounded-lg"

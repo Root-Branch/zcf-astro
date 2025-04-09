@@ -62,7 +62,7 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
           {
             logos.map((logo) => (
               <div class="max-w-[50px] lg:max-w-[80px]">
-                <img
+                <img loading="lazy" 
                   src={convertToWebP(logo.filename)}
                   alt={logo.alt || "Partner logo"}
                   class="max-h-20 w-auto object-contain"
@@ -78,7 +78,7 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
         <div class="flex flex-row mb-8 gap-8">
           {
             card_image?.filename && (
-              <img
+              <img loading="lazy" 
                 src={convertToWebP(card_image.filename)}
                 alt={card_image.alt || "Card icon"}
                 class="w-36 h-36 mb-6 mt-2 hidden lg:block"

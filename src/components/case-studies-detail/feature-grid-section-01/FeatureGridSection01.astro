@@ -35,7 +35,7 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "max-w-[1200px]";
         <div class="flex flex-col">
           <!-- Icon and Title -->
           <div class="flex flex-col items-center md:items-start mb-6">
-            <img
+            <img loading="lazy" 
               src={convertToWebP(feature.image.filename)}
               alt={feature.image.alt || feature.title}
               class="h-16 mb-4"

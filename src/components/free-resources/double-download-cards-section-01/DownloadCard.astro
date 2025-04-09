@@ -18,7 +18,7 @@ const {
     {
       image?.filename && (
         <div class="mb-12 2xl:mb-6">
-          <img
+          <img loading="lazy" 
             src={convertToWebP(image.filename)}
             alt={image.alt || title}
             class="w-full object-cover max-h-[200px]"

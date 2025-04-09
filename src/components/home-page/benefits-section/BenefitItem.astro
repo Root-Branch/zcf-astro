@@ -12,7 +12,7 @@ const icon_height_class = icon_height ? `h-[${icon_height}px]` : "h-[82px]";
 <div class="flex flex-col items-center">
   {/* Icon */}
   <div class="mb-6">
-    <img 
+    <img loading="lazy"  
       src={convertToWebP(icon.filename)}
       alt={icon.alt || `${title} icon`}
       class={`w-auto ${icon_height_class}`}

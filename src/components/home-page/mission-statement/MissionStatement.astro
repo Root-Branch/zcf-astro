@@ -16,7 +16,7 @@ const renderedDescription = renderRichText(description);
         <div class="ds-p-2" set:html={renderedDescription} />
       </div>
       <div class="w-full lg:w-[45%] max-w-[540px] flex justify-center">
-        <img
+        <img loading="lazy" 
           src={convertToWebP(image.filename)}
           alt={image.alt || "Zero is Everything"}
           class="w-[65%] lg:w-[80%] h-auto"
