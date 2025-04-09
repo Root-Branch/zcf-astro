@@ -27,22 +27,26 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
 <section class={padding_classes}>
   <div class={`${max_width_class} mx-auto`}>
     <!-- Top Section -->
-    <div class="bg-ds-teal-200 p-8 lg:p-12 bg-ds-teal-500 w-[90%] md:w-[60%] mx-auto -mb-20 relative z-20">
-      <h2 class="ds-h3 mb-6 text-white">{title}</h2>
+    <div
+      class="bg-ds-teal-200 p-8 lg:p-12 bg-ds-teal-500 w-[90%] md:w-[60%] mx-auto -mb-20 relative z-20"
+    >
+      <h2 class="ds-h3 mb-6 text-white text-center lg:text-left">{title}</h2>
       <div
-        class="content-section text-white space-y-4"
+        class="content-section text-white space-y-4 text-center lg:text-left"
         set:html={renderRichText(description)}
       />
     </div>
 
     <!-- Main Content -->
-    <div class="flex flex-col lg:flex-row gap-8 lg:gap-16 bg-ds-black relative z-10">
+    <div
+      class="flex flex-col lg:flex-row gap-8 lg:gap-16 bg-ds-black relative z-10"
+    >
       <!-- Left Column: Text Sections -->
-      <div class="lg:w-1/2 pb-md px-[2.5rem] md:px-[6.25rem] pt-lg">
+      <div class="lg:w-1/2 pb-xs pt-xl lg:pb-md lg:pt-lg px-[2.5rem] md:px-[6.25rem]">
         {
           sections.map((section, index) => (
-            <div class={`${index === 0 ? '' : 'mt-12'}`}>
-              <h3 class="ds-h3 text-white mb-4">{section.title}</h3>
+            <div class={`${index === 0 ? "" : "mt-12"}`}>
+              <h3 class="ds-h3 text-white mb-4 text-center lg:text-left">{section.title}</h3>
               <div
                 class="case-study-content-section text-white space-y-4"
                 set:html={renderRichText(section.content)}
@@ -89,4 +93,3 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
     margin-bottom: 1rem !important;
   }
 </style>
-

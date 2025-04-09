@@ -28,18 +28,18 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
 
 <section class={`${padding_classes} bg-[#4B6BB7]`}>
   <div class={`${max_width_class} mx-auto px-4 text-white`}>
-    <h2 class="ds-h3 mb-8">{title}</h2>
+    <h2 class="ds-h3 mb-8 text-center lg:text-left">{title}</h2>
 
     <div class="relative">
       <!-- Quote marks -->
-      <div class="absolute -left-8 -top-6">
+      <div class="absolute -left-4 lg:-left-8 -top-6">
         <Image src={quoteIcon} alt="Quote Icon" width={25} height={25} />
       </div>
 
       <!-- Quote content -->
       <div class="space-y-6">
-        <p class="ds-p-1">{quote}</p>
-        <div class="ds-p-2" set:html={renderRichText(author)} />
+        <p class="ds-p-1 text-center lg:text-left">{quote}</p>
+        <div class="ds-p-2 text-center lg:text-left" set:html={renderRichText(author)} />
       </div>
     </div>
   </div>
