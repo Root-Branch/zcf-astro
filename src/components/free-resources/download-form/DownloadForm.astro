@@ -108,6 +108,20 @@ const alignClass = is_center_align ? "text-left lg:text-center" : "";
   <!-- Script to open PDF after successful form submission -->
   <script define:vars={{ pdfUrl, formSectionId, successSectionId }}>
     document.addEventListener("DOMContentLoaded", () => {
+      let pdfWindowReference = null;
+      
+      const form = document.getElementById(formSectionId).querySelector('form');
+      if (form) {
+        form.addEventListener('submit', (e) => {
+          const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+          const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+          
+          if (isSafari && isMobile && pdfUrl) {
+            pdfWindowReference = window.open('about:blank', '_blank');
+          }
+        });
+      }
+
       const observer = new MutationObserver((mutations) => {
         for (const mutation of mutations) {
           if (
@@ -122,7 +136,15 @@ const alignClass = is_center_align ? "text-left lg:text-center" : "";
               !successSection.classList.contains("hidden")
             ) {
               if (pdfUrl) {
-                window.open(pdfUrl, "_blank");
+                // Detect Safari on mobile
+                const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+                const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+                
+                if (isSafari && isMobile && pdfWindowReference) {
+                  pdfWindowReference.location = pdfUrl;
+                } else {
+                  window.open(pdfUrl, '_blank');
+                }
               }
 
               observer.disconnect();
