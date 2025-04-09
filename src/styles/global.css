@@ -64,7 +64,7 @@
   .ds-p-large {
     font-family: "Source Sans 3", sans-serif;
     font-size: 24px;
-    line-height: auto;
+    line-height: 1.4;
     font-weight: 500;
   }
   .ds-p-quote {
