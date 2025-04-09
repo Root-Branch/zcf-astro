@@ -23,16 +23,9 @@
         </div>
 
         <!-- Navigation Buttons (Desktop Only) -->
-        <div class="mt-[3rem] lg:mt-0 hidden lg:flex flex-col sm:flex-row gap-4">
-          <button
-            v-if="currentIndex > 0"
-            @click="prevStep"
-            type="button"
-            class="ds-button px-[15px] py-[10px] md:px-[2rem] md:py-[0.8rem] rounded-full w-full sm:w-auto border-2 border-ds-red-500 text-ds-red-500 hover:bg-ds-red-500/5"
-          >
-            Previous step: {{ steps[currentIndex - 1].name }}
-          </button>
-
+        <div
+          class="mt-[3rem] lg:mt-0 hidden lg:flex flex-col sm:flex-row gap-4"
+        >
           <button
             v-if="currentIndex < steps.length - 1"
             @click="nextStep"
@@ -40,6 +33,14 @@
             class="ds-button px-[15px] py-[10px] md:px-[2rem] md:py-[0.8rem] rounded-full w-full sm:w-auto bg-ds-red-500 text-white hover:opacity-90"
           >
             Next step: {{ steps[currentIndex + 1].name }}
+          </button>
+          <button
+            v-if="currentIndex > 0"
+            @click="prevStep"
+            type="button"
+            class="ds-button px-[15px] py-[10px] md:px-[2rem] md:py-[0.8rem] rounded-full w-full sm:w-auto border-2 border-ds-red-500 text-ds-red-500 hover:bg-ds-red-500/5"
+          >
+            Previous step: {{ steps[currentIndex - 1].name }}
           </button>
         </div>
       </div>
@@ -57,21 +58,20 @@
     <!-- Navigation Buttons (Mobile Only) -->
     <div class="flex lg:hidden flex-row gap-4 mt-8">
       <button
-        v-if="currentIndex > 0"
-        @click="prevStep"
-        type="button"
-        class="ds-button px-[15px] py-[10px] md:px-[2rem] md:py-[0.8rem] rounded-full w-[30%] sm:w-auto border-2 border-ds-red-500 text-ds-red-500 hover:bg-ds-red-500/5"
-      >
-        Previous step: {{ steps[currentIndex - 1].name }}
-      </button>
-
-      <button
         v-if="currentIndex < steps.length - 1"
         @click="nextStep"
         type="button"
         class="ds-button px-[15px] py-[10px] md:px-[2rem] md:py-[0.8rem] rounded-full w-[30%] sm:w-auto bg-ds-red-500 text-white hover:opacity-90"
       >
         Next step: {{ steps[currentIndex + 1].name }}
+      </button>
+      <button
+        v-if="currentIndex > 0"
+        @click="prevStep"
+        type="button"
+        class="ds-button px-[15px] py-[10px] md:px-[2rem] md:py-[0.8rem] rounded-full w-[30%] sm:w-auto border-2 border-ds-red-500 text-ds-red-500 hover:bg-ds-red-500/5"
+      >
+        Previous step: {{ steps[currentIndex - 1].name }}
       </button>
     </div>
   </div>
