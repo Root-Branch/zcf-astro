@@ -33,18 +33,18 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
       <p class="ds-h1 mb-16 text-white">{title}</p>
       <p class="ds-p-1 mx-auto mb-10 max-w-3xl text-white mb-16">{description}</p>
 
-      <p class="ds-h4 mb-16 text-white">{subtitle}</p>
+      <p class="ds-h3 lg:ds-h4 mb-16 text-white">{subtitle}</p>
 
-      <div class="flex flex-wrap justify-center gap-16">
+      <div class="grid lg:flex grid-cols-1 gap-2 lg:justify-center lg:items-center justify-items-center lg:gap-16">
         {
           icon_features &&
             icon_features.map((feature) => (
-              <div class="flex flex-row items-center w-auto">
-                <div class="w-auto h-[64px] mb-4 relative">
+              <div class="flex flex-row items-center justify-start mb-4 lg:mb-0 min-w-[200px]">
+                <div class="w-[50px] h-[50px] lg:w-[64px] lg:h-[64px] flex items-center justify-center relative">
                   <img
                     src={convertToWebP(feature.image?.filename)}
                     alt={feature.image?.alt || feature.description}
-                    class="w-full h-full"
+                    class="w-auto h-auto max-h-[64px] max-w-full object-contain"
                   />
                 </div>
                 <a

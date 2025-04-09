@@ -5,11 +5,11 @@ const { title, description, video, cta_button } = Astro.props;
 ---
 
 <div
-  class="card flex-shrink-0 lg:w-auto max-w-[525px] min-h-[700px] py-16 px-8 lg:p-10 bg-ds-white"
+  class="card flex-shrink-0 lg:w-auto max-w-[525px] p-8 lg:p-12 bg-ds-white"
 >
   {
     video && (
-      <div class="h-[259px] overflow-hidden mb-6">
+      <div class="w-full h-[200px] lg:h-[259px] overflow-hidden mb-6">
         <iframe
           src={video}
           class="w-full h-full"
