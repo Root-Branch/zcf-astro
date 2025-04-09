@@ -62,7 +62,9 @@ const gap_class = gap ? `gap-8 lg:gap-${gap}` : "gap-8";
 const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
 const max_height_class = max_height ? `max-h-[${max_height}px]` : "";
 const shifted_up_class = shifted_up ? `lg:-mt-${shifted_up}` : "";
-const mobile_shifted_up_class = mobile_shifted_up ? `-mt-${mobile_shifted_up}` : "";
+const mobile_shifted_up_class = mobile_shifted_up
+  ? `-mt-${mobile_shifted_up}`
+  : "";
 
 // Title
 const title_color_class = title_color ? `text-${title_color}` : "text-ds-black";
@@ -116,12 +118,14 @@ const mobile_is_image_full_width_class = mobile_is_image_full_width
           class={`${title_font_class} ${title_color_class} text-center lg:text-left hidden lg:block`}
           set:html={renderRichText(title_large_screen)}
         />
-        {description && (
-          <div
-            class={`${mobile_description_font_class} lg:${description_font_class} ${description_color_class} text-center lg:text-left block mt-8`}
-            set:html={renderRichText(description)}
-          />
-        )}
+        {
+          description && (
+            <div
+              class={`${mobile_description_font_class} lg:${description_font_class} ${description_color_class} text-center lg:text-left block ${title || title_large_screen ? "mt-8" : ""}`}
+              set:html={renderRichText(description)}
+            />
+          )
+        }
         {/* CTA Button */}
         {
           cta_button?.[0] && (
