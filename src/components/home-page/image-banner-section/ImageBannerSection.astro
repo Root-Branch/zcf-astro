@@ -10,10 +10,38 @@ const {
   font_bold,
   mobile_heading_font,
   author,
+  styling,
 } = Astro.props;
+
+// Extract styling properties
+const padding_top = styling?.[0]?.padding_top || "";
+const padding_bottom = styling?.[0]?.padding_bottom || "";
+const padding_left = styling?.[0]?.padding_left || "";
+const padding_right = styling?.[0]?.padding_right || "";
+const mobile_padding_top = styling?.[0]?.mobile_padding_top || "";
+const mobile_padding_bottom = styling?.[0]?.mobile_padding_bottom || "";
+const mobile_padding_left = styling?.[0]?.mobile_padding_left || "";
+const mobile_padding_right = styling?.[0]?.mobile_padding_right || "";
+const max_width = styling?.[0]?.max_width || "";
+
+// Create CSS classes
+const padding_classes = `
+  ${mobile_padding_top ? `pt-${mobile_padding_top}` : ""}
+  ${mobile_padding_bottom ? `pb-${mobile_padding_bottom}` : ""}
+  ${mobile_padding_left ? `pl-${mobile_padding_left}` : ""}
+  ${mobile_padding_right ? `pr-${mobile_padding_right}` : ""}
+  ${padding_top ? `lg:pt-${padding_top}` : ""}
+  ${padding_bottom ? `lg:pb-${padding_bottom}` : ""}
+  ${padding_left ? `lg:pl-${padding_left}` : ""}
+  ${padding_right ? `lg:pr-${padding_right}` : ""}
+`;
+
+const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
 ---
 
-<section class="relative h-[500px] lg:h-[400px]">
+<section
+  class=`relative h-[500px] lg:h-[400px] ${padding_classes} ${max_width_class}`
+>
   {/* Background Image */}
   <div class="absolute inset-0">
     {/* Desktop Background Image - hidden on mobile */}
@@ -39,7 +67,7 @@ const {
   <div class="absolute inset-0 bg-ds-blue-900/45"></div>
 
   {/* Content */}
-  <div class="relative z-10 max-w-[1408px] mx-auto px-[3rem] lg:px-4 h-full">
+  <div class="relative z-10 max-w-[1408px] mx-auto lg:px-4 h-full">
     <div class="flex flex-col md:flex-row justify-around items-center h-full">
       {/* Decorative Text Image (Step up to the table) */}
       {
@@ -55,7 +83,11 @@ const {
       {/* Main Heading */}
       <div class="flex flex-col items-center">
         <h2
-          class={`${mobile_heading_font ? `${mobile_heading_font}` : "ds-h2"} ${heading_font ? `lg:${heading_font}` : "lg:ds-h2"} ${font_bold == "bold" ? "!font-bold" : "!font-semibold"} text-ds-white text-center !leading-[1.2] ${
+          class={`${mobile_heading_font ? `${mobile_heading_font}` : "ds-h2"} 
+          ${heading_font ? `lg:${heading_font}` : "lg:ds-h2"} 
+          ${font_bold == "bold" ? "!font-bold" : "!font-semibold"} 
+          text-ds-white text-center !leading-[1.2] 
+          ${
             decorative_text_image?.id
               ? "md:text-right"
               : "md:text-center max-w-[80%]"
