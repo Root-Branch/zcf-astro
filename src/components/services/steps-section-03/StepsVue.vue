@@ -56,7 +56,7 @@
     </div>
 
     <!-- Navigation Buttons (Mobile Only) -->
-    <div class="flex lg:hidden flex-row gap-4 mt-8">
+    <div class="flex lg:hidden flex-row gap-4 mt-[4rem]">
       <button
         v-if="currentIndex < steps.length - 1"
         @click="nextStep"

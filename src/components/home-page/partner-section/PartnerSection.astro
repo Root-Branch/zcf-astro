@@ -32,7 +32,7 @@ const mobile_padding_bottom_class = mobile_padding_bottom
     <div class="flex flex-wrap items-center justify-center gap-8">
       {
         logos?.map((logo) => (
-          <div class="flex items-center justify-center">
+          <div class="flex items-center justify-center max-w-[60px] lg:max-w-[120px]">
             <img
               src={convertToWebP(logo.filename)}
               alt={logo.alt || "Partner logo"}
