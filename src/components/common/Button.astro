@@ -9,6 +9,7 @@ const {
   type,
   is_button_full_width_desktop = false,
   is_button_full_width_mobile = false,
+  is_open_newtab = false,
 } = Astro.props;
 
 const buttonClasses = {
@@ -37,6 +38,7 @@ const commonClasses = [
   ) : (
     <a
       href={link.url}
+      target={is_open_newtab ? "_blank" : "_self"}
       class:list={commonClasses}
     >
       {text}
