@@ -32,15 +32,13 @@
 
         <div
           class="accordion-content overflow-hidden transition-all duration-200"
-          :style="{
-            maxHeight:
-              openIndex === index ? contentHeight[index] + 'px' : '0px',
-          }"
+          :style="{ maxHeight: getMaxHeight(index) }"
+          ref="accordionContents"
         >
           <div class="pb-6 pr-8">
             <p class="ds-p-2">{{ item.description }}</p>
             <div
-              class="ds-p-2 render-rich-text"
+              class="ds-p-2 accordion-rich-text"
               v-html="item.richTextDescription"
             ></div>
           </div>
@@ -61,60 +59,66 @@ export default {
   data() {
     return {
       openIndex: 0,
-      contentHeight: [],
+      contentHeights: [],
     };
+  },
+  computed: {
+    itemCount() {
+      return this.items?.length || 0;
+    }
+  },
+  methods: {
+    toggleAccordion(index) {
+      this.openIndex = this.openIndex === index ? -1 : index;
+      this.$nextTick(() => {
+        this.measureContentHeights();
+      });
+    },
+    getMaxHeight(index) {
+      if (this.openIndex === index) {
+        return `${this.contentHeights[index] || 200}px`;
+      }
+      return '0px';
+    },
+    measureContentHeights() {
+      this.$nextTick(() => {
+        if (!this.$refs.accordionContents) return;
+        
+        this.contentHeights = Array(this.itemCount).fill(0);
+        
+        this.$refs.accordionContents.forEach((content, index) => {
+          if (content && content.children && content.children[0]) {
+            this.contentHeights[index] = content.children[0].offsetHeight;
+          } else {
+            this.contentHeights[index] = 200;
+          }
+        });
+      });
+    }
   },
   watch: {
     items: {
       handler() {
         this.openIndex = 0;
         this.$nextTick(() => {
-          this.updateContentHeights();
-          // Additional check after content has been updated
-          setTimeout(() => this.updateContentHeights(), 100);
+          this.measureContentHeights();
+          setTimeout(() => this.measureContentHeights(), 100);
         });
       },
       immediate: true,
     },
   },
   mounted() {
-    // Force an immediate update and a second update after a short delay
-    this.updateContentHeights();
+    this.measureContentHeights();
     
-    // Additional attempt after a delay to ensure contents are properly measured
     setTimeout(() => {
-      this.updateContentHeights();
-      // Force a redraw
-      if (this.$el) {
-        this.$el.style.display = 'none';
-        this.$el.offsetHeight; // Force a reflow
-        this.$el.style.display = '';
-      }
+      this.measureContentHeights();
     }, 50);
     
-    window.addEventListener("resize", this.updateContentHeights);
+    window.addEventListener("resize", this.measureContentHeights);
   },
   beforeDestroy() {
-    window.removeEventListener("resize", this.updateContentHeights);
-  },
-  methods: {
-    toggleAccordion(index) {
-      this.openIndex = this.openIndex === index ? -1 : index;
-      this.$nextTick(() => this.updateContentHeights());
-    },
-    updateContentHeights() {
-      this.$nextTick(() => {
-        if (this.$el) {
-          const contents = this.$el.querySelectorAll(".accordion-content");
-          if (contents) {
-            this.contentHeight = Array.from(contents).map((content) => {
-              const inner = content.children[0];
-              return inner ? inner.offsetHeight : 0;
-            });
-          }
-        }
-      });
-    },
+    window.removeEventListener("resize", this.measureContentHeights);
   },
 };
 </script>
@@ -130,5 +134,15 @@ export default {
 .accordion-button {
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
+}
+
+.accordion-rich-text ul {
+  list-style: disc !important;
+  padding-left: 1.5rem !important;
+}
+
+.accordion-rich-text ul li {
+  list-style-type: disc !important;
+  padding-bottom: 0.2rem !important;
 }
 </style>
