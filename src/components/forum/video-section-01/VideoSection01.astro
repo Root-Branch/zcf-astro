@@ -2,11 +2,7 @@
 import { getYouTubeVideoId } from "../../../utils/youtube";
 import Button from "../../common/Button.astro";
 
-const { 
-  video_link,
-  cta_button,
-  styling
-} = Astro.props;
+const { video_link, thumbnail_image, cta_button, styling } = Astro.props;
 
 const videoId = getYouTubeVideoId(video_link.url);
 
@@ -30,38 +26,42 @@ const padding_classes = `
 
 const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
 const background_color_class = background_color ? `bg-${background_color}` : "";
+const thumbnail_image_url = thumbnail_image?.filename ? thumbnail_image.filename : "https://i.ytimg.com/vi/" + videoId + "/hqdefault.jpg";
 ---
 
-<section class={`${padding_classes} ${background_color_class}`}>  
+<section class={`${padding_classes} ${background_color_class}`}>
   <div class={`${max_width_class} mx-auto px-4`}>
     <div class="max-w-[1520px] mx-auto">
       {/* Video Container */}
       <div class="relative">
-        <lite-youtube 
+        <lite-youtube
           class="!max-w-full"
           videoid={videoId}
           playlabel={`Play: YouTube Video`}
-          params="modestbranding=1&rel=0"
+          
+          style={`background-image: url('${thumbnail_image_url}');`}
         ></lite-youtube>
       </div>
 
       {/* CTA Button */}
-      {cta_button?.[0] && (
-        <div class="text-center mt-16">
-          <Button
-            text={cta_button[0].text}
-            link={cta_button[0].link}
-            style={cta_button[0].style}
-            background_color={cta_button[0].background_color}
-            text_color={cta_button[0].text_color}
-          />
-        </div>
-      )}
+      {
+        cta_button?.[0] && (
+          <div class="text-center mt-16">
+            <Button
+              text={cta_button[0].text}
+              link={cta_button[0].link}
+              style={cta_button[0].style}
+              background_color={cta_button[0].background_color}
+              text_color={cta_button[0].text_color}
+            />
+          </div>
+        )
+      }
     </div>
   </div>
 </section>
 
 <script>
-  import 'lite-youtube-embed/src/lite-yt-embed.js';
-  import 'lite-youtube-embed/src/lite-yt-embed.css';
-</script> 
+  import "lite-youtube-embed/src/lite-yt-embed.js";
+  import "lite-youtube-embed/src/lite-yt-embed.css";
+</script>
