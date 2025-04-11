@@ -5,12 +5,18 @@ import { renderRichText } from "@storyblok/astro";
 
 const {
   logo,
+  zcf_logo,
   footer_social_links,
   company_description,
+  zcf_company_description,
   credit,
   awards_logo,
   footer_links,
 } = Astro.props;
+
+const isForum = Astro.url.pathname === '/forum';
+const currentLogo = isForum ? zcf_logo : logo;
+const currentDescription = isForum ? zcf_company_description : company_description;
 ---
 
 <footer class="bg-black text-ds-white py-10 lg:py-20">
@@ -20,8 +26,8 @@ const {
       <div class="flex flex-col gap-8">
         <div class="flex gap-8 justify-between items-start">
           <img loading="lazy" 
-            src={logo.filename}
-            alt={logo.alt || "Footer logo"}
+            src={currentLogo.filename}
+            alt={currentLogo.alt || "Footer logo"}
             class="object-contain h-[85px]"
           />
           <div class="flex gap-8">
@@ -31,7 +37,7 @@ const {
 
         {/* Desktop only: Company Description and Credit */}
         <div class="hidden lg:flex lg:flex-col gap-8">
-          <p class="ds-p-3 !font-[300]">{company_description}</p>
+          <p class="ds-p-3 !font-[300]">{currentDescription}</p>
           <div set:html={renderRichText(credit)} class="ds-p-3 !font-[600]" />
         </div>
       </div>
@@ -105,7 +111,7 @@ const {
         /* Company Description and Credit - Bottom on mobile, part of first column on desktop */
       }
       <div class="flex flex-col gap-8 order-last lg:hidden">
-        <p class="ds-p-3 !font-[300]">{company_description}</p>
+        <p class="ds-p-3 !font-[300]">{currentDescription}</p>
         <div set:html={renderRichText(credit)} class="ds-p-3 !font-[600]" />
       </div>
     </div>
