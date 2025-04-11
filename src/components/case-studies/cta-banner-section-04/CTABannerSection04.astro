@@ -4,14 +4,14 @@ import Button from "../../common/Button.astro";
 
 const { title, description, cta_button, image, styling, content_proportion } = Astro.props;
 
-const padding_top = styling?.[0]?.padding_top || "xs";
-const padding_bottom = styling?.[0]?.padding_bottom || "xs";
-const padding_left = styling?.[0]?.padding_left || "xs";
-const padding_right = styling?.[0]?.padding_right || "xs";
-const mobile_padding_top = styling?.[0]?.mobile_padding_top || "xs";
-const mobile_padding_bottom = styling?.[0]?.mobile_padding_bottom || "xs";
-const mobile_padding_left = styling?.[0]?.mobile_padding_left || "xs";
-const mobile_padding_right = styling?.[0]?.mobile_padding_right || "xs";
+const padding_top = styling?.[0]?.padding_top || "";
+const padding_bottom = styling?.[0]?.padding_bottom || "";
+const padding_left = styling?.[0]?.padding_left || "";
+const padding_right = styling?.[0]?.padding_right || "";
+const mobile_padding_top = styling?.[0]?.mobile_padding_top || "";
+const mobile_padding_bottom = styling?.[0]?.mobile_padding_bottom || "";
+const mobile_padding_left = styling?.[0]?.mobile_padding_left || "";
+const mobile_padding_right = styling?.[0]?.mobile_padding_right || "";
 const background_color = styling?.[0]?.background_color || "";
 const max_width = styling?.[0]?.max_width || "";
 
@@ -25,19 +25,19 @@ const padding_classes = `
 const bg_color_class = background_color ? `bg-${background_color}` : "";
 const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
 const gap_class = styling?.[0]?.gap ? `gap-${styling?.[0]?.gap}` : "";
-const content_proportion_class = content_proportion ? `lg:w-[${content_proportion}%]` : "lg:w-[55%]";
-const image_proportion_class = content_proportion ? `lg:w-[${100 - content_proportion}%]` : "lg:w-[45%]";
+const content_proportion_class = content_proportion ? `xl:w-[${content_proportion}%]` : "xl:w-[55%]";
+const image_proportion_class = content_proportion ? `xl:w-[${100 - content_proportion}%]` : "xl:w-[45%]";
 ---
 
 <section
   class={`relative ${padding_classes} ${bg_color_class} ${max_width_class} mx-auto`}
 >
-  <div class={`mx-auto ${max_width_class}`}>
-    <div class={`flex flex-col lg:flex-row ${gap_class} items-center`}>
+  <div class={`mx-auto container`}>
+    <div class={`flex flex-col xl:flex-row ${gap_class} items-center`}>
       {/* Content */}
-      <div class={`${content_proportion_class} text-center lg:text-left z-10`}>
-        <h2 class="ds-h1 !font-bold uppercase">{title}</h2>
-        <p class="ds-p-2 md:ds-p-1 mt-8 lg:mt-12">
+      <div class={`${content_proportion_class} text-center xl:text-left z-10`}>
+        <h2 class="ds-h1 md:ds-h2 2xl:ds-h1 !font-bold uppercase">{title}</h2>
+        <p class="ds-p-2 md:ds-p-1 mt-8 xl:mt-12">
           {description}
         </p>
         {

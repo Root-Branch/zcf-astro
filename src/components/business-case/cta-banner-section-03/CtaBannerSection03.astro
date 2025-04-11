@@ -28,11 +28,10 @@ const max_width_class = `max-w-[${styling?.[0]?.max_width}px]` || "";
 
 <section
   id={id}
-  class={`relative ${padding_top_class} ${padding_bottom_class} 
-  ${padding_left_class} ${padding_right_class} ${mobile_padding_top_class} 
+  class={`relative ${padding_top_class} ${padding_bottom_class}  ${mobile_padding_top_class} 
   ${mobile_padding_bottom_class} ${mobile_padding_left_class} ${mobile_padding_right_class}`}
 >
-  <div class={`mx-auto ${max_width_class}`}>
+  <div class={`mx-auto container`}>
     <div class="flex flex-col xl:flex-row items-center">
       {/* Content */}
       <div class="w-full xl:w-[60%] text-center lg:text-left z-10">
