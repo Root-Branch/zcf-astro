@@ -1,0 +1,13 @@
+#cc-main {
+  --cc-font-family: "Source Sans 3", sans-serif;
+  --cc-primary-color: #000000;
+
+  --cc-btn-primary-bg: #000000;
+  --cc-btn-primary-border-color: #000000;
+  --cc-btn-primary-hover-bg: #000000;
+  --cc-btn-primary-hover-border-color: #000000;
+
+  --cc-toggle-on-bg: var(--cc-btn-primary-bg);
+
+  --cc-btn-border-radius: 30px;
+}

@@ -9,11 +9,13 @@ import autoprefixer from "autoprefixer";
 import vue from "@astrojs/vue";
 import cssnano from "cssnano";
 import compress from "astro-compress";
+import partytown from '@astrojs/partytown';
 
 const { STORYBLOK_TOKEN } = loadEnv(process.env.NODE_ENV, process.cwd(), "");
 
 export default defineConfig({
   integrations: [
+    partytown({ config: { forward: ['dataLayer.push'] } }),
     storyblok({
       accessToken: STORYBLOK_TOKEN,
       livePreview: isPreview,

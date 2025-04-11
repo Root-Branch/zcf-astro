@@ -25,6 +25,46 @@ const { header, footer } = await getGlobalContent();
       href="https://fonts.googleapis.com/css2?family=Just+Another+Hand&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.1.0/dist/cookieconsent.css"
+    />
+    <link rel="stylesheet" href="/src/scripts/cookieconsent.css" />
+    <!-- Google tag (gtag.js) -->
+    <script
+      is:inline
+      type="text/partytown"
+      src="https://www.googletagmanager.com/gtag/js?id=G-734KJEM8F7"></script>
+    <script is:inline type="text/partytown">
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("consent", "default", {
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied",
+        analytics_storage: "denied",
+      });
+
+      gtag("config", "G-734KJEM8F7");
+    </script>
+    <script is:inline data-category="analytics">
+      console.log("analytics");
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("consent", "update", {
+        ad_storage: "granted",
+        ad_user_data: "granted",
+        ad_personalization: "granted",
+        analytics_storage: "granted",
+      });
+    </script>
   </head>
   <body>
     <StoryblokComponent blok={header} />
@@ -32,6 +72,7 @@ const { header, footer } = await getGlobalContent();
       <slot />
     </main>
     <StoryblokComponent blok={footer} />
+    <script type="module" src="/src/scripts/cookieconsent-config.js"></script>
   </body>
 </html>
 
