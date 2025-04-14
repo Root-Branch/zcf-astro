@@ -5,6 +5,7 @@ import Button from "../../common/Button.astro";
 const {
   placeholder = "Enter email to download",
   description,
+  note = "",
   footer,
   pdf_link,
   cta_button = [],
@@ -44,6 +45,7 @@ const alignClass = is_center_align ? "text-left lg:text-center" : "";
         />
         <input type="hidden" name="portalId" value={hubspot_portalId} />
         <input type="hidden" name="formId" value={hubspot_formId} />
+        <input type="hidden" name="description" value={note} />
 
         {
           cta_button && is_button_field_same_row && is_desktop && (
