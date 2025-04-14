@@ -8,13 +8,14 @@ const {
   image,
   download_form = [],
   card_width = "md",
+  is_full_width_carousel = true,
 } = Astro.props;
 ---
 
 <div
-  class={`card flex flex-col bg-ds-blue-900 ${card_width == "md" ? "max-w-[500px]" : "max-w-[547px]"} text-white flex-shrink-0 mr-[20px]`}
+  class={`${is_full_width_carousel ? "card" : ""} flex flex-col bg-ds-blue-900 ${card_width == "md" ? "max-w-[500px]" : "max-w-[547px]"} text-white flex-shrink-0 mr-[20px]`}
 >
-  <div class="p-8 lg:p-12">
+  <div class={`p-8 ${is_full_width_carousel ? "lg:p-12" : "2xl:p-12"}`}>
     {
       image?.filename && (
         <div class="mb-12 2xl:mb-6">

@@ -42,7 +42,7 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
 <!-- Desktop Layout -->
 <section
   id={id}
-  class={`relative ${padding_classes} ${bg_color_class} max-h-[1200px] hidden 2xl:block`}
+  class={`relative ${padding_classes} ${bg_color_class} max-h-[1200px] hidden xl:block`}
 >
   {
     background_image?.filename && (
@@ -68,7 +68,7 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
       </div>
 
       <!-- Download Cards -->
-      <div class="mt-[10rem] grid grid-cols-1 md:grid-cols-2 gap-16 -ml-[8rem]">
+      <div class="mt-[10rem] grid grid-cols-1 md:grid-cols-2 gap-0 -ml-[8rem]">
         {
           download_cards.map((card) => (
             <DownloadCard
@@ -78,6 +78,7 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
               download_form={card.download_form}
               is_desktop={true}
               card_width={card.card_width}
+              is_full_width_carousel={false}
             />
           ))
         }
@@ -87,7 +88,7 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
 </section>
 
 <!-- Mobile Layout -->
-<section class={`${padding_classes} ${bg_color_class} block 2xl:hidden`}>
+<section class={`${padding_classes} ${bg_color_class} block xl:hidden`}>
   <!-- Background Image as Top Image on Mobile -->
   {
     background_image?.filename && (
