@@ -1,7 +1,7 @@
 ---
 import { convertToWebP } from "../../../utils/imageConvert";
 
-const { title, partners = [], styling = [], logo_height = "50" } = Astro.props;
+const { title, partners = [], styling = [], logo_height = "50", id } = Astro.props;
 
 // Extract styling properties
 const padding_top = styling?.[0]?.padding_top || "md";
@@ -43,7 +43,7 @@ const gap_class = gap === "md" ? "gap-4 md:gap-12" : gap === "lg" ? "gap-12 md:g
   }
 </style>
 
-<section class={`relative ${padding_classes} ${bg_color_class}`}>
+<section id={id} class={`relative ${padding_classes} ${bg_color_class}`}>
   <div class={`mx-auto ${max_width_class} px-4`}>
     <!-- Header Section -->
     <div class="text-center mb-12 lg:mb-16">
