@@ -4,6 +4,7 @@ import Button from "../../common/Button.astro";
 import FormInitializer from "./FormInitializer.vue";
 
 const {
+  id,
   title,
   description,
   form_fields = [],
@@ -43,7 +44,7 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
 const formId = `form-${Math.random().toString(36).substring(2, 9)}`;
 ---
 
-<section class={`${padding_classes} ${bg_color_class} text-ds-white`}>
+<section id={id} class={`${padding_classes} ${bg_color_class} text-ds-white`}>
   <div class={`mx-auto ${max_width_class} px-4 md:px-8`}>
     <div class="flex flex-col lg:flex-row items-start gap-8 lg:gap-16">
       <div class="w-full lg:w-[30%]">
