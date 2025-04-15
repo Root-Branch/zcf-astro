@@ -89,7 +89,7 @@ const imageWidthClass = `w-[${image_proportion}%]`;
                       <img loading="lazy" 
                         src={convertToWebP(image.filename)}
                         alt={image.alt || ""}
-                        class="w-[80%] h-full object-cover dynamic-image mx-auto"
+                        class="w-[80%] h-full aspect-square object-cover mx-auto"
                       />
                     </div>
                   ))}
