@@ -35,6 +35,7 @@ export default defineConfig({
         stats_carousel_section: "storyblok/home-page/StatsCarouselSection",
         card_carousel_section: "storyblok/home-page/CardCarouselSection",
         partner_section: "storyblok/home-page/PartnerSection",
+        "testimonial.section.02": "storyblok/home-page/TestimonialSection02",
         "hero_banner.section.01": "storyblok/compliance/HeroBannerSection01",
         "text_banner.section.01": "storyblok/compliance/TextBannerSection01",
         "card_feature.section.01": "storyblok/compliance/CardFeatureSection01",
