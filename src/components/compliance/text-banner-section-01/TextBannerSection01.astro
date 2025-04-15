@@ -10,6 +10,7 @@ const {
   title_color,
   mobile_title_font,
   image,
+  logo,
   is_image_left,
   image_proportion,
   is_image_shifted_down,
@@ -110,6 +111,11 @@ const mobile_is_image_full_width_class = mobile_is_image_full_width
       <div
         class={`w-full ${content_proportion_class} text-center lg:text-left`}
       >
+        {
+          logo && (
+            <img src={convertToWebP(logo.filename)} alt={logo.alt} class="w-36 h-auto mb-8 mx-auto lg:mx-0" />
+          )
+        }
         <div
           class={`${mobile_title_font_class} lg:${title_font_class} ${title_color_class} text-center lg:text-left block lg:hidden`}
           set:html={renderRichText(title)}
