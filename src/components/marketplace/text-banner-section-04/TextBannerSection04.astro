@@ -1,4 +1,6 @@
 ---
+import { renderRichText } from "@storyblok/astro";
+
 const { id, title, description, styling, content_color, content_width } =
   Astro.props;
 
@@ -48,7 +50,7 @@ const content_width_class = content_width
 
       {
         description && (
-          <p class={`ds-p-1 ${content_width_class} mx-auto`}>{description}</p>
+          <div class={`ds-p-1 ${content_width_class} mx-auto`} set:html={renderRichText(description)}/>
         )
       }
     </div>
