@@ -1,0 +1,246 @@
+---
+import { formatDate } from "../../../utils/dateFormat";
+import Button from "../../common/Button.astro";
+import { renderRichText } from "@storyblok/astro";
+
+const { title, description, news_articles, styling } = Astro.props;
+
+// Styling variables
+const padding_top = styling?.[0]?.padding_top || "";
+const padding_bottom = styling?.[0]?.padding_bottom || "";
+const padding_left = styling?.[0]?.padding_left || "";
+const padding_right = styling?.[0]?.padding_right || "";
+const mobile_padding_top = styling?.[0]?.mobile_padding_top || "";
+const mobile_padding_bottom = styling?.[0]?.mobile_padding_bottom || "";
+const mobile_padding_left = styling?.[0]?.mobile_padding_left || "";
+const mobile_padding_right = styling?.[0]?.mobile_padding_right || "";
+const max_width = styling?.[0]?.max_width || "";
+const background_color = styling?.[0]?.background_color || "";
+
+const padding_classes = `
+  pt-${mobile_padding_top} pb-${mobile_padding_bottom}
+  pl-${mobile_padding_left} pr-${mobile_padding_right}
+  lg:pt-${padding_top} lg:pb-${padding_bottom}
+  lg:pl-${padding_left} lg:pr-${padding_right}
+`;
+
+const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
+const background_color_class = background_color ? `bg-${background_color}` : "";
+
+// Format card data for search and filtering
+const newsData =
+  news_articles?.map((article, index) => {
+    const articleContent = article.content.body?.[0];
+    return {
+      index,
+      title: articleContent?.title || "",
+      preview: articleContent?.content
+        ? renderRichText(articleContent.content)
+        : "",
+      date: articleContent?.date || "",
+      slug: article.slug || "",
+    };
+  }) || [];
+---
+
+<section class={`${padding_classes} ${background_color_class}`}>
+  <div class={`${max_width_class} mx-auto`}>
+    <h1 class="ds-h1 mb-4">{title}</h1>
+    {description && <p class="ds-p-1 mb-10">{description}</p>}
+
+    <!-- Search -->
+    <div class="flex items-center gap-4 mb-8">
+      <div
+        id="searchContainer"
+        class="relative w-auto transition-all duration-300"
+      >
+        <button
+          id="searchBtn"
+          class="flex items-center bg-ds-red-500 rounded-full px-6 py-2 text-ds-white ds-p-2 transition-all duration-300"
+        >
+          <svg
+            class="w-5 h-5 mr-3"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+          <span>Search</span>
+        </button>
+        <input
+          type="text"
+          id="searchInput"
+          class="absolute left-0 top-0 w-0 h-full opacity-0 bg-ds-red-500 rounded-full px-6 py-2 text-ds-white ds-p-2 outline-none transition-all duration-300 placeholder:text-ds-white"
+          placeholder="Search..."
+        />
+      </div>
+    </div>
+
+    <!-- News Grid -->
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+      id="news-grid"
+    >
+      {
+        news_articles?.map((article, index) => {
+          const articleContent = article.content.body?.[0];
+
+          if (!articleContent) return null;
+
+          const articleTitle = articleContent.title;
+          const articleImage = articleContent.image?.filename;
+          const articleDate = formatDate(articleContent.date);
+          const articleRichText = articleContent.content;
+          const articleSlug = article.slug;
+
+          return (
+            <div
+              class="bg-ds-grey p-8 flex flex-col news-card"
+              data-index={index}
+            >
+              {articleImage && (
+                <div class="relative mb-4">
+                  <img
+                    src={articleImage}
+                    alt={articleTitle}
+                    class="w-full h-[200px] object-cover"
+                    loading="lazy"
+                  />
+                </div>
+              )}
+              <h3 class="ds-p-1 !font-bold mb-3">{articleTitle}</h3>
+              <div
+                class="ds-p-2 mb-3 flex-grow rich-text-preview"
+                set:html={
+                  articleRichText ? renderRichText(articleRichText) : ""
+                }
+              />
+              <p class="ds-p-3 text-ds-grey-600 mb-4 italic">{articleDate}</p>
+              <div class="mt-auto cursor-pointer">
+                <Button
+                  text="Read more"
+                  link={{ url: `/news/${articleSlug}` }}
+                  style="secondary"
+                  background_color="ds-red-500"
+                  text_color="ds-red-500"
+                />
+              </div>
+            </div>
+          );
+        })
+      }
+    </div>
+
+    <!-- No results message -->
+    <div
+      id="noResults"
+      class="hidden text-center py-12 ds-p-2 max-w-[800px] mx-auto flex justify-center items-center min-h-[250px]"
+    >
+      No matching results found.
+    </div>
+  </div>
+</section>
+
+<style>
+  :global(.rich-text-preview ul) {
+    list-style: disc !important;
+  }
+
+  :global(.rich-text-preview ul li) {
+    list-style-type: disc !important;
+  }
+
+  :global(.rich-text-preview ol) {
+    list-style: decimal !important;
+  }
+
+  :global(.rich-text-preview ol li) {
+    list-style-type: decimal !important;
+  }
+
+  .rich-text-preview {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>
+
+<script define:vars={{ newsData }}>
+  const searchContainer = document.getElementById("searchContainer");
+  const searchBtn = document.getElementById("searchBtn");
+  const searchInput = document.getElementById("searchInput");
+  const newsCards = document.querySelectorAll(".news-card");
+  const noResults = document.getElementById("noResults");
+  const newsGrid = document.getElementById("news-grid");
+
+  let isSearchExpanded = false;
+  let currentSearch = "";
+
+  // Handle search button click - expand search field
+  searchBtn?.addEventListener("click", () => {
+    if (!isSearchExpanded) {
+      searchContainer.style.width = "300px";
+      searchBtn.style.width = "0";
+      searchBtn.style.opacity = "0";
+      searchInput.style.width = "100%";
+      searchInput.style.opacity = "1";
+      searchInput.focus();
+      isSearchExpanded = true;
+    }
+  });
+
+  // Handle search input blur - collapse search field if empty
+  searchInput?.addEventListener("blur", () => {
+    if (!searchInput.value) {
+      searchContainer.style.width = "auto";
+      searchBtn.style.width = "";
+      searchBtn.style.opacity = "1";
+      searchInput.style.width = "0";
+      searchInput.style.opacity = "0";
+      isSearchExpanded = false;
+    }
+  });
+
+  // Handle search input
+  searchInput?.addEventListener("input", (e) => {
+    currentSearch = e.target.value.toLowerCase();
+    filterNews();
+  });
+
+  // Filter news cards
+  function filterNews() {
+    let visibleCount = 0;
+
+    newsCards.forEach((card) => {
+      const index = parseInt(card.getAttribute("data-index"));
+      const newsItem = newsData[index];
+
+      if (!newsItem) return;
+
+      const matchesSearch =
+        !currentSearch ||
+        newsItem.title.toLowerCase().includes(currentSearch) ||
+        newsItem.preview.toLowerCase().includes(currentSearch);
+
+      const shouldShow = matchesSearch;
+      card.classList.toggle("hidden", !shouldShow);
+
+      if (shouldShow) {
+        visibleCount++;
+      }
+    });
+
+    // Show/hide no results message
+    noResults.classList.toggle("hidden", visibleCount > 0);
+    newsGrid.classList.toggle("hidden", visibleCount === 0);
+  }
+
+  // Initialize on load
+  document.addEventListener("DOMContentLoaded", filterNews);
+</script>

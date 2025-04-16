@@ -8,6 +8,7 @@ export async function getStaticPaths() {
   const storyblokApi = useStoryblokApi();
   const { data } = await storyblokApi.get("cdn/links/", {
     version: "draft",
+    resolve_relations: 'news_grid.section.01.news_articles',
   });
 
   let links = data.links;
@@ -24,6 +25,7 @@ const story = await useStoryblok(
   `cdn/stories/${slug === undefined ? "home-page" : slug}`,
   {
     version: isPreview ? "draft" : "published",
+    resolve_relations: 'news_grid.section.01.news_articles',
   },
   {},
   Astro

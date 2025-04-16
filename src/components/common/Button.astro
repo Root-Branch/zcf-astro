@@ -19,7 +19,7 @@ const buttonClasses = {
 
 const buttonStyle = buttonClasses[style] || buttonClasses.primary;
 const commonClasses = [
-  "text-center md:px-[2rem] md:py-[0.8rem] ds-button inline-block rounded-full hover:opacity-90 px-[15px] py-[10px]",
+  "text-center md:px-[2rem] md:py-[0.8rem] ds-button inline-block rounded-full hover:opacity-90 px-[15px] py-[10px] cursor-pointer",
   buttonStyle,
   is_button_full_width_mobile ? "w-full lg:w-auto" : "w-auto",
   is_button_full_width_desktop ? "lg:w-full" : "",

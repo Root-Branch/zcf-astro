@@ -5,6 +5,7 @@ export async function getGlobalContent() {
 
   const { data } = await storyblokApi.get('cdn/stories/site-config', {
     version: 'draft',
+    resolve_relations: 'news_grid.section.01.news_articles',
   })
 
   return {

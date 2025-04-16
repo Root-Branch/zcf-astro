@@ -1,0 +1,10 @@
+---
+import { storyblokEditable } from '@storyblok/astro'
+import NewsArticleSection01 from '../../components/news/news-article-section-01/NewsArticleSection01.astro'
+
+const { blok } = Astro.props
+---
+
+<div {...storyblokEditable(blok)}>
+  <NewsArticleSection01 {...blok} />
+</div>

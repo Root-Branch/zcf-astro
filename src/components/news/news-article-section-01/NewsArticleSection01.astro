@@ -1,0 +1,100 @@
+---
+import { renderRichText } from "@storyblok/astro";
+import { formatDate } from "../../../utils/dateFormat";
+
+const { date, title, image, content, styling } = Astro.props;
+
+// Styling variables
+const padding_top = styling?.[0]?.padding_top || "";
+const padding_bottom = styling?.[0]?.padding_bottom || "";
+const padding_left = styling?.[0]?.padding_left || "";
+const padding_right = styling?.[0]?.padding_right || "";
+const mobile_padding_top = styling?.[0]?.mobile_padding_top || "";
+const mobile_padding_bottom = styling?.[0]?.mobile_padding_bottom || "";
+const mobile_padding_left = styling?.[0]?.mobile_padding_left || "";
+const mobile_padding_right = styling?.[0]?.mobile_padding_right || "";
+const max_width = styling?.[0]?.max_width || "";
+const background_color = styling?.[0]?.background_color || "";
+
+const padding_classes = `
+  pt-${mobile_padding_top} pb-${mobile_padding_bottom}
+  pl-${mobile_padding_left} pr-${mobile_padding_right}
+  lg:pt-${padding_top} lg:pb-${padding_bottom}
+  lg:pl-${padding_left} lg:pr-${padding_right}
+`;
+
+const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
+const background_color_class = background_color ? `bg-${background_color}` : "";
+
+const formattedDate = date ? formatDate(date) : "";
+const renderedContent = content ? renderRichText(content) : "";
+const imageUrl = image?.filename || "";
+---
+
+<section class={`${padding_classes} ${background_color_class}`}>
+  <div class={`${max_width_class} mx-auto`}>
+    <a
+      href="/news"
+      class="ds-p-2 inline-flex items-center mb-6 text-ds-black hover:underline hover:!cursor-pointer"
+    >
+      <svg
+        class="w-5 h-5 mr-2"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M15 19l-7-7 7-7"></path>
+      </svg>
+      Back to Latest News
+    </a>
+
+    {formattedDate && <p class="ds-p-3 mb-4">{formattedDate}</p>}
+    {title && <h1 class="ds-p-medium mb-8">{title}</h1>}
+
+    <div class="flex flex-col lg:flex-row gap-8 mb-16">
+      <div class="lg:w-1/2 max-w-[800px]">
+        <div class="rich-text ds-p-2" set:html={renderedContent} />
+      </div>
+
+      {
+        imageUrl && (
+          <div class="lg:w-1/2 flex items-start">
+            <div class="w-full h-[500px] overflow-hidden">
+              <img
+                src={imageUrl}
+                alt={title}
+                class="w-full max-h-[500px] object-cover"
+              />
+            </div>
+          </div>
+        )
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  :global(.rich-text ul) {
+    list-style: disc !important;
+    padding-left: 1.5rem !important;
+  }
+
+  :global(.rich-text ul li) {
+    list-style-type: disc !important;
+    padding-bottom: 1rem !important;
+  }
+
+  :global(.rich-text ol) {
+    list-style: decimal !important;
+    padding-left: 1.5rem !important;
+  }
+
+  :global(.rich-text ol li) {
+    list-style-type: decimal !important;
+    padding-bottom: 1rem !important;
+  }
+</style>
