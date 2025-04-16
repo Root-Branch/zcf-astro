@@ -18,7 +18,7 @@ const {
   <div class={`p-8 ${is_full_width_carousel ? "lg:p-12" : "2xl:p-12"}`}>
     {
       image?.filename && (
-        <div class="mb-12 2xl:mb-6">
+        <div class="mb-8 2xl:mb-12">
           <img loading="lazy" 
             src={convertToWebP(image.filename)}
             alt={image.alt || title}
@@ -28,8 +28,8 @@ const {
       )
     }
 
-    <h3 class="ds-p-1 !font-semibold mb-4 hidden 2xl:block">{title}</h3>
-    <p class="ds-p-2 mb-12 hidden 2xl:block">{description}</p>
+    <h3 class="ds-p-1 !font-semibold mb-4">{title}</h3>
+    <p class="ds-p-2 mb-8 2xl:mb-12">{description}</p>
 
     {
       download_form && download_form.length > 0 && (
