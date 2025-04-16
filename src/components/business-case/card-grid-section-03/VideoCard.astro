@@ -1,7 +1,11 @@
 ---
 import Button from "../../common/Button.astro";
+import { getYouTubeVideoId } from "../../../utils/youtube";
 
 const { title, description, video, cta_button } = Astro.props;
+
+const videoId = video ? getYouTubeVideoId(video) : null;
+const isYouTube = !!videoId;
 ---
 
 <div
@@ -10,14 +14,22 @@ const { title, description, video, cta_button } = Astro.props;
   {
     video && (
       <div class="w-full h-[200px] lg:h-[259px] overflow-hidden mb-6">
-        <iframe
-          src={video}
-          class="w-full h-full"
-          frameborder="0"
-          allow="autoplay; fullscreen; picture-in-picture"
-          allowfullscreen
-          title={title}
-        />
+        {isYouTube ? (
+          <lite-youtube
+            class="!max-w-full"
+            videoid={videoId}
+            playlabel={`Play: ${title}`}
+          ></lite-youtube>
+        ) : (
+          <iframe
+            src={video}
+            class="w-full h-full"
+            frameborder="0"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen
+            title={title}
+          />
+        )}
       </div>
     )
   }
@@ -41,3 +53,8 @@ const { title, description, video, cta_button } = Astro.props;
     width: calc(100vw - 32px);
   }
 </style>
+
+<script>
+  import "lite-youtube-embed/src/lite-yt-embed.js";
+  import "lite-youtube-embed/src/lite-yt-embed.css";
+</script>
