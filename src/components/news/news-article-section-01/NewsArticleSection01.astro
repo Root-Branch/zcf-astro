@@ -5,15 +5,15 @@ import { formatDate } from "../../../utils/dateFormat";
 const { date, title, image, content, styling } = Astro.props;
 
 // Styling variables
-const padding_top = styling?.[0]?.padding_top || "";
-const padding_bottom = styling?.[0]?.padding_bottom || "";
-const padding_left = styling?.[0]?.padding_left || "";
-const padding_right = styling?.[0]?.padding_right || "";
-const mobile_padding_top = styling?.[0]?.mobile_padding_top || "";
-const mobile_padding_bottom = styling?.[0]?.mobile_padding_bottom || "";
-const mobile_padding_left = styling?.[0]?.mobile_padding_left || "";
-const mobile_padding_right = styling?.[0]?.mobile_padding_right || "";
-const max_width = styling?.[0]?.max_width || "";
+const padding_top = styling?.[0]?.padding_top || "xxs";
+const padding_bottom = styling?.[0]?.padding_bottom || "xs";
+const padding_left = styling?.[0]?.padding_left || "xs";
+const padding_right = styling?.[0]?.padding_right || "xs";
+const mobile_padding_top = styling?.[0]?.mobile_padding_top || "none";
+const mobile_padding_bottom = styling?.[0]?.mobile_padding_bottom || "none";
+const mobile_padding_left = styling?.[0]?.mobile_padding_left || "xxs";
+const mobile_padding_right = styling?.[0]?.mobile_padding_right || "xxs";
+const max_width = styling?.[0]?.max_width || "1520";
 const background_color = styling?.[0]?.background_color || "";
 
 const padding_classes = `
@@ -53,9 +53,9 @@ const imageUrl = image?.filename || "";
     </a>
 
     {formattedDate && <p class="ds-p-3 mb-4">{formattedDate}</p>}
-    {title && <h1 class="ds-p-medium mb-8">{title}</h1>}
+    {title && <h1 class="ds-p-large lg:ds-p-medium mb-8">{title}</h1>}
 
-    <div class="flex flex-col lg:flex-row gap-8 mb-16">
+    <div class="flex flex-col-reverse lg:flex-row gap-8 mb-16">
       <div class="lg:w-1/2 max-w-[800px]">
         <div class="rich-text ds-p-2" set:html={renderedContent} />
       </div>
@@ -63,11 +63,11 @@ const imageUrl = image?.filename || "";
       {
         imageUrl && (
           <div class="lg:w-1/2 flex items-start">
-            <div class="w-full h-[500px] overflow-hidden">
+            <div class="w-full h-auto">
               <img
                 src={imageUrl}
                 alt={title}
-                class="w-full max-h-[500px] object-cover"
+                class="w-auto h-auto object-cover"
               />
             </div>
           </div>
