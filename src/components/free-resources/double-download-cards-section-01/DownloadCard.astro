@@ -8,6 +8,7 @@ const {
   image,
   download_form = [],
   card_width = "md",
+  content_height,
   is_full_width_carousel = true,
 } = Astro.props;
 ---
@@ -22,14 +23,14 @@ const {
           <img loading="lazy" 
             src={convertToWebP(image.filename)}
             alt={image.alt || title}
-            class="w-full object-cover max-h-[200px]"
+            class="w-full object-cover h-[230px]"
           />
         </div>
       )
     }
 
     <h3 class="ds-p-1 !font-semibold mb-4">{title}</h3>
-    <p class="ds-p-2 mb-8 2xl:mb-12">{description}</p>
+    <p class=`ds-p-2 mb-8 2xl:mb-12 ${content_height == "sm" ? "min-h-[60px] xl:min-h-[100px]" : "min-h-[140px] xl:min-h-[160px]"}`>{description}</p>
 
     {
       download_form && download_form.length > 0 && (
