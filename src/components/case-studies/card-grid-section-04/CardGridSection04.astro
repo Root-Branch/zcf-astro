@@ -117,9 +117,6 @@ const cardData = cards.map((card, index) => ({
 
     <!-- Filter and Sort -->
     <div class="flex items-center gap-4 ml-auto text-white ds-p-2">
-      <button class="underline">Filter</button>
-      <div class="w-px h-6 bg-white"></div>
-      
       <!-- Sort Button and Dropdown -->
       <div class="relative">
         <button id="sortButton" class="underline">Sort</button>
@@ -166,7 +163,7 @@ const cardData = cards.map((card, index) => ({
   >
     {
       cards.map((card, index) => (
-        <div class="card-container" data-index={index}>
+        <div class="card-container h-full" data-index={index}>
           <Card
             title={card.title}
             description={card.description}
@@ -341,6 +338,4 @@ const cardData = cards.map((card, index) => ({
       sortDropdown?.classList.add("hidden");
     }
   });
-
-  document.addEventListener("DOMContentLoaded", filterCards);
 </script>

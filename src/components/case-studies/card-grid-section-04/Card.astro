@@ -6,7 +6,7 @@ const { title, description, image, cta_button, tags } = Astro.props;
 ---
 
 <div
-  class="card lg:w-auto lg:max-w-[542px] min-h-[783px] p-8 lg:p-12 bg-ds-white"
+  class="card h-full lg:w-auto lg:max-w-[542px] p-8 lg:p-12 bg-ds-white flex flex-col"
 >
   <h3 class="ds-h3 lg:ds-h4 mb-8">{title}</h3>
   {
@@ -31,16 +31,18 @@ const { title, description, image, cta_button, tags } = Astro.props;
       </div>
     )
   }
-  <p class="ds-p-2 mb-8">{description}</p>
+  <p class="ds-p-2 mb-8 flex-grow">{description}</p>
   {
     cta_button && cta_button.length > 0 && (
-      <Button
-        text={cta_button[0].text}
-        link={cta_button[0].link}
-        style={cta_button[0].style}
-        background_color={cta_button[0].background_color}
-        text_color={cta_button[0].text_color}
-      />
+      <div class="mt-auto">
+        <Button
+          text={cta_button[0].text}
+          link={cta_button[0].link}
+          style={cta_button[0].style}
+          background_color={cta_button[0].background_color}
+          text_color={cta_button[0].text_color}
+        />
+      </div>
     )
   }
 </div>
