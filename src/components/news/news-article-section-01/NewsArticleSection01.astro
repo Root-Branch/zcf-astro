@@ -1,6 +1,7 @@
 ---
 import { renderRichText } from "@storyblok/astro";
 import { formatDate } from "../../../utils/dateFormat";
+import { convertToWebP } from "../../../utils/imageConvert";
 
 const { date, title, image, content, styling } = Astro.props;
 
@@ -65,7 +66,7 @@ const imageUrl = image?.filename || "";
           <div class="lg:w-1/2 flex items-start">
             <div class="w-full h-auto">
               <img
-                src={imageUrl}
+                src={convertToWebP(imageUrl)}
                 alt={title}
                 class="w-auto h-auto object-cover"
               />

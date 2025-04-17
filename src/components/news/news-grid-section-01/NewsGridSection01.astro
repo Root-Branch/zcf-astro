@@ -1,5 +1,6 @@
 ---
 import { formatDate } from "../../../utils/dateFormat";
+import { convertToWebP } from "../../../utils/imageConvert";
 import Button from "../../common/Button.astro";
 import { renderRichText } from "@storyblok/astro";
 
@@ -106,7 +107,7 @@ const newsData =
               {articleImage && (
                 <div class="relative mb-4">
                   <img
-                    src={articleImage}
+                    src={convertToWebP(articleImage)}
                     alt={articleTitle}
                     class="w-full h-[200px] object-cover"
                     loading="lazy"
