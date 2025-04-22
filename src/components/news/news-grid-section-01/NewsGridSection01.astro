@@ -1,6 +1,5 @@
 ---
 import { formatDate } from "../../../utils/dateFormat";
-import { convertToWebP } from "../../../utils/imageConvert";
 import Button from "../../common/Button.astro";
 import { renderRichText } from "@storyblok/astro";
 
@@ -28,9 +27,16 @@ const padding_classes = `
 const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
 const background_color_class = background_color ? `bg-${background_color}` : "";
 
+// Sort articles by date (newest first)
+const sortedArticles = news_articles ? [...news_articles].sort((a, b) => {
+  const dateA = a.content.body?.[0]?.date ? new Date(a.content.body[0].date).getTime() : 0;
+  const dateB = b.content.body?.[0]?.date ? new Date(b.content.body[0].date).getTime() : 0;
+  return dateB - dateA;
+}) : [];
+
 // Format card data for search and filtering
 const newsData =
-  news_articles?.map((article, index) => {
+  sortedArticles.map((article, index) => {
     const articleContent = article.content.body?.[0];
     return {
       index,
@@ -88,7 +94,7 @@ const newsData =
       id="news-grid"
     >
       {
-        news_articles?.map((article, index) => {
+        sortedArticles.map((article, index) => {
           const articleContent = article.content.body?.[0];
 
           if (!articleContent) return null;
@@ -107,14 +113,14 @@ const newsData =
               {articleImage && (
                 <div class="relative mb-4">
                   <img
-                    src={convertToWebP(articleImage)}
+                    src={articleImage}
                     alt={articleTitle}
                     class="w-full h-[200px] object-cover"
                     loading="lazy"
                   />
                 </div>
               )}
-              <h3 class="ds-p-1 !font-bold mb-3">{articleTitle}</h3>
+              <h3 class="ds-h5 !font-bold mb-3">{articleTitle}</h3>
               <div
                 class="ds-p-2 mb-3 rich-text-preview"
                 set:html={

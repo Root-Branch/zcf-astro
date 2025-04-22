@@ -4,11 +4,38 @@ import { Image } from "astro:assets";
 import arrowLeft from "../../../assets/arrow-left.png";
 import arrowRight from "../../../assets/arrow-right.png";
 
-const { title, description, step_cards } = Astro.props;
+const { title, description, step_cards, styling } = Astro.props;
+
+// Extract styling properties
+const padding_top = styling?.[0]?.padding_top || "";
+const padding_bottom = styling?.[0]?.padding_bottom || "";
+const padding_left = styling?.[0]?.padding_left || "";
+const padding_right = styling?.[0]?.padding_right || "";
+const mobile_padding_top = styling?.[0]?.mobile_padding_top || "";
+const mobile_padding_bottom = styling?.[0]?.mobile_padding_bottom || "";
+const mobile_padding_left = styling?.[0]?.mobile_padding_left || "";
+const mobile_padding_right = styling?.[0]?.mobile_padding_right || "";
+const background_color = styling?.[0]?.background_color || "";
+const max_width = styling?.[0]?.max_width || "";
+
+// Create CSS classes
+const padding_classes = `
+  ${mobile_padding_top ? `pt-${mobile_padding_top}` : ""}
+  ${mobile_padding_bottom ? `pb-${mobile_padding_bottom}` : ""}
+  ${mobile_padding_left ? `pl-${mobile_padding_left}` : ""}
+  ${mobile_padding_right ? `pr-${mobile_padding_right}` : ""}
+  ${padding_top ? `lg:pt-${padding_top}` : ""}
+  ${padding_bottom ? `lg:pb-${padding_bottom}` : ""}
+  ${padding_left ? `lg:pl-${padding_left}` : ""}
+  ${padding_right ? `lg:pr-${padding_right}` : ""}
+`;
+
+const bg_color_class = background_color ? `bg-${background_color}` : "";
+const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
 ---
 
-<section class="pt-xs pb-none md:py-md">
-  <div class="mx-auto px-4 lg:px-20">
+<section class=`mx-auto ${padding_classes} ${bg_color_class} ${max_width_class}`>
+  <div class="mx-auto">
     {/* Header */}
     <div class="text-center mb-4 lg:mb-12">
       <h2 class="ds-h2 lg:ds-h3 mb-8">{title}</h2>
@@ -46,7 +73,7 @@ const { title, description, step_cards } = Astro.props;
 
     {/* Desktop Grid (visible on large screens and up) */}
     <div
-      class="hidden xl:grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-4 gap-6 mx-auto min-h-[604px]"
+      class="hidden xl:grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-4 gap-6 mx-auto min-h-[650px]"
       id="steps-desktop-grid"
     >
       {
@@ -100,11 +127,11 @@ const { title, description, step_cards } = Astro.props;
         if (!card) return;
 
         if (idx === highlightIndex) {
-          card.classList.add("lg:bg-ds-teal-500", "xl:min-h-[450px]", "2xl:min-h-[604px]");
-          card.classList.remove("xl:min-h-[400px]", "2xl:min-h-[518px]");
+          card.classList.add("lg:bg-ds-teal-500", "xl:min-h-[450px]", "2xl:min-h-[650px]");
+          card.classList.remove("xl:min-h-[400px]", "2xl:min-h-[580px]");
         } else {
-          card.classList.remove("lg:bg-ds-teal-500", "xl:min-h-[450px]", "2xl:min-h-[604px]");
-          card.classList.add("xl:min-h-[400px]", "2xl:min-h-[518px]");
+          card.classList.remove("lg:bg-ds-teal-500", "xl:min-h-[450px]", "2xl:min-h-[650px]");
+          card.classList.add("xl:min-h-[400px]", "2xl:min-h-[580px]");
         }
       });
     }

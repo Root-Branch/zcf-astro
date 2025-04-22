@@ -37,6 +37,12 @@
     line-height: auto;
     font-weight: 700;
   }
+  .ds-h5 {
+    font-family: "Montserrat", sans-serif;
+    font-size: 18px;
+    line-height: auto;
+    font-weight: 700;
+  }
 
   /* Highlights - Just Another Hand */
   .ds-hl1 {
@@ -160,6 +166,12 @@
       font-size: 25px;
       line-height: auto;
       font-weight: 650;
+    }
+    .ds-h5 {
+      font-family: "Montserrat", sans-serif;
+      font-size: 18px;
+      line-height: auto;
+      font-weight: 350;
     }
 
     /* Highlights - Just Another Hand */

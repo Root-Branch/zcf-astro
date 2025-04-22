@@ -1,4 +1,6 @@
 ---
+import { renderRichText } from "@storyblok/astro";
+
 const { stat_1_percentage, stat_1_text, stat_2_percentage, stat_2_text } =
   Astro.props;
 
@@ -20,7 +22,7 @@ const percent2 = parseInt(stat_2_percentage.replace("%", ""));
     </div>
     <div class="flex flex-col items-start">
       <span class="ds-h2 md:ds-number text-ds-white mb-4">{stat_1_percentage}</span>
-      <p class="ds-p-2 text-ds-white text-left">{stat_1_text}</p>
+      <div class="ds-p-2 text-ds-white text-left" set:html={renderRichText(stat_1_text)} />
     </div>
   </div>
 
@@ -36,7 +38,7 @@ const percent2 = parseInt(stat_2_percentage.replace("%", ""));
     </div>
     <div class="flex flex-col items-start">
       <span class="ds-h2 md:ds-number text-ds-white mb-4">{stat_2_percentage}</span>
-      <p class="ds-p-2 text-ds-white text-left">{stat_2_text}</p>
+      <div class="ds-p-2 text-ds-white text-left" set:html={renderRichText(stat_2_text)} />
     </div>
   </div>
 </div>
