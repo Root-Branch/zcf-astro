@@ -32,7 +32,7 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
     >
       <h2 class="ds-h3 mb-6 text-white text-center lg:text-left">{title}</h2>
       <div
-        class="content-section text-white space-y-4 text-center lg:text-left"
+        class="ds-p-2 content-section text-white space-y-4 text-center lg:text-left"
         set:html={renderRichText(description)}
       />
     </div>
@@ -48,7 +48,7 @@ const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
             <div class={`${index === 0 ? "" : "mt-12"}`}>
               <h3 class="ds-h3 text-white mb-4 text-center lg:text-left">{section.title}</h3>
               <div
-                class="case-study-content-section text-white space-y-4"
+                class="ds-p-2 case-study-content-section text-white space-y-4"
                 set:html={renderRichText(section.content)}
               />
             </div>
