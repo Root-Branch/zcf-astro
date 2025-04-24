@@ -52,27 +52,49 @@ const imageUrl = image?.filename || "";
       Back to Latest News
     </a>
 
-    {formattedDate && <p class="ds-p-3 mb-4">{formattedDate}</p>}
-    {title && <h1 class="ds-p-large lg:ds-p-medium mb-8">{title}</h1>}
-
-    <div class="flex flex-col-reverse lg:flex-row gap-8 mb-16">
-      <div class="lg:w-1/2 max-w-[800px]">
+    <!-- Mobile layout (stacked) -->
+    <div class="lg:hidden mb-16">
+      {formattedDate && <p class="ds-p-3 mb-4">{formattedDate}</p>}
+      {title && <h1 class="ds-p-large mb-8">{title}</h1>}
+      
+      {imageUrl && (
+        <div class="mb-8">
+          <img
+            src={imageUrl}
+            alt={title}
+            class="w-full h-auto object-cover"
+          />
+        </div>
+      )}
+      
+      <div>
         <div class="rich-text ds-p-2" set:html={renderedContent} />
       </div>
-
-      {
-        imageUrl && (
-          <div class="lg:w-1/2 flex items-start">
-            <div class="w-full h-auto">
-              <img
-                src={imageUrl}
-                alt={title}
-                class="w-auto h-auto object-cover"
-              />
-            </div>
+    </div>
+    
+    <!-- Desktop layout -->
+    <div class="hidden lg:block relative mb-16">
+      {formattedDate && <p class="ds-p-3 mb-4">{formattedDate}</p>}
+      
+      <div class="flex gap-8">
+        <div class="w-1/2 relative z-10">
+          {title && <h1 class="ds-p-medium mb-8">{title}</h1>}
+          
+          <div class="bg-ds-grey p-10 w-[120%] relative bottom-[-40px]">
+            <div class="rich-text ds-p-2" set:html={renderedContent} />
           </div>
-        )
-      }
+        </div>
+        
+        {imageUrl && (
+          <div class="w-1/2">
+            <img
+              src={imageUrl}
+              alt={title}
+              class="w-full h-[500px] object-cover"
+            />
+          </div>
+        )}
+      </div>
     </div>
   </div>
 </section>
