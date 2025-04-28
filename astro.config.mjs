@@ -98,6 +98,7 @@ export default defineConfig({
         "partner.section.02": "storyblok/about-us/PartnerSection02",
         "news_grid.section.01": "storyblok/news/NewsGridSection01",
         "news_article.section.01": "storyblok/news/NewsArticleSection01",
+        "rich_text.section.01": "storyblok/RichTextSection01",
       },
     }),
     vue(),

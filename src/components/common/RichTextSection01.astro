@@ -1,0 +1,41 @@
+---
+import { renderRichText } from "@storyblok/astro";
+
+const { content, styling = [], font } = Astro.props;
+
+// Extract styling properties
+const padding_top = styling?.[0]?.padding_top || "none";
+const padding_bottom = styling?.[0]?.padding_bottom || "none";
+const padding_left = styling?.[0]?.padding_left || "";
+const padding_right = styling?.[0]?.padding_right || "";
+const mobile_padding_top = styling?.[0]?.mobile_padding_top || "none";
+const mobile_padding_bottom = styling?.[0]?.mobile_padding_bottom || "none";
+const mobile_padding_left = styling?.[0]?.mobile_padding_left || "";
+const mobile_padding_right = styling?.[0]?.mobile_padding_right || "";
+const background_color = styling?.[0]?.background_color || "";
+const max_width = styling?.[0]?.max_width || "1520";
+const gap = styling?.[0]?.gap || "sm";
+
+// Create CSS classes
+const padding_classes = `
+  ${mobile_padding_top ? `pt-${mobile_padding_top}` : ""}
+  ${mobile_padding_bottom ? `pb-${mobile_padding_bottom}` : ""}
+  ${mobile_padding_left ? `pl-${mobile_padding_left}` : ""}
+  ${mobile_padding_right ? `pr-${mobile_padding_right}` : ""}
+  ${padding_top ? `lg:pt-${padding_top}` : ""}
+  ${padding_bottom ? `lg:pb-${padding_bottom}` : ""}
+  ${padding_left ? `lg:pl-${padding_left}` : ""}
+  ${padding_right ? `lg:pr-${padding_right}` : ""}
+`;
+
+const bg_color_class = background_color ? `bg-${background_color}` : "";
+const max_width_class = max_width ? `max-w-[${max_width}px]` : "";
+const gap_class = `gap-${gap}`;
+const font_class = font ? `${font}` : "";
+---
+
+<section
+  class={`mx-auto relative ${padding_classes} ${bg_color_class} text-ds-black ${font_class} ${max_width_class}`}
+>
+  <div set:html={renderRichText(content)}></div>
+</section>

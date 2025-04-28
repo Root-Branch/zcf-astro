@@ -1,0 +1,9 @@
+---
+import { storyblokEditable } from '@storyblok/astro'
+import RichTextSection01 from '../components/common/RichTextSection01.astro'
+const { blok } = Astro.props
+---
+
+<div {...storyblokEditable(blok)}>
+  <RichTextSection01 {...blok} />
+</div>
