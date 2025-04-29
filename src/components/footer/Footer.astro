@@ -12,11 +12,13 @@ const {
   credit,
   awards_logo,
   footer_links,
+  zcf_footer_links,
 } = Astro.props;
 
 const isForum = Astro.url.pathname === '/forum';
 const currentLogo = isForum ? zcf_logo : logo;
 const currentDescription = isForum ? zcf_company_description : company_description;
+const currentFooterLinks = isForum ? zcf_footer_links : footer_links;
 ---
 
 <footer class="bg-black text-ds-white py-10 lg:py-20">
@@ -62,7 +64,7 @@ const currentDescription = isForum ? zcf_company_description : company_descripti
         }
         <div class="flex flex-col gap-8 lg:hidden">
           {
-            footer_links?.slice(1).map((section) => (
+            currentFooterLinks?.slice(1).map((section) => (
               <div class="flex flex-col gap-4">
                 <h3 class="font-bold text-ds-p-3">{section.title}</h3>
                 <div class="flex flex-col gap-2">
@@ -78,7 +80,7 @@ const currentDescription = isForum ? zcf_company_description : company_descripti
 
         {/* Desktop only: Second and Third columns */}
         {
-          footer_links?.slice(1).map((section) => (
+          currentFooterLinks?.slice(1).map((section) => (
             <div class="hidden lg:flex flex-col gap-4">
               <h3 class="font-bold text-ds-p-3">{section.title}</h3>
               <div class="flex flex-col gap-2">
