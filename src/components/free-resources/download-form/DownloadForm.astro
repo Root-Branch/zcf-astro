@@ -3,6 +3,7 @@ import FormInitializer from "../../marketplace/form-section-02/FormInitializer.v
 import Button from "../../common/Button.astro";
 
 const {
+  form_fields = [],
   placeholder = "Enter email to download",
   description,
   note = "",
@@ -35,17 +36,23 @@ const alignClass = is_center_align ? "text-left lg:text-center" : "";
 <div class={`${alignClass}`}>
   <div id={formSectionId} class="w-full">
     <form id={formId} class="w-full">
-      <div class="relative flex flex-row">
-        <input
-          type="email"
-          name={hubspot_name}
-          placeholder={placeholder}
-          required
-          class={`w-full px-4 py-3 border focus:border-none focus:outline-none focus:ring-1 focus:ring-ds-red-500 ${inputBgClass} ${inputBorderAndTextColor}`}
-        />
-        <input type="hidden" name="portalId" value={hubspot_portalId} />
-        <input type="hidden" name="formId" value={hubspot_formId} />
-        <input type="hidden" name="Description" value={note} />
+      <div class="relative flex flex-col gap-2">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-2">
+          {
+            form_fields.map((field) => (
+              <input
+                type={field?.type || "text"}
+                name={field?.hubspot_name}
+                placeholder={field?.placeholder}
+                required={field?.is_required !== false}
+                class={`w-full px-4 py-3 border focus:border-none focus:outline-none focus:ring-1 focus:ring-ds-red-500 ${inputBgClass} ${inputBorderAndTextColor}`}
+              />
+            ))
+          }
+          <input type="hidden" name="portalId" value={hubspot_portalId} />
+          <input type="hidden" name="formId" value={hubspot_formId} />
+          <input type="hidden" name="Description" value={note} />
+        </div>
 
         {
           cta_button && is_button_field_same_row && is_desktop && (
@@ -69,7 +76,9 @@ const alignClass = is_center_align ? "text-left lg:text-center" : "";
 
       {
         description && (
-          <div class="my-2 ds-p-3 italic lg:not-italic !font-light !text-[15px]">{description}</div>
+          <div class="my-2 ds-p-3 italic lg:not-italic !font-light !text-[15px]">
+            {description}
+          </div>
         )
       }
 
@@ -83,7 +92,9 @@ const alignClass = is_center_align ? "text-left lg:text-center" : "";
               style={cta_button[0].style}
               background_color={cta_button[0].background_color}
               text_color={cta_button[0].text_color}
-              is_button_full_width_desktop={is_button_full_width || is_button_field_same_row}
+              is_button_full_width_desktop={
+                is_button_full_width || is_button_field_same_row
+              }
               is_button_full_width_mobile={true}
             />
           )
@@ -97,7 +108,13 @@ const alignClass = is_center_align ? "text-left lg:text-center" : "";
     <h2 class="ds-h3">Thank you!</h2>
   </div>
 
-  {footer && <div class="mt-6 ds-p-4 text-left !font-light !leading-[1.2]">{footer}</div>}
+  {
+    footer && (
+      <div class="mt-6 ds-p-4 text-left !font-light !leading-[1.2]">
+        {footer}
+      </div>
+    )
+  }
 
   <!-- FormInitializer for HubSpot integration -->
   <FormInitializer
@@ -111,15 +128,19 @@ const alignClass = is_center_align ? "text-left lg:text-center" : "";
   <script define:vars={{ pdfUrl, formSectionId, successSectionId }}>
     document.addEventListener("DOMContentLoaded", () => {
       let pdfWindowReference = null;
-      
-      const form = document.getElementById(formSectionId).querySelector('form');
+
+      const form = document.getElementById(formSectionId).querySelector("form");
       if (form) {
-        form.addEventListener('submit', (e) => {
-          const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-          const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-          
+        form.addEventListener("submit", (e) => {
+          const isSafari = /^((?!chrome|android).)*safari/i.test(
+            navigator.userAgent
+          );
+          const isMobile = /iPhone|iPad|iPod|Android/i.test(
+            navigator.userAgent
+          );
+
           if (isSafari && isMobile && pdfUrl) {
-            pdfWindowReference = window.open('about:blank', '_blank');
+            pdfWindowReference = window.open("about:blank", "_blank");
           }
         });
       }
@@ -139,13 +160,17 @@ const alignClass = is_center_align ? "text-left lg:text-center" : "";
             ) {
               if (pdfUrl) {
                 // Detect Safari on mobile
-                const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-                const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-                
+                const isSafari = /^((?!chrome|android).)*safari/i.test(
+                  navigator.userAgent
+                );
+                const isMobile = /iPhone|iPad|iPod|Android/i.test(
+                  navigator.userAgent
+                );
+
                 if (isSafari && isMobile && pdfWindowReference) {
                   pdfWindowReference.location = pdfUrl;
                 } else {
-                  window.open(pdfUrl, '_blank');
+                  window.open(pdfUrl, "_blank");
                 }
               }
 
