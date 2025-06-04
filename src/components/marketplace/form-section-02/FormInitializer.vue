@@ -34,16 +34,14 @@ export default {
           const formData = new FormData(form);
           const fieldsData = [];
           
-          let counter = 1;
           
           for (const [name, value] of formData.entries()) {
             if (name !== 'portalId' && name !== 'formId') {
               fieldsData.push({
-                objectTypeId: `0-${counter}`,
+                objectTypeId: `0-1`,
                 name: name,
                 value: value
               });
-              counter++;
             }
           }
           
