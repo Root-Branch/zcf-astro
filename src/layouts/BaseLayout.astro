@@ -4,6 +4,7 @@ import { getGlobalContent } from "../utils/storyblok";
 import "../styles/global.css";
 
 const { header, footer } = await getGlobalContent();
+const fathomSiteId = import.meta.env.FATHOM_SITE_ID;
 ---
 
 <html lang="en">
@@ -59,6 +60,13 @@ const { header, footer } = await getGlobalContent();
       href="https://fonts.googleapis.com/css2?family=Just+Another+Hand&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Fathom - beautiful, simple website analytics -->
+    <script
+      src="https://cdn.usefathom.com/script.js"
+      data-site={fathomSiteId}
+      defer></script>
+    <!-- / Fathom -->
   </head>
   <body>
     <StoryblokComponent blok={header} />
