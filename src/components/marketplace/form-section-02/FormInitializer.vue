@@ -38,7 +38,7 @@ export default {
           for (const [name, value] of formData.entries()) {
             if (name !== 'portalId' && name !== 'formId') {
               fieldsData.push({
-                objectTypeId: name !== 'description' ? `0-1` : `0-2`,
+                objectTypeId: name !== 'Description' ? `0-1` : `0-2`,
                 name: name,
                 value: value
               });
