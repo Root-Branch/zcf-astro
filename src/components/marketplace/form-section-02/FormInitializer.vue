@@ -47,8 +47,17 @@ export default {
           
           const context = {
             pageUri: window.location.href,
-            pageName: document.title
+            pageName: document.title,
           };
+          
+          // Get IP address
+          try {
+            const ipResponse = await fetch('https://api.ipify.org?format=json');
+            const ipData = await ipResponse.json();
+            context.ipAddress = ipData.ip;
+          } catch (error) {
+            console.error('Failed to get IP address:', error);
+          }
           
           // Get the HubSpot tracking cookie if available
           const hutk = this.getCookie('hubspotutk');
