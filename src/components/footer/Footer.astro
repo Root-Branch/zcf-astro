@@ -96,14 +96,14 @@ const currentFooterLinks = isForum ? zcf_footer_links : footer_links;
 
       {/* Column 3: Awards - smaller on mobile */}
       <div
-        class="flex flex-row flex-wrap lg:flex-col gap-2 lg:gap-6 items-start justify-start w-full"
+        class="flex flex-row flex-wrap lg:flex-col gap-2 lg:gap-6 items-center justify-start w-full"
       >
         {
           awards_logo?.map((award) => (
             <img loading="lazy" 
               src={award.filename}
               alt={award.alt || "Award logo"}
-              class="object-contain h-auto max-h-[40px] lg:max-h-[64px] w-auto"
+              class="object-contain h-auto max-w-[110px] lg:max-w-[175px] h-auto"
             />
           ))
         }
