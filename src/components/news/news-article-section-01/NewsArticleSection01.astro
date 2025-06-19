@@ -2,7 +2,7 @@
 import { renderRichText } from "@storyblok/astro";
 import { formatDate } from "../../../utils/dateFormat";
 
-const { date, title, image, content, styling } = Astro.props;
+const { date, title, image, content, styling, back_button_text } = Astro.props;
 
 // Styling variables
 const padding_top = styling?.[0]?.padding_top || "xxs";
@@ -33,9 +33,9 @@ const imageUrl = image?.filename || "";
 
 <section class={`${padding_classes} ${background_color_class}`}>
   <div class={`${max_width_class} mx-auto`}>
-    <a
-      href="/news"
-      class="ds-p-2 inline-flex items-center mb-6 text-ds-black hover:underline hover:!cursor-pointer"
+    <button
+      id="backButton"
+      class="ds-p-2 inline-flex items-center mb-6 text-ds-black hover:underline hover:!cursor-pointer bg-transparent border-none"
     >
       <svg
         class="w-5 h-5 mr-2"
@@ -49,8 +49,8 @@ const imageUrl = image?.filename || "";
           stroke-width="2"
           d="M15 19l-7-7 7-7"></path>
       </svg>
-      Back to Latest News
-    </a>
+      {back_button_text || "Back to Latest News"}
+    </button>
 
     <!-- Mobile layout (stacked) -->
     <div class="lg:hidden mb-16">
@@ -120,3 +120,9 @@ const imageUrl = image?.filename || "";
     padding-bottom: 1rem !important;
   }
 </style>
+
+<script>
+  document.getElementById('backButton')?.addEventListener('click', () => {
+    history.back();
+  });
+</script>

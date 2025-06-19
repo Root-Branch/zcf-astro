@@ -3,7 +3,7 @@ import { formatDate } from "../../../utils/dateFormat";
 import Button from "../../common/Button.astro";
 import { renderRichText } from "@storyblok/astro";
 
-const { title, description, news_articles, styling } = Astro.props;
+const { title, description, news_articles, styling, no_results_message } = Astro.props;
 
 // Styling variables
 const padding_top = styling?.[0]?.padding_top || "";
@@ -45,7 +45,7 @@ const newsData =
         ? renderRichText(articleContent.content)
         : "",
       date: articleContent?.date || "",
-      slug: article.slug || "",
+      slug: article.full_slug || "",
     };
   }) || [];
 ---
@@ -103,7 +103,7 @@ const newsData =
           const articleImage = articleContent.image?.filename;
           const articleDate = formatDate(articleContent.date);
           const articleRichText = articleContent.content;
-          const articleSlug = article.slug;
+          const articleSlug = article.full_slug;
 
           return (
             <div
@@ -131,7 +131,7 @@ const newsData =
               <div class="mt-auto cursor-pointer">
                 <Button
                   text="Read more"
-                  link={{ url: `/news/${articleSlug}` }}
+                  link={{ url: `${articleSlug}` }}
                   style="secondary"
                   background_color="ds-red-500"
                   text_color="ds-red-500"
@@ -148,7 +148,13 @@ const newsData =
       id="noResults"
       class="hidden text-center py-12 ds-p-2 max-w-[800px] mx-auto flex justify-center items-center min-h-[250px]"
     >
-      No matching results found.
+      {no_results_message && no_results_message?.content[0]?.content ? (
+        <div class="max-w-none text-center bg-ds-grey p-8">
+          <div class="mb-6" set:html={renderRichText(no_results_message)} />
+        </div>
+      ) : (
+        <p>No matching results found.</p>
+      )}
     </div>
   </div>
 </section>
